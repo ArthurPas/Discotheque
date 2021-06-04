@@ -64,7 +64,7 @@ namespace AppliGrpR
         {
             string name = reader.GetString(0);
             string firstName = reader.GetString(1);
-            Console.WriteLine(name + firstName);
+            Console.WriteLine(name + firstName +" a prolongé son emprunt");
         }
 
     }

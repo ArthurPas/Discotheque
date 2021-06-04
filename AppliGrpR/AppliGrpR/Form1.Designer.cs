@@ -35,6 +35,7 @@ namespace AppliGrpR
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.AddButton = new System.Windows.Forms.Button();
+            this.ListButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
@@ -82,11 +83,22 @@ namespace AppliGrpR
             this.AddButton.UseVisualStyleBackColor = true;
             this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
+            // ListButton
+            // 
+            this.ListButton.Location = new System.Drawing.Point(172, 290);
+            this.ListButton.Name = "ListButton";
+            this.ListButton.Size = new System.Drawing.Size(138, 23);
+            this.ListButton.TabIndex = 6;
+            this.ListButton.Text = "Liste Emprunts prolongés";
+            this.ListButton.UseVisualStyleBackColor = true;
+            this.ListButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListButton_MouseDown);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ListButton);
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.textBox4);
@@ -108,6 +120,7 @@ namespace AppliGrpR
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Button AddButton;
+        private System.Windows.Forms.Button ListButton;
     }
 }
 

@@ -19,7 +19,7 @@ namespace AppliGrpR
         {
             InitializeComponent();
             InitConnexion();
-            ListRetard10J();
+            TOP10ALBUMS();
         }
         public void InitConnexion()
         {
@@ -212,6 +212,32 @@ namespace AppliGrpR
         private void SuppressionAncien_MouseDown(object sender, MouseEventArgs e)
         {
             PurgeAbonne();
+        }
+
+        private void TOP10ALBUMS()
+        {
+            int classement = 1;
+            string sql = " SELECT TOP 10 COUNT(DATE_EMPRUNT)'Nombre d`emprunts', Titre_Album " +
+                "FROM EMPRUNTER INNER JOIN ALBUMS" +
+                " ON ALBUMS.CODE_ALBUM = EMPRUNTER.CODE_ALBUM " +
+                "GROUP BY TITRE_ALBUM " +
+                "ORDER BY COUNT(DATE_EMPRUNT) DESC";
+            OleDbCommand cmd = new OleDbCommand(sql, dbCon);
+            cmd.ExecuteNonQuery(); ;
+            OleDbDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                int nbEmprunts = reader.GetInt32(0);
+                string titreAlbum = reader.GetString(1);
+                Console.WriteLine("Classement : " + classement + " | Nombre d'emprunts : " + nbEmprunts + " | Titre de l'album :" + titreAlbum);
+                classement++;
+            }
+        }
+
+        private void buttonTOP10_MouseDown_1(object sender, MouseEventArgs e)
+        {
+            TOP10ALBUMS();
         }
     } 
 }

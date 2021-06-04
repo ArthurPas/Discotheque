@@ -42,6 +42,12 @@ namespace AppliGrpR
             this.ListButton = new System.Windows.Forms.Button();
             this.buttonTOP10 = new System.Windows.Forms.Button();
             this.Suppression = new System.Windows.Forms.Button();
+            this.Nationalité = new System.Windows.Forms.Label();
+            this.Nom = new System.Windows.Forms.Label();
+            this.Prénom = new System.Windows.Forms.Label();
+            this.Identifiant = new System.Windows.Forms.Label();
+            this.Mot_de_passe = new System.Windows.Forms.Label();
+            this.nationalite = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // textBox1
@@ -150,11 +156,71 @@ namespace AppliGrpR
             this.Suppression.Text = "Suppression plus 1 an";
             this.Suppression.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Suppression_MouseDown);
             // 
+            // Nationalité
+            // 
+            this.Nationalité.AutoSize = true;
+            this.Nationalité.Location = new System.Drawing.Point(81, 51);
+            this.Nationalité.Name = "Nationalité";
+            this.Nationalité.Size = new System.Drawing.Size(57, 13);
+            this.Nationalité.TabIndex = 12;
+            this.Nationalité.Text = "Nationalité";
+            // 
+            // Nom
+            // 
+            this.Nom.AutoSize = true;
+            this.Nom.Location = new System.Drawing.Point(81, 88);
+            this.Nom.Name = "Nom";
+            this.Nom.Size = new System.Drawing.Size(29, 13);
+            this.Nom.TabIndex = 13;
+            this.Nom.Text = "Nom";
+            // 
+            // Prénom
+            // 
+            this.Prénom.AutoSize = true;
+            this.Prénom.Location = new System.Drawing.Point(81, 126);
+            this.Prénom.Name = "Prénom";
+            this.Prénom.Size = new System.Drawing.Size(43, 13);
+            this.Prénom.TabIndex = 14;
+            this.Prénom.Text = "Prénom";
+            // 
+            // Identifiant
+            // 
+            this.Identifiant.AutoSize = true;
+            this.Identifiant.Location = new System.Drawing.Point(81, 169);
+            this.Identifiant.Name = "Identifiant";
+            this.Identifiant.Size = new System.Drawing.Size(53, 13);
+            this.Identifiant.TabIndex = 15;
+            this.Identifiant.Text = "Identifiant";
+            // 
+            // Mot_de_passe
+            // 
+            this.Mot_de_passe.AutoSize = true;
+            this.Mot_de_passe.Location = new System.Drawing.Point(81, 211);
+            this.Mot_de_passe.Name = "Mot_de_passe";
+            this.Mot_de_passe.Size = new System.Drawing.Size(71, 13);
+            this.Mot_de_passe.TabIndex = 16;
+            this.Mot_de_passe.Text = "Mot de passe";
+            // 
+            // nationalite
+            // 
+            this.nationalite.FormattingEnabled = true;
+            this.nationalite.Location = new System.Drawing.Point(287, 48);
+            this.nationalite.Name = "nationalite";
+            this.nationalite.Size = new System.Drawing.Size(120, 186);
+            this.nationalite.TabIndex = 17;
+            this.nationalite.SelectedIndexChanged += new System.EventHandler(this.nationalite_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.nationalite);
+            this.Controls.Add(this.Mot_de_passe);
+            this.Controls.Add(this.Identifiant);
+            this.Controls.Add(this.Prénom);
+            this.Controls.Add(this.Nom);
+            this.Controls.Add(this.Nationalité);
             this.Controls.Add(this.Suppression);
             this.Controls.Add(this.buttonTOP10);
             this.Controls.Add(this.ListButton);
@@ -190,6 +256,12 @@ namespace AppliGrpR
         private System.Windows.Forms.Button ListButton;
         private System.Windows.Forms.Button buttonTOP10;
         private System.Windows.Forms.Button Suppression;
+        private System.Windows.Forms.Label Nationalité;
+        private System.Windows.Forms.Label Nom;
+        private System.Windows.Forms.Label Prénom;
+        private System.Windows.Forms.Label Identifiant;
+        private System.Windows.Forms.Label Mot_de_passe;
+        private System.Windows.Forms.ListBox nationalite;
     }
 }
 

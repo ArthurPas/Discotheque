@@ -14,6 +14,7 @@ namespace AppliGrpR
     public partial class Form1 : Form
     {
         OleDbConnection dbCon;
+        List<Albums> empruntés = new List<Albums>();
         public Form1()
         {
             InitializeComponent();
@@ -40,6 +41,33 @@ namespace AppliGrpR
             cmd.ExecuteNonQuery();
         }
 
+        public void ConsultAlbum()
+        {
+            string sql = "select  EMPRUNTER.CODE_ALBUM, TITRE_ALBUM, ANNÉE_ALBUM from EMPRUNTER " +
+                "Inner join ALBUMS on EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
+                "Inner join ABONNÉS on EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ " +
+                "WHERE ABONNÉS.NOM_ABONNÉ = '"+SearchName.Text+"'";
+
+
+            OleDbCommand cmdRead = new OleDbCommand(sql, dbCon);
+            OleDbDataReader reader = cmdRead.ExecuteReader();
+
+
+            while (reader.Read())
+            {
+                int code = Convert.ToInt32(reader.GetInt32(0));
+                string titre = reader.GetString(1);
+                int annee=0;
+                if (!reader.IsDBNull(2))
+                    annee = reader.GetInt32(2);
+
+                Albums a = new Albums(code, titre, annee);
+                listBox1.Items.Add(a);
+                empruntés.Add(a);
+            }
+            reader.Close();
+        }
+
         private void AddButton_Click(object sender, EventArgs e)
         {
             AddAbonnes();
@@ -48,6 +76,14 @@ namespace AppliGrpR
             textBox3.Text = "";
             textBox4.Text = "";
             textBox5.Text = "";
+        }
+
+        private void Consulter_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+
+            ConsultAlbum();
+            SearchName.Text = "";
         }
     }
 }

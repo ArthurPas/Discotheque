@@ -15,6 +15,7 @@ namespace AppliGrpR
     {
         OleDbConnection dbCon;
         List<Albums> empruntés = new List<Albums>();
+        List<String> genres = new List<String>();
         List<string> nationalités = new List<string>();
         string nationaliteActuelle = "";
         public Form1()
@@ -122,7 +123,7 @@ namespace AppliGrpR
          * 
          */
 
-        public void ExtendBorrowing(string username, string titreAlbum)
+        public void ExtendBorrowing(string userLog, string titreAlbum)
         {
 
             string extendDate = "UPDATE EMPRUNTER " +
@@ -131,7 +132,7 @@ namespace AppliGrpR
             "INNER JOIN ABONNÉS ON EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ " +
             "INNER JOIN ALBUMS ON EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
             "INNER JOIN GENRES on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE " +
-            "WHERE ABONNÉS.LOGIN_ABONNÉ = '" + username + "' " +
+            "WHERE ABONNÉS.LOGIN_ABONNÉ = '" + userLog + "' " +
             "AND ALBUMS.TITRE_ALBUM = '" + titreAlbum + "' " +
             "AND DATE_RETOUR_ATTENDUE - DATE_EMPRUNT < DÉLAI";
 
@@ -146,7 +147,7 @@ namespace AppliGrpR
          * US9-
          * 
          */
-        public void ExtendAllBorrowing(string username)
+        public void ExtendAllBorrowing(string userLog)
         {
 
             string extendDate = "UPDATE EMPRUNTER " +
@@ -155,13 +156,13 @@ namespace AppliGrpR
             "INNER JOIN ABONNÉS ON EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ " +
             "INNER JOIN ALBUMS ON EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
             "INNER JOIN GENRES on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE " +
-            "WHERE ABONNÉS.LOGIN_ABONNÉ = '" + username + "' " +
+            "WHERE ABONNÉS.LOGIN_ABONNÉ = '" + userLog + "' " +
             "AND DATE_RETOUR_ATTENDUE - DATE_EMPRUNT < DÉLAI";
 
             OleDbCommand cmd = new OleDbCommand(extendDate, dbCon);
             cmd.ExecuteNonQuery();
 
-            Console.WriteLine("Date d'emprunt étendue pour tout les emprunts de " + username);
+            Console.WriteLine("Date d'emprunt étendue pour tout les emprunts de " + userLog);
 
         }
 
@@ -181,7 +182,7 @@ namespace AppliGrpR
 
             OleDbDataReader reader = cmd.ExecuteReader();
 
-            Console.WriteLine("Album qui n'ont pas été emprunté depuis un mois: ");
+            Console.WriteLine("Album qui n'ont pas été emprunté depuis un an: ");
             while (reader.Read())
             {
                 string titreAlbum = reader.GetString(3); 
@@ -277,7 +278,31 @@ namespace AppliGrpR
                 classement++;
             }
         }
-
+        private void Suggestions(string userlog)
+        {
+            string sql = "SELECT GENRES.LIBELLÉ_GENRE FROM EMPRUNTER INNER JOIN ABONNÉS ON EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ " +
+                "INNER JOIN ALBUMS ON EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
+                "INNER JOIN GENRES ON ALBUMS.CODE_GENRE = GENRES.CODE_GENRE " +
+                "WHERE ABONNÉS.LOGIN_ABONNÉ = '" + userlog + "'";
+            OleDbCommand cmd = new OleDbCommand(sql, dbCon);
+            cmd.ExecuteNonQuery(); ;
+            OleDbDataReader reader = cmd.ExecuteReader();
+            genres.Clear();
+            while (reader.Read())
+            {
+                genres.Add(reader.GetString(0));
+            }
+            string sqlTwo = "SELECT TITRE_ALBUM FROM ALBUMS INNER JOIN GENRES ON GENRES.CODE_GENRE = ALBUMS.CODE_GENRE " +
+                "WHERE LIBELLÉ_GENRE = '"+genres[0]+"'";
+            OleDbCommand cmdTwo = new OleDbCommand(sqlTwo, dbCon);
+            cmdTwo.ExecuteNonQuery(); ;
+            OleDbDataReader readerTwo = cmdTwo.ExecuteReader();
+            while (readerTwo.Read())
+            {
+                string nomAlbum = readerTwo.GetString(0);
+                Console.WriteLine("Nous vous recommandons dans le genre "+genres[0]+" l'album : "+nomAlbum);
+            }
+        }
         private void buttonTOP10_MouseDown_1(object sender, MouseEventArgs e)
         {
             TOP10ALBUMS();
@@ -305,6 +330,11 @@ namespace AppliGrpR
             }
             reader.Close();
             textBox1.Text= code.ToString();
+        }
+
+        private void Recomandation_MouseDown(object sender, MouseEventArgs e)
+        {
+            Suggestions("yo");
         }
     } 
 }

@@ -42,6 +42,7 @@ namespace AppliGrpR
             this.ListButton = new System.Windows.Forms.Button();
             this.buttonTOP10 = new System.Windows.Forms.Button();
             this.Suppression = new System.Windows.Forms.Button();
+            this.Recomandation = new System.Windows.Forms.Button();
             this.Nationalité = new System.Windows.Forms.Label();
             this.Nom = new System.Windows.Forms.Label();
             this.Prénom = new System.Windows.Forms.Label();
@@ -121,7 +122,7 @@ namespace AppliGrpR
             // 
             // Consulter
             // 
-            this.Consulter.Location = new System.Drawing.Point(619, 374);
+            this.Consulter.Location = new System.Drawing.Point(610, 358);
             this.Consulter.Name = "Consulter";
             this.Consulter.Size = new System.Drawing.Size(75, 23);
             this.Consulter.TabIndex = 9;
@@ -155,6 +156,16 @@ namespace AppliGrpR
             this.Suppression.TabIndex = 11;
             this.Suppression.Text = "Suppression plus 1 an";
             this.Suppression.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Suppression_MouseDown);
+            // 
+            // Recomandation
+            // 
+            this.Recomandation.Location = new System.Drawing.Point(519, 382);
+            this.Recomandation.Name = "Recomandation";
+            this.Recomandation.Size = new System.Drawing.Size(75, 23);
+            this.Recomandation.TabIndex = 12;
+            this.Recomandation.Text = "recommandations";
+            this.Recomandation.UseVisualStyleBackColor = true;
+            this.Recomandation.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Recomandation_MouseDown);
             // 
             // Nationalité
             // 
@@ -215,6 +226,7 @@ namespace AppliGrpR
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.Recomandation);
             this.Controls.Add(this.nationalite);
             this.Controls.Add(this.Mot_de_passe);
             this.Controls.Add(this.Identifiant);
@@ -256,6 +268,7 @@ namespace AppliGrpR
         private System.Windows.Forms.Button ListButton;
         private System.Windows.Forms.Button buttonTOP10;
         private System.Windows.Forms.Button Suppression;
+        private System.Windows.Forms.Button Recomandation;
         private System.Windows.Forms.Label Nationalité;
         private System.Windows.Forms.Label Nom;
         private System.Windows.Forms.Label Prénom;

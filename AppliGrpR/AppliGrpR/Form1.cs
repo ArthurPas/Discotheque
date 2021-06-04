@@ -15,10 +15,13 @@ namespace AppliGrpR
     {
         OleDbConnection dbCon;
         List<Albums> empruntés = new List<Albums>();
+        List<string> nationalités = new List<string>();
+        string nationaliteActuelle = "";
         public Form1()
         {
             InitializeComponent();
             InitConnexion();
+            
         }
         public void InitConnexion()
         {
@@ -27,6 +30,7 @@ namespace AppliGrpR
 
             dbCon = new OleDbConnection(ChaineBd);
             dbCon.Open();
+            Nationalite();
             ExtendBorrowing("arthurp", "Le Boeuf sur le Toit"); //TEST
             ExtendAllBorrowing("arthurp"); //TEST
             GetAlbumNotBorrowSinceOneYears();//TEST
@@ -80,6 +84,25 @@ namespace AppliGrpR
                 Albums a = new Albums(code, titre, annee);
                 listBox1.Items.Add(a);
                 empruntés.Add(a);
+            }
+            reader.Close();
+        }
+
+        public void Nationalite()
+        {
+            string sql = "select * from PAYS";
+
+
+            OleDbCommand cmdRead = new OleDbCommand(sql, dbCon);
+            OleDbDataReader reader = cmdRead.ExecuteReader();
+
+
+            while (reader.Read())
+            {
+                string titre = reader.GetString(1);
+                nationalités.Add(titre);
+                nationalite.Items.Add(titre);
+                Console.WriteLine(nationalite.SelectedItems.ToString());
             }
             reader.Close();
         }
@@ -263,6 +286,25 @@ namespace AppliGrpR
         private void Suppression_MouseDown(object sender, MouseEventArgs e)
         {
             PurgeAbonne();
+        }
+
+        private void nationalite_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine(nationalite.SelectedItem.ToString());
+            nationaliteActuelle = nationalite.SelectedItem.ToString();
+
+            string sql = "select * from PAYS WHERE NOM_PAYS ='"+ nationalite.SelectedItem.ToString()+"'";
+            OleDbCommand cmdRead = new OleDbCommand(sql, dbCon);
+            OleDbDataReader reader = cmdRead.ExecuteReader();
+
+            int code = 0; ;
+            while (reader.Read())
+            {
+                code = reader.GetInt32(0);
+                Console.WriteLine(nationalite.SelectedItems.ToString());
+            }
+            reader.Close();
+            textBox1.Text= code.ToString();
         }
     } 
 }

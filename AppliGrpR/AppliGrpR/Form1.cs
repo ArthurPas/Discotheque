@@ -19,6 +19,7 @@ namespace AppliGrpR
         {
             InitializeComponent();
             InitConnexion();
+            TOP10ALBUMS();
         }
         public void InitConnexion()
         {
@@ -232,6 +233,11 @@ namespace AppliGrpR
                 Console.WriteLine("Classement : " + classement + " | Nombre d'emprunts : " + nbEmprunts + " | Titre de l'album :" + titreAlbum);
                 classement++;
             }
+        }
+
+        private void buttonTOP10_MouseDown_1(object sender, MouseEventArgs e)
+        {
+            TOP10ALBUMS();
         }
     } 
 }

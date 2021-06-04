@@ -40,6 +40,7 @@ namespace AppliGrpR
             this.SearchName = new System.Windows.Forms.TextBox();
             this.Consulter = new System.Windows.Forms.Button();
             this.ListButton = new System.Windows.Forms.Button();
+            this.buttonTOP10 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
@@ -121,11 +122,29 @@ namespace AppliGrpR
             this.Consulter.UseVisualStyleBackColor = true;
             this.Consulter.Click += new System.EventHandler(this.Consulter_Click);
             // 
+            // ListButton
+            // 
+            this.ListButton.Location = new System.Drawing.Point(0, 0);
+            this.ListButton.Name = "ListButton";
+            this.ListButton.Size = new System.Drawing.Size(75, 23);
+            this.ListButton.TabIndex = 0;
+            // 
+            // buttonTOP10
+            // 
+            this.buttonTOP10.Location = new System.Drawing.Point(22, 374);
+            this.buttonTOP10.Name = "buttonTOP10";
+            this.buttonTOP10.Size = new System.Drawing.Size(120, 38);
+            this.buttonTOP10.TabIndex = 10;
+            this.buttonTOP10.Text = "Afficher TOP10";
+            this.buttonTOP10.UseVisualStyleBackColor = true;
+            this.buttonTOP10.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonTOP10_MouseDown_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.buttonTOP10);
             this.Controls.Add(this.ListButton);
             this.Controls.Add(this.Consulter);
             this.Controls.Add(this.SearchName);
@@ -157,6 +176,7 @@ namespace AppliGrpR
         private System.Windows.Forms.TextBox SearchName;
         private System.Windows.Forms.Button Consulter;
         private System.Windows.Forms.Button ListButton;
+        private System.Windows.Forms.Button buttonTOP10;
     }
 }
 

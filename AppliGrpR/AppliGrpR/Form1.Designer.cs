@@ -41,6 +41,7 @@ namespace AppliGrpR
             this.Consulter = new System.Windows.Forms.Button();
             this.ListButton = new System.Windows.Forms.Button();
             this.buttonTOP10 = new System.Windows.Forms.Button();
+            this.Suppression = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
@@ -124,10 +125,11 @@ namespace AppliGrpR
             // 
             // ListButton
             // 
-            this.ListButton.Location = new System.Drawing.Point(0, 0);
+            this.ListButton.Location = new System.Drawing.Point(225, 374);
             this.ListButton.Name = "ListButton";
-            this.ListButton.Size = new System.Drawing.Size(75, 23);
+            this.ListButton.Size = new System.Drawing.Size(86, 38);
             this.ListButton.TabIndex = 0;
+            this.ListButton.Text = "Liste prolongé";
             // 
             // buttonTOP10
             // 
@@ -139,11 +141,21 @@ namespace AppliGrpR
             this.buttonTOP10.UseVisualStyleBackColor = true;
             this.buttonTOP10.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonTOP10_MouseDown_1);
             // 
+            // Suppression
+            // 
+            this.Suppression.Location = new System.Drawing.Point(407, 374);
+            this.Suppression.Name = "Suppression";
+            this.Suppression.Size = new System.Drawing.Size(86, 38);
+            this.Suppression.TabIndex = 11;
+            this.Suppression.Text = "Suppression plus 1 an";
+            this.Suppression.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Suppression_MouseDown);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.Suppression);
             this.Controls.Add(this.buttonTOP10);
             this.Controls.Add(this.ListButton);
             this.Controls.Add(this.Consulter);
@@ -177,6 +189,7 @@ namespace AppliGrpR
         private System.Windows.Forms.Button Consulter;
         private System.Windows.Forms.Button ListButton;
         private System.Windows.Forms.Button buttonTOP10;
+        private System.Windows.Forms.Button Suppression;
     }
 }
 

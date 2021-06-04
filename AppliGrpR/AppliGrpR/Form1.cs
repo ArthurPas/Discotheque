@@ -19,7 +19,6 @@ namespace AppliGrpR
         {
             InitializeComponent();
             InitConnexion();
-            TOP10ALBUMS();
         }
         public void InitConnexion()
         {
@@ -229,16 +228,10 @@ namespace AppliGrpR
                 //suppression
                 string sup = "DELETE FROM EMPRUNTER where CODE_ABONNÉ ="+code +
                     "DELETE FROM ABONNÉS where CODE_ABONNÉ ="+code;
-                Console.WriteLine(code);
                 OleDbCommand cmd = new OleDbCommand(sup, dbCon);
                 cmd.ExecuteNonQuery();
             }
             reader.Close();
-        }
-
-        private void SuppressionAncien_MouseDown(object sender, MouseEventArgs e)
-        {
-            PurgeAbonne();
         }
 
         private void TOP10ALBUMS()
@@ -265,6 +258,11 @@ namespace AppliGrpR
         private void buttonTOP10_MouseDown_1(object sender, MouseEventArgs e)
         {
             TOP10ALBUMS();
+        }
+
+        private void Suppression_MouseDown(object sender, MouseEventArgs e)
+        {
+            PurgeAbonne();
         }
     } 
 }

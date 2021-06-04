@@ -39,6 +39,7 @@ namespace AppliGrpR
             this.label1 = new System.Windows.Forms.Label();
             this.SearchName = new System.Windows.Forms.TextBox();
             this.Consulter = new System.Windows.Forms.Button();
+            this.ListButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
@@ -125,6 +126,7 @@ namespace AppliGrpR
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ListButton);
             this.Controls.Add(this.Consulter);
             this.Controls.Add(this.SearchName);
             this.Controls.Add(this.label1);
@@ -154,6 +156,7 @@ namespace AppliGrpR
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox SearchName;
         private System.Windows.Forms.Button Consulter;
+        private System.Windows.Forms.Button ListButton;
     }
 }
 

@@ -29,6 +29,8 @@ namespace AppliGrpR
             dbCon = new OleDbConnection(ChaineBd);
             dbCon.Open();
             ExtendBorrowing("arthurp", "Le Boeuf sur le Toit"); //TEST
+            ExtendAllBorrowing("arthurp"); //TEST
+
         }
 
         public void AddAbonnes()
@@ -105,6 +107,28 @@ namespace AppliGrpR
           
         }
 
+        /*
+         * US9-
+         * 
+         */
+        public void ExtendAllBorrowing(string username)
+        {
+
+            string extendDate = "UPDATE EMPRUNTER " +
+            "Set EMPRUNTER.DATE_RETOUR_ATTENDUE = DATEADD(MONTH,1,EMPRUNTER.DATE_RETOUR_ATTENDUE) " +
+            "FROM EMPRUNTER " +
+            "INNER JOIN ABONNÉS ON EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ " +
+            "INNER JOIN ALBUMS ON EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
+            "INNER JOIN GENRES on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE " +
+            "WHERE ABONNÉS.LOGIN_ABONNÉ = '" + username + "' " +
+            "AND DATE_RETOUR_ATTENDUE - DATE_EMPRUNT < DÉLAI";
+
+            OleDbCommand cmd = new OleDbCommand(extendDate, dbCon);
+            cmd.ExecuteNonQuery();
+
+            Console.WriteLine("Date d'emprunt étendue pour tout les emprunts de " + username);
+
+        }
 
         private void Consulter_Click(object sender, EventArgs e)
         {
@@ -128,5 +152,6 @@ namespace AppliGrpR
                 Console.WriteLine(nom+prenom);
             }
         }
+ 
     }
 }

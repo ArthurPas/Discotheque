@@ -34,7 +34,7 @@ namespace AppliGrpR
         public void AddAbonnes()
         {
 
-            string consult = "Select * from ABONNÉS WHERE NOM_ABONNÉ = '"+textBox2.Text+ "' and PRÉNOM_ABONNÉ ='"+textBox3.Text+"'";
+            string consult = "Select * from ABONNÉS WHERE NOM_ABONNÉ = '" + textBox2.Text + "' and PRÉNOM_ABONNÉ ='" + textBox3.Text + "'";
             OleDbCommand cmdConsult = new OleDbCommand(consult, dbCon);
             OleDbDataReader reader = cmdConsult.ExecuteReader();
             if (!reader.HasRows)
@@ -49,13 +49,18 @@ namespace AppliGrpR
                 cmd.Parameters.Add("PASSWORD_ABONNÉ", OleDbType.VarChar).Value = textBox5.Text;
                 cmd.ExecuteNonQuery();
             }
+            else
+            {
+                Console.WriteLine("Déjà inscrit");
+            }
+        }
 
         public void ConsultAlbum()
         {
             string sql = "select  EMPRUNTER.CODE_ALBUM, TITRE_ALBUM, ANNÉE_ALBUM from EMPRUNTER " +
                 "Inner join ALBUMS on EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
                 "Inner join ABONNÉS on EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ " +
-                "WHERE ABONNÉS.NOM_ABONNÉ = '"+SearchName.Text+"'";
+                "WHERE ABONNÉS.NOM_ABONNÉ = '" + SearchName.Text + "'";
 
 
             OleDbCommand cmdRead = new OleDbCommand(sql, dbCon);
@@ -66,7 +71,7 @@ namespace AppliGrpR
             {
                 int code = Convert.ToInt32(reader.GetInt32(0));
                 string titre = reader.GetString(1);
-                int annee=0;
+                int annee = 0;
                 if (!reader.IsDBNull(2))
                     annee = reader.GetInt32(2);
 
@@ -92,7 +97,7 @@ namespace AppliGrpR
          * 
          */
 
-        public void ExtendBorrowing(string  username,string titreAlbum)
+        public void ExtendBorrowing(string username, string titreAlbum)
         {
 
             string extendDate = "UPDATE EMPRUNTER " +
@@ -109,7 +114,7 @@ namespace AppliGrpR
             cmd.ExecuteNonQuery();
 
             Console.WriteLine("Date d'emprunt étendue");
-          
+
         }
 
 
@@ -132,46 +137,29 @@ namespace AppliGrpR
             {
                 string nom = reader.GetString(0);
                 string prenom = reader.GetString(1);
-                Console.WriteLine(nom+prenom);
+                Console.WriteLine(nom + prenom);
             }
         }
-    }
-            else
-            {
-                Console.WriteLine("Déjà inscrit");
-            }
-            
-        }
-    public void ListExtended()
-    {
-        string list = "Select NOM_ABONNÉ, PRÉNOM_ABONNÉ FROM ABONNÉS INNER JOIN EMPRUNTER on ABONNÉS.CODE_ABONNÉ = " +
-            "EMPRUNTER.CODE_ABONNÉ INNER JOIN ALBUMS on EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
-            "INNER JOIN GENRES on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE WHERE DATE_RETOUR_ATTENDUE - DATE_EMPRUNT > DÉLAI";
-        OleDbCommand cmd = new OleDbCommand(list, dbCon);
-        OleDbDataReader reader = cmd.ExecuteReader();
-        while (reader.Read())
+        public void ListExtended()
         {
-            string name = reader.GetString(0);
-            string firstName = reader.GetString(1);
-            Console.WriteLine(name + firstName +" a prolongé son emprunt");
+            string list = "Select NOM_ABONNÉ, PRÉNOM_ABONNÉ FROM ABONNÉS INNER JOIN EMPRUNTER on ABONNÉS.CODE_ABONNÉ = " +
+                "EMPRUNTER.CODE_ABONNÉ INNER JOIN ALBUMS on EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
+                "INNER JOIN GENRES on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE WHERE DATE_RETOUR_ATTENDUE - DATE_EMPRUNT > DÉLAI";
+            OleDbCommand cmd = new OleDbCommand(list, dbCon);
+            OleDbDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                string name = reader.GetString(0);
+                string firstName = reader.GetString(1);
+                Console.WriteLine(name + firstName + " a prolongé son emprunt");
+            }
+
         }
 
-    }
+        private void ListButton_MouseDown(object sender, MouseEventArgs e)
+        {
+            ListExtended();
 
-    private void AddButton_Click(object sender, EventArgs e)
-    {
-        AddAbonnes();
-        textBox1.Text = "";
-        textBox2.Text = "";
-        textBox3.Text = "";
-        textBox4.Text = "";
-        textBox5.Text = "";
-    }
-
-    private void ListButton_MouseDown(object sender, MouseEventArgs e)
-    {
-        ListExtended();
-
-    }
-}
+        }
+    } 
 }

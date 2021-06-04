@@ -90,7 +90,7 @@ namespace AppliGrpR
         {
             string sql = "SELECT DISTINCT NOM_ABONNÉ,PRÉNOM_ABONNÉ from ABONNÉS" +
                 " INNER JOIN EMPRUNTER on ABONNÉS.CODE_ABONNÉ = EMPRUNTER.CODE_ABONNÉ " +
-                "WHERE DATEDIFF(day, Emprunter.DATE_RETOUR_ATTENDUE, GETDATE()) > 10;";
+                "WHERE DATEDIFF(day, GETDATE(), Emprunter.DATE_RETOUR_ATTENDUE) > 10;";
             OleDbCommand cmd = new OleDbCommand(sql, dbCon);
             cmd.ExecuteNonQuery();
             OleDbDataReader reader = cmd.ExecuteReader();

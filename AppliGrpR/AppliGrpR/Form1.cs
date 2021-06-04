@@ -180,10 +180,38 @@ namespace AppliGrpR
 
         }
 
-        private void ListButton_MouseDown(object sender, MouseEventArgs e)
+        private void ListButton_MouseDown_1(object sender, MouseEventArgs e)
         {
             ListExtended();
+        }
 
+        public void PurgeAbonne()
+        {
+            string sql = "select ABONNÉS.PRÉNOM_ABONNÉ, NOM_ABONNÉ,ABONNÉS.CODE_ABONNÉ, CODE_ALBUM,DATE_EMPRUNT " +
+                "from emprunter " +
+                "inner join ABONNÉS on ABONNÉS.CODE_ABONNÉ = EMPRUNTER.CODE_ABONNÉ " +
+                "WHERE DATEDIFF(day, DATE_EMPRUNT, GETDATE()) > 365";
+
+            OleDbCommand cmdRead = new OleDbCommand(sql, dbCon);
+            OleDbDataReader reader = cmdRead.ExecuteReader();
+
+
+            while (reader.Read())
+            {
+                int code = reader.GetInt32(2);
+                //suppression
+                string sup = "DELETE FROM EMPRUNTER where CODE_ABONNÉ ="+code +
+                    "DELETE FROM ABONNÉS where CODE_ABONNÉ ="+code;
+                Console.WriteLine(code);
+                OleDbCommand cmd = new OleDbCommand(sup, dbCon);
+                cmd.ExecuteNonQuery();
+            }
+            reader.Close();
+        }
+
+        private void SuppressionAncien_MouseDown(object sender, MouseEventArgs e)
+        {
+            PurgeAbonne();
         }
     } 
 }

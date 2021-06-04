@@ -30,6 +30,7 @@ namespace AppliGrpR
             dbCon.Open();
             ExtendBorrowing("arthurp", "Le Boeuf sur le Toit"); //TEST
             ExtendAllBorrowing("arthurp"); //TEST
+            GetAlbumNotBorrowSinceOneYears();//TEST
 
         }
 
@@ -141,6 +142,32 @@ namespace AppliGrpR
             Console.WriteLine("Date d'emprunt étendue pour tout les emprunts de " + username);
 
         }
+
+        /*
+         * US8 
+         * 
+        */
+        public void GetAlbumNotBorrowSinceOneYears() {
+
+            string request = "SELECT * " +
+                "FROM ALBUMS " +
+                "FULL JOIN EMPRUNTER ON ALBUMS.CODE_ALBUM = EMPRUNTER.CODE_ALBUM " +
+                "WHERE DATEDIFF(day, DATE_EMPRUNT,GETDATE()) > 365 OR DATE_EMPRUNT IS NULL ";
+
+            OleDbCommand cmd = new OleDbCommand(request, dbCon);
+            cmd.ExecuteNonQuery();
+
+            OleDbDataReader reader = cmd.ExecuteReader();
+
+            Console.WriteLine("Album qui n'ont pas été emprunté depuis un mois: ");
+            while (reader.Read())
+            {
+                string titreAlbum = reader.GetString(3); 
+                Console.WriteLine("titre de l'Album: " + titreAlbum);
+
+            }
+        }
+
 
         private void Consulter_Click(object sender, EventArgs e)
         {

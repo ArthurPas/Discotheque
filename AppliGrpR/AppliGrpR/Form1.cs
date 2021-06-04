@@ -19,7 +19,6 @@ namespace AppliGrpR
         {
             InitializeComponent();
             InitConnexion();
-            TOP10ALBUMS();
         }
         public void InitConnexion()
         {
@@ -230,7 +229,7 @@ namespace AppliGrpR
             {
                 int nbEmprunts = reader.GetInt32(0);
                 string titreAlbum = reader.GetString(1);
-                Console.WriteLine("Classement : " + classement +" | Nombre d'emprunts : " + nbEmprunts + " | Titre de l'album :" + titreAlbum);
+                Console.WriteLine("Classement : " + classement + " | Nombre d'emprunts : " + nbEmprunts + " | Titre de l'album :" + titreAlbum);
                 classement++;
             }
         }

@@ -10,17 +10,17 @@ namespace AppliGrpR
     {
         int id;
         string titre;
-        int annee;
+        DateTime dateRetour;
 
-        public Albums(int c, string n, int p)
+        public Albums(int c, string n, DateTime d)
         {
             id = c;
             titre = n;
-            annee = p;
+            dateRetour = d;
         }
         public override string ToString()
         {
-            return titre + " " + annee;
+            return titre + "date de retour : " +dateRetour;
         }
         public int getID()
         {

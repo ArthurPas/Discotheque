@@ -71,7 +71,7 @@ namespace AppliGrpR
         /// </summary>
         public void ConsultAlbum()
         {
-            string sql = "select  EMPRUNTER.CODE_ALBUM, TITRE_ALBUM, ANNÉE_ALBUM from EMPRUNTER " +
+            string sql = "select  EMPRUNTER.CODE_ALBUM, TITRE_ALBUM, DATE_RETOUR_ATTENDUE from EMPRUNTER " +
                 "Inner join ALBUMS on EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
                 "Inner join ABONNÉS on EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ " +
                 "WHERE ABONNÉS.CODE_ABONNÉ = '" + numeroAbonne.Text + "'";
@@ -85,11 +85,11 @@ namespace AppliGrpR
             {
                 int code = Convert.ToInt32(reader.GetInt32(0));
                 string titre = reader.GetString(1);
-                int annee = 0;
+                DateTime dateRetour = new DateTime();
                 if (!reader.IsDBNull(2))
-                    annee = reader.GetInt32(2);
+                    dateRetour = reader.GetDateTime(2);
 
-                Albums a = new Albums(code, titre, annee);
+                Albums a = new Albums(code, titre, dateRetour);
                 listBox1.Items.Add(a);
                 empruntés.Add(a);
             }
@@ -241,17 +241,19 @@ namespace AppliGrpR
         /// </summary>
         public void ListRetard10J()
         {
-            string sql = "SELECT DISTINCT NOM_ABONNÉ,PRÉNOM_ABONNÉ from ABONNÉS" +
+            string sql = "SELECT DISTINCT NOM_ABONNÉ,PRÉNOM_ABONNÉ, TITRE_ALBUM from ABONNÉS" +
                 " INNER JOIN EMPRUNTER on ABONNÉS.CODE_ABONNÉ = EMPRUNTER.CODE_ABONNÉ " +
+                "INNER JOIN ALBUMS on EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM "+
                 "WHERE DATEDIFF(day,Emprunter.DATE_RETOUR_ATTENDUE, GETDATE()) > 10;";
             OleDbCommand cmd = new OleDbCommand(sql, dbCon);
             cmd.ExecuteNonQuery();
             OleDbDataReader reader = cmd.ExecuteReader();
+            listBox1.Items.Add("Les retards de 10 jours ou plus sont sur : ");
             while (reader.Read())
             {
                 string nom = reader.GetString(0);
-                string prenom = reader.GetString(1);
-                listBox1.Items.Add(nom + prenom);
+                string titre = reader.GetString(2);
+                listBox1.Items.Add(nom + titre);
             }
         }
 
@@ -261,16 +263,18 @@ namespace AppliGrpR
         /// </summary>
         public void ListExtended()
         {
-            string list = "Select NOM_ABONNÉ, PRÉNOM_ABONNÉ FROM ABONNÉS INNER JOIN EMPRUNTER on ABONNÉS.CODE_ABONNÉ = " +
+            string list = "Select NOM_ABONNÉ, PRÉNOM_ABONNÉ, TITRE_ALBUM FROM ABONNÉS INNER JOIN EMPRUNTER on ABONNÉS.CODE_ABONNÉ = " +
                 "EMPRUNTER.CODE_ABONNÉ INNER JOIN ALBUMS on EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
-                "INNER JOIN GENRES on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE WHERE DATE_RETOUR_ATTENDUE - DATE_EMPRUNT > DÉLAI";
+                "INNER JOIN GENRES on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE " +
+                "WHERE DATE_RETOUR_ATTENDUE - DATE_EMPRUNT > DÉLAI";
             OleDbCommand cmd = new OleDbCommand(list, dbCon);
             OleDbDataReader reader = cmd.ExecuteReader();
+            listBox1.Items.Add("Les emprunts qui ont étés prolongés sont : ");
             while (reader.Read())
             {
                 string name = reader.GetString(0);
-                string firstName = reader.GetString(1);
-                listBox1.Items.Add(name + firstName + " a prolongé son emprunt");
+                string titre = reader.GetString(2);
+                listBox1.Items.Add(name  +" a prolongé l'emprunt de "+titre);
             }
 
         }
@@ -417,18 +421,8 @@ namespace AppliGrpR
 
         public void Emprunter()
         {
-            int codeAbo = 0;
+            string codeAbo = numeroAbonne.Text;
             int delayNumber = 0;
-            string sql = "SELECT CODE_ABONNÉ FROM ABONNÉS WHERE NOM_ABONNÉ = ? AND PRÉNOM_ABONNÉ = ?";
-            OleDbCommand cmd = new OleDbCommand(sql, dbCon);
-            cmd.Parameters.Add("NOM_ABONNÉ", OleDbType.VarChar).Value = textBox2.Text;
-            cmd.Parameters.Add("PRÉNOM_ABONNÉ", OleDbType.VarChar).Value = textBox3.Text;
-            cmd.ExecuteNonQuery();
-            OleDbDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                codeAbo = reader.GetInt32(0);
-            }
             string delay = "SELECT DÉLAI FROM GENRES INNER JOIN ALBUMS on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE " +
                 "WHERE ALBUMS.CODE_ALBUM = " + CodeAlbum;
             OleDbCommand cmdDelay = new OleDbCommand(delay, dbCon);

@@ -121,23 +121,24 @@ namespace AppliGrpR
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(632, 30);
+            this.listBox1.Location = new System.Drawing.Point(612, 32);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(384, 251);
+            this.listBox1.Size = new System.Drawing.Size(435, 251);
             this.listBox1.TabIndex = 6;
             // 
             // Numero_Abonne
             // 
             this.Numero_Abonne.AutoSize = true;
-            this.Numero_Abonne.Location = new System.Drawing.Point(932, 434);
+            this.Numero_Abonne.Location = new System.Drawing.Point(731, 409);
             this.Numero_Abonne.Name = "Numero_Abonne";
             this.Numero_Abonne.Size = new System.Drawing.Size(84, 13);
             this.Numero_Abonne.TabIndex = 7;
             this.Numero_Abonne.Text = "Numero Abonne";
+            this.Numero_Abonne.Visible = false;
             // 
             // Consulter
             // 
-            this.Consulter.Location = new System.Drawing.Point(939, 498);
+            this.Consulter.Location = new System.Drawing.Point(951, 576);
             this.Consulter.Name = "Consulter";
             this.Consulter.Size = new System.Drawing.Size(75, 39);
             this.Consulter.TabIndex = 9;
@@ -147,7 +148,7 @@ namespace AppliGrpR
             // 
             // ListButton
             // 
-            this.ListButton.Location = new System.Drawing.Point(106, 461);
+            this.ListButton.Location = new System.Drawing.Point(22, 475);
             this.ListButton.Name = "ListButton";
             this.ListButton.Size = new System.Drawing.Size(86, 38);
             this.ListButton.TabIndex = 0;
@@ -156,7 +157,7 @@ namespace AppliGrpR
             // 
             // buttonTOP10
             // 
-            this.buttonTOP10.Location = new System.Drawing.Point(226, 461);
+            this.buttonTOP10.Location = new System.Drawing.Point(179, 475);
             this.buttonTOP10.Name = "buttonTOP10";
             this.buttonTOP10.Size = new System.Drawing.Size(120, 38);
             this.buttonTOP10.TabIndex = 10;
@@ -166,7 +167,7 @@ namespace AppliGrpR
             // 
             // Suppression
             // 
-            this.Suppression.Location = new System.Drawing.Point(395, 461);
+            this.Suppression.Location = new System.Drawing.Point(353, 574);
             this.Suppression.Name = "Suppression";
             this.Suppression.Size = new System.Drawing.Size(86, 38);
             this.Suppression.TabIndex = 11;
@@ -175,7 +176,7 @@ namespace AppliGrpR
             // 
             // Recomandation
             // 
-            this.Recomandation.Location = new System.Drawing.Point(663, 469);
+            this.Recomandation.Location = new System.Drawing.Point(815, 592);
             this.Recomandation.Name = "Recomandation";
             this.Recomandation.Size = new System.Drawing.Size(97, 23);
             this.Recomandation.TabIndex = 12;
@@ -258,7 +259,7 @@ namespace AppliGrpR
             // Partie_abonne
             // 
             this.Partie_abonne.AutoSize = true;
-            this.Partie_abonne.Location = new System.Drawing.Point(735, 308);
+            this.Partie_abonne.Location = new System.Drawing.Point(809, 295);
             this.Partie_abonne.Name = "Partie_abonne";
             this.Partie_abonne.Size = new System.Drawing.Size(73, 13);
             this.Partie_abonne.TabIndex = 20;
@@ -267,7 +268,7 @@ namespace AppliGrpR
             // Partie_admin
             // 
             this.Partie_admin.AutoSize = true;
-            this.Partie_admin.Location = new System.Drawing.Point(281, 308);
+            this.Partie_admin.Location = new System.Drawing.Point(236, 295);
             this.Partie_admin.Name = "Partie_admin";
             this.Partie_admin.Size = new System.Drawing.Size(65, 13);
             this.Partie_admin.TabIndex = 21;
@@ -276,7 +277,7 @@ namespace AppliGrpR
             // US2
             // 
             this.US2.AutoSize = true;
-            this.US2.Location = new System.Drawing.Point(961, 474);
+            this.US2.Location = new System.Drawing.Point(973, 561);
             this.US2.Name = "US2";
             this.US2.Size = new System.Drawing.Size(28, 13);
             this.US2.TabIndex = 22;
@@ -285,7 +286,7 @@ namespace AppliGrpR
             // US4
             // 
             this.US4.AutoSize = true;
-            this.US4.Location = new System.Drawing.Point(132, 445);
+            this.US4.Location = new System.Drawing.Point(48, 459);
             this.US4.Name = "US4";
             this.US4.Size = new System.Drawing.Size(28, 13);
             this.US4.TabIndex = 23;
@@ -294,7 +295,7 @@ namespace AppliGrpR
             // US10
             // 
             this.US10.AutoSize = true;
-            this.US10.Location = new System.Drawing.Point(695, 453);
+            this.US10.Location = new System.Drawing.Point(846, 574);
             this.US10.Name = "US10";
             this.US10.Size = new System.Drawing.Size(34, 13);
             this.US10.TabIndex = 24;
@@ -303,7 +304,7 @@ namespace AppliGrpR
             // US7
             // 
             this.US7.AutoSize = true;
-            this.US7.Location = new System.Drawing.Point(271, 445);
+            this.US7.Location = new System.Drawing.Point(222, 459);
             this.US7.Name = "US7";
             this.US7.Size = new System.Drawing.Size(28, 13);
             this.US7.TabIndex = 25;
@@ -321,7 +322,7 @@ namespace AppliGrpR
             // US6
             // 
             this.US6.AutoSize = true;
-            this.US6.Location = new System.Drawing.Point(421, 445);
+            this.US6.Location = new System.Drawing.Point(383, 558);
             this.US6.Name = "US6";
             this.US6.Size = new System.Drawing.Size(28, 13);
             this.US6.TabIndex = 27;
@@ -330,23 +331,24 @@ namespace AppliGrpR
             // ListeAbonne
             // 
             this.ListeAbonne.FormattingEnabled = true;
-            this.ListeAbonne.Location = new System.Drawing.Point(783, 450);
+            this.ListeAbonne.Location = new System.Drawing.Point(408, 324);
             this.ListeAbonne.Name = "ListeAbonne";
-            this.ListeAbonne.Size = new System.Drawing.Size(120, 82);
+            this.ListeAbonne.Size = new System.Drawing.Size(299, 199);
             this.ListeAbonne.TabIndex = 28;
             this.ListeAbonne.SelectedIndexChanged += new System.EventHandler(this.ListeAbonne_SelectedIndexChanged);
             // 
             // numeroAbonne
             // 
-            this.numeroAbonne.Location = new System.Drawing.Point(926, 450);
+            this.numeroAbonne.Location = new System.Drawing.Point(724, 425);
             this.numeroAbonne.Name = "numeroAbonne";
             this.numeroAbonne.Size = new System.Drawing.Size(100, 20);
             this.numeroAbonne.TabIndex = 29;
+            this.numeroAbonne.Visible = false;
             // 
             // Liste_Abonne
             // 
             this.Liste_Abonne.AutoSize = true;
-            this.Liste_Abonne.Location = new System.Drawing.Point(805, 434);
+            this.Liste_Abonne.Location = new System.Drawing.Point(525, 308);
             this.Liste_Abonne.Name = "Liste_Abonne";
             this.Liste_Abonne.Size = new System.Drawing.Size(69, 13);
             this.Liste_Abonne.TabIndex = 30;
@@ -355,15 +357,15 @@ namespace AppliGrpR
             // ListAlbum
             // 
             this.ListAlbum.FormattingEnabled = true;
-            this.ListAlbum.Location = new System.Drawing.Point(395, 48);
+            this.ListAlbum.Location = new System.Drawing.Point(386, 48);
             this.ListAlbum.Name = "ListAlbum";
-            this.ListAlbum.Size = new System.Drawing.Size(171, 186);
+            this.ListAlbum.Size = new System.Drawing.Size(203, 199);
             this.ListAlbum.TabIndex = 31;
             this.ListAlbum.SelectedIndexChanged += new System.EventHandler(this.ListAlbum_SelectedIndexChanged_1);
             // 
             // emprunterButton
             // 
-            this.emprunterButton.Location = new System.Drawing.Point(469, 245);
+            this.emprunterButton.Location = new System.Drawing.Point(449, 260);
             this.emprunterButton.Name = "emprunterButton";
             this.emprunterButton.Size = new System.Drawing.Size(75, 23);
             this.emprunterButton.TabIndex = 32;
@@ -373,7 +375,7 @@ namespace AppliGrpR
             // 
             // ProlongerButton
             // 
-            this.ProlongerButton.Location = new System.Drawing.Point(672, 514);
+            this.ProlongerButton.Location = new System.Drawing.Point(824, 535);
             this.ProlongerButton.Name = "ProlongerButton";
             this.ProlongerButton.Size = new System.Drawing.Size(75, 23);
             this.ProlongerButton.TabIndex = 33;
@@ -384,7 +386,7 @@ namespace AppliGrpR
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(694, 495);
+            this.label1.Location = new System.Drawing.Point(848, 519);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(28, 13);
             this.label1.TabIndex = 34;
@@ -392,7 +394,7 @@ namespace AppliGrpR
             // 
             // Retard10
             // 
-            this.Retard10.Location = new System.Drawing.Point(106, 561);
+            this.Retard10.Location = new System.Drawing.Point(22, 574);
             this.Retard10.Name = "Retard10";
             this.Retard10.Size = new System.Drawing.Size(86, 38);
             this.Retard10.TabIndex = 35;
@@ -402,7 +404,7 @@ namespace AppliGrpR
             // US5
             // 
             this.US5.AutoSize = true;
-            this.US5.Location = new System.Drawing.Point(132, 545);
+            this.US5.Location = new System.Drawing.Point(48, 558);
             this.US5.Name = "US5";
             this.US5.Size = new System.Drawing.Size(28, 13);
             this.US5.TabIndex = 36;
@@ -410,7 +412,7 @@ namespace AppliGrpR
             // 
             // PlusUnAn
             // 
-            this.PlusUnAn.Location = new System.Drawing.Point(249, 561);
+            this.PlusUnAn.Location = new System.Drawing.Point(195, 574);
             this.PlusUnAn.Name = "PlusUnAn";
             this.PlusUnAn.Size = new System.Drawing.Size(86, 38);
             this.PlusUnAn.TabIndex = 37;
@@ -420,7 +422,7 @@ namespace AppliGrpR
             // US8
             // 
             this.US8.AutoSize = true;
-            this.US8.Location = new System.Drawing.Point(281, 545);
+            this.US8.Location = new System.Drawing.Point(222, 558);
             this.US8.Name = "US8";
             this.US8.Size = new System.Drawing.Size(28, 13);
             this.US8.TabIndex = 38;

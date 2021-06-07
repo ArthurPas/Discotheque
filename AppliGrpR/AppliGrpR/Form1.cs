@@ -364,22 +364,28 @@ namespace AppliGrpR
             {
                 genres.Add(reader.GetString(0));
             }
-            string sqlTwo = "SELECT TITRE_ALBUM FROM ALBUMS INNER JOIN GENRES ON GENRES.CODE_GENRE = ALBUMS.CODE_GENRE " +
+            string sqlTwo = "SELECT ALBUMS.TITRE_ALBUM, ALBUMS.CODE_ALBUM,EMPRUNTER.DATE_RETOUR_ATTENDUE FROM ALBUMS INNER JOIN GENRES ON GENRES.CODE_GENRE = ALBUMS.CODE_GENRE " +
+                "INNER JOIN EMPRUNTER ON EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
                 "WHERE LIBELLÉ_GENRE = '"+genres[0]+"'";
             OleDbCommand cmdTwo = new OleDbCommand(sqlTwo, dbCon);
             cmdTwo.ExecuteNonQuery(); 
             OleDbDataReader readerTwo = cmdTwo.ExecuteReader();
             listBox1.Items.Add("Nous vous recommandons dans le genre " + genres[0]);
+            int code = 0;
+            string nomAlbum = "";
+            DateTime date = new DateTime();
             while (readerTwo.Read())
             {
-                string nomAlbum = readerTwo.GetString(0);
+                nomAlbum= readerTwo.GetString(0);
+                code = readerTwo.GetInt32(1);
+                date = readerTwo.GetDateTime(2);
                 album.Add(nomAlbum);
             }
             for (int i = 0; i < 10; i++)
             {                                            
                 int index = random.Next(album.Count);
-                listBox1.Items.Add(album[index]);
-                Console.WriteLine(index);
+                Albums a = new Albums(code, album[index], date);
+                listBox1.Items.Add(a);
             }    
         }
 
@@ -506,21 +512,27 @@ namespace AppliGrpR
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Albums album = (Albums)listBox1.SelectedItem;
-            string titre = album.titre.ToString();
-            string apostrophe = "'";
-            if (titre.Contains("'"))
-            {
-                titre = titre.Insert(titre.IndexOf("'"), apostrophe);
-            }
+            try { 
+                Albums album = (Albums)listBox1.SelectedItem;
+                string titre = album.titre.ToString();
+                string apostrophe = "'";
+                if (titre.Contains("'"))
+                {
+                    titre = titre.Insert(titre.IndexOf("'"), apostrophe);
+                }
 
-            string sql = "SELECT CODE_ALBUM FROM ALBUMS WHERE TITRE_ALBUM ='" + titre + "'";
-            OleDbCommand cmd = new OleDbCommand(sql, dbCon);
-            cmd.ExecuteNonQuery();
-            OleDbDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+                string sql = "SELECT CODE_ALBUM FROM ALBUMS WHERE TITRE_ALBUM ='" + titre + "'";
+                OleDbCommand cmd = new OleDbCommand(sql, dbCon);
+                cmd.ExecuteNonQuery();
+                OleDbDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    CodeAlbumProlonger = reader.GetInt32(0);
+                }
+            }
+            catch (System.InvalidCastException)
             {
-                CodeAlbumProlonger = reader.GetInt32(0);
+
             }
         }
 

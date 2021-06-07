@@ -33,6 +33,10 @@ namespace AppliGrpR
 
         }
 
+        /// <summary>
+        /// Ajoute un Abonné à la Base depuis les valeurs récupéré dans les textBox
+        /// </summary>
+
         public void AddAbonnes()
         {
 
@@ -57,6 +61,10 @@ namespace AppliGrpR
             }
         }
 
+        /// <summary>
+        /// US2
+        /// Consulte les albums empruntés par un utilisateur
+        /// </summary>
         public void ConsultAlbum()
         {
             string sql = "select  EMPRUNTER.CODE_ALBUM, TITRE_ALBUM, ANNÉE_ALBUM from EMPRUNTER " +
@@ -94,10 +102,12 @@ namespace AppliGrpR
             textBox5.Text = "";
         }
 
-        /*
-         * US3-
-         * 
-         */
+        /// <summary>
+        /// US3
+        /// Prolonge un emprent donné
+        /// @param l'identifiant de l'utilisateur qui réalise sont prolongement
+        /// @param le titre de l'album que l'on veut prolonger
+        /// </summary>
 
         public void ExtendBorrowing(string username, string titreAlbum)
         {
@@ -119,10 +129,11 @@ namespace AppliGrpR
 
         }
 
-        /*
-         * US9-
-         * 
-         */
+        /// <summary>
+        /// US9
+        /// Prolonge l'emprunt de tous les emprunts
+        /// @param l'identifiant de l'utilisateur qui réalise sont prolongement
+        /// </summary>
         public void ExtendAllBorrowing(string username)
         {
 
@@ -142,10 +153,11 @@ namespace AppliGrpR
 
         }
 
-        /*
-         * US8 
-         * 
-        */
+        /// <summary>
+        ///US8 
+        ///Affiche les almbums qui n'ont pas était emprunté depuis 1 ans
+        /// </summary>
+        
         public void GetAlbumNotBorrowSinceOneYears() {
 
             string request = "SELECT * " +
@@ -175,6 +187,11 @@ namespace AppliGrpR
             ConsultAlbum();
             SearchName.Text = "";
         }
+
+        /// <summary>
+        /// US5
+        /// Affiche les abonnés ayant des emprunts non rapportés en retard de 10 jours
+        /// </summary>
         public void ListRetard10J()
         {
             string sql = "SELECT DISTINCT NOM_ABONNÉ,PRÉNOM_ABONNÉ from ABONNÉS" +
@@ -190,6 +207,11 @@ namespace AppliGrpR
                 Console.WriteLine(nom + prenom);
             }
         }
+
+        /// <summary>
+        /// US4
+        /// Affiche les emprunts qui on été prolongés
+        /// </summary>
         public void ListExtended()
         {
             string list = "Select NOM_ABONNÉ, PRÉNOM_ABONNÉ FROM ABONNÉS INNER JOIN EMPRUNTER on ABONNÉS.CODE_ABONNÉ = " +
@@ -211,6 +233,10 @@ namespace AppliGrpR
             ListExtended();
         }
 
+        /// <summary>
+        /// US6
+        /// Supprimer les abonnés et leur emprunts si leur dernière emprunt date de plus d'un an
+        /// </summary>
         public void PurgeAbonne()
         {
             string sql = "select ABONNÉS.PRÉNOM_ABONNÉ, NOM_ABONNÉ,ABONNÉS.CODE_ABONNÉ, CODE_ALBUM,DATE_EMPRUNT " +
@@ -234,6 +260,10 @@ namespace AppliGrpR
             reader.Close();
         }
 
+        /// <summary>
+        /// US7
+        /// Affiche les 10 albums les plus empruntés dans l'année
+        /// </summary>
         private void TOP10ALBUMS()
         {
             int classement = 1;

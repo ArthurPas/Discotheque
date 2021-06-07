@@ -65,6 +65,12 @@ namespace AppliGrpR
             this.emprunterButton = new System.Windows.Forms.Button();
             this.ProlongerButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.Retard10 = new System.Windows.Forms.Button();
+            this.US5 = new System.Windows.Forms.Label();
+            this.PlusUnAn = new System.Windows.Forms.Button();
+            this.US8 = new System.Windows.Forms.Label();
+            this.US9 = new System.Windows.Forms.Label();
+            this.ProlongerTout = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
@@ -169,9 +175,9 @@ namespace AppliGrpR
             // 
             // Recomandation
             // 
-            this.Recomandation.Location = new System.Drawing.Point(672, 469);
+            this.Recomandation.Location = new System.Drawing.Point(663, 469);
             this.Recomandation.Name = "Recomandation";
-            this.Recomandation.Size = new System.Drawing.Size(75, 23);
+            this.Recomandation.Size = new System.Drawing.Size(97, 23);
             this.Recomandation.TabIndex = 12;
             this.Recomandation.Text = "recommandations";
             this.Recomandation.UseVisualStyleBackColor = true;
@@ -349,7 +355,7 @@ namespace AppliGrpR
             // ListAlbum
             // 
             this.ListAlbum.FormattingEnabled = true;
-            this.ListAlbum.Location = new System.Drawing.Point(424, 48);
+            this.ListAlbum.Location = new System.Drawing.Point(395, 48);
             this.ListAlbum.Name = "ListAlbum";
             this.ListAlbum.Size = new System.Drawing.Size(171, 186);
             this.ListAlbum.TabIndex = 31;
@@ -384,11 +390,72 @@ namespace AppliGrpR
             this.label1.TabIndex = 34;
             this.label1.Text = "US3";
             // 
+            // Retard10
+            // 
+            this.Retard10.Location = new System.Drawing.Point(106, 561);
+            this.Retard10.Name = "Retard10";
+            this.Retard10.Size = new System.Drawing.Size(86, 38);
+            this.Retard10.TabIndex = 35;
+            this.Retard10.Text = "Retard 10 jours";
+            this.Retard10.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Retard10_MouseDown);
+            // 
+            // US5
+            // 
+            this.US5.AutoSize = true;
+            this.US5.Location = new System.Drawing.Point(132, 545);
+            this.US5.Name = "US5";
+            this.US5.Size = new System.Drawing.Size(28, 13);
+            this.US5.TabIndex = 36;
+            this.US5.Text = "US5";
+            // 
+            // PlusUnAn
+            // 
+            this.PlusUnAn.Location = new System.Drawing.Point(249, 561);
+            this.PlusUnAn.Name = "PlusUnAn";
+            this.PlusUnAn.Size = new System.Drawing.Size(86, 38);
+            this.PlusUnAn.TabIndex = 37;
+            this.PlusUnAn.Text = "Pas empruntés plus d\'un an";
+            this.PlusUnAn.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PlusUnAn_MouseDown);
+            // 
+            // US8
+            // 
+            this.US8.AutoSize = true;
+            this.US8.Location = new System.Drawing.Point(281, 545);
+            this.US8.Name = "US8";
+            this.US8.Size = new System.Drawing.Size(28, 13);
+            this.US8.TabIndex = 38;
+            this.US8.Text = "US8";
+            // 
+            // US9
+            // 
+            this.US9.AutoSize = true;
+            this.US9.Location = new System.Drawing.Point(694, 561);
+            this.US9.Name = "US9";
+            this.US9.Size = new System.Drawing.Size(28, 13);
+            this.US9.TabIndex = 39;
+            this.US9.Text = "US9";
+            // 
+            // ProlongerTout
+            // 
+            this.ProlongerTout.Location = new System.Drawing.Point(663, 577);
+            this.ProlongerTout.Name = "ProlongerTout";
+            this.ProlongerTout.Size = new System.Drawing.Size(97, 38);
+            this.ProlongerTout.TabIndex = 40;
+            this.ProlongerTout.Text = "Prolonger tous emprunts";
+            this.ProlongerTout.UseVisualStyleBackColor = true;
+            this.ProlongerTout.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ProlongerTout_MouseDown);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1062, 627);
+            this.Controls.Add(this.ProlongerTout);
+            this.Controls.Add(this.US9);
+            this.Controls.Add(this.US8);
+            this.Controls.Add(this.PlusUnAn);
+            this.Controls.Add(this.US5);
+            this.Controls.Add(this.Retard10);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ProlongerButton);
             this.Controls.Add(this.emprunterButton);
@@ -470,6 +537,12 @@ namespace AppliGrpR
         private System.Windows.Forms.Button emprunterButton;
         private System.Windows.Forms.Button ProlongerButton;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button Retard10;
+        private System.Windows.Forms.Label US5;
+        private System.Windows.Forms.Button PlusUnAn;
+        private System.Windows.Forms.Label US8;
+        private System.Windows.Forms.Label US9;
+        private System.Windows.Forms.Button ProlongerTout;
     }
 }
 

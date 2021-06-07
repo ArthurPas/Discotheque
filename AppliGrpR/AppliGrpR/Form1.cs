@@ -35,10 +35,6 @@ namespace AppliGrpR
             Nationalite();
             Abonnes();
             Album();
-            //TEST
-            //ExtendAllBorrowing("sup"); //TEST
-           // GetAlbumNotBorrowSinceOneYears();//TEST
-
         }
 
         /// <summary>
@@ -159,6 +155,7 @@ namespace AppliGrpR
             textBox3.Text = "";
             textBox4.Text = "";
             textBox5.Text = "";
+            Abonnes();
         }
 
         /// <summary>
@@ -186,7 +183,7 @@ namespace AppliGrpR
         /// Prolonge l'emprunt de tous les emprunts
         /// @param l'identifiant de l'utilisateur qui réalise sont prolongement
         /// </summary>
-        public void ExtendAllBorrowing(string userLog)
+        public void ExtendAllBorrowing()
         {
 
             string extendDate = "UPDATE EMPRUNTER " +
@@ -195,13 +192,12 @@ namespace AppliGrpR
             "INNER JOIN ABONNÉS ON EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ " +
             "INNER JOIN ALBUMS ON EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
             "INNER JOIN GENRES on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE " +
-            "WHERE ABONNÉS.LOGIN_ABONNÉ = '" + userLog + "' " +
-            "AND DATE_RETOUR_ATTENDUE - DATE_EMPRUNT < DÉLAI";
+            "WHERE ABONNÉS.CODE_ABONNÉ = " + numeroAbonne.Text  +
+            "AND DATE_RETOUR_ATTENDUE - DATE_EMPRUNT <= DÉLAI";
 
             OleDbCommand cmd = new OleDbCommand(extendDate, dbCon);
             cmd.ExecuteNonQuery();
-
-            Console.WriteLine("Date d'emprunt étendue pour tout les emprunts de " + userLog);
+            listBox1.Items.Add("Date d'emprunt étendue pour tous vos emprunts");
 
         }
 
@@ -210,7 +206,7 @@ namespace AppliGrpR
         ///Affiche les almbums qui n'ont pas était emprunté depuis 1 ans
         /// </summary>
         
-        public void GetAlbumNotBorrowSinceOneYears() {
+        public void GetAlbumNotBorrowedSinceOneYear() {
 
             string request = "SELECT * " +
                 "FROM ALBUMS " +
@@ -222,11 +218,11 @@ namespace AppliGrpR
 
             OleDbDataReader reader = cmd.ExecuteReader();
 
-            Console.WriteLine("Album qui n'ont pas été emprunté depuis un an: ");
+            listBox1.Items.Add("Album qui n'ont pas été emprunté depuis un an: ");
             while (reader.Read())
             {
                 string titreAlbum = reader.GetString(3); 
-                Console.WriteLine("titre de l'Album: " + titreAlbum);
+                listBox1.Items.Add(titreAlbum);
 
             }
         }
@@ -247,7 +243,7 @@ namespace AppliGrpR
         {
             string sql = "SELECT DISTINCT NOM_ABONNÉ,PRÉNOM_ABONNÉ from ABONNÉS" +
                 " INNER JOIN EMPRUNTER on ABONNÉS.CODE_ABONNÉ = EMPRUNTER.CODE_ABONNÉ " +
-                "WHERE DATEDIFF(day, GETDATE(), Emprunter.DATE_RETOUR_ATTENDUE) > 10;";
+                "WHERE DATEDIFF(day,Emprunter.DATE_RETOUR_ATTENDUE, GETDATE()) > 10;";
             OleDbCommand cmd = new OleDbCommand(sql, dbCon);
             cmd.ExecuteNonQuery();
             OleDbDataReader reader = cmd.ExecuteReader();
@@ -255,7 +251,7 @@ namespace AppliGrpR
             {
                 string nom = reader.GetString(0);
                 string prenom = reader.GetString(1);
-                Console.WriteLine(nom + prenom);
+                listBox1.Items.Add(nom + prenom);
             }
         }
 
@@ -274,7 +270,7 @@ namespace AppliGrpR
             {
                 string name = reader.GetString(0);
                 string firstName = reader.GetString(1);
-                Console.WriteLine(name + firstName + " a prolongé son emprunt");
+                listBox1.Items.Add(name + firstName + " a prolongé son emprunt");
             }
 
         }
@@ -334,21 +330,23 @@ namespace AppliGrpR
             OleDbCommand cmd = new OleDbCommand(sql, dbCon);
             cmd.ExecuteNonQuery(); ;
             OleDbDataReader reader = cmd.ExecuteReader();
-
+            listBox1.Items.Add("Classement : ");
             while (reader.Read())
             {
                 int nbEmprunts = reader.GetInt32(0);
                 string titreAlbum = reader.GetString(1);
-                Console.WriteLine("Classement : " + classement + " | Nombre d'emprunts : " + nbEmprunts + " | Titre de l'album :" + titreAlbum);
+                
+
+               listBox1.Items.Add(classement + " | Nombre d'emprunts : " + nbEmprunts + " | Titre de l'album :" + titreAlbum);
                 classement++;
             }
         }
-        private void Suggestions(string userlog)
+        private void Suggestions()
         {
             string sql = "SELECT GENRES.LIBELLÉ_GENRE FROM EMPRUNTER INNER JOIN ABONNÉS ON EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ " +
                 "INNER JOIN ALBUMS ON EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
                 "INNER JOIN GENRES ON ALBUMS.CODE_GENRE = GENRES.CODE_GENRE " +
-                "WHERE ABONNÉS.LOGIN_ABONNÉ = '" + userlog + "'";
+                "WHERE ABONNÉS.CODE_ABONNÉ = '" + numeroAbonne.Text + "'";
             OleDbCommand cmd = new OleDbCommand(sql, dbCon);
             cmd.ExecuteNonQuery(); ;
             OleDbDataReader reader = cmd.ExecuteReader();
@@ -362,14 +360,16 @@ namespace AppliGrpR
             OleDbCommand cmdTwo = new OleDbCommand(sqlTwo, dbCon);
             cmdTwo.ExecuteNonQuery(); ;
             OleDbDataReader readerTwo = cmdTwo.ExecuteReader();
+            listBox1.Items.Add("Nous vous recommandons dans le genre " + genres[0]);
             while (readerTwo.Read())
             {
                 string nomAlbum = readerTwo.GetString(0);
-                Console.WriteLine("Nous vous recommandons dans le genre "+genres[0]+" l'album : "+nomAlbum);
+                listBox1.Items.Add(nomAlbum);
             }
         }
         private void buttonTOP10_MouseDown_1(object sender, MouseEventArgs e)
         {
+            listBox1.Items.Clear();
             TOP10ALBUMS();
         }
 
@@ -396,7 +396,8 @@ namespace AppliGrpR
 
         private void Recomandation_MouseDown(object sender, MouseEventArgs e)
         {
-            Suggestions("yo");
+            listBox1.Items.Clear();
+            Suggestions();
         }
 
         private void ListeAbonne_SelectedIndexChanged(object sender, EventArgs e)
@@ -452,6 +453,7 @@ namespace AppliGrpR
 
         private void ListButton_MouseDown(object sender, MouseEventArgs e)
         {
+            listBox1.Items.Clear();
             ListExtended();
         }
 
@@ -476,6 +478,24 @@ namespace AppliGrpR
         private void ProlongerButton_MouseDown(object sender, MouseEventArgs e)
         {
             ExtendBorrowing();
+        }
+
+        private void Retard10_MouseDown(object sender, MouseEventArgs e)
+        {
+            listBox1.Items.Clear();
+            ListRetard10J();
+        }
+
+        private void PlusUnAn_MouseDown(object sender, MouseEventArgs e)
+        {
+            listBox1.Items.Clear();
+            GetAlbumNotBorrowedSinceOneYear();
+        }
+
+        private void ProlongerTout_MouseDown(object sender, MouseEventArgs e)
+        {
+            listBox1.Items.Clear();
+            ExtendAllBorrowing();
         }
     } 
 }

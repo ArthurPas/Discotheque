@@ -45,7 +45,7 @@ namespace AppliGrpR
         public void AddAbonnes()
         {
 
-            string consult = "Select * from ABONNÉS WHERE NOM_ABONNÉ = '" + textBox2.Text + "' and PRÉNOM_ABONNÉ ='" + textBox3.Text + "'";
+            string consult = "Select * from ABONNÉS WHERE LOGIN_ABONNÉ = '"+textBox4.Text+"'";
             OleDbCommand cmdConsult = new OleDbCommand(consult, dbCon);
             OleDbDataReader reader = cmdConsult.ExecuteReader();
             if (!reader.HasRows)

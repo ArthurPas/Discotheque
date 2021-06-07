@@ -15,9 +15,8 @@ namespace AppliGrpR
     {
         OleDbConnection dbCon;
         List<Albums> empruntés = new List<Albums>();
-        List<String> genres = new List<String>();
+        List<string> genres = new List<string>();
         List<string> nationalités = new List<string>();
-        string nationaliteActuelle = "";
         public Form1()
         {
             InitializeComponent();
@@ -32,6 +31,7 @@ namespace AppliGrpR
             dbCon = new OleDbConnection(ChaineBd);
             dbCon.Open();
             Nationalite();
+            Abonnes();
             ExtendBorrowing("arthurp", "Le Boeuf sur le Toit"); //TEST
             ExtendAllBorrowing("arthurp"); //TEST
             GetAlbumNotBorrowSinceOneYears();//TEST
@@ -67,7 +67,7 @@ namespace AppliGrpR
             string sql = "select  EMPRUNTER.CODE_ALBUM, TITRE_ALBUM, ANNÉE_ALBUM from EMPRUNTER " +
                 "Inner join ALBUMS on EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
                 "Inner join ABONNÉS on EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ " +
-                "WHERE ABONNÉS.NOM_ABONNÉ = '" + SearchName.Text + "'";
+                "WHERE ABONNÉS.CODE_ABONNÉ = '" + numeroAbonne.Text + "'";
 
 
             OleDbCommand cmdRead = new OleDbCommand(sql, dbCon);
@@ -103,7 +103,24 @@ namespace AppliGrpR
                 string titre = reader.GetString(1);
                 nationalités.Add(titre);
                 nationalite.Items.Add(titre);
-                Console.WriteLine(nationalite.SelectedItems.ToString());
+            }
+            reader.Close();
+        }
+
+        public void Abonnes()
+        {
+            ListeAbonne.Items.Clear();
+            string sql = "select * from ABONNÉS";
+
+
+            OleDbCommand cmdRead = new OleDbCommand(sql, dbCon);
+            OleDbDataReader reader = cmdRead.ExecuteReader();
+
+
+            while (reader.Read())
+            {
+                string titre = reader.GetString(2);
+                ListeAbonne.Items.Add(titre);
             }
             reader.Close();
         }
@@ -197,7 +214,6 @@ namespace AppliGrpR
             listBox1.Items.Clear();
 
             ConsultAlbum();
-            SearchName.Text = "";
         }
         public void ListRetard10J()
         {
@@ -237,6 +253,7 @@ namespace AppliGrpR
 
         public void PurgeAbonne()
         {
+            //regarde si l'abonné a un emprunt qui date de plus d'un an
             string sql = "select ABONNÉS.PRÉNOM_ABONNÉ, NOM_ABONNÉ,ABONNÉS.CODE_ABONNÉ, CODE_ALBUM,DATE_EMPRUNT " +
                 "from emprunter " +
                 "inner join ABONNÉS on ABONNÉS.CODE_ABONNÉ = EMPRUNTER.CODE_ABONNÉ " +
@@ -248,12 +265,24 @@ namespace AppliGrpR
 
             while (reader.Read())
             {
+                //récupère le code de l'abo
                 int code = reader.GetInt32(2);
-                //suppression
-                string sup = "DELETE FROM EMPRUNTER where CODE_ABONNÉ ="+code +
-                    "DELETE FROM ABONNÉS where CODE_ABONNÉ ="+code;
-                OleDbCommand cmd = new OleDbCommand(sup, dbCon);
-                cmd.ExecuteNonQuery();
+                //regarde si il a un emprunt qui date de moins d'un an
+                string test = "select ABONNÉS.PRÉNOM_ABONNÉ, NOM_ABONNÉ,ABONNÉS.CODE_ABONNÉ, CODE_ALBUM,DATE_EMPRUNT " +
+                    "from emprunter " +
+                    "inner join ABONNÉS on ABONNÉS.CODE_ABONNÉ = EMPRUNTER.CODE_ABONNÉ " +
+                    "WHERE DATEDIFF(day, DATE_EMPRUNT, GETDATE()) < 365 AND ABONNÉS.CODE_ABONNÉ ="+code;
+                OleDbCommand cmdReadtest = new OleDbCommand(test, dbCon);
+                OleDbDataReader readertest = cmdReadtest.ExecuteReader();
+                //si pas d'emprunt qui date de moins d'un an
+                if (!readertest.Read())
+                {
+                    //suppression
+                    string sup = "DELETE FROM EMPRUNTER where CODE_ABONNÉ =" + code +
+                        "DELETE FROM ABONNÉS where CODE_ABONNÉ =" + code;
+                    OleDbCommand cmd = new OleDbCommand(sup, dbCon);
+                    cmd.ExecuteNonQuery();
+                }
             }
             reader.Close();
         }
@@ -311,13 +340,11 @@ namespace AppliGrpR
         private void Suppression_MouseDown(object sender, MouseEventArgs e)
         {
             PurgeAbonne();
+            Abonnes();
         }
 
         private void nationalite_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Console.WriteLine(nationalite.SelectedItem.ToString());
-            nationaliteActuelle = nationalite.SelectedItem.ToString();
-
             string sql = "select * from PAYS WHERE NOM_PAYS ='"+ nationalite.SelectedItem.ToString()+"'";
             OleDbCommand cmdRead = new OleDbCommand(sql, dbCon);
             OleDbDataReader reader = cmdRead.ExecuteReader();
@@ -326,7 +353,6 @@ namespace AppliGrpR
             while (reader.Read())
             {
                 code = reader.GetInt32(0);
-                Console.WriteLine(nationalite.SelectedItems.ToString());
             }
             reader.Close();
             textBox1.Text= code.ToString();
@@ -335,6 +361,21 @@ namespace AppliGrpR
         private void Recomandation_MouseDown(object sender, MouseEventArgs e)
         {
             Suggestions("yo");
+        }
+
+        private void ListeAbonne_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string sql = "select * from ABONNÉS WHERE NOM_ABONNÉ ='" + ListeAbonne.SelectedItem.ToString() + "'";
+            OleDbCommand cmdRead = new OleDbCommand(sql, dbCon);
+            OleDbDataReader reader = cmdRead.ExecuteReader();
+
+            int code = 0; ;
+            while (reader.Read())
+            {
+                code = reader.GetInt32(0);
+            }
+            reader.Close();
+            numeroAbonne.Text = code.ToString();
         }
     } 
 }

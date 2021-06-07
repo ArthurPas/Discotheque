@@ -186,7 +186,7 @@ namespace AppliGrpR
         /// Prolonge l'emprunt de tous les emprunts
         /// @param l'identifiant de l'utilisateur qui réalise sont prolongement
         /// </summary>
-        public void ExtendAllBorrowing(string username)
+        public void ExtendAllBorrowing(string userLog)
         {
 
             string extendDate = "UPDATE EMPRUNTER " +

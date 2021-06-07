@@ -18,7 +18,8 @@ namespace AppliGrpR
         List<string> genres = new List<string>();
         List<string> nationalités = new List<string>();
         List<string> album = new List<string>();
-        int CodeAlbum= 0;
+        int CodeAlbumEmprunter= 0;
+        int CodeAlbumProlonger = 0;
         public Form1()
         {
             InitializeComponent();
@@ -171,7 +172,7 @@ namespace AppliGrpR
             string extendDate = "UPDATE EMPRUNTER Set EMPRUNTER.DATE_RETOUR_ATTENDUE = DATEADD(month, 1, EMPRUNTER.DATE_RETOUR_ATTENDUE) " +
                 "FROM EMPRUNTER INNER JOIN ABONNÉS ON EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ INNER JOIN ALBUMS ON EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
                 "INNER JOIN GENRES on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE WHERE ABONNÉS.CODE_ABONNÉ = "+numeroAbonne.Text+
-                " AND ALBUMS.CODE_ALBUM = "+CodeAlbum+" AND DATE_RETOUR_ATTENDUE - DATE_EMPRUNT <= DÉLAI";
+                " AND ALBUMS.CODE_ALBUM = "+CodeAlbumProlonger+" AND DATE_RETOUR_ATTENDUE - DATE_EMPRUNT <= DÉLAI";
 
             OleDbCommand cmd = new OleDbCommand(extendDate, dbCon);
             cmd.ExecuteNonQuery();
@@ -435,7 +436,7 @@ namespace AppliGrpR
             string codeAbo = numeroAbonne.Text;
             int delayNumber = 0;
             string delay = "SELECT DÉLAI FROM GENRES INNER JOIN ALBUMS on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE " +
-                "WHERE ALBUMS.CODE_ALBUM = " + CodeAlbum;
+                "WHERE ALBUMS.CODE_ALBUM = " + CodeAlbumEmprunter;
             OleDbCommand cmdDelay = new OleDbCommand(delay, dbCon);
             cmdDelay.ExecuteNonQuery();
             OleDbDataReader readerDelay = cmdDelay.ExecuteReader();
@@ -446,7 +447,7 @@ namespace AppliGrpR
             string request = "insert into EMPRUNTER(CODE_ABONNÉ,CODE_ALBUM,DATE_EMPRUNT,DATE_RETOUR_ATTENDUE) " +
                 "values(" + codeAbo + ", ?, GETDATE(),DATEADD(Day,?,GETDATE()))";
             OleDbCommand cmdTwo = new OleDbCommand(request, dbCon);
-            cmdTwo.Parameters.Add("CODE_ALBUM", OleDbType.Integer).Value = CodeAlbum;
+            cmdTwo.Parameters.Add("CODE_ALBUM", OleDbType.Integer).Value = CodeAlbumEmprunter;
             cmdTwo.Parameters.Add("CODE_ALBUM", OleDbType.Integer).Value = delayNumber;
             cmdTwo.ExecuteNonQuery();
         }
@@ -477,7 +478,7 @@ namespace AppliGrpR
             OleDbDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                CodeAlbum = reader.GetInt32(0);
+                CodeAlbumEmprunter = reader.GetInt32(0);
             }
         }
         private void ProlongerButton_MouseDown(object sender, MouseEventArgs e)
@@ -501,6 +502,61 @@ namespace AppliGrpR
         {
             listBox1.Items.Clear();
             ExtendAllBorrowing();
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Albums album = (Albums)listBox1.SelectedItem;
+            string titre = album.titre.ToString();
+            string apostrophe = "'";
+            if (titre.Contains("'"))
+            {
+                titre = titre.Insert(titre.IndexOf("'"), apostrophe);
+            }
+
+            string sql = "SELECT CODE_ALBUM FROM ALBUMS WHERE TITRE_ALBUM ='" + titre + "'";
+            OleDbCommand cmd = new OleDbCommand(sql, dbCon);
+            cmd.ExecuteNonQuery();
+            OleDbDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                CodeAlbumProlonger = reader.GetInt32(0);
+            }
+        }
+
+        private void RechercherTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (RechercherTextBox.Text.Equals(""))
+            {
+                Album();
+            }
+            else
+            {
+                ListAlbum.Items.Clear();
+                string apostrophe = "'";
+                string titreRech = RechercherTextBox.Text;
+                if (titreRech.Contains("'"))
+                {
+                     titreRech = titreRech.Insert(titreRech.IndexOf("'"), apostrophe);
+                }
+                string sql = "SELECT TITRE_ALBUM, ALBUMS.CODE_ALBUM, EMPRUNTER.DATE_RETOUR_ATTENDUE " +
+                    "FROM ALBUMS " +
+                    "FULL JOIN EMPRUNTER on EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
+                    "WHERE TITRE_ALBUM LIKE '%"+ titreRech + "%'";
+                OleDbCommand cmd = new OleDbCommand(sql, dbCon);
+                OleDbDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    string titre = reader.GetString(0);
+                    int id = reader.GetInt32(1);
+                    DateTime dateRetour= new DateTime();
+                    if (!reader.IsDBNull(2))
+                        dateRetour = reader.GetDateTime(2);
+                    Albums a = new Albums(id, titre, dateRetour);
+                    ListAlbum.Items.Add(a);
+                    
+                }
+            }
         }
     } 
 }

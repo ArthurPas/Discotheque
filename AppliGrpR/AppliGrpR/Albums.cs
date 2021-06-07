@@ -9,7 +9,7 @@ namespace AppliGrpR
     class Albums
     {
         int id;
-        string titre;
+        public string titre;
         DateTime dateRetour;
 
         public Albums(int c, string n, DateTime d)

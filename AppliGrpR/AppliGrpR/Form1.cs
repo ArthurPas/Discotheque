@@ -17,7 +17,9 @@ namespace AppliGrpR
         List<Albums> empruntés = new List<Albums>();
         List<String> genres = new List<String>();
         List<string> nationalités = new List<string>();
+        List<string> album = new List<string>();
         string nationaliteActuelle = "";
+        int CodeAlbum= 0;
         public Form1()
         {
             InitializeComponent();
@@ -32,6 +34,7 @@ namespace AppliGrpR
             dbCon = new OleDbConnection(ChaineBd);
             dbCon.Open();
             Nationalite();
+            Album();
             ExtendBorrowing("arthurp", "Le Boeuf sur le Toit"); //TEST
             ExtendAllBorrowing("arthurp"); //TEST
             GetAlbumNotBorrowSinceOneYears();//TEST
@@ -104,6 +107,23 @@ namespace AppliGrpR
                 nationalités.Add(titre);
                 nationalite.Items.Add(titre);
                 Console.WriteLine(nationalite.SelectedItems.ToString());
+            }
+            reader.Close();
+        }
+        public void Album()
+        {
+            string sql = "select * from ALBUMS";
+
+
+            OleDbCommand cmdRead = new OleDbCommand(sql, dbCon);
+            OleDbDataReader reader = cmdRead.ExecuteReader();
+
+
+            while (reader.Read())
+            {
+                string titre = reader.GetString(3);
+                album.Add(titre);
+                ListAlbum.Items.Add(titre);
             }
             reader.Close();
         }
@@ -335,6 +355,63 @@ namespace AppliGrpR
         private void Recomandation_MouseDown(object sender, MouseEventArgs e)
         {
             Suggestions("yo");
+        }
+
+        private void ListAlbum_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            string titre = ListAlbum.SelectedItem.ToString();
+            string apostrophe = "'";
+            if (titre.Contains("'"))
+            {
+                titre=titre.Insert(titre.IndexOf("'"), apostrophe);
+            }
+
+            string sql = "SELECT CODE_ALBUM FROM ALBUMS WHERE TITRE_ALBUM ='" + titre+"'";
+            OleDbCommand cmd = new OleDbCommand(sql, dbCon);
+            cmd.ExecuteNonQuery();
+            OleDbDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                CodeAlbum = reader.GetInt32(0);
+            }
+            
+        }
+
+        private void EmprunterButton_MouseDown(object sender, MouseEventArgs e)
+        {
+            Emprunter();
+        }
+        public void Emprunter()
+        {
+            int codeAbo = 0;
+            int delayNumber = 0;
+            string sql = "SELECT CODE_ABONNÉ FROM ABONNÉS WHERE NOM_ABONNÉ = ? AND PRÉNOM_ABONNÉ = ?";
+            OleDbCommand cmd = new OleDbCommand(sql, dbCon);
+            cmd.Parameters.Add("NOM_ABONNÉ", OleDbType.VarChar).Value = textBox2.Text;
+            cmd.Parameters.Add("PRÉNOM_ABONNÉ", OleDbType.VarChar).Value = textBox3.Text;
+            cmd.ExecuteNonQuery();
+            OleDbDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                codeAbo = reader.GetInt32(0);
+                Console.WriteLine("code abo" + codeAbo);
+            }
+            string delay = "SELECT DÉLAI FROM GENRES INNER JOIN ALBUMS on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE " +
+                "WHERE ALBUMS.CODE_ALBUM = " + CodeAlbum;
+            OleDbCommand cmdDelay = new OleDbCommand(delay, dbCon);
+            cmdDelay.ExecuteNonQuery();
+            OleDbDataReader readerDelay = cmdDelay.ExecuteReader();
+            while (readerDelay.Read())
+            {
+                delayNumber = readerDelay.GetInt32(0);
+            }
+            string request = "insert into EMPRUNTER(CODE_ABONNÉ,CODE_ALBUM,DATE_EMPRUNT,DATE_RETOUR_ATTENDUE) " +
+                "values(" + codeAbo + ", ?, GETDATE(),DATEADD(Day,?,GETDATE()))";
+            OleDbCommand cmdTwo = new OleDbCommand(request, dbCon);
+            cmdTwo.Parameters.Add("CODE_ALBUM", OleDbType.Integer).Value = CodeAlbum;
+            cmdTwo.Parameters.Add("CODE_ALBUM", OleDbType.Integer).Value = delayNumber;
+            cmdTwo.ExecuteNonQuery();
         }
     } 
 }

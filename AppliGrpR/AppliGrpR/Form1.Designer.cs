@@ -49,6 +49,8 @@ namespace AppliGrpR
             this.Identifiant = new System.Windows.Forms.Label();
             this.Mot_de_passe = new System.Windows.Forms.Label();
             this.nationalite = new System.Windows.Forms.ListBox();
+            this.ListAlbum = new System.Windows.Forms.ListBox();
+            this.EmprunterButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
@@ -221,11 +223,32 @@ namespace AppliGrpR
             this.nationalite.TabIndex = 17;
             this.nationalite.SelectedIndexChanged += new System.EventHandler(this.nationalite_SelectedIndexChanged);
             // 
+            // ListAlbum
+            // 
+            this.ListAlbum.FormattingEnabled = true;
+            this.ListAlbum.Location = new System.Drawing.Point(414, 48);
+            this.ListAlbum.Name = "ListAlbum";
+            this.ListAlbum.Size = new System.Drawing.Size(99, 186);
+            this.ListAlbum.TabIndex = 18;
+            this.ListAlbum.SelectedIndexChanged += new System.EventHandler(this.ListAlbum_SelectedIndexChanged);
+            // 
+            // EmprunterButton
+            // 
+            this.EmprunterButton.Location = new System.Drawing.Point(414, 245);
+            this.EmprunterButton.Name = "EmprunterButton";
+            this.EmprunterButton.Size = new System.Drawing.Size(75, 23);
+            this.EmprunterButton.TabIndex = 19;
+            this.EmprunterButton.Text = "Emprunter";
+            this.EmprunterButton.UseVisualStyleBackColor = true;
+            this.EmprunterButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.EmprunterButton_MouseDown);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.EmprunterButton);
+            this.Controls.Add(this.ListAlbum);
             this.Controls.Add(this.Recomandation);
             this.Controls.Add(this.nationalite);
             this.Controls.Add(this.Mot_de_passe);
@@ -275,6 +298,8 @@ namespace AppliGrpR
         private System.Windows.Forms.Label Identifiant;
         private System.Windows.Forms.Label Mot_de_passe;
         private System.Windows.Forms.ListBox nationalite;
+        private System.Windows.Forms.ListBox ListAlbum;
+        private System.Windows.Forms.Button EmprunterButton;
     }
 }
 

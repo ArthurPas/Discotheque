@@ -347,10 +347,14 @@ namespace AppliGrpR
         }
         private void Suggestions()
         {
-            string sql = "SELECT GENRES.LIBELLÉ_GENRE FROM EMPRUNTER INNER JOIN ABONNÉS ON EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ " +
-                "INNER JOIN ALBUMS ON EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
-                "INNER JOIN GENRES ON ALBUMS.CODE_GENRE = GENRES.CODE_GENRE " +
-                "WHERE ABONNÉS.CODE_ABONNÉ = '" + numeroAbonne.Text + "'";
+            var random = new Random();
+            string sql = "SELECT TOP 1 LIBELLÉ_GENRE, COUNT(DATE_EMPRUNT) as 'Emprunts totaux' " +
+                "FROM GENRES INNER JOIN ALBUMS ON ALBUMS.CODE_GENRE = GENRES.CODE_GENRE " +
+                "INNER JOIN EMPRUNTER ON ALBUMS.CODE_ALBUM = EMPRUNTER.CODE_ALBUM " +
+                "INNER JOIN ABONNÉS ON EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ " +
+                "WHERE ABONNÉS.CODE_ABONNÉ = "+numeroAbonne.Text +
+                "GROUP BY LIBELLÉ_GENRE " +
+                "ORDER BY COUNT(DATE_EMPRUNT) DESC";
             OleDbCommand cmd = new OleDbCommand(sql, dbCon);
             cmd.ExecuteNonQuery(); ;
             OleDbDataReader reader = cmd.ExecuteReader();
@@ -362,15 +366,22 @@ namespace AppliGrpR
             string sqlTwo = "SELECT TITRE_ALBUM FROM ALBUMS INNER JOIN GENRES ON GENRES.CODE_GENRE = ALBUMS.CODE_GENRE " +
                 "WHERE LIBELLÉ_GENRE = '"+genres[0]+"'";
             OleDbCommand cmdTwo = new OleDbCommand(sqlTwo, dbCon);
-            cmdTwo.ExecuteNonQuery(); ;
+            cmdTwo.ExecuteNonQuery(); 
             OleDbDataReader readerTwo = cmdTwo.ExecuteReader();
             listBox1.Items.Add("Nous vous recommandons dans le genre " + genres[0]);
             while (readerTwo.Read())
             {
                 string nomAlbum = readerTwo.GetString(0);
-                listBox1.Items.Add(nomAlbum);
+                album.Add(nomAlbum);
             }
+            for (int i = 0; i < 10; i++)
+            {                                            
+                int index = random.Next(album.Count);
+                listBox1.Items.Add(album[index]);
+                Console.WriteLine(index);
+            }    
         }
+
         private void buttonTOP10_MouseDown_1(object sender, MouseEventArgs e)
         {
             listBox1.Items.Clear();

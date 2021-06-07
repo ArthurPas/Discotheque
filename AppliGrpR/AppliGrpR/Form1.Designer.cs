@@ -71,6 +71,8 @@ namespace AppliGrpR
             this.US8 = new System.Windows.Forms.Label();
             this.US9 = new System.Windows.Forms.Label();
             this.ProlongerTout = new System.Windows.Forms.Button();
+            this.RechercherTextBox = new System.Windows.Forms.TextBox();
+            this.RechercherAlbum = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBox1
@@ -125,6 +127,7 @@ namespace AppliGrpR
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(435, 251);
             this.listBox1.TabIndex = 6;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // Numero_Abonne
             // 
@@ -243,14 +246,14 @@ namespace AppliGrpR
             this.ajouterAbonné.AutoSize = true;
             this.ajouterAbonné.Location = new System.Drawing.Point(135, 13);
             this.ajouterAbonné.Name = "ajouterAbonné";
-            this.ajouterAbonné.Size = new System.Drawing.Size(74, 13);
+            this.ajouterAbonné.Size = new System.Drawing.Size(80, 13);
             this.ajouterAbonné.TabIndex = 18;
-            this.ajouterAbonné.Text = "Ajouter Aboné";
+            this.ajouterAbonné.Text = "Ajouter Abonné";
             // 
             // Affichage
             // 
             this.Affichage.AutoSize = true;
-            this.Affichage.Location = new System.Drawing.Point(695, 9);
+            this.Affichage.Location = new System.Drawing.Point(804, 9);
             this.Affichage.Name = "Affichage";
             this.Affichage.Size = new System.Drawing.Size(52, 13);
             this.Affichage.TabIndex = 19;
@@ -447,11 +450,30 @@ namespace AppliGrpR
             this.ProlongerTout.UseVisualStyleBackColor = true;
             this.ProlongerTout.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ProlongerTout_MouseDown);
             // 
+            // RechercherTextBox
+            // 
+            this.RechercherTextBox.Location = new System.Drawing.Point(489, 25);
+            this.RechercherTextBox.Name = "RechercherTextBox";
+            this.RechercherTextBox.Size = new System.Drawing.Size(100, 20);
+            this.RechercherTextBox.TabIndex = 41;
+            this.RechercherTextBox.TextChanged += new System.EventHandler(this.RechercherTextBox_TextChanged);
+            // 
+            // RechercherAlbum
+            // 
+            this.RechercherAlbum.AutoSize = true;
+            this.RechercherAlbum.Location = new System.Drawing.Point(393, 28);
+            this.RechercherAlbum.Name = "RechercherAlbum";
+            this.RechercherAlbum.Size = new System.Drawing.Size(69, 13);
+            this.RechercherAlbum.TabIndex = 42;
+            this.RechercherAlbum.Text = "Rechercher :";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1062, 627);
+            this.Controls.Add(this.RechercherAlbum);
+            this.Controls.Add(this.RechercherTextBox);
             this.Controls.Add(this.ProlongerTout);
             this.Controls.Add(this.US9);
             this.Controls.Add(this.US8);
@@ -545,6 +567,8 @@ namespace AppliGrpR
         private System.Windows.Forms.Label US8;
         private System.Windows.Forms.Label US9;
         private System.Windows.Forms.Button ProlongerTout;
+        private System.Windows.Forms.TextBox RechercherTextBox;
+        private System.Windows.Forms.Label RechercherAlbum;
     }
 }
 

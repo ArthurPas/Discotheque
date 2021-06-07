@@ -17,6 +17,8 @@ namespace AppliGrpR
         List<Albums> empruntés = new List<Albums>();
         List<string> genres = new List<string>();
         List<string> nationalités = new List<string>();
+        List<string> album = new List<string>();
+        int CodeAlbum= 0;
         public Form1()
         {
             InitializeComponent();
@@ -32,9 +34,10 @@ namespace AppliGrpR
             dbCon.Open();
             Nationalite();
             Abonnes();
-            ExtendBorrowing("arthurp", "Le Boeuf sur le Toit"); //TEST
-            ExtendAllBorrowing("arthurp"); //TEST
-            GetAlbumNotBorrowSinceOneYears();//TEST
+            Album();
+            //TEST
+            //ExtendAllBorrowing("sup"); //TEST
+           // GetAlbumNotBorrowSinceOneYears();//TEST
 
         }
 
@@ -106,7 +109,22 @@ namespace AppliGrpR
             }
             reader.Close();
         }
+        public void Album()
+        {
+            string sql = "select * from ALBUMS";
 
+            OleDbCommand cmdRead = new OleDbCommand(sql, dbCon);
+            OleDbDataReader reader = cmdRead.ExecuteReader();
+
+
+            while (reader.Read())
+            {
+                string titre = reader.GetString(3);
+                album.Add(titre);
+                ListAlbum.Items.Add(titre);
+            }
+            reader.Close();
+        }
         public void Abonnes()
         {
             ListeAbonne.Items.Clear();
@@ -140,23 +158,16 @@ namespace AppliGrpR
          * 
          */
 
-        public void ExtendBorrowing(string userLog, string titreAlbum)
+        public void ExtendBorrowing()
         {
 
-            string extendDate = "UPDATE EMPRUNTER " +
-            "Set EMPRUNTER.DATE_RETOUR_ATTENDUE = DATEADD(MONTH,1,EMPRUNTER.DATE_RETOUR_ATTENDUE) " +
-            "FROM EMPRUNTER " +
-            "INNER JOIN ABONNÉS ON EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ " +
-            "INNER JOIN ALBUMS ON EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
-            "INNER JOIN GENRES on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE " +
-            "WHERE ABONNÉS.LOGIN_ABONNÉ = '" + userLog + "' " +
-            "AND ALBUMS.TITRE_ALBUM = '" + titreAlbum + "' " +
-            "AND DATE_RETOUR_ATTENDUE - DATE_EMPRUNT < DÉLAI";
+            string extendDate = "UPDATE EMPRUNTER Set EMPRUNTER.DATE_RETOUR_ATTENDUE = DATEADD(month, 1, EMPRUNTER.DATE_RETOUR_ATTENDUE) " +
+                "FROM EMPRUNTER INNER JOIN ABONNÉS ON EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ INNER JOIN ALBUMS ON EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
+                "INNER JOIN GENRES on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE WHERE ABONNÉS.CODE_ABONNÉ = "+numeroAbonne.Text+
+                " AND ALBUMS.CODE_ALBUM = "+CodeAlbum+" AND DATE_RETOUR_ATTENDUE - DATE_EMPRUNT <= DÉLAI";
 
             OleDbCommand cmd = new OleDbCommand(extendDate, dbCon);
             cmd.ExecuteNonQuery();
-
-            Console.WriteLine("Date d'emprunt étendue");
 
         }
 
@@ -244,11 +255,6 @@ namespace AppliGrpR
                 Console.WriteLine(name + firstName + " a prolongé son emprunt");
             }
 
-        }
-
-        private void ListButton_MouseDown_1(object sender, MouseEventArgs e)
-        {
-            ListExtended();
         }
 
         public void PurgeAbonne()
@@ -376,6 +382,70 @@ namespace AppliGrpR
             }
             reader.Close();
             numeroAbonne.Text = code.ToString();
+        }
+
+        public void Emprunter()
+        {
+            int codeAbo = 0;
+            int delayNumber = 0;
+            string sql = "SELECT CODE_ABONNÉ FROM ABONNÉS WHERE NOM_ABONNÉ = ? AND PRÉNOM_ABONNÉ = ?";
+            OleDbCommand cmd = new OleDbCommand(sql, dbCon);
+            cmd.Parameters.Add("NOM_ABONNÉ", OleDbType.VarChar).Value = textBox2.Text;
+            cmd.Parameters.Add("PRÉNOM_ABONNÉ", OleDbType.VarChar).Value = textBox3.Text;
+            cmd.ExecuteNonQuery();
+            OleDbDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                codeAbo = reader.GetInt32(0);
+            }
+            string delay = "SELECT DÉLAI FROM GENRES INNER JOIN ALBUMS on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE " +
+                "WHERE ALBUMS.CODE_ALBUM = " + CodeAlbum;
+            OleDbCommand cmdDelay = new OleDbCommand(delay, dbCon);
+            cmdDelay.ExecuteNonQuery();
+            OleDbDataReader readerDelay = cmdDelay.ExecuteReader();
+            while (readerDelay.Read())
+            {
+                delayNumber = readerDelay.GetInt32(0);
+            }
+            string request = "insert into EMPRUNTER(CODE_ABONNÉ,CODE_ALBUM,DATE_EMPRUNT,DATE_RETOUR_ATTENDUE) " +
+                "values(" + codeAbo + ", ?, GETDATE(),DATEADD(Day,?,GETDATE()))";
+            OleDbCommand cmdTwo = new OleDbCommand(request, dbCon);
+            cmdTwo.Parameters.Add("CODE_ALBUM", OleDbType.Integer).Value = CodeAlbum;
+            cmdTwo.Parameters.Add("CODE_ALBUM", OleDbType.Integer).Value = delayNumber;
+            cmdTwo.ExecuteNonQuery();
+        }
+
+        private void emprunterButton_MouseDown(object sender, MouseEventArgs e)
+        {
+            Emprunter();
+        }
+
+        private void ListButton_MouseDown(object sender, MouseEventArgs e)
+        {
+            ListExtended();
+        }
+
+        private void ListAlbum_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            string titre = ListAlbum.SelectedItem.ToString();
+            string apostrophe = "'";
+            if (titre.Contains("'"))
+            {
+                titre = titre.Insert(titre.IndexOf("'"), apostrophe);
+            }
+
+            string sql = "SELECT CODE_ALBUM FROM ALBUMS WHERE TITRE_ALBUM ='" + titre + "'";
+            OleDbCommand cmd = new OleDbCommand(sql, dbCon);
+            cmd.ExecuteNonQuery();
+            OleDbDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                CodeAlbum = reader.GetInt32(0);
+            }
+        }
+        private void ProlongerButton_MouseDown(object sender, MouseEventArgs e)
+        {
+            ExtendBorrowing();
         }
     } 
 }

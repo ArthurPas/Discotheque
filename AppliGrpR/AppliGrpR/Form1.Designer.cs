@@ -61,6 +61,10 @@ namespace AppliGrpR
             this.ListeAbonne = new System.Windows.Forms.ListBox();
             this.numeroAbonne = new System.Windows.Forms.TextBox();
             this.Liste_Abonne = new System.Windows.Forms.Label();
+            this.ListAlbum = new System.Windows.Forms.ListBox();
+            this.emprunterButton = new System.Windows.Forms.Button();
+            this.ProlongerButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBox1
@@ -142,6 +146,7 @@ namespace AppliGrpR
             this.ListButton.Size = new System.Drawing.Size(86, 38);
             this.ListButton.TabIndex = 0;
             this.ListButton.Text = "Liste prolongé";
+            this.ListButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListButton_MouseDown);
             // 
             // buttonTOP10
             // 
@@ -341,11 +346,53 @@ namespace AppliGrpR
             this.Liste_Abonne.TabIndex = 30;
             this.Liste_Abonne.Text = "Liste Abonne";
             // 
+            // ListAlbum
+            // 
+            this.ListAlbum.FormattingEnabled = true;
+            this.ListAlbum.Location = new System.Drawing.Point(424, 48);
+            this.ListAlbum.Name = "ListAlbum";
+            this.ListAlbum.Size = new System.Drawing.Size(171, 186);
+            this.ListAlbum.TabIndex = 31;
+            this.ListAlbum.SelectedIndexChanged += new System.EventHandler(this.ListAlbum_SelectedIndexChanged_1);
+            // 
+            // emprunterButton
+            // 
+            this.emprunterButton.Location = new System.Drawing.Point(469, 245);
+            this.emprunterButton.Name = "emprunterButton";
+            this.emprunterButton.Size = new System.Drawing.Size(75, 23);
+            this.emprunterButton.TabIndex = 32;
+            this.emprunterButton.Text = "Emprunter";
+            this.emprunterButton.UseVisualStyleBackColor = true;
+            this.emprunterButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.emprunterButton_MouseDown);
+            // 
+            // ProlongerButton
+            // 
+            this.ProlongerButton.Location = new System.Drawing.Point(672, 514);
+            this.ProlongerButton.Name = "ProlongerButton";
+            this.ProlongerButton.Size = new System.Drawing.Size(75, 23);
+            this.ProlongerButton.TabIndex = 33;
+            this.ProlongerButton.Text = "Prolonger";
+            this.ProlongerButton.UseVisualStyleBackColor = true;
+            this.ProlongerButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ProlongerButton_MouseDown);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(694, 495);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(28, 13);
+            this.label1.TabIndex = 34;
+            this.label1.Text = "US3";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1062, 627);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.ProlongerButton);
+            this.Controls.Add(this.emprunterButton);
+            this.Controls.Add(this.ListAlbum);
             this.Controls.Add(this.Liste_Abonne);
             this.Controls.Add(this.numeroAbonne);
             this.Controls.Add(this.ListeAbonne);
@@ -419,6 +466,10 @@ namespace AppliGrpR
         private System.Windows.Forms.ListBox ListeAbonne;
         private System.Windows.Forms.TextBox numeroAbonne;
         private System.Windows.Forms.Label Liste_Abonne;
+        private System.Windows.Forms.ListBox ListAlbum;
+        private System.Windows.Forms.Button emprunterButton;
+        private System.Windows.Forms.Button ProlongerButton;
+        private System.Windows.Forms.Label label1;
     }
 }
 

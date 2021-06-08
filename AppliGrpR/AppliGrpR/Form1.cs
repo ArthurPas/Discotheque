@@ -18,6 +18,7 @@ namespace AppliGrpR
         List<string> genres = new List<string>();
         List<string> nationalités = new List<string>();
         List<string> album = new List<string>();
+        List<int> albumDispo = new List<int>();
         int CodeAlbumEmprunter= 0;
         int CodeAlbumProlonger = 0;
         public Form1()
@@ -450,12 +451,23 @@ namespace AppliGrpR
             {
                 delayNumber = readerDelay.GetInt32(0);
             }
+            string dispo = "SELECT * FROM ALBUMS FULL JOIN EMPRUNTER ON EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM WHERE DATE_RETOUR_ATTENDUE IS NULL";
+            OleDbCommand cmdDispo = new OleDbCommand(dispo, dbCon);
+            cmdDispo.ExecuteNonQuery();
+            OleDbDataReader redaerDispo = cmdDispo.ExecuteReader();
+            while (redaerDispo.Read())
+            {
+                albumDispo.Add(redaerDispo.GetInt32(0));
+            }
             string request = "insert into EMPRUNTER(CODE_ABONNÉ,CODE_ALBUM,DATE_EMPRUNT,DATE_RETOUR_ATTENDUE) " +
                 "values(" + codeAbo + ", ?, GETDATE(),DATEADD(Day,?,GETDATE()))";
             OleDbCommand cmdTwo = new OleDbCommand(request, dbCon);
+            if (albumDispo.Contains(CodeAlbumEmprunter)) { 
             cmdTwo.Parameters.Add("CODE_ALBUM", OleDbType.Integer).Value = CodeAlbumEmprunter;
-            cmdTwo.Parameters.Add("CODE_ALBUM", OleDbType.Integer).Value = delayNumber;
+            cmdTwo.Parameters.Add("DÉLAIS", OleDbType.Integer).Value = delayNumber;
             cmdTwo.ExecuteNonQuery();
+            }
+            albumDispo.Clear();
         }
 
         private void emprunterButton_MouseDown(object sender, MouseEventArgs e)

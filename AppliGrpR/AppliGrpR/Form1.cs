@@ -13,7 +13,7 @@ namespace AppliGrpR
 {
     public partial class Form1 : Form
     {
-        OleDbConnection dbCon;
+        public static OleDbConnection dbCon;
         List<Albums> empruntés = new List<Albums>();
         List<string> genres = new List<string>();
         List<string> nationalités = new List<string>();
@@ -23,6 +23,7 @@ namespace AppliGrpR
         int CodeAlbumProlonger = 0;
         public Form1()
         {
+            this.StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
             InitConnexion();
             
@@ -586,6 +587,20 @@ namespace AppliGrpR
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void PasserAdmin_MouseDown(object sender, MouseEventArgs e)
+        {
+            Administrateur_Connexion adminConnexion = new Administrateur_Connexion();
+            adminConnexion.StartPosition = FormStartPosition.CenterScreen;
+            adminConnexion.ShowDialog();
+        }
+
+        private void PasserAbonne_MouseDown(object sender, MouseEventArgs e)
+        {
+            Abonne_Connexion AbonneConnexion = new Abonne_Connexion();
+            AbonneConnexion.StartPosition = FormStartPosition.CenterScreen;
+            AbonneConnexion.ShowDialog();
         }
     } 
 }

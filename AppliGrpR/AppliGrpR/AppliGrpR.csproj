@@ -46,6 +46,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abonne_Accueil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abonne_Accueil.Designer.cs">
+      <DependentUpon>Abonne_Accueil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abonne_Connexion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abonne_Connexion.Designer.cs">
+      <DependentUpon>Abonne_Connexion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abonne_Prolonger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abonne_Prolonger.Designer.cs">
+      <DependentUpon>Abonne_Prolonger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Administrateur_Accueil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Administrateur_Accueil.Designer.cs">
+      <DependentUpon>Administrateur_Accueil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Administrateur_Purger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Administrateur_Purger.Designer.cs">
+      <DependentUpon>Administrateur_Purger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Administrateur_Connexion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Administrateur_Connexion.Designer.cs">
+      <DependentUpon>Administrateur_Connexion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Albums.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -55,6 +91,24 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Abonne_Accueil.resx">
+      <DependentUpon>Abonne_Accueil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abonne_Connexion.resx">
+      <DependentUpon>Abonne_Connexion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abonne_Prolonger.resx">
+      <DependentUpon>Abonne_Prolonger.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Administrateur_Accueil.resx">
+      <DependentUpon>Administrateur_Accueil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Administrateur_Purger.resx">
+      <DependentUpon>Administrateur_Purger.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Administrateur_Connexion.resx">
+      <DependentUpon>Administrateur_Connexion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

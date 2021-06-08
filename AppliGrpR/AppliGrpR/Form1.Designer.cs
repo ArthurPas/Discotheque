@@ -73,6 +73,8 @@ namespace AppliGrpR
             this.ProlongerTout = new System.Windows.Forms.Button();
             this.RechercherTextBox = new System.Windows.Forms.TextBox();
             this.RechercherAlbum = new System.Windows.Forms.Label();
+            this.PasserAdmin = new System.Windows.Forms.Button();
+            this.PasserAbonne = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
@@ -467,11 +469,33 @@ namespace AppliGrpR
             this.RechercherAlbum.TabIndex = 42;
             this.RechercherAlbum.Text = "Rechercher :";
             // 
+            // PasserAdmin
+            // 
+            this.PasserAdmin.Location = new System.Drawing.Point(226, 343);
+            this.PasserAdmin.Name = "PasserAdmin";
+            this.PasserAdmin.Size = new System.Drawing.Size(85, 23);
+            this.PasserAdmin.TabIndex = 43;
+            this.PasserAdmin.Text = "PasserAdmin";
+            this.PasserAdmin.UseVisualStyleBackColor = true;
+            this.PasserAdmin.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PasserAdmin_MouseDown);
+            // 
+            // PasserAbonne
+            // 
+            this.PasserAbonne.Location = new System.Drawing.Point(812, 343);
+            this.PasserAbonne.Name = "PasserAbonne";
+            this.PasserAbonne.Size = new System.Drawing.Size(85, 23);
+            this.PasserAbonne.TabIndex = 44;
+            this.PasserAbonne.Text = "PasserAbonne";
+            this.PasserAbonne.UseVisualStyleBackColor = true;
+            this.PasserAbonne.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PasserAbonne_MouseDown);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1062, 627);
+            this.ClientSize = new System.Drawing.Size(1084, 661);
+            this.Controls.Add(this.PasserAbonne);
+            this.Controls.Add(this.PasserAdmin);
             this.Controls.Add(this.RechercherAlbum);
             this.Controls.Add(this.RechercherTextBox);
             this.Controls.Add(this.ProlongerTout);
@@ -569,6 +593,8 @@ namespace AppliGrpR
         private System.Windows.Forms.Button ProlongerTout;
         private System.Windows.Forms.TextBox RechercherTextBox;
         private System.Windows.Forms.Label RechercherAlbum;
+        private System.Windows.Forms.Button PasserAdmin;
+        private System.Windows.Forms.Button PasserAbonne;
     }
 }
 

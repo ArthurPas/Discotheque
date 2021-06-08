@@ -13,9 +13,10 @@ namespace AppliGrpR
 {
     public partial class Abonne_Connexion : Form
     {
-        OleDbConnection dbCon = Form1.dbCon;
+        OleDbConnection dbCon = Accueil.dbCon;
         public Abonne_Connexion()
         {
+            this.StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
         }
 
@@ -60,10 +61,12 @@ namespace AppliGrpR
 
                     Abonne_Accueil.MotDePasse = motDePasse;
                 }
-                
+
+                this.Close();
                 Abonne_Accueil AbonneAccueil = new Abonne_Accueil();
                 AbonneAccueil.StartPosition = FormStartPosition.CenterScreen;
                 AbonneAccueil.ShowDialog();
+                
             }
             else
             {

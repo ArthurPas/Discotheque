@@ -13,7 +13,7 @@ namespace AppliGrpR
 {
     public partial class Abonne_Prolonger : Form
     {
-        OleDbConnection dbCon = Form1.dbCon;
+        OleDbConnection dbCon = Accueil.dbCon;
         public static Abonne_Accueil accueil;
         int CodeAlbumProlonger=0;
         public Abonne_Prolonger()

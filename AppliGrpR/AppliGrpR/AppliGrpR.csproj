@@ -93,12 +93,6 @@
     <Compile Include="Accueil.Designer.cs">
       <DependentUpon>Accueil.cs</DependentUpon>
     </Compile>
-    <Compile Include="Client_Connexion.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Client_Connexion.Designer.cs">
-      <DependentUpon>Client_Connexion.cs</DependentUpon>
-    </Compile>
     <Compile Include="Client_Insciption_Complete.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,9 +115,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Accueil.resx">
       <DependentUpon>Accueil.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Client_Connexion.resx">
-      <DependentUpon>Client_Connexion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Client_Insciption_Complete.resx">
       <DependentUpon>Client_Insciption_Complete.cs</DependentUpon>

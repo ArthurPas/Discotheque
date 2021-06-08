@@ -37,8 +37,8 @@ namespace AppliGrpR
             this.RechercherAlbum = new System.Windows.Forms.Label();
             this.Tous_Les_Albums = new System.Windows.Forms.Label();
             this.Albums_Conseillés = new System.Windows.Forms.Label();
-            this.Accueil = new System.Windows.Forms.Label();
-            this.Retour = new System.Windows.Forms.Button();
+            this.accueil = new System.Windows.Forms.Label();
+            this.déconnexion = new System.Windows.Forms.Button();
             this.Prolonger_un_emprunt = new System.Windows.Forms.Button();
             this.Emprunter = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -112,24 +112,24 @@ namespace AppliGrpR
             this.Albums_Conseillés.TabIndex = 45;
             this.Albums_Conseillés.Text = "Albums Conseillés";
             // 
-            // Accueil
+            // accueil
             // 
-            this.Accueil.AutoSize = true;
-            this.Accueil.Location = new System.Drawing.Point(512, 39);
-            this.Accueil.Name = "Accueil";
-            this.Accueil.Size = new System.Drawing.Size(42, 13);
-            this.Accueil.TabIndex = 46;
-            this.Accueil.Text = "Accueil";
+            this.accueil.AutoSize = true;
+            this.accueil.Location = new System.Drawing.Point(512, 39);
+            this.accueil.Name = "accueil";
+            this.accueil.Size = new System.Drawing.Size(42, 13);
+            this.accueil.TabIndex = 46;
+            this.accueil.Text = "Accueil";
             // 
-            // Retour
+            // déconnexion
             // 
-            this.Retour.Location = new System.Drawing.Point(997, 12);
-            this.Retour.Name = "Retour";
-            this.Retour.Size = new System.Drawing.Size(75, 23);
-            this.Retour.TabIndex = 47;
-            this.Retour.Text = "Retour";
-            this.Retour.UseVisualStyleBackColor = true;
-            this.Retour.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Retour_MouseDown);
+            this.déconnexion.Location = new System.Drawing.Point(985, 12);
+            this.déconnexion.Name = "déconnexion";
+            this.déconnexion.Size = new System.Drawing.Size(87, 23);
+            this.déconnexion.TabIndex = 47;
+            this.déconnexion.Text = "Déconnexion";
+            this.déconnexion.UseVisualStyleBackColor = true;
+            this.déconnexion.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Retour_MouseDown);
             // 
             // Prolonger_un_emprunt
             // 
@@ -158,8 +158,8 @@ namespace AppliGrpR
             this.ClientSize = new System.Drawing.Size(1084, 661);
             this.Controls.Add(this.Emprunter);
             this.Controls.Add(this.Prolonger_un_emprunt);
-            this.Controls.Add(this.Retour);
-            this.Controls.Add(this.Accueil);
+            this.Controls.Add(this.déconnexion);
+            this.Controls.Add(this.accueil);
             this.Controls.Add(this.Albums_Conseillés);
             this.Controls.Add(this.Tous_Les_Albums);
             this.Controls.Add(this.RechercherAlbum);
@@ -185,8 +185,8 @@ namespace AppliGrpR
         private System.Windows.Forms.Label RechercherAlbum;
         private System.Windows.Forms.Label Tous_Les_Albums;
         private System.Windows.Forms.Label Albums_Conseillés;
-        private System.Windows.Forms.Label Accueil;
-        private System.Windows.Forms.Button Retour;
+        private System.Windows.Forms.Label accueil;
+        private System.Windows.Forms.Button déconnexion;
         private System.Windows.Forms.Button Prolonger_un_emprunt;
         private System.Windows.Forms.Button Emprunter;
     }

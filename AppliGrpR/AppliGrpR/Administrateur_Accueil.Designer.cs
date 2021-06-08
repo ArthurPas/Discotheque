@@ -39,7 +39,7 @@ namespace AppliGrpR
             this.Retard10jours = new System.Windows.Forms.Label();
             this.ListeAbonnebox = new System.Windows.Forms.ListBox();
             this.ListeAbonne = new System.Windows.Forms.Label();
-            this.Retour = new System.Windows.Forms.Button();
+            this.déconnexion = new System.Windows.Forms.Button();
             this.PurgerAbonnes = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -128,15 +128,15 @@ namespace AppliGrpR
             this.ListeAbonne.TabIndex = 9;
             this.ListeAbonne.Text = "Liste Abonnes";
             // 
-            // Retour
+            // déconnexion
             // 
-            this.Retour.Location = new System.Drawing.Point(997, 12);
-            this.Retour.Name = "Retour";
-            this.Retour.Size = new System.Drawing.Size(75, 23);
-            this.Retour.TabIndex = 10;
-            this.Retour.Text = "Retour";
-            this.Retour.UseVisualStyleBackColor = true;
-            this.Retour.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Retour_MouseDown);
+            this.déconnexion.Location = new System.Drawing.Point(990, 12);
+            this.déconnexion.Name = "déconnexion";
+            this.déconnexion.Size = new System.Drawing.Size(82, 26);
+            this.déconnexion.TabIndex = 10;
+            this.déconnexion.Text = "Déconnexion";
+            this.déconnexion.UseVisualStyleBackColor = true;
+            this.déconnexion.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Retour_MouseDown);
             // 
             // PurgerAbonnes
             // 
@@ -154,7 +154,7 @@ namespace AppliGrpR
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 661);
             this.Controls.Add(this.PurgerAbonnes);
-            this.Controls.Add(this.Retour);
+            this.Controls.Add(this.déconnexion);
             this.Controls.Add(this.ListeAbonne);
             this.Controls.Add(this.ListeAbonnebox);
             this.Controls.Add(this.Retard10jours);
@@ -184,7 +184,7 @@ namespace AppliGrpR
         private System.Windows.Forms.Label Retard10jours;
         private System.Windows.Forms.ListBox ListeAbonnebox;
         private System.Windows.Forms.Label ListeAbonne;
-        private System.Windows.Forms.Button Retour;
+        private System.Windows.Forms.Button déconnexion;
         private System.Windows.Forms.Button PurgerAbonnes;
     }
 }

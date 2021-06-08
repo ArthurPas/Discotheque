@@ -31,8 +31,8 @@ namespace AppliGrpR
         /// <param name="e"></param>
         private void Client_Insciption_Complete_Paint(object sender, PaintEventArgs e)
         {
-            string message = "Bonjour, " + prénom + " " + nom + ", votre compte ayant pour identifiant '" + id + "' a bien était créer." + '\n' + "\n"
-                + "Appuyer sur continuer pour vous rendre à la page d'accueil et vous pourrez désormais vous connecter";
+            string message = "Bonjour, " + prénom + " " + nom + ", votre compte ayant pour identifiant '" + id + "' a bien été créé." + '\n' + "\n"
+                + "Appuyez sur continuer pour vous rendre à la page d'accueil et vous pourrez désormais vous connecter";
 
             Font font = new Font("Arial", 16);
             SolidBrush brush = new SolidBrush(Color.Black);

@@ -14,12 +14,14 @@ namespace AppliGrpR
     {
         public Administrateur_Connexion()
         {
+            this.StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
         }
 
         private void SeConnecter_MouseDown(object sender, MouseEventArgs e)
         {
             if (pseudoTextBox.Text.Equals("admin") && motdepassetextbox.Text.Equals("admin")) {
+                this.Close();
                 AdministrateurAccueil admin = new AdministrateurAccueil();
                 admin.StartPosition = FormStartPosition.CenterScreen;
                 admin.ShowDialog();

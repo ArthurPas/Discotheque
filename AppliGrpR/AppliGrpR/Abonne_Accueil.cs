@@ -13,7 +13,7 @@ namespace AppliGrpR
 {
     public partial class Abonne_Accueil : Form
     {
-        OleDbConnection dbCon = Form1.dbCon;
+        OleDbConnection dbCon = Accueil.dbCon;
         List<Albums> empruntés = new List<Albums>();
         List<string> genres = new List<string>();
         List<string> album = new List<string>();
@@ -246,6 +246,8 @@ namespace AppliGrpR
 
         private void Retour_MouseDown(object sender, MouseEventArgs e)
         {
+            Accueil a = new Accueil();
+            a.Show();
             this.Close();
         }
     }

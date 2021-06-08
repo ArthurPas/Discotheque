@@ -13,7 +13,7 @@ namespace AppliGrpR
 {
     public partial class AdministrateurAccueil : Form
     {
-        OleDbConnection dbCon = Form1.dbCon;
+        OleDbConnection dbCon = Accueil.dbCon;
         public AdministrateurAccueil()
         {
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -141,7 +141,8 @@ namespace AppliGrpR
 
         private void Retour_MouseDown(object sender, MouseEventArgs e)
         {
-            this.Hide();
+            Accueil a = new Accueil();
+            a.Show();
             this.Close();
         }
     }

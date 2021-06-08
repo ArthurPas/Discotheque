@@ -13,7 +13,7 @@ namespace AppliGrpR
 {
     public partial class Administrateur_Purger : Form
     {
-        OleDbConnection dbCon = Form1.dbCon;
+        OleDbConnection dbCon = Accueil.dbCon;
         public Administrateur_Purger()
         {
             this.StartPosition = FormStartPosition.CenterScreen;

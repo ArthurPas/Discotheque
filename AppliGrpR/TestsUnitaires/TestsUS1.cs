@@ -61,11 +61,30 @@ namespace TestsUnitaires
             OleDbCommand cmdDel = new OleDbCommand(delete, dbCon);
             cmdDel.ExecuteNonQuery();
         }
-        public bool testEmprunt(string codeAbo, int codeAlbumAEmprunter)
+        [TestMethod]
+        public void testEmprunt()
         {
             InitConnexion();
+            int codeAlbumAEmprunter =554;
+            int codeAbo = 0;
             bool testVerif;
             int delayNumber = 0;
+            string test = "insert into ABONNÉS(CODE_PAYS, NOM_ABONNÉ, PRÉNOM_ABONNÉ, LOGIN_ABONNÉ, PASSWORD_ABONNÉ) values(?,?,?,?,?)";
+            OleDbCommand cmdInsert = new OleDbCommand(test, dbCon);
+            cmdInsert.Parameters.Add("CODE_PAYS", OleDbType.Integer).Value = 1;
+            cmdInsert.Parameters.Add("NOM_ABONNÉ", OleDbType.VarChar).Value = "Test";
+            cmdInsert.Parameters.Add("PRÉNOM_ABONNÉ", OleDbType.VarChar).Value = "Pas dans la base";
+            cmdInsert.Parameters.Add("LOGIN_ABONNÉ", OleDbType.VarChar).Value = "log";
+            cmdInsert.Parameters.Add("PASSWORD_ABONNÉ", OleDbType.VarChar).Value = "pwd";
+            cmdInsert.ExecuteNonQuery();
+            string sql = "select * from ABONNÉS WHERE LOGIN_ABONNÉ ='log'";
+            OleDbCommand cmdRead = new OleDbCommand(sql, dbCon);
+            OleDbDataReader reader = cmdRead.ExecuteReader();
+            while (reader.Read())
+            {
+                codeAbo = reader.GetInt32(0);
+            }
+            reader.Close();
             string delay = "SELECT DÉLAI FROM GENRES INNER JOIN ALBUMS on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE " +
                 "WHERE ALBUMS.CODE_ALBUM = "+ codeAlbumAEmprunter;
             OleDbCommand cmdDelay = new OleDbCommand(delay, dbCon);
@@ -88,6 +107,7 @@ namespace TestsUnitaires
             string request = "insert into EMPRUNTER(CODE_ABONNÉ,CODE_ALBUM,DATE_EMPRUNT,DATE_RETOUR_ATTENDUE) " +
                 "values(" + codeAbo + ", ?, GETDATE(),DATEADD(Day,?,GETDATE()))";
             OleDbCommand cmdTwo = new OleDbCommand(request, dbCon);
+            Trace.WriteLine(albumDispo.Contains(codeAlbumAEmprunter));
             if (albumDispo.Contains(codeAlbumAEmprunter))
             {
                 cmdTwo.Parameters.Add("CODE_ALBUM", OleDbType.Integer).Value = codeAlbumAEmprunter;
@@ -100,13 +120,11 @@ namespace TestsUnitaires
             OleDbDataReader readerCheck = cmdCheck.ExecuteReader();
             testVerif = readerCheck.HasRows;
             readerCheck.Close();
-            Assert.IsTrue(testEmprunt("39", 701)); // album non emprunté par aikahloul (numero 39 de la base)
-            Assert.IsFalse(testEmprunt("39", 700));// album emprunté par aikahloul
+            Assert.IsTrue(testVerif);
             string delete = " DELETE FROM EMPRUNTER WHERE CODE_ALBUM = " + codeAlbumAEmprunter;
             OleDbCommand cmdDelete = new OleDbCommand(delete, dbCon);
             cmdDelete.ExecuteNonQuery();
-
-            return testVerif;
         }
+        
     }
 }

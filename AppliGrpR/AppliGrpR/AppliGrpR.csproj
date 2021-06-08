@@ -32,6 +32,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,6 +51,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Albums.cs" />
+    <Compile Include="Accueil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Accueil.Designer.cs">
+      <DependentUpon>Accueil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Client_Connexion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Client_Connexion.Designer.cs">
+      <DependentUpon>Client_Connexion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Client_Insciption_Complete.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Client_Insciption_Complete.Designer.cs">
+      <DependentUpon>Client_Insciption_Complete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Client_Inscription.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Client_Inscription.Designer.cs">
+      <DependentUpon>Client_Inscription.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -55,6 +83,18 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Accueil.resx">
+      <DependentUpon>Accueil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Client_Connexion.resx">
+      <DependentUpon>Client_Connexion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Client_Insciption_Complete.resx">
+      <DependentUpon>Client_Insciption_Complete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Client_Inscription.resx">
+      <DependentUpon>Client_Inscription.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

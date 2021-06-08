@@ -290,7 +290,7 @@ namespace AppliGrpR
             string sql = "select ABONNÉS.PRÉNOM_ABONNÉ, NOM_ABONNÉ,ABONNÉS.CODE_ABONNÉ, CODE_ALBUM,DATE_EMPRUNT " +
                 "from emprunter " +
                 "inner join ABONNÉS on ABONNÉS.CODE_ABONNÉ = EMPRUNTER.CODE_ABONNÉ " +
-                "WHERE DATEDIFF(day, DATE_EMPRUNT, GETDATE()) > 365";
+                "WHERE DATEDIFF(day, DATE_EMPRUNT, GETDATE()) > 365 AND DATE_RETOUR iS NOT NULL";
 
             OleDbCommand cmdRead = new OleDbCommand(sql, dbCon);
             OleDbDataReader reader = cmdRead.ExecuteReader();

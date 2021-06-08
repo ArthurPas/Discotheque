@@ -20,16 +20,18 @@ namespace TestsUnitaires
         [TestMethod]
         public void TestListEmpruntAbo()
         {
+            Boolean sameList = true;
+            int i = 0;
             InitConnexion();
-            int nbrAlbums=0;
+            int nbrAlbums = 0;
             string login = "aikahloul";
-            string sqlEmprunt = "SELECT ALBUMS.TITRE_ALBUM FROM EMPRUNTER INNER JOIN ALBUMS ON EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM WHERE EMPRUNTER.CODE_ABONNÉ = ( SELECT CODE_ABONNÉ FROM ABONNÉS WHERE LOGIN_ABONNÉ = '"+login+"')";
+            string sqlEmprunt = "SELECT ALBUMS.TITRE_ALBUM FROM EMPRUNTER INNER JOIN ALBUMS ON EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM WHERE EMPRUNTER.CODE_ABONNÉ = ( SELECT CODE_ABONNÉ FROM ABONNÉS WHERE LOGIN_ABONNÉ = '" + login + "')";
             OleDbCommand cmdList = new OleDbCommand(sqlEmprunt, dbCon);
             cmdList.ExecuteNonQuery();
             OleDbDataReader rdList = cmdList.ExecuteReader();
             if (rdList is null)
             {
-                Trace.Write("Aucun livre emprunté"); 
+                Trace.Write("Aucun livre emprunté");
             }
             else
             {
@@ -47,7 +49,23 @@ namespace TestsUnitaires
             {
                 nbrAlbums = rdCount.GetInt32(0);
             }
-           Assert.AreEqual(albumAbo.Count, nbrAlbums);
+            rdCount.Close();
+            Assert.AreEqual(albumAbo.Count, nbrAlbums);
+            string sqlVerif = "SELECT ALBUMS.TITRE_ALBUM FROM EMPRUNTER " +
+                "INNER JOIN ALBUMS ON EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
+                "WHERE EMPRUNTER.CODE_ABONNÉ = ( SELECT CODE_ABONNÉ FROM ABONNÉS WHERE LOGIN_ABONNÉ = '" + login + "')";
+            OleDbCommand cmdVerif = new OleDbCommand(sqlVerif, dbCon);
+            cmdVerif.ExecuteNonQuery();
+            OleDbDataReader rdVerif = cmdVerif.ExecuteReader();
+            while (rdVerif.Read())
+            {
+                if (!albumAbo[i].Equals(rdVerif.GetString(0)))
+                {
+                    sameList = false;
+                }
+                i++;
+            }
+            Assert.IsTrue(sameList);
         }
     }
 }

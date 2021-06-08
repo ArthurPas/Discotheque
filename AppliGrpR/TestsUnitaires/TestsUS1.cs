@@ -61,6 +61,8 @@ namespace TestsUnitaires
             OleDbCommand cmdDel = new OleDbCommand(delete, dbCon);
             cmdDel.ExecuteNonQuery();
         }
+
+        [TestMethod]
         public bool testEmprunt(string codeAbo, int codeAlbumAEmprunter)
         {
             InitConnexion();

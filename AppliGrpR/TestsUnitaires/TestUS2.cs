@@ -24,7 +24,19 @@ namespace TestsUnitaires
             int i = 0;
             InitConnexion();
             int nbrAlbums = 0;
-            string login = "aikahloul";
+            int codeAlbums = 549;
+            string login = "loginaAjouter";
+            string insert = "insert into ABONNÉS(CODE_PAYS,NOM_ABONNÉ,PRÉNOM_ABONNÉ,LOGIN_ABONNÉ,PASSWORD_ABONNÉ) values(?,?,?,?,?)";
+            OleDbCommand cmdInsert = new OleDbCommand(insert, dbCon);
+            cmdInsert.Parameters.Add("CODE_PAYS", OleDbType.Integer).Value = 1;
+            cmdInsert.Parameters.Add("NOM_ABONNÉ", OleDbType.VarChar).Value = "Test";
+            cmdInsert.Parameters.Add("PRÉNOM_ABONNÉ", OleDbType.VarChar).Value = "Pas dans la base";
+            cmdInsert.Parameters.Add("LOGIN_ABONNÉ", OleDbType.VarChar).Value = login;
+            cmdInsert.Parameters.Add("PASSWORD_ABONNÉ", OleDbType.VarChar).Value = "pwd";
+            cmdInsert.ExecuteNonQuery();
+            string sqlAjoutEmpruntFictif = "insert into EMPRUNTER(CODE_ABONNÉ,CODE_ALBUM,DATE_EMPRUNT,DATE_RETOUR_ATTENDUE) values((SELECT CODE_ABONNÉ FROM ABONNÉS WHERE LOGIN_ABONNÉ='"+login+"'),"+codeAlbums+", '04/06/2014', '04/07/2015')";
+            OleDbCommand cmdAjoutFictif = new OleDbCommand(sqlAjoutEmpruntFictif, dbCon);
+            cmdAjoutFictif.ExecuteNonQuery();
             string sqlEmprunt = "SELECT ALBUMS.TITRE_ALBUM FROM EMPRUNTER INNER JOIN ALBUMS ON EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM WHERE EMPRUNTER.CODE_ABONNÉ = ( SELECT CODE_ABONNÉ FROM ABONNÉS WHERE LOGIN_ABONNÉ = '" + login + "')";
             OleDbCommand cmdList = new OleDbCommand(sqlEmprunt, dbCon);
             cmdList.ExecuteNonQuery();
@@ -43,7 +55,7 @@ namespace TestsUnitaires
             rdList.Close();
             string sqlCount = "SELECT COUNT(ALBUMS.TITRE_ALBUM) FROM EMPRUNTER INNER JOIN ALBUMS ON EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM WHERE EMPRUNTER.CODE_ABONNÉ = ( SELECT CODE_ABONNÉ FROM ABONNÉS WHERE LOGIN_ABONNÉ = '" + login + "')";
             OleDbCommand cmdCount = new OleDbCommand(sqlCount, dbCon);
-            cmdList.ExecuteNonQuery();
+            cmdCount.ExecuteNonQuery();
             OleDbDataReader rdCount = cmdCount.ExecuteReader();
             while (rdCount.Read())
             {
@@ -66,6 +78,12 @@ namespace TestsUnitaires
                 i++;
             }
             Assert.IsTrue(sameList);
+            string sqlDeleteFromEmprunts = "DELETE FROM EMPRUNTER WHERE EMPRUNTER.CODE_ABONNÉ = (SELECT CODE_ABONNÉ FROM ABONNÉS WHERE LOGIN_ABONNÉ = '" + login + "')";
+            OleDbCommand cmdDeleteFromEmprunts = new OleDbCommand(sqlDeleteFromEmprunts, dbCon);
+            cmdDeleteFromEmprunts.ExecuteNonQuery();
+            string sqlDeleteFromAbonnés = "DELETE FROM ABONNÉS WHERE ABONNÉS.CODE_ABONNÉ = (SELECT CODE_ABONNÉ FROM ABONNÉS WHERE LOGIN_ABONNÉ = '"+login+"')";
+            OleDbCommand cmdDeleteFromAbonnés = new OleDbCommand(sqlDeleteFromAbonnés, dbCon);
+            cmdDeleteFromAbonnés.ExecuteNonQuery();
         }
     }
 }

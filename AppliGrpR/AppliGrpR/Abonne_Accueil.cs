@@ -14,7 +14,7 @@ namespace AppliGrpR
     public partial class Abonne_Accueil : Form
     {
         OleDbConnection dbCon = Accueil.dbCon;
-        List<Albums> empruntés = new List<Albums>();
+        public static List<Albums> empruntés = new List<Albums>();
         List<string> genres = new List<string>();
         List<string> album = new List<string>();
         int CodeAlbumEmprunter= 0;
@@ -73,7 +73,7 @@ namespace AppliGrpR
             while (reader.Read())
             {
                 int code = Convert.ToInt32(reader.GetInt32(0));
-                string titre = reader.GetString(1);
+                string titre = reader.GetString(1).Trim();
                 DateTime dateRetour = new DateTime();
                 if (!reader.IsDBNull(2))
                     dateRetour = reader.GetDateTime(2);

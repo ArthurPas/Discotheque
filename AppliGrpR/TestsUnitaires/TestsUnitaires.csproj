@@ -63,6 +63,7 @@
     <Compile Include="TestUS2.cs" />
     <Compile Include="TestUS2.cs" />
     <Compile Include="TestUS6.cs" />
+    <Compile Include="TestUS9.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

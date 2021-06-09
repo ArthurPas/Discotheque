@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using AppliGrpR;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +18,10 @@ namespace TestsUnitaires
         OleDbConnection dbCon;
         string ChaineBd = "Provider=SQLOLEDB;Data Source=INFO-DORMEUR;Initial Catalog=MusiquePT2_R;Integrated Security=SSPI;";
         Dictionary<string, DateTime> emprunt = new Dictionary<string, DateTime>();
+        Client_Inscription client = new Client_Inscription();
+        Abonne_Accueil abo = new Abonne_Accueil();
+        Abonne_Prolonger prolo = new Abonne_Prolonger();
+        Accueil accueil = new Accueil();
         public void InitConnexion()
         {
             dbCon = new OleDbConnection(ChaineBd);
@@ -26,45 +31,37 @@ namespace TestsUnitaires
         public void TestProlongement()
         {
             InitConnexion();
-            string logAbo = "testUnitaires3";
-            int codeAlb = 522;
+
+            string login = "US3ProlongementUnSeul";
+            string mdp = "testmdp";
+            string prenom = "prenomTest";
+            string nom = "testNom";
+            string nationalite = "France";
+            string codePays = "1";
             int codeAbo = 0;
+            int codeAlbumPro = 568;
             DateTime dateRetour = new DateTime();
-            string test = "insert into ABONNÉS(CODE_PAYS, NOM_ABONNÉ, PRÉNOM_ABONNÉ, LOGIN_ABONNÉ, PASSWORD_ABONNÉ) values(?,?,?,?,?)";
-            OleDbCommand cmdInsert = new OleDbCommand(test, dbCon);
-            cmdInsert.Parameters.Add("CODE_PAYS", OleDbType.Integer).Value = 1;
-            cmdInsert.Parameters.Add("NOM_ABONNÉ", OleDbType.VarChar).Value = "Test";
-            cmdInsert.Parameters.Add("PRÉNOM_ABONNÉ", OleDbType.VarChar).Value = "Pas dans la base";
-            cmdInsert.Parameters.Add("LOGIN_ABONNÉ", OleDbType.VarChar).Value = logAbo;
-            cmdInsert.Parameters.Add("PASSWORD_ABONNÉ", OleDbType.VarChar).Value = "pwd";
-            cmdInsert.ExecuteNonQuery();
-            string sql = "select * from ABONNÉS WHERE LOGIN_ABONNÉ ='" + logAbo + "'";
-            OleDbCommand cmdRead = new OleDbCommand(sql, dbCon);
-            OleDbDataReader reader = cmdRead.ExecuteReader();
+            DateTime dateRetourInit = new DateTime();
+            client.AddAbonnes(login, nationalite, nom, mdp, prenom);
+            string consultCode = "Select CODE_ABONNÉ from ABONNÉS WHERE LOGIN_ABONNÉ = '" + login + "'";
+            OleDbCommand cmdConsultCode = new OleDbCommand(consultCode, dbCon);
+            OleDbDataReader reader = cmdConsultCode.ExecuteReader();
             while (reader.Read())
             {
                 codeAbo = reader.GetInt32(0);
             }
-            reader.Close();
-            string testEmprunt = "insert into EMPRUNTER(CODE_ABONNÉ,CODE_ALBUM,DATE_EMPRUNT,DATE_RETOUR_ATTENDUE) values(" + codeAbo + ", " + codeAlb + ", '22/06/2014', '04/07/2014')";
-            OleDbCommand cmdEmprunt = new OleDbCommand(testEmprunt, dbCon);
-            cmdEmprunt.ExecuteNonQuery();
-            string consult = "SELECT DATE_RETOUR_ATTENDUE, ABONNÉS.LOGIN_ABONNÉ FROM EMPRUNTER INNER JOIN ABONNÉS ON " +
-                "EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ INNER JOIN ALBUMS ON ALBUMS.CODE_ALBUM = EMPRUNTER.CODE_ALBUM WHERE ABONNÉS.LOGIN_ABONNÉ = '" + logAbo +
-                "' AND ALBUMS.CODE_ALBUM = " + codeAlb;
-            OleDbCommand cmd = new OleDbCommand(consult, dbCon);
+            abo.EmprunterFonction(codeAlbumPro, codeAbo);
+            string consultDate = "SELECT DATE_RETOUR_ATTENDUE FROM EMPRUNTER INNER JOIN ABONNÉS ON " +
+                "EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ INNER JOIN ALBUMS ON ALBUMS.CODE_ALBUM = EMPRUNTER.CODE_ALBUM WHERE ABONNÉS.LOGIN_ABONNÉ = '" + login +
+                "' AND ALBUMS.CODE_ALBUM = " + codeAlbumPro;
+            OleDbCommand cmd = new OleDbCommand(consultDate, dbCon);
             OleDbDataReader readerTwo = cmd.ExecuteReader();
             while (readerTwo.Read())
             {
-                emprunt.Add(logAbo, readerTwo.GetDateTime(0));
+                dateRetourInit = readerTwo.GetDateTime(0);
             }
-            readerTwo.Close();
-            string extend = "UPDATE EMPRUNTER Set EMPRUNTER.DATE_RETOUR_ATTENDUE = DATEADD(month, 1, EMPRUNTER.DATE_RETOUR_ATTENDUE) " +
-                            "FROM EMPRUNTER INNER JOIN ABONNÉS ON EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ INNER JOIN ALBUMS ON EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
-                            "INNER JOIN GENRES on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE WHERE ABONNÉS.CODE_ABONNÉ = " + codeAbo +
-                            " AND ALBUMS.CODE_ALBUM = " + codeAlb + " AND DATE_RETOUR_ATTENDUE - DATE_EMPRUNT <= DÉLAI";
-            OleDbCommand cmdSql = new OleDbCommand(extend, dbCon);
-            cmdSql.ExecuteNonQuery();
+            prolo.ExtendBorrowing(codeAbo, codeAlbumPro);
+            
             string consultExtend = " SELECT * FROM EMPRUNTER WHERE CODE_ABONNÉ = " + codeAbo;
             OleDbCommand cmdCE = new OleDbCommand(consultExtend, dbCon);
             OleDbDataReader readerTree = cmdCE.ExecuteReader();
@@ -72,59 +69,50 @@ namespace TestsUnitaires
             {
                 dateRetour = readerTree.GetDateTime(3);
             }
-            readerTree.Close();
-            Assert.AreEqual(emprunt[logAbo].AddMonths(1),dateRetour, "test pas passé");
-            string delete = " DELETE FROM EMPRUNTER WHERE CODE_ABONNÉ = ( SELECT CODE_ABONNÉ FROM ABONNÉS WHERE LOGIN_ABONNÉ = '" + logAbo + "')";
-            OleDbCommand cmdDelete = new OleDbCommand(delete, dbCon);
+            Assert.AreEqual(dateRetourInit.AddMonths(1).Month,dateRetour.Month, "test pas passé");
+            
+         
+            string deleteEmprunt = " DELETE FROM EMPRUNTER WHERE CODE_ABONNÉ = "+codeAbo;
+            OleDbCommand cmdDelete = new OleDbCommand(deleteEmprunt, dbCon);
             cmdDelete.ExecuteNonQuery();
-            string deleteFromAbo = "DELETE FROM ABONNÉS WHERE CODE_ABONNÉ =" + codeAbo;
-            OleDbCommand cmdDeleteFromAbo = new OleDbCommand(deleteFromAbo, dbCon);
-            cmdDeleteFromAbo.ExecuteNonQuery();
-            emprunt.Clear();
+            string delete = "DELETE FROM ABONNÉS WHERE LOGIN_ABONNÉ ='" + login + "'";
+            OleDbCommand cmdDel = new OleDbCommand(delete, dbCon);
+            cmdDel.ExecuteNonQuery();
         }
         [TestMethod]
         public void TestProlongementDejaProl()
         {
             InitConnexion();
-            string logAbo = "testUnitaires3DejaProl";
-            int codeAlb = 523;
+            string login = "testUS3ProlongementDejaProl";
+            string mdp = "testmdp";
+            string prenom = "prenomTest";
+            string nom = "testNom";
+            string nationalite = "France";
+            string codePays = "1";
             int codeAbo = 0;
+            int codeAlbumPro = 156;
             DateTime dateRetour = new DateTime();
-            string test = "insert into ABONNÉS(CODE_PAYS, NOM_ABONNÉ, PRÉNOM_ABONNÉ, LOGIN_ABONNÉ, PASSWORD_ABONNÉ) values(?,?,?,?,?)";
-            OleDbCommand cmdInsert = new OleDbCommand(test, dbCon);
-            cmdInsert.Parameters.Add("CODE_PAYS", OleDbType.Integer).Value = 1;
-            cmdInsert.Parameters.Add("NOM_ABONNÉ", OleDbType.VarChar).Value = "Test";
-            cmdInsert.Parameters.Add("PRÉNOM_ABONNÉ", OleDbType.VarChar).Value = "Pas dans la base";
-            cmdInsert.Parameters.Add("LOGIN_ABONNÉ", OleDbType.VarChar).Value = logAbo;
-            cmdInsert.Parameters.Add("PASSWORD_ABONNÉ", OleDbType.VarChar).Value = "pwd";
-            cmdInsert.ExecuteNonQuery();
-            string sql = "select * from ABONNÉS WHERE LOGIN_ABONNÉ ='" + logAbo + "'";
-            OleDbCommand cmdRead = new OleDbCommand(sql, dbCon);
-            OleDbDataReader reader = cmdRead.ExecuteReader();
+            DateTime dateRetourInit = new DateTime();
+            client.AddAbonnes(login, nationalite, nom, mdp, prenom);
+            string consultCode = "Select CODE_ABONNÉ from ABONNÉS WHERE LOGIN_ABONNÉ = '" + login + "'";
+            OleDbCommand cmdConsultCode = new OleDbCommand(consultCode, dbCon);
+            OleDbDataReader reader = cmdConsultCode.ExecuteReader();
             while (reader.Read())
             {
                 codeAbo = reader.GetInt32(0);
             }
-            reader.Close();
-            string testEmprunt = "insert into EMPRUNTER(CODE_ABONNÉ,CODE_ALBUM,DATE_EMPRUNT,DATE_RETOUR_ATTENDUE) values(" + codeAbo + ", " + codeAlb + ", '22/06/2014', '04/07/2021')";
-            OleDbCommand cmdEmprunt = new OleDbCommand(testEmprunt, dbCon);
-            cmdEmprunt.ExecuteNonQuery();
-            string consult = "SELECT DATE_RETOUR_ATTENDUE, ABONNÉS.LOGIN_ABONNÉ FROM EMPRUNTER INNER JOIN ABONNÉS ON " +
-                "EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ INNER JOIN ALBUMS ON ALBUMS.CODE_ALBUM = EMPRUNTER.CODE_ALBUM WHERE ABONNÉS.LOGIN_ABONNÉ = '" + logAbo +
-                "' AND ALBUMS.CODE_ALBUM = " + codeAlb;
-            OleDbCommand cmd = new OleDbCommand(consult, dbCon);
+            abo.EmprunterFonction(codeAlbumPro, codeAbo);
+            string consultDate = "SELECT DATE_RETOUR_ATTENDUE FROM EMPRUNTER INNER JOIN ABONNÉS ON " +
+                "EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ INNER JOIN ALBUMS ON ALBUMS.CODE_ALBUM = EMPRUNTER.CODE_ALBUM WHERE ABONNÉS.LOGIN_ABONNÉ = '" + login +
+                "' AND ALBUMS.CODE_ALBUM = " + codeAlbumPro;
+            OleDbCommand cmd = new OleDbCommand(consultDate, dbCon);
             OleDbDataReader readerTwo = cmd.ExecuteReader();
             while (readerTwo.Read())
             {
-                emprunt.Add(logAbo, readerTwo.GetDateTime(0));
+                dateRetourInit = readerTwo.GetDateTime(0);
             }
-            readerTwo.Close();
-            string extend = "UPDATE EMPRUNTER Set EMPRUNTER.DATE_RETOUR_ATTENDUE = DATEADD(month, 1, EMPRUNTER.DATE_RETOUR_ATTENDUE) " +
-                            "FROM EMPRUNTER INNER JOIN ABONNÉS ON EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ INNER JOIN ALBUMS ON EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
-                            "INNER JOIN GENRES on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE WHERE ABONNÉS.CODE_ABONNÉ = " + codeAbo +
-                            " AND ALBUMS.CODE_ALBUM = " + codeAlb + " AND DATE_RETOUR_ATTENDUE - DATE_EMPRUNT <= DÉLAI";
-            OleDbCommand cmdSql = new OleDbCommand(extend, dbCon);
-            cmdSql.ExecuteNonQuery();
+            prolo.ExtendBorrowing(codeAbo, codeAlbumPro);
+            prolo.ExtendBorrowing(codeAbo, codeAlbumPro);
             string consultExtend = " SELECT * FROM EMPRUNTER WHERE CODE_ABONNÉ = " + codeAbo;
             OleDbCommand cmdCE = new OleDbCommand(consultExtend, dbCon);
             OleDbDataReader readerTree = cmdCE.ExecuteReader();
@@ -132,15 +120,15 @@ namespace TestsUnitaires
             {
                 dateRetour = readerTree.GetDateTime(3);
             }
-            readerTree.Close();
-            Assert.AreEqual(emprunt[logAbo].AddMonths(0), dateRetour, "test pas passé");
-            string delete = " DELETE FROM EMPRUNTER WHERE CODE_ABONNÉ = ( SELECT CODE_ABONNÉ FROM ABONNÉS WHERE LOGIN_ABONNÉ = '" + logAbo + "')";
-            OleDbCommand cmdDelete = new OleDbCommand(delete, dbCon);
+            Assert.AreEqual(dateRetourInit.AddMonths(1).Month, dateRetour.Month, "test pas passé");
+
+            
+            string deleteEmprunt = " DELETE FROM EMPRUNTER WHERE CODE_ABONNÉ = "+codeAbo;
+            OleDbCommand cmdDelete = new OleDbCommand(deleteEmprunt, dbCon);
             cmdDelete.ExecuteNonQuery();
-            string deleteFromAbo = "DELETE FROM ABONNÉS WHERE CODE_ABONNÉ =" + codeAbo;
-            OleDbCommand cmdDeleteFromAbo = new OleDbCommand(deleteFromAbo, dbCon);
-            cmdDeleteFromAbo.ExecuteNonQuery();
-            emprunt.Clear();
+            string delete = "DELETE FROM ABONNÉS WHERE LOGIN_ABONNÉ ='" + login + "'";
+            OleDbCommand cmdDel = new OleDbCommand(delete, dbCon);
+            cmdDel.ExecuteNonQuery();
         }
     }
 }

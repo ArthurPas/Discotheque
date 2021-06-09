@@ -84,6 +84,9 @@ namespace TestsUnitaires
             string deleteAbo = "DELETE FROM ABONNÉS WHERE LOGIN_ABONNÉ ='" + login + "'";
             OleDbCommand cmdDel = new OleDbCommand(deleteAbo, dbCon);
             cmdDel.ExecuteNonQuery();
+
+
+
             /*
             int codeAlbumAEmprunter =554;
             int codeAbo = 0;

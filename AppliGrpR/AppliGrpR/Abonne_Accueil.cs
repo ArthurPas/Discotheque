@@ -34,8 +34,8 @@ namespace AppliGrpR
 
         public void refreshList ()
         {
-            ConsultAlbum();
-            Suggestions();
+            ConsultAlbum(SetNumAbonne());
+            Suggestions(numeroAbonne);
             Album();
             Abonne_Prolonger.accueil = this;
         }
@@ -55,13 +55,13 @@ namespace AppliGrpR
             return code;
         }
 
-        public void ConsultAlbum()
+        public void ConsultAlbum(int numeroAbo)
         {
             AlbumsEmpruntes.Items.Clear();
             string sql = "select  EMPRUNTER.CODE_ALBUM, TITRE_ALBUM, DATE_RETOUR_ATTENDUE from EMPRUNTER " +
                 "Inner join ALBUMS on EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
                 "Inner join ABONNÉS on EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ " +
-                "WHERE ABONNÉS.CODE_ABONNÉ = '" + SetNumAbonne() + "'";
+                "WHERE ABONNÉS.CODE_ABONNÉ = '" + numeroAbo + "'";
 
 
             OleDbCommand cmdRead = new OleDbCommand(sql, dbCon);
@@ -81,13 +81,13 @@ namespace AppliGrpR
                 empruntés.Add(a);
             }
             reader.Close();
-            numeroAbonne = SetNumAbonne();
+            numeroAbonne = numeroAbo;
         }
 
-        private void Suggestions()
+        private void Suggestions(int numeroAbo)
         {
             //test si l'abonné a déjà emprunté
-            string sqlTest = "SELECT * From emprunter where CODE_ABONNÉ ="+numeroAbonne;
+            string sqlTest = "SELECT * From emprunter where CODE_ABONNÉ ="+ numeroAbo;
             OleDbCommand cmdTest = new OleDbCommand(sqlTest, dbCon);
             cmdTest.ExecuteNonQuery(); ;
             OleDbDataReader readerTest = cmdTest.ExecuteReader();
@@ -196,20 +196,21 @@ namespace AppliGrpR
         {
             try
             {
-                EmprunterFonction();
+                EmprunterFonction(CodeAlbumEmprunter, SetNumAbonne());
             }catch(System.Data.OleDb.OleDbException)
             {
                 MessageBox.Show("Vous avez déjà emprunté cet album");
             }
-            ConsultAlbum();
+            ConsultAlbum(SetNumAbonne());
+            Suggestions(numeroAbonne);
         }
 
-        private void EmprunterFonction()
+        private void EmprunterFonction(int codeAlbum, int numAbo)
         {
-            int codeAbo = SetNumAbonne();
+            int codeAbo = numAbo;
             int delayNumber = 0;
             string delay = "SELECT DÉLAI FROM GENRES INNER JOIN ALBUMS on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE " +
-                "WHERE ALBUMS.CODE_ALBUM = " + CodeAlbumEmprunter;
+                "WHERE ALBUMS.CODE_ALBUM = " + codeAlbum;
             OleDbCommand cmdDelay = new OleDbCommand(delay, dbCon);
             cmdDelay.ExecuteNonQuery();
             OleDbDataReader readerDelay = cmdDelay.ExecuteReader();
@@ -220,7 +221,7 @@ namespace AppliGrpR
             string request = "insert into EMPRUNTER(CODE_ABONNÉ,CODE_ALBUM,DATE_EMPRUNT,DATE_RETOUR_ATTENDUE) " +
                 "values(" + codeAbo + ", ?, GETDATE(),DATEADD(Day,?,GETDATE()))";
             OleDbCommand cmdTwo = new OleDbCommand(request, dbCon);
-            cmdTwo.Parameters.Add("CODE_ALBUM", OleDbType.Integer).Value = CodeAlbumEmprunter;
+            cmdTwo.Parameters.Add("CODE_ALBUM", OleDbType.Integer).Value = codeAlbum;
             cmdTwo.Parameters.Add("CODE_ALBUM", OleDbType.Integer).Value = delayNumber;
             cmdTwo.ExecuteNonQuery();
         }

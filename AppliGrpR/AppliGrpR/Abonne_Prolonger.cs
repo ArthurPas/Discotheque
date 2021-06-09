@@ -48,13 +48,13 @@ namespace AppliGrpR
 
         }
 
-        public void ExtendBorrowing()
+        public void ExtendBorrowing(int numeroABo, int codeAlbumPro)
         {
 
             string extendDate = "UPDATE EMPRUNTER Set EMPRUNTER.DATE_RETOUR_ATTENDUE = DATEADD(month, 1, EMPRUNTER.DATE_RETOUR_ATTENDUE) " +
                 "FROM EMPRUNTER INNER JOIN ABONNÉS ON EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ INNER JOIN ALBUMS ON EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
-                "INNER JOIN GENRES on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE WHERE ABONNÉS.CODE_ABONNÉ = " + Abonne_Accueil.numeroAbonne +
-                " AND ALBUMS.CODE_ALBUM = " + CodeAlbumProlonger + " AND DATE_RETOUR_ATTENDUE - DATE_EMPRUNT <= DÉLAI";
+                "INNER JOIN GENRES on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE WHERE ABONNÉS.CODE_ABONNÉ = " + numeroABo +
+                " AND ALBUMS.CODE_ALBUM = " + codeAlbumPro + " AND DATE_RETOUR_ATTENDUE - DATE_EMPRUNT <= DÉLAI";
 
             OleDbCommand cmd = new OleDbCommand(extendDate, dbCon);
             cmd.ExecuteNonQuery();
@@ -91,7 +91,7 @@ namespace AppliGrpR
 
         private void ProlongerButton_MouseDown(object sender, MouseEventArgs e)
         {
-            ExtendBorrowing();
+            ExtendBorrowing(Abonne_Accueil.numeroAbonne, CodeAlbumProlonger);
             AlbumsProlongeables.Items.Clear();
             ListeDesProlongeable();
             accueil.refreshList();
@@ -99,7 +99,7 @@ namespace AppliGrpR
 
         private void Pronlonger_tout_bouton_MouseDown(object sender, MouseEventArgs e)
         {
-            ExtendAllBorrowing();
+            ExtendAllBorrowing(Abonne_Accueil.numeroAbonne);
             AlbumsProlongeables.Items.Clear();
             ListeDesProlongeable();
             accueil.refreshList();
@@ -110,7 +110,7 @@ namespace AppliGrpR
         /// Prolonge l'emprunt de tous les emprunts
         /// @param l'identifiant de l'utilisateur qui réalise sont prolongement
         /// </summary>
-        public void ExtendAllBorrowing()
+        public void ExtendAllBorrowing(int numeroAbo)
         {
 
             string extendDate = "UPDATE EMPRUNTER " +
@@ -119,7 +119,7 @@ namespace AppliGrpR
             "INNER JOIN ABONNÉS ON EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ " +
             "INNER JOIN ALBUMS ON EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
             "INNER JOIN GENRES on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE " +
-            "WHERE ABONNÉS.CODE_ABONNÉ = " + Abonne_Accueil.numeroAbonne +
+            "WHERE ABONNÉS.CODE_ABONNÉ = " + numeroAbo +
             "AND DATE_RETOUR_ATTENDUE - DATE_EMPRUNT <= DÉLAI";
 
             OleDbCommand cmd = new OleDbCommand(extendDate, dbCon);

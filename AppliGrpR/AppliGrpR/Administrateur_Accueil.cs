@@ -16,6 +16,7 @@ namespace AppliGrpR
         OleDbConnection dbCon = Accueil.dbCon;
         public static List<Albums> top10 = new List<Albums>();
         public List<string> listeRetard = new List<string>();
+        public List<int> listeAlbNonEmprUnAn = new List<int>();
         public AdministrateurAccueil()
         {
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -147,9 +148,10 @@ namespace AppliGrpR
             nonEmprunté.Items.Add("Album qui n'ont pas été emprunté depuis un an: ");
             while (reader.Read())
             {
+                int codeAlb = reader.GetInt32(0);
                 string titreAlbum = reader.GetString(3);
                 nonEmprunté.Items.Add(titreAlbum);
-
+                listeAlbNonEmprUnAn.Add(codeAlb);
             }
         }
 

@@ -64,16 +64,14 @@ namespace TestsUnitaires
             }
             reader.Close();
             bool same = true;
-            int i = 0;
-            foreach(Albums a in AdministrateurAccueil.top10)
+            for (int i = 0; i < topTest.Count; i++)
             {
-                if (!topTest[i].getID().Equals(a.getID()))
+                if (!topTest[i].getID().Equals(AdministrateurAccueil.top10[i].getID()))
                 {
                     same = false;
                 }
                 i++;
             }
-            i = 0;
             Assert.IsTrue(same);
         }
     }

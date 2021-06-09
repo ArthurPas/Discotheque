@@ -207,7 +207,7 @@ namespace AppliGrpR
             Suggestions(numeroAbonne);
         }
 
-        private void EmprunterFonction(int codeAlbum, int numAbo)
+        public void EmprunterFonction(int codeAlbum, int numAbo)
         {
             int codeAbo = numAbo;
             int delayNumber = 0;

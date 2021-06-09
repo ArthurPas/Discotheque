@@ -73,6 +73,7 @@ namespace TestsUnitaires
                 }
                 i++;
             }
+            i = 0;
             Assert.IsTrue(same);
         }
     }

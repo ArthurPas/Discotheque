@@ -35,7 +35,7 @@ namespace AppliGrpR
             string sql = "select ABONNÉS.PRÉNOM_ABONNÉ, NOM_ABONNÉ,ABONNÉS.CODE_ABONNÉ, CODE_ALBUM,DATE_EMPRUNT " +
                 "from emprunter " +
                 "inner join ABONNÉS on ABONNÉS.CODE_ABONNÉ = EMPRUNTER.CODE_ABONNÉ " +
-                "WHERE DATEDIFF(day, DATE_EMPRUNT, GETDATE()) > 365";
+                "WHERE DATEDIFF(day, DATE_EMPRUNT, GETDATE()) > 365 AND DATE_RETOUR iS NOT NULL";
 
             OleDbCommand cmdRead = new OleDbCommand(sql, dbCon);
             OleDbDataReader reader = cmdRead.ExecuteReader();
@@ -49,7 +49,7 @@ namespace AppliGrpR
                 string test = "select ABONNÉS.PRÉNOM_ABONNÉ, NOM_ABONNÉ,ABONNÉS.CODE_ABONNÉ, CODE_ALBUM,DATE_EMPRUNT " +
                     "from emprunter " +
                     "inner join ABONNÉS on ABONNÉS.CODE_ABONNÉ = EMPRUNTER.CODE_ABONNÉ " +
-                    "WHERE DATEDIFF(day, DATE_EMPRUNT, GETDATE()) < 365 AND ABONNÉS.CODE_ABONNÉ =" + code;
+                    "WHERE DATEDIFF(day, DATE_EMPRUNT, GETDATE()) < 365 AND ABONNÉS.CODE_ABONNÉ =" + code + "AND DATE_RETOUR iS NOT NULL";
                 OleDbCommand cmdReadtest = new OleDbCommand(test, dbCon);
                 OleDbDataReader readertest = cmdReadtest.ExecuteReader();
                 //si pas d'emprunt qui date de moins d'un an
@@ -70,19 +70,12 @@ namespace AppliGrpR
             return MessageBox.Show(message, "", buttons) == DialogResult.Yes;
         }
 
-        private void PurgerOne_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (ConfirmDialog())
-            {
-                AfficherPurgeAbonne();
-            }
-        }
-
         private void PurgeAll_MouseDown(object sender, MouseEventArgs e)
         {
             if (ConfirmDialog())
             {
                 PurgeAbonne();
+                AbonnesPurger.Items.Clear();
                 AfficherPurgeAbonne();
             }
         }
@@ -93,7 +86,7 @@ namespace AppliGrpR
             string sql = "select ABONNÉS.PRÉNOM_ABONNÉ, NOM_ABONNÉ,ABONNÉS.CODE_ABONNÉ, CODE_ALBUM,DATE_EMPRUNT " +
                 "from emprunter " +
                 "inner join ABONNÉS on ABONNÉS.CODE_ABONNÉ = EMPRUNTER.CODE_ABONNÉ " +
-                "WHERE DATEDIFF(day, DATE_EMPRUNT, GETDATE()) > 365";
+                "WHERE DATEDIFF(day, DATE_EMPRUNT, GETDATE()) > 365 AND DATE_RETOUR iS NOT NULL";
 
             OleDbCommand cmdRead = new OleDbCommand(sql, dbCon);
             OleDbDataReader reader = cmdRead.ExecuteReader();
@@ -107,7 +100,7 @@ namespace AppliGrpR
                 string test = "select ABONNÉS.PRÉNOM_ABONNÉ, NOM_ABONNÉ,ABONNÉS.CODE_ABONNÉ, CODE_ALBUM,DATE_EMPRUNT " +
                     "from emprunter " +
                     "inner join ABONNÉS on ABONNÉS.CODE_ABONNÉ = EMPRUNTER.CODE_ABONNÉ " +
-                    "WHERE DATEDIFF(day, DATE_EMPRUNT, GETDATE()) < 365 AND ABONNÉS.CODE_ABONNÉ =" + code;
+                    "WHERE DATEDIFF(day, DATE_EMPRUNT, GETDATE()) < 365 AND ABONNÉS.CODE_ABONNÉ =" + code + " AND DATE_RETOUR iS NOT NULL";
                 OleDbCommand cmdReadtest = new OleDbCommand(test, dbCon);
                 OleDbDataReader readertest = cmdReadtest.ExecuteReader();
                 //si pas d'emprunt qui date de moins d'un an

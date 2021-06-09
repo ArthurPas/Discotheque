@@ -34,6 +34,8 @@ namespace AppliGrpR
 
         private void Retour_MouseDown(object sender, MouseEventArgs e)
         {
+            Accueil a = new Accueil();
+            a.Show();
             this.Close();
         }
     }

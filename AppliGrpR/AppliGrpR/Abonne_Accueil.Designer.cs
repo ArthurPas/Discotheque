@@ -41,6 +41,10 @@ namespace AppliGrpR
             this.déconnexion = new System.Windows.Forms.Button();
             this.Prolonger_un_emprunt = new System.Windows.Forms.Button();
             this.Emprunter = new System.Windows.Forms.Button();
+            this.ButtonRightEmprunt = new System.Windows.Forms.Button();
+            this.ButtonLeftEmprunt = new System.Windows.Forms.Button();
+            this.ToutLeftButton = new System.Windows.Forms.Button();
+            this.ToutRightButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // AlbumsConseillés
@@ -48,7 +52,7 @@ namespace AppliGrpR
             this.AlbumsConseillés.FormattingEnabled = true;
             this.AlbumsConseillés.Location = new System.Drawing.Point(147, 245);
             this.AlbumsConseillés.Name = "AlbumsConseillés";
-            this.AlbumsConseillés.Size = new System.Drawing.Size(793, 121);
+            this.AlbumsConseillés.Size = new System.Drawing.Size(793, 160);
             this.AlbumsConseillés.TabIndex = 1;
             // 
             // AlbumsEmpruntes
@@ -56,7 +60,7 @@ namespace AppliGrpR
             this.AlbumsEmpruntes.FormattingEnabled = true;
             this.AlbumsEmpruntes.Location = new System.Drawing.Point(147, 74);
             this.AlbumsEmpruntes.Name = "AlbumsEmpruntes";
-            this.AlbumsEmpruntes.Size = new System.Drawing.Size(793, 121);
+            this.AlbumsEmpruntes.Size = new System.Drawing.Size(793, 134);
             this.AlbumsEmpruntes.TabIndex = 2;
             // 
             // TousLesAlbums
@@ -64,7 +68,7 @@ namespace AppliGrpR
             this.TousLesAlbums.FormattingEnabled = true;
             this.TousLesAlbums.Location = new System.Drawing.Point(147, 455);
             this.TousLesAlbums.Name = "TousLesAlbums";
-            this.TousLesAlbums.Size = new System.Drawing.Size(793, 160);
+            this.TousLesAlbums.Size = new System.Drawing.Size(793, 134);
             this.TousLesAlbums.TabIndex = 3;
             this.TousLesAlbums.SelectedIndexChanged += new System.EventHandler(this.TousLesAlbums_SelectedIndexChanged);
             // 
@@ -97,7 +101,7 @@ namespace AppliGrpR
             // Tous_Les_Albums
             // 
             this.Tous_Les_Albums.AutoSize = true;
-            this.Tous_Les_Albums.Location = new System.Drawing.Point(148, 402);
+            this.Tous_Les_Albums.Location = new System.Drawing.Point(144, 414);
             this.Tous_Les_Albums.Name = "Tous_Les_Albums";
             this.Tous_Les_Albums.Size = new System.Drawing.Size(88, 13);
             this.Tous_Les_Albums.TabIndex = 44;
@@ -151,11 +155,55 @@ namespace AppliGrpR
             this.Emprunter.UseVisualStyleBackColor = true;
             this.Emprunter.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Emprunter_MouseDown);
             // 
+            // ButtonRightEmprunt
+            // 
+            this.ButtonRightEmprunt.Location = new System.Drawing.Point(864, 216);
+            this.ButtonRightEmprunt.Name = "ButtonRightEmprunt";
+            this.ButtonRightEmprunt.Size = new System.Drawing.Size(75, 23);
+            this.ButtonRightEmprunt.TabIndex = 50;
+            this.ButtonRightEmprunt.Text = "->";
+            this.ButtonRightEmprunt.UseVisualStyleBackColor = true;
+            this.ButtonRightEmprunt.Click += new System.EventHandler(this.ButtonRightEmprunt_Click);
+            // 
+            // ButtonLeftEmprunt
+            // 
+            this.ButtonLeftEmprunt.Location = new System.Drawing.Point(783, 216);
+            this.ButtonLeftEmprunt.Name = "ButtonLeftEmprunt";
+            this.ButtonLeftEmprunt.Size = new System.Drawing.Size(75, 23);
+            this.ButtonLeftEmprunt.TabIndex = 51;
+            this.ButtonLeftEmprunt.Text = "<-";
+            this.ButtonLeftEmprunt.UseVisualStyleBackColor = true;
+            this.ButtonLeftEmprunt.Click += new System.EventHandler(this.ButtonLeftEmprunt_Click);
+            // 
+            // ToutLeftButton
+            // 
+            this.ToutLeftButton.Location = new System.Drawing.Point(783, 595);
+            this.ToutLeftButton.Name = "ToutLeftButton";
+            this.ToutLeftButton.Size = new System.Drawing.Size(75, 23);
+            this.ToutLeftButton.TabIndex = 54;
+            this.ToutLeftButton.Text = "<-";
+            this.ToutLeftButton.UseVisualStyleBackColor = true;
+            this.ToutLeftButton.Click += new System.EventHandler(this.ToutLeftButton_Click);
+            // 
+            // ToutRightButton
+            // 
+            this.ToutRightButton.Location = new System.Drawing.Point(864, 595);
+            this.ToutRightButton.Name = "ToutRightButton";
+            this.ToutRightButton.Size = new System.Drawing.Size(75, 23);
+            this.ToutRightButton.TabIndex = 55;
+            this.ToutRightButton.Text = "->";
+            this.ToutRightButton.UseVisualStyleBackColor = true;
+            this.ToutRightButton.Click += new System.EventHandler(this.ToutRightButton_Click);
+            // 
             // Abonne_Accueil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 661);
+            this.Controls.Add(this.ToutRightButton);
+            this.Controls.Add(this.ToutLeftButton);
+            this.Controls.Add(this.ButtonLeftEmprunt);
+            this.Controls.Add(this.ButtonRightEmprunt);
             this.Controls.Add(this.Emprunter);
             this.Controls.Add(this.Prolonger_un_emprunt);
             this.Controls.Add(this.déconnexion);
@@ -189,5 +237,9 @@ namespace AppliGrpR
         private System.Windows.Forms.Button déconnexion;
         private System.Windows.Forms.Button Prolonger_un_emprunt;
         private System.Windows.Forms.Button Emprunter;
+        private System.Windows.Forms.Button ButtonRightEmprunt;
+        private System.Windows.Forms.Button ButtonLeftEmprunt;
+        private System.Windows.Forms.Button ToutLeftButton;
+        private System.Windows.Forms.Button ToutRightButton;
     }
 }

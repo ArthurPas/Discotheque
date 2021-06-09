@@ -26,6 +26,7 @@ namespace AppliGrpR
         public static string Id;
         public static string MotDePasse;
         public static int numeroAbonne;
+        public int index = 1;
         public Abonne_Accueil()
         {
             InitializeComponent();
@@ -77,11 +78,11 @@ namespace AppliGrpR
                 DateTime dateRetour = new DateTime();
                 if (!reader.IsDBNull(2))
                     dateRetour = reader.GetDateTime(2);
-
+                
                 Albums a = new Albums(code, titre, dateRetour);
-                AlbumsEmpruntes.Items.Add(a);
-                empruntés.Add(a);
+                empruntés.Add(a); 
             }
+            AfficherPageEmprunt();
             reader.Close();
             numeroAbonne = numeroAbo;
         }
@@ -126,7 +127,6 @@ namespace AppliGrpR
                 {
                     int index = random.Next(album.Count);
                     AlbumsConseillés.Items.Add(album[index]);
-                    Console.WriteLine(index);
                 }
             }
             else
@@ -147,8 +147,9 @@ namespace AppliGrpR
             {
                 string titre = reader.GetString(3);
                 album.Add(titre);
-                TousLesAlbums.Items.Add(titre);
+                
             }
+            AfficherPageConseil();
             reader.Close();
         }
 
@@ -252,6 +253,63 @@ namespace AppliGrpR
             Accueil a = new Accueil();
             a.Show();
             this.Close();
+        }
+        public void AfficherPageEmprunt()
+        {
+            
+            for (int i = 10 * index - 10; i < 10 * index; i++)
+            {
+                if (i <empruntés.Count)
+                {
+                    AlbumsEmpruntes.Items.Add(empruntés[i]);
+                }
+            }
+        }
+        public void AfficherPageConseil()
+        {
+            for (int i = 10 * index - 10; i < 10 * index; i++)
+            {
+                if (i < album.Count)
+                {
+                    TousLesAlbums.Items.Add(album[i]);
+                }
+            }
+        }
+        public void PlusUnePage()
+        {
+            index++;
+        }
+        public void MoinsUnePage()
+        {
+            if(index > 1) { 
+                index--;
+            }
+        }
+        private void ButtonRightEmprunt_Click(object sender, EventArgs e)
+        {
+            AlbumsEmpruntes.Items.Clear();
+            PlusUnePage();
+            AfficherPageEmprunt();
+        }
+
+        private void ButtonLeftEmprunt_Click(object sender, EventArgs e)
+        {
+            AlbumsEmpruntes.Items.Clear();
+            MoinsUnePage();
+            AfficherPageEmprunt();
+        }
+        private void ToutRightButton_Click(object sender, EventArgs e)
+        {
+            TousLesAlbums.Items.Clear();
+            PlusUnePage();
+            AfficherPageConseil();
+        }
+
+        private void ToutLeftButton_Click(object sender, EventArgs e)
+        {
+            TousLesAlbums.Items.Clear();
+            MoinsUnePage();
+            AfficherPageConseil();
         }
     }
 }

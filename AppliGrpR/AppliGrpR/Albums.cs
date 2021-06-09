@@ -25,7 +25,7 @@ namespace AppliGrpR
         }
         public override string ToString()
         {
-            return titre + "date de retour : " + dateRetour;
+            return titre + "              ==> date de retour : " + dateRetour;
         }
         public int getID()
         {

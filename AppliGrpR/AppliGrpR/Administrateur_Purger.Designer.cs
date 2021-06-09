@@ -31,7 +31,6 @@ namespace AppliGrpR
         {
             this.AbonnesPurger = new System.Windows.Forms.ListBox();
             this.Retour = new System.Windows.Forms.Button();
-            this.PurgerOne = new System.Windows.Forms.Button();
             this.PurgeAll = new System.Windows.Forms.Button();
             this.inactifPlusUnAn = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -54,19 +53,9 @@ namespace AppliGrpR
             this.Retour.UseVisualStyleBackColor = true;
             this.Retour.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Retour_MouseDown);
             // 
-            // PurgerOne
-            // 
-            this.PurgerOne.Location = new System.Drawing.Point(170, 368);
-            this.PurgerOne.Name = "PurgerOne";
-            this.PurgerOne.Size = new System.Drawing.Size(104, 23);
-            this.PurgerOne.TabIndex = 12;
-            this.PurgerOne.Text = "Purger un abonne";
-            this.PurgerOne.UseVisualStyleBackColor = true;
-            this.PurgerOne.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PurgerOne_MouseDown);
-            // 
             // PurgeAll
             // 
-            this.PurgeAll.Location = new System.Drawing.Point(539, 368);
+            this.PurgeAll.Location = new System.Drawing.Point(353, 363);
             this.PurgeAll.Name = "PurgeAll";
             this.PurgeAll.Size = new System.Drawing.Size(75, 23);
             this.PurgeAll.TabIndex = 13;
@@ -90,7 +79,6 @@ namespace AppliGrpR
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.inactifPlusUnAn);
             this.Controls.Add(this.PurgeAll);
-            this.Controls.Add(this.PurgerOne);
             this.Controls.Add(this.Retour);
             this.Controls.Add(this.AbonnesPurger);
             this.Name = "Administrateur_Purger";
@@ -104,7 +92,6 @@ namespace AppliGrpR
 
         private System.Windows.Forms.ListBox AbonnesPurger;
         private System.Windows.Forms.Button Retour;
-        private System.Windows.Forms.Button PurgerOne;
         private System.Windows.Forms.Button PurgeAll;
         private System.Windows.Forms.Label inactifPlusUnAn;
     }

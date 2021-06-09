@@ -33,11 +33,11 @@ namespace AppliGrpR
         /// Ajoute un Abonné à la Base depuis les valeurs récupéré dans les textBox
         /// </summary>
 
-        public void AddAbonnes()
+        public void AddAbonnes(string idbox,string nationalitebox, string nombox, string mdpbox, string prenombox)
         {
             bool valide = true;
 
-            string consult = "Select * from ABONNÉS WHERE LOGIN_ABONNÉ = '" + id_box.Text + "'";
+            string consult = "Select * from ABONNÉS WHERE LOGIN_ABONNÉ = '" + idbox + "'";
             OleDbCommand cmdConsult = new OleDbCommand(consult, dbCon);
             OleDbDataReader reader = cmdConsult.ExecuteReader();
 
@@ -51,11 +51,11 @@ namespace AppliGrpR
                     string insert = "insert into ABONNÉS(CODE_PAYS,NOM_ABONNÉ,PRÉNOM_ABONNÉ,LOGIN_ABONNÉ,PASSWORD_ABONNÉ) values(?,?,?,?,?)";
                     OleDbCommand cmd = new OleDbCommand(insert, dbCon);
 
-                    cmd.Parameters.Add("CODE_PAYS", OleDbType.Integer).Value = getCodePaysFromNationalite(nationalité_comboBox.Text);
-                    cmd.Parameters.Add("NOM_ABONNÉ", OleDbType.VarChar).Value = nom_box.Text;
-                    cmd.Parameters.Add("PRÉNOM_ABONNÉ", OleDbType.VarChar).Value = prénom_box.Text;
-                    cmd.Parameters.Add("LOGIN_ABONNÉ", OleDbType.VarChar).Value = id_box.Text;
-                    cmd.Parameters.Add("PASSWORD_ABONNÉ", OleDbType.VarChar).Value = mdp_box.Text;
+                    cmd.Parameters.Add("CODE_PAYS", OleDbType.Integer).Value = getCodePaysFromNationalite(nationalitebox);
+                    cmd.Parameters.Add("NOM_ABONNÉ", OleDbType.VarChar).Value = nombox;
+                    cmd.Parameters.Add("PRÉNOM_ABONNÉ", OleDbType.VarChar).Value = prenombox;
+                    cmd.Parameters.Add("LOGIN_ABONNÉ", OleDbType.VarChar).Value = idbox;
+                    cmd.Parameters.Add("PASSWORD_ABONNÉ", OleDbType.VarChar).Value = mdpbox;
                     cmd.ExecuteNonQuery();
 
 
@@ -174,7 +174,7 @@ namespace AppliGrpR
 
         private void inscription_Click(object sender, EventArgs e)
         {
-            AddAbonnes();
+            AddAbonnes(id_box.Text, nationalité_comboBox.Text, nom_box.Text, mdp_box.Text, prénom_box.Text);
             
         }
 

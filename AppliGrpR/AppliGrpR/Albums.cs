@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AppliGrpR
 {
-    class Albums
+    public class Albums
     {
         int id;
         public string titre;
@@ -18,9 +18,14 @@ namespace AppliGrpR
             titre = n;
             dateRetour = d;
         }
+        public Albums(int c, string n)
+        {
+            id = c;
+            titre = n;
+        }
         public override string ToString()
         {
-            return titre + "date de retour : " +dateRetour;
+            return titre + "date de retour : " + dateRetour;
         }
         public int getID()
         {

@@ -14,6 +14,7 @@ namespace AppliGrpR
     public partial class AdministrateurAccueil : Form
     {
         OleDbConnection dbCon = Accueil.dbCon;
+        public List<string> listeRetard= new List<string>();
         public AdministrateurAccueil()
         {
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -65,6 +66,7 @@ namespace AppliGrpR
                 string nom = reader.GetString(0);
                 string titre = reader.GetString(2);
                 Retard10joursBox.Items.Add(nom + titre);
+                listeRetard.Add(nom);
             }
         }
 

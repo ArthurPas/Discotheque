@@ -42,6 +42,8 @@ namespace AppliGrpR
 
         private int SetNumAbonne()
         {
+            Accueil accueil = new Accueil();
+            dbCon = Accueil.dbCon;
             string sql = "select * from ABONNÉS WHERE LOGIN_ABONNÉ ='" + Id + "'";
             OleDbCommand cmdRead = new OleDbCommand(sql, dbCon);
             OleDbDataReader reader = cmdRead.ExecuteReader();
@@ -204,7 +206,7 @@ namespace AppliGrpR
             ConsultAlbum();
         }
 
-        private void EmprunterFonction()
+        public void EmprunterFonction(int codeAlbum, int numAbo)
         {
             int codeAbo = SetNumAbonne();
             int delayNumber = 0;

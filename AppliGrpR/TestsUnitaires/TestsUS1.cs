@@ -18,6 +18,9 @@ namespace TestsUnitaires
     {
         OleDbConnection dbCon;
         string ChaineBd = "Provider=SQLOLEDB;Data Source=INFO-DORMEUR;Initial Catalog=MusiquePT2_R;Integrated Security=SSPI;";
+        Client_Inscription client = new Client_Inscription();
+        Abonne_Accueil abo = new Abonne_Accueil();
+        Accueil accueil = new Accueil();
         List<int> albumDispo = new List<int>();
         public void InitConnexion()
         {
@@ -28,7 +31,7 @@ namespace TestsUnitaires
         public void TestInscription()
         {
             InitConnexion();
-            Client_Inscription client = new Client_Inscription();
+            
             string login = "testUS1";
             string mdp = "testmdp";
             string prenom = "prenomTest";
@@ -41,6 +44,7 @@ namespace TestsUnitaires
             OleDbCommand cmdConsult = new OleDbCommand(consult, dbCon);
             OleDbDataReader reader = cmdConsult.ExecuteReader();
             Assert.IsTrue(reader.HasRows, "pas inscrit");
+            reader.Close();
             string delete = "DELETE FROM ABONNÉS WHERE LOGIN_ABONNÉ ='" + login + "'";
             OleDbCommand cmdDel = new OleDbCommand(delete, dbCon);
             cmdDel.ExecuteNonQuery();
@@ -49,6 +53,38 @@ namespace TestsUnitaires
         public void testEmprunt()
         {
             InitConnexion();
+            bool testVerif;
+            string login = "testUS1";
+            string mdp = "testmdp";
+            string prenom = "prenomTest";
+            string nom = "testNom";
+            string nationalite = "France";
+            int codeAbo = 0;
+            client.AddAbonnes(login, nationalite, nom, mdp, prenom);
+            string consult = "Select CODE_ABONNÉ from ABONNÉS WHERE LOGIN_ABONNÉ = '" + login + "'";
+            OleDbCommand cmdConsult = new OleDbCommand(consult, dbCon);
+            OleDbDataReader reader = cmdConsult.ExecuteReader();
+            while (reader.Read())
+            {
+                codeAbo =reader.GetInt32(0);
+            }
+            reader.Close();
+            int codeAlb = 624;
+            abo.EmprunterFonction(codeAlb, codeAbo);
+            string check = "SELECT * FROM EMPRUNTER INNER JOIN ABONNÉS ON EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ WHERE CODE_ALBUM = " + codeAlb + " AND ABONNÉS.CODE_ABONNÉ=" + codeAbo;
+            OleDbCommand cmdCheck = new OleDbCommand(check, dbCon);
+            cmdCheck.ExecuteNonQuery();
+            OleDbDataReader readerCheck = cmdCheck.ExecuteReader();
+            testVerif = readerCheck.HasRows;
+            readerCheck.Close();
+            Assert.IsTrue(testVerif);
+            string delete = " DELETE FROM EMPRUNTER WHERE CODE_ALBUM = " + codeAlb;
+            OleDbCommand cmdDelete = new OleDbCommand(delete, dbCon);
+            cmdDelete.ExecuteNonQuery();
+            string deleteAbo = "DELETE FROM ABONNÉS WHERE LOGIN_ABONNÉ ='" + login + "'";
+            OleDbCommand cmdDel = new OleDbCommand(deleteAbo, dbCon);
+            cmdDel.ExecuteNonQuery();
+            /*
             int codeAlbumAEmprunter =554;
             int codeAbo = 0;
             bool testVerif;
@@ -108,6 +144,7 @@ namespace TestsUnitaires
             string delete = " DELETE FROM EMPRUNTER WHERE CODE_ALBUM = " + codeAlbumAEmprunter;
             OleDbCommand cmdDelete = new OleDbCommand(delete, dbCon);
             cmdDelete.ExecuteNonQuery();
+            */
         }
         
     }

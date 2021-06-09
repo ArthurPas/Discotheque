@@ -16,6 +16,7 @@ namespace AppliGrpR
         OleDbConnection dbCon = Accueil.dbCon;
         public static List<Albums> top10 = new List<Albums>();
         public List<string> listeRetard = new List<string>();
+        public static List<Albums> listeProlongement = new List<Albums>();
         public AdministrateurAccueil()
         {
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -33,7 +34,7 @@ namespace AppliGrpR
         /// </summary>
         public void ListExtended()
         {
-            string list = "Select NOM_ABONNÉ, PRÉNOM_ABONNÉ, TITRE_ALBUM FROM ABONNÉS INNER JOIN EMPRUNTER on ABONNÉS.CODE_ABONNÉ = " +
+            string list = "Select NOM_ABONNÉ, PRÉNOM_ABONNÉ, TITRE_ALBUM,EMPRUNTER.CODE_ALBUM,EMPRUNTER.DATE_RETOUR_ATTENDUE FROM ABONNÉS INNER JOIN EMPRUNTER on ABONNÉS.CODE_ABONNÉ = " +
                 "EMPRUNTER.CODE_ABONNÉ INNER JOIN ALBUMS on EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
                 "INNER JOIN GENRES on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE " +
                 "WHERE DATE_RETOUR_ATTENDUE - DATE_EMPRUNT > DÉLAI";
@@ -42,9 +43,14 @@ namespace AppliGrpR
             ListeProlongementBox.Items.Add("Les emprunts qui ont étés prolongés sont : ");
             while (reader.Read())
             {
+                DateTime dateRetourAttendue = new DateTime();
                 string name = reader.GetString(0);
                 string titre = reader.GetString(2);
+                int codeAlbum = reader.GetInt32(3);
+                dateRetourAttendue = reader.GetDateTime(4);
                 ListeProlongementBox.Items.Add(name + " a prolongé l'emprunt de " + titre);
+                Albums a = new Albums(codeAlbum, titre, dateRetourAttendue);
+                listeProlongement.Add(a);
             }
 
         }

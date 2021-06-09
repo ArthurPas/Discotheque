@@ -58,6 +58,7 @@
     <Compile Include="TestsUS4.cs" />
     <Compile Include="TestsUS5.cs" />
     <Compile Include="TestsUS7.cs" />
+    <Compile Include="TestsUS8.cs" />
     <Compile Include="TestUS3.cs" />
     <Compile Include="TestUS2.cs" />
     <Compile Include="TestUS2.cs" />

@@ -27,7 +27,7 @@ namespace TestsUnitaires
             dbCon.Open();
         }
         [TestMethod]
-        public void TestInscription()
+        public void TestTop10()
         {
             InitConnexion();
 

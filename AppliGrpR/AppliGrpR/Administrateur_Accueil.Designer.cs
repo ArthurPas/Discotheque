@@ -48,7 +48,7 @@ namespace AppliGrpR
             this.ListeProlongementBox.FormattingEnabled = true;
             this.ListeProlongementBox.Location = new System.Drawing.Point(32, 63);
             this.ListeProlongementBox.Name = "ListeProlongementBox";
-            this.ListeProlongementBox.Size = new System.Drawing.Size(407, 121);
+            this.ListeProlongementBox.Size = new System.Drawing.Size(485, 121);
             this.ListeProlongementBox.TabIndex = 0;
             // 
             // top10liste
@@ -56,7 +56,7 @@ namespace AppliGrpR
             this.top10liste.FormattingEnabled = true;
             this.top10liste.Location = new System.Drawing.Point(32, 452);
             this.top10liste.Name = "top10liste";
-            this.top10liste.Size = new System.Drawing.Size(407, 121);
+            this.top10liste.Size = new System.Drawing.Size(485, 147);
             this.top10liste.TabIndex = 1;
             // 
             // Retard10joursBox
@@ -64,15 +64,15 @@ namespace AppliGrpR
             this.Retard10joursBox.FormattingEnabled = true;
             this.Retard10joursBox.Location = new System.Drawing.Point(32, 258);
             this.Retard10joursBox.Name = "Retard10joursBox";
-            this.Retard10joursBox.Size = new System.Drawing.Size(407, 121);
+            this.Retard10joursBox.Size = new System.Drawing.Size(485, 121);
             this.Retard10joursBox.TabIndex = 2;
             // 
             // nonEmprunté
             // 
             this.nonEmprunté.FormattingEnabled = true;
-            this.nonEmprunté.Location = new System.Drawing.Point(817, 103);
+            this.nonEmprunté.Location = new System.Drawing.Point(782, 103);
             this.nonEmprunté.Name = "nonEmprunté";
-            this.nonEmprunté.Size = new System.Drawing.Size(238, 407);
+            this.nonEmprunté.Size = new System.Drawing.Size(273, 407);
             this.nonEmprunté.TabIndex = 3;
             // 
             // nonEmpruntesLabel
@@ -114,15 +114,15 @@ namespace AppliGrpR
             // ListeAbonnebox
             // 
             this.ListeAbonnebox.FormattingEnabled = true;
-            this.ListeAbonnebox.Location = new System.Drawing.Point(518, 103);
+            this.ListeAbonnebox.Location = new System.Drawing.Point(587, 103);
             this.ListeAbonnebox.Name = "ListeAbonnebox";
-            this.ListeAbonnebox.Size = new System.Drawing.Size(201, 407);
+            this.ListeAbonnebox.Size = new System.Drawing.Size(160, 407);
             this.ListeAbonnebox.TabIndex = 8;
             // 
             // ListeAbonne
             // 
             this.ListeAbonne.AutoSize = true;
-            this.ListeAbonne.Location = new System.Drawing.Point(515, 87);
+            this.ListeAbonne.Location = new System.Drawing.Point(584, 87);
             this.ListeAbonne.Name = "ListeAbonne";
             this.ListeAbonne.Size = new System.Drawing.Size(74, 13);
             this.ListeAbonne.TabIndex = 9;

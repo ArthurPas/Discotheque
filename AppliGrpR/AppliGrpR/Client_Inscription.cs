@@ -41,11 +41,11 @@ namespace AppliGrpR
             OleDbCommand cmdConsult = new OleDbCommand(consult, dbCon);
             OleDbDataReader reader = cmdConsult.ExecuteReader();
 
-            //disableAllErrorMessage();
-            //valide = manageErrorMessage();
+            /*disableAllErrorMessage();
+            valide = manageErrorMessage();
 
-            //if (valide)
-           // {
+            if (valide)
+            {*/
                 if (!reader.HasRows)
                 {
                     string insert = "insert into ABONNÉS(CODE_PAYS,NOM_ABONNÉ,PRÉNOM_ABONNÉ,LOGIN_ABONNÉ,PASSWORD_ABONNÉ) values(?,?,?,?,?)";
@@ -61,7 +61,7 @@ namespace AppliGrpR
 
                     Client_Insciption_Complete c = new Client_Insciption_Complete(nom_box.Text, prénom_box.Text, id_box.Text);
                     c.Show();
-                  
+
                     this.Close();
 
                     nationalité_comboBox.Text = "";
@@ -75,7 +75,7 @@ namespace AppliGrpR
                 {
                     MessageBox.Show("Erreur un compte existe déja avec le même identifiant");
                 }
-           // }
+            //}
             
         }
 

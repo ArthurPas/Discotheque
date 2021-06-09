@@ -17,10 +17,9 @@ namespace AppliGrpR
         public static List<Albums> empruntés = new List<Albums>();
         List<string> genres = new List<string>();
         List<string> album = new List<string>();
+        public static List<Albums> suggestionsAlbums = new List<Albums>();
+        public static List<Albums> suggestionsAlbumsChoisit = new List<Albums>();
         int CodeAlbumEmprunter= 0;
-        //
-        // initialisé pour le test
-        //
         public static string Nom;
         public static string Prenom;
         public static string Id;
@@ -35,6 +34,7 @@ namespace AppliGrpR
 
         public void refreshList ()
         {
+            
             ConsultAlbum(SetNumAbonne());
             Suggestions(numeroAbonne);
             Album();
@@ -87,7 +87,7 @@ namespace AppliGrpR
             numeroAbonne = numeroAbo;
         }
 
-        private void Suggestions(int numeroAbo)
+        public void Suggestions(int numeroAbo)
         {
             //test si l'abonné a déjà emprunté
             string sqlTest = "SELECT * From emprunter where CODE_ABONNÉ ="+ numeroAbo;
@@ -112,7 +112,8 @@ namespace AppliGrpR
                 {
                     genres.Add(reader.GetString(0));
                 }
-                string sqlTwo = "SELECT TITRE_ALBUM FROM ALBUMS INNER JOIN GENRES ON GENRES.CODE_GENRE = ALBUMS.CODE_GENRE " +
+                string sqlTwo = "SELECT ALBUMS.CODE_ALBUM, TITRE_ALBUM, EMPRUNTER.DATE_RETOUR_ATTENDUE FROM ALBUMS INNER JOIN GENRES ON GENRES.CODE_GENRE = ALBUMS.CODE_GENRE " +
+                    "INNER JOIN EMPRUNTER ON EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
                     "WHERE LIBELLÉ_GENRE = '" + genres[0] + "'";
                 OleDbCommand cmdTwo = new OleDbCommand(sqlTwo, dbCon);
                 cmdTwo.ExecuteNonQuery();
@@ -120,13 +121,19 @@ namespace AppliGrpR
                 AlbumsConseillés.Items.Add("Nous vous recommandons dans le genre " + genres[0]);
                 while (readerTwo.Read())
                 {
-                    string nomAlbum = readerTwo.GetString(0);
+                    string nomAlbum = readerTwo.GetString(1);
                     album.Add(nomAlbum);
+                    int code = readerTwo.GetInt32(0);
+                    Albums a = new Albums(code, nomAlbum);
+                    suggestionsAlbums.Add(a);
                 }
                 for (int i = 0; i < 10; i++)
                 {
-                    int index = random.Next(album.Count);
-                    AlbumsConseillés.Items.Add(album[index]);
+                    int index1 = random.Next(album.Count);
+                    int index2 = random.Next(suggestionsAlbums.Count);
+                    AlbumsConseillés.Items.Add(album[index1]);
+
+                    suggestionsAlbumsChoisit.Add(suggestionsAlbums[index2]);
                 }
             }
             else
@@ -168,9 +175,8 @@ namespace AppliGrpR
                 {
                     titreRech = titreRech.Insert(titreRech.IndexOf("'"), apostrophe);
                 }
-                string sql = "SELECT TITRE_ALBUM, ALBUMS.CODE_ALBUM, EMPRUNTER.DATE_RETOUR_ATTENDUE " +
+                string sql = "SELECT TITRE_ALBUM, ALBUMS.CODE_ALBUM " +
                     "FROM ALBUMS " +
-                    "FULL JOIN EMPRUNTER on EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
                     "WHERE TITRE_ALBUM LIKE '%" + titreRech + "%'";
                 OleDbCommand cmd = new OleDbCommand(sql, dbCon);
                 OleDbDataReader reader = cmd.ExecuteReader();
@@ -178,10 +184,7 @@ namespace AppliGrpR
                 {
                     string titre = reader.GetString(0);
                     int id = reader.GetInt32(1);
-                    DateTime dateRetour = new DateTime();
-                    if (!reader.IsDBNull(2))
-                        dateRetour = reader.GetDateTime(2);
-                    Albums a = new Albums(id, titre, dateRetour);
+                    Albums a = new Albums(id, titre);
                     TousLesAlbums.Items.Add(titre);
 
                 }
@@ -204,6 +207,7 @@ namespace AppliGrpR
             {
                 MessageBox.Show("Vous avez déjà emprunté cet album");
             }
+            AlbumsConseillés.Items.Clear();
             ConsultAlbum(SetNumAbonne());
             Suggestions(numeroAbonne);
         }

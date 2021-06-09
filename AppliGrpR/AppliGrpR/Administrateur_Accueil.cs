@@ -15,6 +15,7 @@ namespace AppliGrpR
     {
         OleDbConnection dbCon = Accueil.dbCon;
         public static List<Albums> top10 = new List<Albums>();
+        public List<string> listeRetard = new List<string>();
         public AdministrateurAccueil()
         {
             this.StartPosition = FormStartPosition.CenterScreen;

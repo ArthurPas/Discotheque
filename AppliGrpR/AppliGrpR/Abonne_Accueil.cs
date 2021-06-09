@@ -198,7 +198,7 @@ namespace AppliGrpR
         {
             try
             {
-                EmprunterFonction();
+                EmprunterFonction(CodeAlbumEmprunter, SetNumAbonne());
             }catch(System.Data.OleDb.OleDbException)
             {
                 MessageBox.Show("Vous avez déjà emprunté cet album");
@@ -208,10 +208,10 @@ namespace AppliGrpR
 
         public void EmprunterFonction(int codeAlbum, int numAbo)
         {
-            int codeAbo = SetNumAbonne();
+            int codeAbo = numAbo;
             int delayNumber = 0;
             string delay = "SELECT DÉLAI FROM GENRES INNER JOIN ALBUMS on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE " +
-                "WHERE ALBUMS.CODE_ALBUM = " + CodeAlbumEmprunter;
+                "WHERE ALBUMS.CODE_ALBUM = " + codeAlbum;
             OleDbCommand cmdDelay = new OleDbCommand(delay, dbCon);
             cmdDelay.ExecuteNonQuery();
             OleDbDataReader readerDelay = cmdDelay.ExecuteReader();
@@ -222,7 +222,7 @@ namespace AppliGrpR
             string request = "insert into EMPRUNTER(CODE_ABONNÉ,CODE_ALBUM,DATE_EMPRUNT,DATE_RETOUR_ATTENDUE) " +
                 "values(" + codeAbo + ", ?, GETDATE(),DATEADD(Day,?,GETDATE()))";
             OleDbCommand cmdTwo = new OleDbCommand(request, dbCon);
-            cmdTwo.Parameters.Add("CODE_ALBUM", OleDbType.Integer).Value = CodeAlbumEmprunter;
+            cmdTwo.Parameters.Add("CODE_ALBUM", OleDbType.Integer).Value = codeAlbum;
             cmdTwo.Parameters.Add("CODE_ALBUM", OleDbType.Integer).Value = delayNumber;
             cmdTwo.ExecuteNonQuery();
         }

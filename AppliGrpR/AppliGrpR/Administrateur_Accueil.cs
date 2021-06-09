@@ -14,7 +14,7 @@ namespace AppliGrpR
     public partial class AdministrateurAccueil : Form
     {
         OleDbConnection dbCon = Accueil.dbCon;
-        public List<string> listeRetard= new List<string>();
+        public static List<Albums> top10 = new List<Albums>();
         public AdministrateurAccueil()
         {
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -88,7 +88,7 @@ namespace AppliGrpR
             reader.Close();
         }
 
-        private void TOP10ALBUMS()
+        public void TOP10ALBUMS()
         {
             int classement = 1;
             string sql = " SELECT TOP 10 COUNT(DATE_EMPRUNT)'Nombre d`emprunts', Titre_Album " +
@@ -104,11 +104,30 @@ namespace AppliGrpR
             {
                 int nbEmprunts = reader.GetInt32(0);
                 string titreAlbum = reader.GetString(1);
-
-
+                string apostrophe = "'";
+                if (titreAlbum.Contains("'"))
+                {
+                    titreAlbum = titreAlbum.Insert(titreAlbum.IndexOf("'"), apostrophe);
+                }
+                //
+                string sqlalbum = "SELECT TITRE_ALBUM, albums.CODE_ALBUM, DATE_RETOUR_ATTENDUE " +
+                    "FROM EMPRUNTER INNER JOIN ALBUMS " +
+                    "ON ALBUMS.CODE_ALBUM = EMPRUNTER.CODE_ALBUM " +
+                    "where TITRE_ALBUM ='"+titreAlbum+"'";
+                OleDbCommand cmdalbum = new OleDbCommand(sqlalbum, dbCon);
+                cmdalbum.ExecuteNonQuery();
+                OleDbDataReader readeralbum = cmdalbum.ExecuteReader();
+                if (readeralbum.Read())
+                {
+                    string titre = readeralbum.GetString(0);
+                    int code = readeralbum.GetInt32(1);
+                    Albums a = new Albums(code, titre);
+                    top10.Add(a);
+                }
                 top10liste.Items.Add(classement + " | Nombre d'emprunts : " + nbEmprunts + " | Titre de l'album :" + titreAlbum);
                 classement++;
             }
+            reader.Close();
         }
 
         public void GetAlbumNotBorrowedSinceOneYear()

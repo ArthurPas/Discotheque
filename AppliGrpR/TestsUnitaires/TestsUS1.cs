@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using AppliGrpR;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +10,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 namespace TestsUnitaires
 {
     [TestClass]
@@ -26,38 +28,20 @@ namespace TestsUnitaires
         public void TestInscription()
         {
             InitConnexion();
-            string login = "aikahloul"; // Déja dans la base 
-            string consult = "Select * from ABONNÉS WHERE LOGIN_ABONNÉ = '"+login+"'";
+            Client_Inscription client = new Client_Inscription();
+            string login = "testUS1";
+            string mdp = "testmdp";
+            string prenom = "prenomTest";
+            string nom = "testNom";
+            string nationalite = "France";
+            string codePays = "1";
+            client.AddAbonnes(login, nationalite, nom, mdp, prenom);
+            string consult = "Select * from ABONNÉS WHERE LOGIN_ABONNÉ = '" + login + "' AND PASSWORD_ABONNÉ ='"+mdp+"' AND" +
+                " NOM_ABONNÉ ='"+nom+"' AND PRÉNOM_ABONNÉ ='"+prenom+"' AND CODE_PAYS = "+ codePays;
             OleDbCommand cmdConsult = new OleDbCommand(consult, dbCon);
             OleDbDataReader reader = cmdConsult.ExecuteReader();
-            if (!reader.HasRows)
-            {
-                // Ajout théorique d'un abonné
-            }
-            Assert.IsTrue(reader.HasRows, "erreur ajout alors que login déja pris");
-            reader.Close();
-            string loginTwo = "PasDansLabase"; // Pas dans la base
-            string consultTwo = "Select * from ABONNÉS WHERE LOGIN_ABONNÉ = '" + loginTwo + "'";
-            OleDbCommand cmdConsultTwo = new OleDbCommand(consultTwo, dbCon);
-            OleDbDataReader readerTwo = cmdConsultTwo.ExecuteReader();
-            if (!readerTwo.HasRows)
-            {
-                string insert = "insert into ABONNÉS(CODE_PAYS,NOM_ABONNÉ,PRÉNOM_ABONNÉ,LOGIN_ABONNÉ,PASSWORD_ABONNÉ) values(?,?,?,?,?)";
-                OleDbCommand cmdInsert = new OleDbCommand(insert, dbCon);
-                cmdInsert.Parameters.Add("CODE_PAYS", OleDbType.Integer).Value = 1;
-                cmdInsert.Parameters.Add("NOM_ABONNÉ", OleDbType.VarChar).Value = "Test";
-                cmdInsert.Parameters.Add("PRÉNOM_ABONNÉ", OleDbType.VarChar).Value = "Pas dans la base";
-                cmdInsert.Parameters.Add("LOGIN_ABONNÉ", OleDbType.VarChar).Value = loginTwo;
-                cmdInsert.Parameters.Add("PASSWORD_ABONNÉ", OleDbType.VarChar).Value = "pwd";
-                cmdInsert.ExecuteNonQuery();
-
-            }
-            readerTwo.Close();
-            string consultTree = "Select * from ABONNÉS WHERE LOGIN_ABONNÉ = '" + loginTwo + "' AND CODE_PAYS= 1 AND NOM_ABONNÉ='Test' AND PRÉNOM_ABONNÉ = 'Pas dans la base' AND PASSWORD_ABONNÉ = 'pwd'";
-            OleDbCommand cmdConsultTree = new OleDbCommand(consultTree, dbCon);
-            OleDbDataReader readerTree = cmdConsultTree.ExecuteReader();
-            Assert.IsTrue(readerTree.HasRows, "pas ajouté");
-            string delete = "DELETE FROM ABONNÉS WHERE LOGIN_ABONNÉ ='" + loginTwo + "'";
+            Assert.IsTrue(reader.HasRows, "pas inscrit");
+            string delete = "DELETE FROM ABONNÉS WHERE LOGIN_ABONNÉ ='" + login + "'";
             OleDbCommand cmdDel = new OleDbCommand(delete, dbCon);
             cmdDel.ExecuteNonQuery();
         }

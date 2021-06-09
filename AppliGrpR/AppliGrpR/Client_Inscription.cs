@@ -41,11 +41,11 @@ namespace AppliGrpR
             OleDbCommand cmdConsult = new OleDbCommand(consult, dbCon);
             OleDbDataReader reader = cmdConsult.ExecuteReader();
 
-            disableAllErrorMessage();
-            valide = manageErrorMessage();
+            //disableAllErrorMessage();
+            //valide = manageErrorMessage();
 
-            if (valide)
-            {
+            //if (valide)
+           // {
                 if (!reader.HasRows)
                 {
                     string insert = "insert into ABONNÉS(CODE_PAYS,NOM_ABONNÉ,PRÉNOM_ABONNÉ,LOGIN_ABONNÉ,PASSWORD_ABONNÉ) values(?,?,?,?,?)";
@@ -75,7 +75,7 @@ namespace AppliGrpR
                 {
                     MessageBox.Show("Erreur un compte existe déja avec le même identifiant");
                 }
-            }
+           // }
             
         }
 
@@ -106,11 +106,11 @@ namespace AppliGrpR
         /// <returns></returns>
         private string getCodePaysFromNationalite(string pays)
         {
-            string sql = "select * from PAYS WHERE NOM_PAYS ='" + pays + "'";
+            string sql = "select CODE_PAYS from PAYS WHERE NOM_PAYS ='" + pays + "'";
             OleDbCommand cmdRead = new OleDbCommand(sql, dbCon);
             OleDbDataReader reader = cmdRead.ExecuteReader();
 
-            int code = 0; ;
+            int code = 0;
             while (reader.Read())
             {
                 code = reader.GetInt32(0);

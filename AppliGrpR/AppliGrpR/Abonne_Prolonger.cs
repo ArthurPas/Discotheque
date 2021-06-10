@@ -63,28 +63,31 @@ namespace AppliGrpR
 
         private void AlbumsProlongeables_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
+            if (AlbumsProlongeables.SelectedItem != null)
             {
-                Albums album = (Albums)AlbumsProlongeables.SelectedItem;
-                string titre = album.titre.ToString();
-                string apostrophe = "'";
-                if (titre.Contains("'"))
+                try
                 {
-                    titre = titre.Insert(titre.IndexOf("'"), apostrophe);
-                }
+                    Albums album = (Albums)AlbumsProlongeables.SelectedItem;
+                    string titre = album.titre.ToString();
+                    string apostrophe = "'";
+                    if (titre.Contains("'"))
+                    {
+                        titre = titre.Insert(titre.IndexOf("'"), apostrophe);
+                    }
 
-                string sql = "SELECT CODE_ALBUM FROM ALBUMS WHERE TITRE_ALBUM ='" + titre + "'";
-                OleDbCommand cmd = new OleDbCommand(sql, dbCon);
-                cmd.ExecuteNonQuery();
-                OleDbDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                    string sql = "SELECT CODE_ALBUM FROM ALBUMS WHERE TITRE_ALBUM ='" + titre + "'";
+                    OleDbCommand cmd = new OleDbCommand(sql, dbCon);
+                    cmd.ExecuteNonQuery();
+                    OleDbDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        CodeAlbumProlonger = reader.GetInt32(0);
+                    }
+                }
+                catch (System.InvalidCastException)
                 {
-                    CodeAlbumProlonger = reader.GetInt32(0);
-                }
-            }
-            catch (System.InvalidCastException)
-            {
 
+                }
             }
 
         }

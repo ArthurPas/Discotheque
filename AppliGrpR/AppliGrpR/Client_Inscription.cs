@@ -81,8 +81,6 @@ namespace AppliGrpR
 
         public string EncryptageDeMotDePasse(string mdp)
         {
-
-            char[] chiffre = { '0','1','2','3','4','5','6','7','8','9'};
             string encrypt = "";
             for (int i = 0; i < mdp.Length; i++)
             {

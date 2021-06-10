@@ -28,55 +28,54 @@ namespace AppliGrpR
             disableAllErrorMessage();
         }
 
-
+        public bool InscriptionValide()
+        {
+            bool valide = true;
+            disableAllErrorMessage();
+            valide = manageErrorMessage();
+            return valide;
+        }
         /// <summary>
         /// Ajoute un Abonné à la Base depuis les valeurs récupéré dans les textBox
         /// </summary>
 
-        public void AddAbonnes(string idbox,string nationalitebox, string nombox, string mdpbox, string prenombox)
+        public void AddAbonnes(string idbox, string nationalitebox, string nombox, string mdpbox, string prenombox)
         {
-            bool valide = true;
 
             string consult = "Select * from ABONNÉS WHERE LOGIN_ABONNÉ = '" + idbox + "'";
             OleDbCommand cmdConsult = new OleDbCommand(consult, dbCon);
             OleDbDataReader reader = cmdConsult.ExecuteReader();
 
-            disableAllErrorMessage();
-            valide = manageErrorMessage();
-
-            if (valide)
+            if (!reader.HasRows)
             {
-                if (!reader.HasRows)
-                {
-                    string insert = "insert into ABONNÉS(CODE_PAYS,NOM_ABONNÉ,PRÉNOM_ABONNÉ,LOGIN_ABONNÉ,PASSWORD_ABONNÉ) values(?,?,?,?,?)";
-                    OleDbCommand cmd = new OleDbCommand(insert, dbCon);
+                string insert = "insert into ABONNÉS(CODE_PAYS,NOM_ABONNÉ,PRÉNOM_ABONNÉ,LOGIN_ABONNÉ,PASSWORD_ABONNÉ) values(?,?,?,?,?)";
+                OleDbCommand cmd = new OleDbCommand(insert, dbCon);
 
-                    cmd.Parameters.Add("CODE_PAYS", OleDbType.Integer).Value = getCodePaysFromNationalite(nationalitebox);
-                    cmd.Parameters.Add("NOM_ABONNÉ", OleDbType.VarChar).Value = nombox;
-                    cmd.Parameters.Add("PRÉNOM_ABONNÉ", OleDbType.VarChar).Value = prenombox;
-                    cmd.Parameters.Add("LOGIN_ABONNÉ", OleDbType.VarChar).Value = idbox;
-                    cmd.Parameters.Add("PASSWORD_ABONNÉ", OleDbType.VarChar).Value = mdpbox;
-                    cmd.ExecuteNonQuery();
+                cmd.Parameters.Add("CODE_PAYS", OleDbType.Integer).Value = getCodePaysFromNationalite(nationalitebox);
+                cmd.Parameters.Add("NOM_ABONNÉ", OleDbType.VarChar).Value = nombox;
+                cmd.Parameters.Add("PRÉNOM_ABONNÉ", OleDbType.VarChar).Value = prenombox;
+                cmd.Parameters.Add("LOGIN_ABONNÉ", OleDbType.VarChar).Value = idbox;
+                cmd.Parameters.Add("PASSWORD_ABONNÉ", OleDbType.VarChar).Value = mdpbox;
+                cmd.ExecuteNonQuery();
 
 
-                    Client_Insciption_Complete c = new Client_Insciption_Complete(nom_box.Text, prénom_box.Text, id_box.Text);
-                    c.Show();
+                Client_Insciption_Complete c = new Client_Insciption_Complete(nom_box.Text, prénom_box.Text, id_box.Text);
+                c.Show();
 
-                    this.Close();
+                this.Close();
 
-                    nationalité_comboBox.Text = "";
-                    nom_box.Text = "";
-                    prénom_box.Text = "";
-                    id_box.Text = "";
-                    mdp_box.Text = "";
+                nationalité_comboBox.Text = "";
+                nom_box.Text = "";
+                prénom_box.Text = "";
+                id_box.Text = "";
+                mdp_box.Text = "";
 
-                }
-                else
-                {
-                    MessageBox.Show("Erreur un compte existe déja avec le même identifiant");
-                }
             }
-            
+            else
+            {
+                MessageBox.Show("Erreur un compte existe déja avec le même identifiant");
+            }
+
         }
 
         public void Nationalite()
@@ -93,7 +92,7 @@ namespace AppliGrpR
             }
             reader.Close();
 
-            foreach(string s in nationalités)
+            foreach (string s in nationalités)
             {
                 nationalité_comboBox.Items.Add(s);
             }
@@ -167,15 +166,17 @@ namespace AppliGrpR
             if (nationalité_comboBox.Text == "")
             {
                 valide = false;
-                erreur_nationalité.Visible = true;                     
+                erreur_nationalité.Visible = true;
             }
             return valide;
         }
 
         private void inscription_Click(object sender, EventArgs e)
         {
-            AddAbonnes(id_box.Text, nationalité_comboBox.Text, nom_box.Text, mdp_box.Text, prénom_box.Text);
-            
+            if (InscriptionValide())
+            {
+                AddAbonnes(id_box.Text, nationalité_comboBox.Text, nom_box.Text, mdp_box.Text, prénom_box.Text);
+            }
         }
 
         private void retour_button_Click(object sender, EventArgs e)

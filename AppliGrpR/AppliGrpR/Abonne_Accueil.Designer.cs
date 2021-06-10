@@ -49,13 +49,14 @@ namespace AppliGrpR
             this.pageEmprunté = new System.Windows.Forms.Label();
             this.pageAlbum = new System.Windows.Forms.Label();
             this.buttonRendre = new System.Windows.Forms.Button();
+            this.modifierMdp = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // AlbumsConseillés
             // 
             this.AlbumsConseillés.FormattingEnabled = true;
-            this.AlbumsConseillés.Location = new System.Drawing.Point(147, 245);
+            this.AlbumsConseillés.Location = new System.Drawing.Point(134, 261);
             this.AlbumsConseillés.Name = "AlbumsConseillés";
             this.AlbumsConseillés.Size = new System.Drawing.Size(793, 147);
             this.AlbumsConseillés.TabIndex = 1;
@@ -63,7 +64,7 @@ namespace AppliGrpR
             // AlbumsEmpruntes
             // 
             this.AlbumsEmpruntes.FormattingEnabled = true;
-            this.AlbumsEmpruntes.Location = new System.Drawing.Point(147, 74);
+            this.AlbumsEmpruntes.Location = new System.Drawing.Point(134, 90);
             this.AlbumsEmpruntes.Name = "AlbumsEmpruntes";
             this.AlbumsEmpruntes.Size = new System.Drawing.Size(793, 134);
             this.AlbumsEmpruntes.TabIndex = 2;
@@ -72,7 +73,7 @@ namespace AppliGrpR
             // TousLesAlbums
             // 
             this.TousLesAlbums.FormattingEnabled = true;
-            this.TousLesAlbums.Location = new System.Drawing.Point(147, 455);
+            this.TousLesAlbums.Location = new System.Drawing.Point(134, 471);
             this.TousLesAlbums.Name = "TousLesAlbums";
             this.TousLesAlbums.Size = new System.Drawing.Size(416, 134);
             this.TousLesAlbums.TabIndex = 3;
@@ -81,7 +82,7 @@ namespace AppliGrpR
             // AlbumsEmpruntés
             // 
             this.AlbumsEmpruntés.AutoSize = true;
-            this.AlbumsEmpruntés.Location = new System.Drawing.Point(144, 58);
+            this.AlbumsEmpruntés.Location = new System.Drawing.Point(131, 74);
             this.AlbumsEmpruntés.Name = "AlbumsEmpruntés";
             this.AlbumsEmpruntés.Size = new System.Drawing.Size(94, 13);
             this.AlbumsEmpruntés.TabIndex = 4;
@@ -89,7 +90,7 @@ namespace AppliGrpR
             // 
             // RechercherTextBox
             // 
-            this.RechercherTextBox.Location = new System.Drawing.Point(228, 430);
+            this.RechercherTextBox.Location = new System.Drawing.Point(215, 446);
             this.RechercherTextBox.Name = "RechercherTextBox";
             this.RechercherTextBox.Size = new System.Drawing.Size(100, 20);
             this.RechercherTextBox.TabIndex = 42;
@@ -98,7 +99,7 @@ namespace AppliGrpR
             // RechercherAlbum
             // 
             this.RechercherAlbum.AutoSize = true;
-            this.RechercherAlbum.Location = new System.Drawing.Point(148, 434);
+            this.RechercherAlbum.Location = new System.Drawing.Point(135, 450);
             this.RechercherAlbum.Name = "RechercherAlbum";
             this.RechercherAlbum.Size = new System.Drawing.Size(69, 13);
             this.RechercherAlbum.TabIndex = 43;
@@ -107,7 +108,7 @@ namespace AppliGrpR
             // Tous_Les_Albums
             // 
             this.Tous_Les_Albums.AutoSize = true;
-            this.Tous_Les_Albums.Location = new System.Drawing.Point(144, 414);
+            this.Tous_Les_Albums.Location = new System.Drawing.Point(131, 430);
             this.Tous_Les_Albums.Name = "Tous_Les_Albums";
             this.Tous_Les_Albums.Size = new System.Drawing.Size(88, 13);
             this.Tous_Les_Albums.TabIndex = 44;
@@ -116,7 +117,7 @@ namespace AppliGrpR
             // Albums_Conseillés
             // 
             this.Albums_Conseillés.AutoSize = true;
-            this.Albums_Conseillés.Location = new System.Drawing.Point(144, 229);
+            this.Albums_Conseillés.Location = new System.Drawing.Point(131, 245);
             this.Albums_Conseillés.Name = "Albums_Conseillés";
             this.Albums_Conseillés.Size = new System.Drawing.Size(91, 13);
             this.Albums_Conseillés.TabIndex = 45;
@@ -125,7 +126,7 @@ namespace AppliGrpR
             // accueil
             // 
             this.accueil.AutoSize = true;
-            this.accueil.Location = new System.Drawing.Point(512, 39);
+            this.accueil.Location = new System.Drawing.Point(508, 58);
             this.accueil.Name = "accueil";
             this.accueil.Size = new System.Drawing.Size(42, 13);
             this.accueil.TabIndex = 46;
@@ -143,7 +144,7 @@ namespace AppliGrpR
             // 
             // Prolonger_un_emprunt
             // 
-            this.Prolonger_un_emprunt.Location = new System.Drawing.Point(974, 74);
+            this.Prolonger_un_emprunt.Location = new System.Drawing.Point(944, 113);
             this.Prolonger_un_emprunt.Name = "Prolonger_un_emprunt";
             this.Prolonger_un_emprunt.Size = new System.Drawing.Size(73, 38);
             this.Prolonger_un_emprunt.TabIndex = 48;
@@ -153,7 +154,7 @@ namespace AppliGrpR
             // 
             // Emprunter
             // 
-            this.Emprunter.Location = new System.Drawing.Point(974, 531);
+            this.Emprunter.Location = new System.Drawing.Point(961, 547);
             this.Emprunter.Name = "Emprunter";
             this.Emprunter.Size = new System.Drawing.Size(73, 38);
             this.Emprunter.TabIndex = 49;
@@ -163,7 +164,7 @@ namespace AppliGrpR
             // 
             // ButtonRightEmprunt
             // 
-            this.ButtonRightEmprunt.Location = new System.Drawing.Point(864, 216);
+            this.ButtonRightEmprunt.Location = new System.Drawing.Point(851, 232);
             this.ButtonRightEmprunt.Name = "ButtonRightEmprunt";
             this.ButtonRightEmprunt.Size = new System.Drawing.Size(75, 23);
             this.ButtonRightEmprunt.TabIndex = 50;
@@ -173,7 +174,7 @@ namespace AppliGrpR
             // 
             // ButtonLeftEmprunt
             // 
-            this.ButtonLeftEmprunt.Location = new System.Drawing.Point(783, 216);
+            this.ButtonLeftEmprunt.Location = new System.Drawing.Point(770, 232);
             this.ButtonLeftEmprunt.Name = "ButtonLeftEmprunt";
             this.ButtonLeftEmprunt.Size = new System.Drawing.Size(75, 23);
             this.ButtonLeftEmprunt.TabIndex = 51;
@@ -183,7 +184,7 @@ namespace AppliGrpR
             // 
             // ToutLeftButton
             // 
-            this.ToutLeftButton.Location = new System.Drawing.Point(407, 595);
+            this.ToutLeftButton.Location = new System.Drawing.Point(394, 611);
             this.ToutLeftButton.Name = "ToutLeftButton";
             this.ToutLeftButton.Size = new System.Drawing.Size(75, 23);
             this.ToutLeftButton.TabIndex = 54;
@@ -193,7 +194,7 @@ namespace AppliGrpR
             // 
             // ToutRightButton
             // 
-            this.ToutRightButton.Location = new System.Drawing.Point(488, 595);
+            this.ToutRightButton.Location = new System.Drawing.Point(475, 611);
             this.ToutRightButton.Name = "ToutRightButton";
             this.ToutRightButton.Size = new System.Drawing.Size(75, 23);
             this.ToutRightButton.TabIndex = 55;
@@ -203,7 +204,7 @@ namespace AppliGrpR
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(694, 418);
+            this.pictureBox1.Location = new System.Drawing.Point(681, 434);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(200, 200);
             this.pictureBox1.TabIndex = 56;
@@ -212,7 +213,7 @@ namespace AppliGrpR
             // pageEmprunté
             // 
             this.pageEmprunté.AutoSize = true;
-            this.pageEmprunté.Location = new System.Drawing.Point(905, 186);
+            this.pageEmprunté.Location = new System.Drawing.Point(892, 202);
             this.pageEmprunté.Name = "pageEmprunté";
             this.pageEmprunté.Size = new System.Drawing.Size(35, 13);
             this.pageEmprunté.TabIndex = 57;
@@ -221,7 +222,7 @@ namespace AppliGrpR
             // pageAlbum
             // 
             this.pageAlbum.AutoSize = true;
-            this.pageAlbum.Location = new System.Drawing.Point(495, 566);
+            this.pageAlbum.Location = new System.Drawing.Point(482, 582);
             this.pageAlbum.Name = "pageAlbum";
             this.pageAlbum.Size = new System.Drawing.Size(35, 13);
             this.pageAlbum.TabIndex = 58;
@@ -229,7 +230,7 @@ namespace AppliGrpR
             // 
             // buttonRendre
             // 
-            this.buttonRendre.Location = new System.Drawing.Point(972, 165);
+            this.buttonRendre.Location = new System.Drawing.Point(944, 171);
             this.buttonRendre.Name = "buttonRendre";
             this.buttonRendre.Size = new System.Drawing.Size(75, 34);
             this.buttonRendre.TabIndex = 59;
@@ -237,11 +238,22 @@ namespace AppliGrpR
             this.buttonRendre.UseVisualStyleBackColor = true;
             this.buttonRendre.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonRendre_MouseDown);
             // 
+            // modifierMdp
+            // 
+            this.modifierMdp.Location = new System.Drawing.Point(908, 39);
+            this.modifierMdp.Name = "modifierMdp";
+            this.modifierMdp.Size = new System.Drawing.Size(169, 22);
+            this.modifierMdp.TabIndex = 60;
+            this.modifierMdp.Text = "Modifier Mot de Passe";
+            this.modifierMdp.UseVisualStyleBackColor = true;
+            this.modifierMdp.Click += new System.EventHandler(this.modifierMdp_Click);
+            // 
             // Abonne_Accueil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 661);
+            this.Controls.Add(this.modifierMdp);
             this.Controls.Add(this.buttonRendre);
             this.Controls.Add(this.pageAlbum);
             this.Controls.Add(this.pageEmprunté);
@@ -292,5 +304,6 @@ namespace AppliGrpR
         private System.Windows.Forms.Label pageEmprunté;
         private System.Windows.Forms.Label pageAlbum;
         private System.Windows.Forms.Button buttonRendre;
+        private System.Windows.Forms.Button modifierMdp;
     }
 }

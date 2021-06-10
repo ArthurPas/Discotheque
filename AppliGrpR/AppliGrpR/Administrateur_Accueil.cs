@@ -15,7 +15,7 @@ namespace AppliGrpR
     {
         OleDbConnection dbCon = Accueil.dbCon;
         public static List<Albums> top10 = new List<Albums>();
-        public List<string> ListeAbo = new List<string>();
+        public List<string> listeAbo = new List<string>();
         public List<string> listeRetard = new List<string>();
         public List<string> listeAlbNonEmprUnAn = new List<string>();
         public static List<Albums> listeProlongement = new List<Albums>();
@@ -46,7 +46,7 @@ namespace AppliGrpR
                 "WHERE DATE_RETOUR_ATTENDUE - DATE_EMPRUNT > DÉLAI";
             OleDbCommand cmd = new OleDbCommand(list, dbCon);
             OleDbDataReader reader = cmd.ExecuteReader();
-            ListeProlongementBox.Items.Add("Les emprunts qui ont étés prolongés sont : ");
+            listeProlongementBox.Items.Add("Les emprunts qui ont étés prolongés sont : ");
             while (reader.Read())
             {
                 DateTime dateRetourAttendue = new DateTime();
@@ -58,7 +58,8 @@ namespace AppliGrpR
                 Albums a = new Albums(codeAlbum, titre, dateRetourAttendue);
                 listeProlongement.Add(a);
             }
-            AfficherProlongement();
+            AfficherPaginationAvecAlbum(indexProlo, listeProlongementBox, listeProlongement,pageProlongement, 10);
+
         }
 
         /// <summary>
@@ -80,12 +81,12 @@ namespace AppliGrpR
                 string titre = reader.GetString(2);
                 listeRetard.Add(nom+titre);
             }
-            AfficherRetard();
+            AfficherPagination(indexRetard, Retard10joursBox, listeRetard,pageRetard, 10);
         }
 
         public void Abonnes()
         {
-            ListeAbonnebox.Items.Clear();
+            listeAbonnebox.Items.Clear();
             string sql = "select * from ABONNÉS";
 
 
@@ -97,9 +98,9 @@ namespace AppliGrpR
             {
                 string titre = reader.GetString(2);
                 
-                ListeAbo.Add(titre);
+                listeAbo.Add(titre);
             }
-            AfficherPageAbo();
+            AfficherPagination(indexAbo, listeAbonnebox, listeAbo,pageListAbo, 20);
             reader.Close();
         }
 
@@ -166,7 +167,7 @@ namespace AppliGrpR
                 
                 listeAlbNonEmprUnAn.Add(titreAlbum);
             }
-            AfficherPageNonEmprunt();
+            AfficherPagination(indexNonEmprunteUnAn, nonEmprunté, listeAlbNonEmprUnAn,pageNonEmprunté, 20);
         }
 
         private void PurgerAbonnes_MouseDown(object sender, MouseEventArgs e)
@@ -183,47 +184,7 @@ namespace AppliGrpR
             a.Show();
             this.Close();
         }
-        public void AfficherPageAbo()
-        {
 
-            for (int i = 20 * indexAbo - 20; i < 20 * indexAbo; i++)
-            {
-                if (i < ListeAbo.Count)
-                {
-                    ListeAbonnebox.Items.Add(ListeAbo[i]);
-                }
-            }
-        }
-        public void AfficherProlongement()
-        {
-            for (int i = 10 * indexProlo - 10; i < 10 * indexProlo; i++)
-            {
-                if (i < listeProlongement.Count)
-                {
-                    ListeProlongementBox.Items.Add(listeProlongement[i]);
-                }
-            }
-        }
-        public void AfficherPageNonEmprunt()
-        {
-            for (int i = 20 * indexNonEmprunteUnAn - 20; i < 20 * indexNonEmprunteUnAn; i++)
-            {
-                if (i < listeAlbNonEmprUnAn.Count)
-                {
-                    nonEmprunté.Items.Add(listeAlbNonEmprUnAn[i]);
-                }
-            }
-        }
-        public void AfficherRetard()
-        {
-            for (int i = 10 * indexRetard - 10; i < 10 * indexRetard; i++)
-            {
-                if (i < listeRetard.Count)
-                {
-                    Retard10joursBox.Items.Add(listeRetard[i]);
-                }
-            }
-        }
 
 
         /// <summary>
@@ -233,107 +194,133 @@ namespace AppliGrpR
         /// <param name="listBox"></param>
         /// <param name="list"></param>
         /// <param name="taille"></param>
-        public  void Afficher(int index,ListBox listBox, List<string> list, int taille)
+        public void Paginer(ref int index, ListBox listBox, List<string> list, Label label ,int taille,int direction)
         {
-            for (int i = taille * index - taille; i < taille * index; i++)
-            {
-                if (i < list.Count)
-                {
-                    listBox.Items.Add(list[i]);
-                }
-            }
-
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="index"></param>
-        /// <param name="listBox"></param>
-        /// <param name="list"></param>
-        /// <param name="taille"></param>
-        public void AfficherAlbum(int index, ListBox listBox, List<Albums> list, int taille)
-        {
-            for (int i = taille * index - taille; i < taille * index; i++)
-            {
-                if (i < list.Count)
-                {
-                    listBox.Items.Add(list[i]);
-                }
-            }
-        }
-
-
-
-
-        private void RightListButton_Click(object sender, EventArgs e)
-        {
-            ListeAbonnebox.Items.Clear();
-            indexAbo++;
-            AfficherPageAbo();
             
+            if (direction == 1)
+            {
+                if (index < getIindexedMax(index, list, taille))
+                    index++;
+            }
+            else
+            {
+                if(index >1)
+                    index--;
+            }
 
+            AfficherPagination(index, listBox, list,label, taille);
+        }
+
+        public void AfficherPagination(int index, ListBox listBox, List<string> list,Label label, int taille)
+        {
+            listBox.Items.Clear();
+            for (int i = taille * index - taille; i < taille * index; i++)
+            {
+                if (i < list.Count)
+                {
+                    listBox.Items.Add(list[i]);
+                }
+            }
+            label.Text = index.ToString() + "/" + getIindexedMax(index, list, taille);
+
+        }
+        public double getIindexedMax(int index, List<string> list, int taille)
+        {
+            float l = list.Count;
+            float t = taille;
+            return Math.Ceiling(l / t);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="listBox"></param>
+        /// <param name="list"></param>
+        /// <param name="taille"></param>
+        public void PaginerAvecAlbum(ref int index, ListBox listBox, List<Albums> list,Label label,int taille, int direction)
+        {
+
+            if (direction == 1)
+            {
+                if(index < getIindexedMaxAlbum(index, list, taille))
+                index++;
+            }
+            else
+            {
+                if (index > 1)
+                    index--;
+            }
+            AfficherPaginationAvecAlbum(index, listBox, list,label , taille);
+        }
+
+        public void AfficherPaginationAvecAlbum(int index, ListBox listBox, List<Albums> list,Label label, int taille)
+        {
+            listBox.Items.Clear();
+            for (int i = taille * index - taille; i < taille * index; i++)
+            {
+                if (i < list.Count)
+                {
+                    listBox.Items.Add(list[i]);
+                }
+            }
+
+            label.Text = index.ToString() + "/" +  getIindexedMaxAlbum(index,list,taille);
+
+        }
+
+    public double getIindexedMaxAlbum(int index, List<Albums> list, int taille)
+    {
+        float l = list.Count;
+        float t = taille;
+        return Math.Ceiling(l / t);
+    }
+
+
+
+    private void RightListButton_Click(object sender, EventArgs e)
+        {
+            Paginer(ref indexAbo, listeAbonnebox,listeAbo,pageListAbo, 20,1);    
+            
         }
 
         private void LeftListButton_Click(object sender, EventArgs e)
         {
-            ListeAbonnebox.Items.Clear();
-            AfficherPageAbo();
-            if (indexAbo > 1)
-            {
-                indexAbo--;
-            }
+
+            Paginer(ref indexAbo, listeAbonnebox, listeAbo, pageListAbo, 20,-1);
         }
 
-        private void RightNonEmprButton_Click(object sender, EventArgs e)
+        private void RightNonEmprButton_Click(object sender, EventArgs e)//
         {
-            nonEmprunté.Items.Clear();
-            AfficherPageNonEmprunt();
-            indexNonEmprunteUnAn++;
+            Paginer(ref indexNonEmprunteUnAn, nonEmprunté, listeAlbNonEmprUnAn,pageNonEmprunté,20, 1); 
+            
         }
 
         private void LeftNonEmprButton_Click(object sender, EventArgs e)
         {
-            nonEmprunté.Items.Clear();
-            AfficherPageNonEmprunt();
-            if (indexNonEmprunteUnAn > 1)
-            {
-                indexNonEmprunteUnAn--;
-            }
+            Paginer(ref indexNonEmprunteUnAn, nonEmprunté, listeAlbNonEmprUnAn, pageNonEmprunté,20,-1);
         }
 
         private void ProloRightButton_Click(object sender, EventArgs e)
         {
-
-            ListeProlongementBox.Items.Clear();
-            AfficherProlongement();
-            indexProlo++;
+            Console.WriteLine(indexProlo);
+            PaginerAvecAlbum(ref indexProlo, listeProlongementBox, listeProlongement,pageProlongement,10, 1);
         }
 
         private void ProloLeftButton_Click(object sender, EventArgs e)
         {
-            ListeProlongementBox.Items.Clear();
-            AfficherProlongement();
-            if(indexProlo > 1)
-            {
-                indexProlo--;
-            }
+            PaginerAvecAlbum(ref indexProlo, listeProlongementBox, listeProlongement, pageProlongement,10, -1);
+
         }
 
         private void RetardRightButton_Click(object sender, EventArgs e)
         {
-            Retard10joursBox.Items.Clear();
-            AfficherRetard();
-            indexRetard++;
+            Paginer(ref indexRetard, Retard10joursBox,listeRetard,pageRetard,10, 1);
         }
 
         private void RetardLeftButton_Click(object sender, EventArgs e)
         {
-            Retard10joursBox.Items.Clear();
-            AfficherRetard();
-            if(indexRetard > 1)
-            {
-                indexProlo--;
-            }
+            Paginer(ref indexRetard, Retard10joursBox, listeRetard, pageRetard,10, -1);
         }
     }
 }

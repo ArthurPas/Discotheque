@@ -81,7 +81,6 @@ namespace TestsUnitaires
         public void testEmprunt()
         {
             InitConnexion();
-            bool testVerif;
             string login = "testUS1.1.1";
             string mdp = "testmdp";
             string prenom = "prenomTest";
@@ -97,15 +96,15 @@ namespace TestsUnitaires
                 codeAbo =reader.GetInt32(0);
             }
             reader.Close();
-            int codeAlb = 624;
+            int codeAlb = 658;
+            abo.RendreFonction(codeAlb,codeAbo);
             abo.EmprunterFonction(codeAlb, codeAbo);
             string check = "SELECT * FROM EMPRUNTER INNER JOIN ABONNÉS ON EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ WHERE CODE_ALBUM = " + codeAlb + " AND ABONNÉS.CODE_ABONNÉ=" + codeAbo;
             OleDbCommand cmdCheck = new OleDbCommand(check, dbCon);
             cmdCheck.ExecuteNonQuery();
             OleDbDataReader readerCheck = cmdCheck.ExecuteReader();
-            testVerif = readerCheck.HasRows;
+            Assert.IsTrue(readerCheck.HasRows);
             readerCheck.Close();
-            Assert.IsTrue(testVerif);
             string delete = " DELETE FROM EMPRUNTER WHERE CODE_ALBUM = " + codeAlb;
             OleDbCommand cmdDelete = new OleDbCommand(delete, dbCon);
             cmdDelete.ExecuteNonQuery();
@@ -147,7 +146,8 @@ namespace TestsUnitaires
                 codeAbo2 = reader2.GetInt32(0);
             }
             reader2.Close();
-            int codeAlb = 624;
+            int codeAlb = 658;
+            abo.RendreFonction(codeAlb, codeAbo);
             abo.EmprunterFonction(codeAlb, codeAbo);
             Assert.IsFalse(abo.EmprunterFonction(codeAlb, codeAbo2));
             string check = "SELECT * FROM EMPRUNTER INNER JOIN ABONNÉS ON EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ WHERE CODE_ALBUM = " + codeAlb + 

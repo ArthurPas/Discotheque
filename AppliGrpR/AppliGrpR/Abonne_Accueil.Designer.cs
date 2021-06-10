@@ -45,6 +45,8 @@ namespace AppliGrpR
             this.ButtonLeftEmprunt = new System.Windows.Forms.Button();
             this.ToutLeftButton = new System.Windows.Forms.Button();
             this.ToutRightButton = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // AlbumsConseillés
@@ -68,7 +70,7 @@ namespace AppliGrpR
             this.TousLesAlbums.FormattingEnabled = true;
             this.TousLesAlbums.Location = new System.Drawing.Point(147, 455);
             this.TousLesAlbums.Name = "TousLesAlbums";
-            this.TousLesAlbums.Size = new System.Drawing.Size(793, 134);
+            this.TousLesAlbums.Size = new System.Drawing.Size(416, 134);
             this.TousLesAlbums.TabIndex = 3;
             this.TousLesAlbums.SelectedIndexChanged += new System.EventHandler(this.TousLesAlbums_SelectedIndexChanged);
             // 
@@ -177,7 +179,7 @@ namespace AppliGrpR
             // 
             // ToutLeftButton
             // 
-            this.ToutLeftButton.Location = new System.Drawing.Point(783, 595);
+            this.ToutLeftButton.Location = new System.Drawing.Point(407, 595);
             this.ToutLeftButton.Name = "ToutLeftButton";
             this.ToutLeftButton.Size = new System.Drawing.Size(75, 23);
             this.ToutLeftButton.TabIndex = 54;
@@ -187,7 +189,7 @@ namespace AppliGrpR
             // 
             // ToutRightButton
             // 
-            this.ToutRightButton.Location = new System.Drawing.Point(864, 595);
+            this.ToutRightButton.Location = new System.Drawing.Point(488, 595);
             this.ToutRightButton.Name = "ToutRightButton";
             this.ToutRightButton.Size = new System.Drawing.Size(75, 23);
             this.ToutRightButton.TabIndex = 55;
@@ -195,11 +197,20 @@ namespace AppliGrpR
             this.ToutRightButton.UseVisualStyleBackColor = true;
             this.ToutRightButton.Click += new System.EventHandler(this.ToutRightButton_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(694, 418);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(200, 200);
+            this.pictureBox1.TabIndex = 56;
+            this.pictureBox1.TabStop = false;
+            // 
             // Abonne_Accueil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 661);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.ToutRightButton);
             this.Controls.Add(this.ToutLeftButton);
             this.Controls.Add(this.ButtonLeftEmprunt);
@@ -218,6 +229,7 @@ namespace AppliGrpR
             this.Controls.Add(this.AlbumsConseillés);
             this.Name = "Abonne_Accueil";
             this.Text = "Abonne_Accueil";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -241,5 +253,6 @@ namespace AppliGrpR
         private System.Windows.Forms.Button ButtonLeftEmprunt;
         private System.Windows.Forms.Button ToutLeftButton;
         private System.Windows.Forms.Button ToutRightButton;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

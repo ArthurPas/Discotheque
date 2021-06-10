@@ -32,6 +32,7 @@ namespace AppliGrpR
             this.inscription = new System.Windows.Forms.Button();
             this.connexion_user = new System.Windows.Forms.Button();
             this.connexion_admin = new System.Windows.Forms.Button();
+            this.quitter = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // inscription
@@ -64,11 +65,23 @@ namespace AppliGrpR
             this.connexion_admin.UseVisualStyleBackColor = true;
             this.connexion_admin.Click += new System.EventHandler(this.connexion_admin_Click);
             // 
+            // quitter
+            // 
+            this.quitter.Location = new System.Drawing.Point(12, 614);
+            this.quitter.Name = "quitter";
+            this.quitter.Size = new System.Drawing.Size(116, 35);
+            this.quitter.TabIndex = 6;
+            this.quitter.Text = "Quitter";
+            this.quitter.UseVisualStyleBackColor = true;
+            this.quitter.MouseDown += new System.Windows.Forms.MouseEventHandler(this.quitter_MouseDown);
+            // 
             // Accueil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1084, 661);
+            this.Controls.Add(this.quitter);
             this.Controls.Add(this.connexion_admin);
             this.Controls.Add(this.connexion_user);
             this.Controls.Add(this.inscription);
@@ -82,5 +95,6 @@ namespace AppliGrpR
         private System.Windows.Forms.Button inscription;
         private System.Windows.Forms.Button connexion_user;
         private System.Windows.Forms.Button connexion_admin;
+        private System.Windows.Forms.Button quitter;
     }
 }

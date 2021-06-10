@@ -267,11 +267,6 @@ namespace AppliGrpR
                     pictureBox1.Image = new Bitmap(ms); // pboPhoto est ma picture box
                     pictureBox1.Image = resizeImage(pictureBox1.Image, new Size(200, 200));
                 }
-                else
-                {
-                    pictureBox1.Image = Image.FromFile("pochetteAlbum.png");
-                    pictureBox1.Image = resizeImage(pictureBox1.Image, new Size(200, 200));
-                }
                 readerimage.Close();
             }
         }

@@ -46,6 +46,8 @@ namespace AppliGrpR
             this.ToutLeftButton = new System.Windows.Forms.Button();
             this.ToutRightButton = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pageEmprunté = new System.Windows.Forms.Label();
+            this.pageAlbum = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -207,11 +209,31 @@ namespace AppliGrpR
             this.pictureBox1.TabIndex = 56;
             this.pictureBox1.TabStop = false;
             // 
+            // pageEmprunté
+            // 
+            this.pageEmprunté.AutoSize = true;
+            this.pageEmprunté.Location = new System.Drawing.Point(905, 186);
+            this.pageEmprunté.Name = "pageEmprunté";
+            this.pageEmprunté.Size = new System.Drawing.Size(35, 13);
+            this.pageEmprunté.TabIndex = 57;
+            this.pageEmprunté.Text = "label1";
+            // 
+            // pageAlbum
+            // 
+            this.pageAlbum.AutoSize = true;
+            this.pageAlbum.Location = new System.Drawing.Point(495, 566);
+            this.pageAlbum.Name = "pageAlbum";
+            this.pageAlbum.Size = new System.Drawing.Size(35, 13);
+            this.pageAlbum.TabIndex = 58;
+            this.pageAlbum.Text = "label2";
+            // 
             // Abonne_Accueil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 661);
+            this.Controls.Add(this.pageAlbum);
+            this.Controls.Add(this.pageEmprunté);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.ToutRightButton);
             this.Controls.Add(this.ToutLeftButton);
@@ -256,5 +278,7 @@ namespace AppliGrpR
         private System.Windows.Forms.Button ToutLeftButton;
         private System.Windows.Forms.Button ToutRightButton;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label pageEmprunté;
+        private System.Windows.Forms.Label pageAlbum;
     }
 }

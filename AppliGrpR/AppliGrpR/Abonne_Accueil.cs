@@ -84,7 +84,7 @@ namespace AppliGrpR
                 Albums a = new Albums(code, titre, dateRetour);
                 empruntés.Add(a); 
             }
-            AfficherPageEmprunt();
+            Affichage_Utils.AfficherPaginationAvecAlbum(indexEmprunt, AlbumsEmpruntes, empruntés, pageEmprunté,10);
             reader.Close();
             numeroAbonne = numeroAbo;
         }
@@ -158,7 +158,8 @@ namespace AppliGrpR
                 album.Add(titre);
                 
             }
-            AfficherTout();
+            Affichage_Utils.AfficherPagination(indexTout, TousLesAlbums, album, pageAlbum, 10);
+
             reader.Close();
         }
 
@@ -287,55 +288,31 @@ namespace AppliGrpR
             a.Show();
             this.Close();
         }
-        public void AfficherPageEmprunt()
-        {
-            
-            for (int i = 10 * indexEmprunt - 10; i < 10 * indexEmprunt; i++)
-            {
-                if (i <empruntés.Count)
-                {
-                    AlbumsEmpruntes.Items.Add(empruntés[i]);
-                }
-            }
-        }
-        public void AfficherTout()
-        {
-            for (int i = 10 * indexTout - 10; i < 10 * indexTout; i++)
-            {
-                if (i < album.Count)
-                {
-                    TousLesAlbums.Items.Add(album[i]);
-                }
-            }
-        }
+
+
         private void ButtonRightEmprunt_Click(object sender, EventArgs e)
         {
-            AlbumsEmpruntes.Items.Clear();
-            indexEmprunt++;
-            AfficherPageEmprunt();
+
+            Affichage_Utils.PaginerAvecAlbum(ref indexEmprunt, AlbumsEmpruntes, empruntés, pageEmprunté,10, 1);
         }
 
         private void ButtonLeftEmprunt_Click(object sender, EventArgs e)
         {
-            AlbumsEmpruntes.Items.Clear();
-            if (indexEmprunt > 1)
-            {
-                indexEmprunt--;
-            }
-            AfficherPageEmprunt();
+
+            Affichage_Utils.PaginerAvecAlbum(ref indexEmprunt, AlbumsEmpruntes, empruntés, pageEmprunté, 10, -1);
+
         }
         private void ToutRightButton_Click(object sender, EventArgs e)
         {
-            TousLesAlbums.Items.Clear();
-            indexTout++;
-            AfficherTout();
+
+            Affichage_Utils.Paginer(ref indexTout,TousLesAlbums ,album, pageAlbum, 10, 1);
+
         }
 
         private void ToutLeftButton_Click(object sender, EventArgs e)
         {
-            TousLesAlbums.Items.Clear();
-            indexTout--;
-            AfficherTout();
+            Affichage_Utils.Paginer(ref indexTout, TousLesAlbums, album, pageAlbum, 10, -1);
+
         }
     }
 }

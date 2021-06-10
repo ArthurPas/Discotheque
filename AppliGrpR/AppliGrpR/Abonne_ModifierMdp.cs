@@ -14,14 +14,15 @@ namespace AppliGrpR
     public partial class Abonne_ModifierMdp : Form
     {
         OleDbConnection dbCon = Accueil.dbCon;
-
+        Abonne_Accueil abo;
         string mdpActuel;
         string mdpActuelEntré;
         string nouveauMdp;
         string nouveauMdpConfirm;
 
-        public Abonne_ModifierMdp()
+        public Abonne_ModifierMdp(Abonne_Accueil abo)
         {
+            this.abo = abo;
             this.StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
 
@@ -32,7 +33,7 @@ namespace AppliGrpR
         public void modifierMotdePasse()
         {
             bool valide = true;
-            string login = Abonne_Accueil.Id;   //ATTENTION le Log en Static n'est pas du tout une bonne idée, le logiciel ne serait pas utilisable par plusieur utilisateur en même temps
+            string login = abo.Id;   //ATTENTION le Log en Static n'est pas du tout une bonne idée, le logiciel ne serait pas utilisable par plusieur utilisateur en même temps
 
             //Get value from TextBox && Show error if necessary
             if (mdp_box.Text == "")
@@ -71,8 +72,7 @@ namespace AppliGrpR
             {
                mdpActuel = reader.GetString(0).Trim(' ');
             }
-            Console.WriteLine(valide);
-            Console.WriteLine(mdpActuelEntré + "      " + mdpActuel + valide);
+            mdpActuel = DecryptageDeMotDePasse(mdpActuel);
 
             if (nouveauMdp == mdpActuel)
             {
@@ -94,14 +94,13 @@ namespace AppliGrpR
                 {
                     MettreAJourMotDePasse(login, nouveauMdp);
                    
-                    string message ="Votre Mot de Passe à bien était modifié";
-                    string caption = "Form Closing";
-                    var result = MessageBox.Show(message, caption, MessageBoxButtons.OK,MessageBoxIcon.Question);
+                    string message ="Votre Mot de Passe a bien été modifié";
+                    string caption = "Modification de mot de passe";
+                    var result = MessageBox.Show(message, caption, MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
                     //Redirige à l'accueil après avoir appuyer sur Ok
                     if (result == DialogResult.OK)
                     {
-                        Abonne_Accueil a = new Abonne_Accueil();
-                        a.Show();
+                        abo.Show();
                         this.Close();
                     }
 
@@ -113,6 +112,28 @@ namespace AppliGrpR
             }
 
         }
+        public string DecryptageDeMotDePasse(string mdp)
+        {
+            string decrypt = "";
+            for (int i = 0; i < mdp.Length; i++)
+            {
+                if ((char)mdp[i] != ' ' && (char)mdp[i] > '9')
+                {
+                    decrypt += (char)(mdp[i] - 'a');
+                }
+                else if ((char)mdp[i] == ' ')
+                {
+                    decrypt += ' ';
+                }
+                else
+                {
+                    decrypt += (char)mdp[i];
+                }
+            }
+            return decrypt;
+        }
+
+
 
         /// <summary>
         /// Met a jour le Mot de Passe d'un user a parti d'un nouveau mot de passe entré
@@ -120,10 +141,27 @@ namespace AppliGrpR
         private void MettreAJourMotDePasse(string login,string nouveauMdp)
         {
 
-            string sqlUpdate = "Update ABONNÉS SET PASSWORD_ABONNÉ = '" + nouveauMdp + "' FROM ABONNÉS WHERE LOGIN_ABONNÉ = '" + login + "'";
+            string sqlUpdate = "Update ABONNÉS SET PASSWORD_ABONNÉ = '" + EncryptageDeMotDePasse(nouveauMdp) + "' FROM ABONNÉS WHERE LOGIN_ABONNÉ = '" + login + "'";
             OleDbCommand cmdUpdate = new OleDbCommand(sqlUpdate, dbCon);
             cmdUpdate.ExecuteNonQuery();
 
+        }
+
+        public string EncryptageDeMotDePasse(string mdp)
+        {
+            string encrypt = "";
+            for (int i = 0; i < mdp.Length; i++)
+            {
+                if ((char)(mdp[i]) > '9')
+                {
+                    encrypt += (char)(mdp[i] + 'a');
+                }
+                else
+                {
+                    encrypt += mdp[i];
+                }
+            }
+            return encrypt;
         }
 
         private void hideError()
@@ -144,8 +182,7 @@ namespace AppliGrpR
 
         private void retour_Click(object sender, EventArgs e)
         {
-            Abonne_Accueil a = new Abonne_Accueil();
-            a.Show();
+            abo.Show();
             this.Close();
         }
 

@@ -19,7 +19,7 @@ namespace TestsUnitaires
         OleDbConnection dbCon;
         string ChaineBd = "Provider=SQLOLEDB;Data Source=INFO-DORMEUR;Initial Catalog=MusiquePT2_R;Integrated Security=SSPI;";
         Client_Inscription client = new Client_Inscription();
-        Abonne_Accueil abo = new Abonne_Accueil();
+        
         Accueil accueil = new Accueil();
         List<int> albumDispo = new List<int>();
         public void InitConnexion()
@@ -38,6 +38,7 @@ namespace TestsUnitaires
             string nom = "testNom";
             string nationalite = "France";
             string codePays = "1";
+            Abonne_Accueil abo = new Abonne_Accueil(nom, prenom, login);
             client.AddAbonnes(login, nationalite, nom, mdp, prenom);
             string consult = "Select * from ABONNÉS WHERE LOGIN_ABONNÉ = '" + login + "' AND PASSWORD_ABONNÉ ='"+mdp+"' AND" +
                 " NOM_ABONNÉ ='"+nom+"' AND PRÉNOM_ABONNÉ ='"+prenom+"' AND CODE_PAYS = "+ codePays;
@@ -87,6 +88,7 @@ namespace TestsUnitaires
             string nom = "testNom";
             string nationalite = "France";
             int codeAbo = 0;
+            Abonne_Accueil abo = new Abonne_Accueil(nom, prenom, login);
             client.AddAbonnes(login, nationalite, nom, mdp, prenom);
             string consult = "Select CODE_ABONNÉ from ABONNÉS WHERE LOGIN_ABONNÉ = '" + login + "'";
             OleDbCommand cmdConsult = new OleDbCommand(consult, dbCon);
@@ -128,6 +130,7 @@ namespace TestsUnitaires
             string nom2 = "testNom";
             string nationalite2 = "France";
             int codeAbo2 = 0;
+            Abonne_Accueil abo = new Abonne_Accueil(nom, prenom, login);
             client.AddAbonnes(login, nationalite, nom, mdp, prenom);
             client.AddAbonnes(login2, nationalite2, nom2, mdp2, prenom2);
             string consult = "Select CODE_ABONNÉ from ABONNÉS WHERE LOGIN_ABONNÉ = '" + login + "'";

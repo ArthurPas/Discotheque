@@ -172,6 +172,8 @@ namespace AppliGrpR
 
         private void PurgerAbonnes_MouseDown(object sender, MouseEventArgs e)
         {
+            listeProlongementBox.Items.Clear();
+            listeProlongement.Clear();
             Administrateur_Purger adminPurger = new Administrateur_Purger();
             adminPurger.ShowDialog();
             this.Hide();

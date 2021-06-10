@@ -154,7 +154,7 @@ namespace AppliGrpR
             OleDbCommand cmdRead = new OleDbCommand(sql, dbCon);
             OleDbDataReader reader = cmdRead.ExecuteReader();
 
-
+                    
             while (reader.Read())
             {
                 string titre = reader.GetString(3);

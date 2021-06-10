@@ -26,6 +26,7 @@ namespace AppliGrpR
             dbCon.Open();
             Nationalite();
             disableAllErrorMessage();
+
         }
 
         public bool InscriptionValide()
@@ -194,6 +195,16 @@ namespace AppliGrpR
         private void ConfirmationMdpTextBox_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void viewConfirmMdp_Click(object sender, EventArgs e)
+        {
+            ConfirmationMdpTextBox.UseSystemPasswordChar = !ConfirmationMdpTextBox.UseSystemPasswordChar;
+        }
+
+        private void viewMdp_Click(object sender, EventArgs e)
+        {
+            mdp_box.UseSystemPasswordChar = !mdp_box.UseSystemPasswordChar;
         }
     }
 }

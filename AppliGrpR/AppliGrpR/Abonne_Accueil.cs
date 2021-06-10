@@ -253,7 +253,7 @@ namespace AppliGrpR
                 CodeAlbumEmprunter = reader.GetInt32(0);
             }
 
-            string sqlimage = "SELECT POCHETTE FROM ALBUMS WHERE CODE_ALBUM ='" + CodeAlbumEmprunter + "'";
+            string sqlimage = "SELECT POCHETTE FROM ALBUMS WHERE CODE_ALBUM ='" + CodeAlbumEmprunter + "' and POCHETTE is not null";
             OleDbCommand cmdimage = new OleDbCommand(sqlimage, dbCon);
             cmdimage.ExecuteNonQuery();
             OleDbDataReader readerimage = cmdimage.ExecuteReader();
@@ -263,6 +263,14 @@ namespace AppliGrpR
                 MemoryStream ms = new MemoryStream(image);
                 pictureBox1.Image = new Bitmap(ms); // pboPhoto est ma picture box
                 pictureBox1.Image = resizeImage(pictureBox1.Image, new Size(200, 200));
+            }
+            else
+            {
+                using (FileStream fs = new FileStream(@"./pochetteAlbum.png", FileMode.Open))
+                {
+                    pictureBox1.Image = Image.FromStream(fs);
+                    pictureBox1.Image = resizeImage(pictureBox1.Image, new Size(200, 200));
+                }
             }
             readerimage.Close();
             

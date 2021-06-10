@@ -199,6 +199,8 @@ namespace AppliGrpR
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackgroundImage = global::AppliGrpR.Properties.Resources.pochetteAlbum1;
+            this.pictureBox1.InitialImage = global::AppliGrpR.Properties.Resources.pochetteAlbum;
             this.pictureBox1.Location = new System.Drawing.Point(694, 418);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(200, 200);

@@ -44,5 +44,10 @@ namespace AppliGrpR
             a.Show();
             this.Hide();
         }
+
+        private void quitter_MouseDown(object sender, MouseEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -251,6 +252,25 @@ namespace AppliGrpR
             {
                 CodeAlbumEmprunter = reader.GetInt32(0);
             }
+
+            string sqlimage = "SELECT POCHETTE FROM ALBUMS WHERE CODE_ALBUM ='" + CodeAlbumEmprunter + "'";
+            OleDbCommand cmdimage = new OleDbCommand(sqlimage, dbCon);
+            cmdimage.ExecuteNonQuery();
+            OleDbDataReader readerimage = cmdimage.ExecuteReader();
+            if (readerimage.Read()) // rd est ma datareader
+            {
+                byte[] image = (byte[])readerimage[0];
+                MemoryStream ms = new MemoryStream(image);
+                pictureBox1.Image = new Bitmap(ms); // pboPhoto est ma picture box
+                pictureBox1.Image = resizeImage(pictureBox1.Image, new Size(200, 200));
+            }
+            readerimage.Close();
+            
+        }
+
+        public static Image resizeImage(Image imgToResize, Size size)
+        {
+            return (Image)(new Bitmap(imgToResize, size));
         }
 
         private void Retour_MouseDown(object sender, MouseEventArgs e)

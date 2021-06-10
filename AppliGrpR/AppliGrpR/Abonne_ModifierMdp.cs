@@ -71,8 +71,7 @@ namespace AppliGrpR
             {
                mdpActuel = reader.GetString(0).Trim(' ');
             }
-            Console.WriteLine(valide);
-            Console.WriteLine(mdpActuelEntré + "      " + mdpActuel + valide);
+            mdpActuel = DecryptageDeMotDePasse(mdpActuel);
 
             if (nouveauMdp == mdpActuel)
             {
@@ -92,8 +91,8 @@ namespace AppliGrpR
             {
                 if (valide)
                 {
-                    MettreAJourMotDePasse(login, mdpActuelEntré);
-                    MessageBox.Show("Votre Mot de Passe à bien était modifié");
+                    MettreAJourMotDePasse(login, nouveauMdp);
+                    MessageBox.Show("Votre Mot de Passe a bien été modifié");
                                
                     
                 }
@@ -104,6 +103,27 @@ namespace AppliGrpR
             }
 
         }
+        public string DecryptageDeMotDePasse(string mdp)
+        {
+            string decrypt = "";
+            for (int i = 0; i < mdp.Length; i++)
+            {
+                if ((char)mdp[i] != ' ' && (char)mdp[i] > '9')
+                {
+                    decrypt += (char)(mdp[i] - 'a');
+                }
+                else if ((char)mdp[i] == ' ')
+                {
+                    decrypt += ' ';
+                }
+                else
+                {
+                    decrypt += (char)mdp[i];
+                }
+            }
+            return decrypt;
+        }
+
 
         /// <summary>
         /// Met a jour le Mot de Passe d'un user a parti d'un nouveau mot de passe entré
@@ -120,10 +140,27 @@ namespace AppliGrpR
                 codeAbo = readerTwo.GetInt32(0);
             }
 
-            string sqlUpdate = "Update ABONNÉS SET PASSWORD_ABONNÉ = '" + mdpActuelEntré +"' FROM ABONNÉS WHERE LOGIN_ABONNÉ = '" + login + "'";
+            string sqlUpdate = "Update ABONNÉS SET PASSWORD_ABONNÉ = '" + EncryptageDeMotDePasse(mdpActuelEntré) + "' FROM ABONNÉS WHERE LOGIN_ABONNÉ = '" + login + "'";
             OleDbCommand cmdUpdate = new OleDbCommand(sqlUpdate, dbCon);
             cmdUpdate.ExecuteNonQuery();
 
+        }
+
+        public string EncryptageDeMotDePasse(string mdp)
+        {
+            string encrypt = "";
+            for (int i = 0; i < mdp.Length; i++)
+            {
+                if ((char)(mdp[i]) > '9')
+                {
+                    encrypt += (char)(mdp[i] + 'a');
+                }
+                else
+                {
+                    encrypt += mdp[i];
+                }
+            }
+            return encrypt;
         }
 
         private void hideError()

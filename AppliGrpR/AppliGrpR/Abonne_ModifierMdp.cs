@@ -92,10 +92,19 @@ namespace AppliGrpR
             {
                 if (valide)
                 {
-                    MettreAJourMotDePasse(login, mdpActuelEntré);
-                    MessageBox.Show("Votre Mot de Passe à bien était modifié");
-                               
-                    
+                    MettreAJourMotDePasse(login, nouveauMdp);
+                   
+                    string message ="Votre Mot de Passe à bien était modifié";
+                    string caption = "Form Closing";
+                    var result = MessageBox.Show(message, caption, MessageBoxButtons.OK,MessageBoxIcon.Question);
+                    //Redirige à l'accueil après avoir appuyer sur Ok
+                    if (result == DialogResult.OK)
+                    {
+                        Abonne_Accueil a = new Abonne_Accueil();
+                        a.Show();
+                        this.Close();
+                    }
+
                 }
             }
             else
@@ -108,19 +117,10 @@ namespace AppliGrpR
         /// <summary>
         /// Met a jour le Mot de Passe d'un user a parti d'un nouveau mot de passe entré
         /// </summary>
-        private void MettreAJourMotDePasse(string login,string mdpActuelEntré)
+        private void MettreAJourMotDePasse(string login,string nouveauMdp)
         {
-            //Get le Code Abbonné From Login
-            int codeAbo;
-            string consultCode = "Select CODE_ABONNÉ from ABONNÉS WHERE LOGIN_ABONNÉ = '" + login + "'";
-            OleDbCommand cmdConsultCode = new OleDbCommand(consultCode, dbCon);
-            OleDbDataReader readerTwo = cmdConsultCode.ExecuteReader();
-            while (readerTwo.Read())
-            {
-                codeAbo = readerTwo.GetInt32(0);
-            }
 
-            string sqlUpdate = "Update ABONNÉS SET PASSWORD_ABONNÉ = '" + mdpActuelEntré +"' FROM ABONNÉS WHERE LOGIN_ABONNÉ = '" + login + "'";
+            string sqlUpdate = "Update ABONNÉS SET PASSWORD_ABONNÉ = '" + nouveauMdp + "' FROM ABONNÉS WHERE LOGIN_ABONNÉ = '" + login + "'";
             OleDbCommand cmdUpdate = new OleDbCommand(sqlUpdate, dbCon);
             cmdUpdate.ExecuteNonQuery();
 
@@ -147,6 +147,23 @@ namespace AppliGrpR
             Abonne_Accueil a = new Abonne_Accueil();
             a.Show();
             this.Close();
+        }
+
+
+        private void viewMdp_Click(object sender, EventArgs e)
+        {
+            mdp_box.UseSystemPasswordChar = !mdp_box.UseSystemPasswordChar;
+        }
+
+        private void viewNewMdp_Click(object sender, EventArgs e)
+        {
+            newMdp_box.UseSystemPasswordChar = !newMdp_box.UseSystemPasswordChar;
+        }
+
+        private void viewConfirmNewMdp_Click(object sender, EventArgs e)
+        {
+            newMdpConfirm_box.UseSystemPasswordChar = !newMdpConfirm_box.UseSystemPasswordChar;
+
         }
     }
 }

@@ -44,6 +44,9 @@ namespace AppliGrpR
             this.errorConfirmNewMdp = new System.Windows.Forms.Label();
             this.errorMdp = new System.Windows.Forms.Label();
             this.errorSameMdp = new System.Windows.Forms.Label();
+            this.viewMdp = new System.Windows.Forms.Button();
+            this.viewNewMdp = new System.Windows.Forms.Button();
+            this.viewConfirmNewMdp = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mdp_box
@@ -52,6 +55,7 @@ namespace AppliGrpR
             this.mdp_box.Name = "mdp_box";
             this.mdp_box.Size = new System.Drawing.Size(319, 20);
             this.mdp_box.TabIndex = 0;
+            this.mdp_box.UseSystemPasswordChar = true;
             // 
             // newMdp_box
             // 
@@ -59,6 +63,7 @@ namespace AppliGrpR
             this.newMdp_box.Name = "newMdp_box";
             this.newMdp_box.Size = new System.Drawing.Size(319, 20);
             this.newMdp_box.TabIndex = 1;
+            this.newMdp_box.UseSystemPasswordChar = true;
             // 
             // newMdpConfirm_box
             // 
@@ -66,6 +71,7 @@ namespace AppliGrpR
             this.newMdpConfirm_box.Name = "newMdpConfirm_box";
             this.newMdpConfirm_box.Size = new System.Drawing.Size(319, 20);
             this.newMdpConfirm_box.TabIndex = 2;
+            this.newMdpConfirm_box.UseSystemPasswordChar = true;
             // 
             // titre
             // 
@@ -183,11 +189,44 @@ namespace AppliGrpR
             this.errorSameMdp.TabIndex = 14;
             this.errorSameMdp.Text = "! Votre Nouveau Mot de Passe est le même que votre mot de passe actuel";
             // 
+            // viewMdp
+            // 
+            this.viewMdp.Location = new System.Drawing.Point(722, 239);
+            this.viewMdp.Name = "viewMdp";
+            this.viewMdp.Size = new System.Drawing.Size(22, 22);
+            this.viewMdp.TabIndex = 15;
+            this.viewMdp.Text = "o";
+            this.viewMdp.UseVisualStyleBackColor = true;
+            this.viewMdp.Click += new System.EventHandler(this.viewMdp_Click);
+            // 
+            // viewNewMdp
+            // 
+            this.viewNewMdp.Location = new System.Drawing.Point(722, 325);
+            this.viewNewMdp.Name = "viewNewMdp";
+            this.viewNewMdp.Size = new System.Drawing.Size(22, 22);
+            this.viewNewMdp.TabIndex = 16;
+            this.viewNewMdp.Text = "o";
+            this.viewNewMdp.UseVisualStyleBackColor = true;
+            this.viewNewMdp.Click += new System.EventHandler(this.viewNewMdp_Click);
+            // 
+            // viewConfirmNewMdp
+            // 
+            this.viewConfirmNewMdp.Location = new System.Drawing.Point(722, 399);
+            this.viewConfirmNewMdp.Name = "viewConfirmNewMdp";
+            this.viewConfirmNewMdp.Size = new System.Drawing.Size(22, 22);
+            this.viewConfirmNewMdp.TabIndex = 17;
+            this.viewConfirmNewMdp.Text = "o";
+            this.viewConfirmNewMdp.UseVisualStyleBackColor = true;
+            this.viewConfirmNewMdp.Click += new System.EventHandler(this.viewConfirmNewMdp_Click);
+            // 
             // Abonne_ModifierMdp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 661);
+            this.Controls.Add(this.viewConfirmNewMdp);
+            this.Controls.Add(this.viewNewMdp);
+            this.Controls.Add(this.viewMdp);
             this.Controls.Add(this.errorSameMdp);
             this.Controls.Add(this.errorMdp);
             this.Controls.Add(this.errorConfirmNewMdp);
@@ -227,5 +266,8 @@ namespace AppliGrpR
         private System.Windows.Forms.Label errorConfirmNewMdp;
         private System.Windows.Forms.Label errorMdp;
         private System.Windows.Forms.Label errorSameMdp;
+        private System.Windows.Forms.Button viewMdp;
+        private System.Windows.Forms.Button viewNewMdp;
+        private System.Windows.Forms.Button viewConfirmNewMdp;
     }
 }

@@ -90,5 +90,10 @@ namespace AppliGrpR
             }
             return decrypt;
         }
+
+        private void viewMdp_Click(object sender, EventArgs e)
+        {
+            motdepassetextbox.UseSystemPasswordChar = !motdepassetextbox.UseSystemPasswordChar;
+        }
     }
 }

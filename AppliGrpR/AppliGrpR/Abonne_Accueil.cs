@@ -36,7 +36,6 @@ namespace AppliGrpR
 
         public void refreshList ()
         {
-            
             ConsultAlbum(SetNumAbonne());
             Suggestions(numeroAbonne);
             Album();
@@ -62,6 +61,7 @@ namespace AppliGrpR
 
         public void ConsultAlbum(int numeroAbo)
         {
+            empruntés.Clear();
             AlbumsEmpruntes.Items.Clear();
             string sql = "select  EMPRUNTER.CODE_ALBUM, TITRE_ALBUM, DATE_RETOUR_ATTENDUE from EMPRUNTER " +
                 "Inner join ALBUMS on EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
@@ -146,6 +146,7 @@ namespace AppliGrpR
 
         public void Album()
         {
+            album.Clear();
             string sql = "select * from ALBUMS";
 
             OleDbCommand cmdRead = new OleDbCommand(sql, dbCon);

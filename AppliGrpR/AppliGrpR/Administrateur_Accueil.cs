@@ -152,7 +152,7 @@ namespace AppliGrpR
             string request = "SELECT * " +
                 "FROM ALBUMS " +
                 "FULL JOIN EMPRUNTER ON ALBUMS.CODE_ALBUM = EMPRUNTER.CODE_ALBUM " +
-                "WHERE DATEDIFF(day, DATE_EMPRUNT,GETDATE()) > 365 OR DATE_EMPRUNT IS NULL ";
+                "WHERE DATEDIFF(day,GETDATE(), DATE_EMPRUNT) > 365 OR DATE_EMPRUNT IS NULL ";
 
             OleDbCommand cmd = new OleDbCommand(request, dbCon);
             cmd.ExecuteNonQuery();

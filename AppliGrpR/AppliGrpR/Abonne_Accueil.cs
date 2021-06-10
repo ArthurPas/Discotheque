@@ -238,43 +238,42 @@ namespace AppliGrpR
 
         private void TousLesAlbums_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string titre = TousLesAlbums.SelectedItem.ToString();
-            string apostrophe = "'";
-            if (titre.Contains("'"))
+            if (TousLesAlbums.SelectedItem != null)
             {
-                titre = titre.Insert(titre.IndexOf("'"), apostrophe);
-            }
-
-            string sql = "SELECT CODE_ALBUM FROM ALBUMS WHERE TITRE_ALBUM ='" + titre + "'";
-            OleDbCommand cmd = new OleDbCommand(sql, dbCon);
-            cmd.ExecuteNonQuery();
-            OleDbDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                CodeAlbumEmprunter = reader.GetInt32(0);
-            }
-
-            string sqlimage = "SELECT POCHETTE FROM ALBUMS WHERE CODE_ALBUM ='" + CodeAlbumEmprunter + "' and POCHETTE is not null";
-            OleDbCommand cmdimage = new OleDbCommand(sqlimage, dbCon);
-            cmdimage.ExecuteNonQuery();
-            OleDbDataReader readerimage = cmdimage.ExecuteReader();
-            if (readerimage.Read()) // rd est ma datareader
-            {
-                byte[] image = (byte[])readerimage[0];
-                MemoryStream ms = new MemoryStream(image);
-                pictureBox1.Image = new Bitmap(ms); // pboPhoto est ma picture box
-                pictureBox1.Image = resizeImage(pictureBox1.Image, new Size(200, 200));
-            }
-            else
-            {
-                using (FileStream fs = new FileStream(@"./pochetteAlbum.png", FileMode.Open))
+                string titre = TousLesAlbums.SelectedItem.ToString();
+                string apostrophe = "'";
+                if (titre.Contains("'"))
                 {
-                    pictureBox1.Image = Image.FromStream(fs);
+                    titre = titre.Insert(titre.IndexOf("'"), apostrophe);
+                }
+
+                string sql = "SELECT CODE_ALBUM FROM ALBUMS WHERE TITRE_ALBUM ='" + titre + "'";
+                OleDbCommand cmd = new OleDbCommand(sql, dbCon);
+                cmd.ExecuteNonQuery();
+                OleDbDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    CodeAlbumEmprunter = reader.GetInt32(0);
+                }
+
+                string sqlimage = "SELECT POCHETTE FROM ALBUMS WHERE CODE_ALBUM ='" + CodeAlbumEmprunter + "' and POCHETTE is not null";
+                OleDbCommand cmdimage = new OleDbCommand(sqlimage, dbCon);
+                cmdimage.ExecuteNonQuery();
+                OleDbDataReader readerimage = cmdimage.ExecuteReader();
+                if (readerimage.Read()) // rd est ma datareader
+                {
+                    byte[] image = (byte[])readerimage[0];
+                    MemoryStream ms = new MemoryStream(image);
+                    pictureBox1.Image = new Bitmap(ms); // pboPhoto est ma picture box
                     pictureBox1.Image = resizeImage(pictureBox1.Image, new Size(200, 200));
                 }
+                else
+                {
+                    pictureBox1.Image = Image.FromFile("pochetteAlbum.png");
+                    pictureBox1.Image = resizeImage(pictureBox1.Image, new Size(200, 200));
+                }
+                readerimage.Close();
             }
-            readerimage.Close();
-            
         }
 
         public static Image resizeImage(Image imgToResize, Size size)

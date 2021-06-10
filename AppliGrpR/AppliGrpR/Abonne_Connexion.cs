@@ -45,7 +45,8 @@ namespace AppliGrpR
             {
                 motDePasseBDD = reader.GetString(0);
             }
-            if (motDePasse.Equals(motDePasseBDD))
+            string a = DecryptageDeMotDePasse(motDePasseBDD);
+            if (motDePasse.Equals(DecryptageDeMotDePasse(motDePasseBDD)))
             {
                 string sqlSet = "Select NOM_ABONNÉ, PRÉNOM_ABONNÉ, LOGIN_ABONNÉ, PASSWORD_ABONNÉ from ABONNÉS where LOGIN_ABONNÉ = '" + pseudoTextBox.Text + "'";
                 OleDbCommand cmdSet = new OleDbCommand(sqlSet, dbCon);
@@ -74,6 +75,26 @@ namespace AppliGrpR
             {
                 MessageBox.Show("Le mot de passe ou l'utilisateur est incorrect");
             }
+        }
+        public string DecryptageDeMotDePasse(string mdp)
+        {
+            string decrypt = "";
+            for (int i = 0; i < mdp.Length; i++)
+            {
+                if ((char)mdp[i]!=' ' && (char)mdp[i] > '9')
+                {
+                    decrypt += (char)(mdp[i] - 'a');
+                } 
+                else if((char)mdp[i] == ' ')
+                {
+                    decrypt += ' ';
+                }
+                else
+                {
+                    decrypt += (char)mdp[i];
+                }
+            }
+            return decrypt;
         }
     }
 }

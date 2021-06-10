@@ -26,7 +26,6 @@ namespace AppliGrpR
             dbCon.Open();
             Nationalite();
             disableAllErrorMessage();
-
         }
 
         public bool InscriptionValide()
@@ -56,7 +55,7 @@ namespace AppliGrpR
                 cmd.Parameters.Add("NOM_ABONNÉ", OleDbType.VarChar).Value = nombox;
                 cmd.Parameters.Add("PRÉNOM_ABONNÉ", OleDbType.VarChar).Value = prenombox;
                 cmd.Parameters.Add("LOGIN_ABONNÉ", OleDbType.VarChar).Value = idbox;
-                cmd.Parameters.Add("PASSWORD_ABONNÉ", OleDbType.VarChar).Value = mdpbox;
+                cmd.Parameters.Add("PASSWORD_ABONNÉ", OleDbType.VarChar).Value = EncryptageDeMotDePasse(mdpbox);
                 cmd.ExecuteNonQuery();
 
 
@@ -77,6 +76,24 @@ namespace AppliGrpR
                 MessageBox.Show("Erreur un compte existe déja avec le même identifiant");
             }
 
+        }
+
+        public string EncryptageDeMotDePasse(string mdp)
+        {
+
+            char[] chiffre = { '0','1','2','3','4','5','6','7','8','9'};
+            string encrypt = "";
+            for (int i = 0; i < mdp.Length; i++)
+            {
+                if ((char)(mdp[i]) > '9') {
+                    encrypt += (char)(mdp[i] + 'a');
+                }
+                else
+                {
+                    encrypt += mdp[i];
+                }
+            }
+            return encrypt;
         }
 
         public void Nationalite()

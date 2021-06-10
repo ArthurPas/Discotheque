@@ -134,13 +134,14 @@ namespace AppliGrpR
         }
 
 
+
         /// <summary>
         /// Met a jour le Mot de Passe d'un user a parti d'un nouveau mot de passe entré
         /// </summary>
         private void MettreAJourMotDePasse(string login,string nouveauMdp)
         {
 
-            string sqlUpdate = "Update ABONNÉS SET PASSWORD_ABONNÉ = '" + mdpActuelEntré +"' FROM ABONNÉS WHERE LOGIN_ABONNÉ = '" + login + "'";
+            string sqlUpdate = "Update ABONNÉS SET PASSWORD_ABONNÉ = '" + EncryptageDeMotDePasse(mdpActuelEntré) + "' FROM ABONNÉS WHERE LOGIN_ABONNÉ = '" + login + "'";
             OleDbCommand cmdUpdate = new OleDbCommand(sqlUpdate, dbCon);
             cmdUpdate.ExecuteNonQuery();
 

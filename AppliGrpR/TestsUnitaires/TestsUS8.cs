@@ -19,7 +19,6 @@ namespace TestsUnitaires
         string ChaineBd = "Provider=SQLOLEDB;Data Source=INFO-DORMEUR;Initial Catalog=MusiquePT2_R;Integrated Security=SSPI;";
         Accueil accueil = new Accueil();
         AdministrateurAccueil adminAcc = new AdministrateurAccueil();
-        List<Albums> topTest = new List<Albums>();
         public void InitConnexion()
         {
             dbCon = new OleDbConnection(ChaineBd);
@@ -30,7 +29,7 @@ namespace TestsUnitaires
         {
             InitConnexion();
             bool same = true;
-            List<int> test = new List<int>();
+            List<string> test = new List<string>();
             string request = "SELECT * " +
                 "FROM ALBUMS " +
                 "FULL JOIN EMPRUNTER ON ALBUMS.CODE_ALBUM = EMPRUNTER.CODE_ALBUM " +
@@ -42,10 +41,12 @@ namespace TestsUnitaires
             OleDbDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                test.Add(reader.GetInt32(0));
+                test.Add(reader.GetString(3));
             }
             if (adminAcc.listeAlbNonEmprUnAn.Count>0)
             {
+                test.Count();
+                adminAcc.listeAlbNonEmprUnAn.Count();
                 for (int i = 0; i < adminAcc.listeAlbNonEmprUnAn.Count; i++)
                 {
                     if (!test[i].Equals(adminAcc.listeAlbNonEmprUnAn[i]))

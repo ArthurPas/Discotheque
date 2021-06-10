@@ -222,25 +222,34 @@ namespace AppliGrpR
             Suggestions(numeroAbonne);
         }
 
-        public void EmprunterFonction(int codeAlbum, int numAbo)
+        public bool EmprunterFonction(int codeAlbum, int numAbo)
         {
-            int codeAbo = numAbo;
-            int delayNumber = 0;
-            string delay = "SELECT DÉLAI FROM GENRES INNER JOIN ALBUMS on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE " +
-                "WHERE ALBUMS.CODE_ALBUM = " + codeAlbum;
-            OleDbCommand cmdDelay = new OleDbCommand(delay, dbCon);
-            cmdDelay.ExecuteNonQuery();
-            OleDbDataReader readerDelay = cmdDelay.ExecuteReader();
-            while (readerDelay.Read())
+            bool effectuer = true;
+            try
             {
-                delayNumber = readerDelay.GetInt32(0);
+                int codeAbo = numAbo;
+                int delayNumber = 0;
+                string delay = "SELECT DÉLAI FROM GENRES INNER JOIN ALBUMS on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE " +
+                    "WHERE ALBUMS.CODE_ALBUM = " + codeAlbum;
+                OleDbCommand cmdDelay = new OleDbCommand(delay, dbCon);
+                cmdDelay.ExecuteNonQuery();
+                OleDbDataReader readerDelay = cmdDelay.ExecuteReader();
+                while (readerDelay.Read())
+                {
+                    delayNumber = readerDelay.GetInt32(0);
+                }
+                string request = "insert into EMPRUNTER(CODE_ABONNÉ,CODE_ALBUM,DATE_EMPRUNT,DATE_RETOUR_ATTENDUE) " +
+                    "values(" + codeAbo + ", ?, GETDATE(),DATEADD(Day,?,GETDATE()))";
+                OleDbCommand cmdTwo = new OleDbCommand(request, dbCon);
+                cmdTwo.Parameters.Add("CODE_ALBUM", OleDbType.Integer).Value = codeAlbum;
+                cmdTwo.Parameters.Add("CODE_ALBUM", OleDbType.Integer).Value = delayNumber;
+                cmdTwo.ExecuteNonQuery();
             }
-            string request = "insert into EMPRUNTER(CODE_ABONNÉ,CODE_ALBUM,DATE_EMPRUNT,DATE_RETOUR_ATTENDUE) " +
-                "values(" + codeAbo + ", ?, GETDATE(),DATEADD(Day,?,GETDATE()))";
-            OleDbCommand cmdTwo = new OleDbCommand(request, dbCon);
-            cmdTwo.Parameters.Add("CODE_ALBUM", OleDbType.Integer).Value = codeAlbum;
-            cmdTwo.Parameters.Add("CODE_ALBUM", OleDbType.Integer).Value = delayNumber;
-            cmdTwo.ExecuteNonQuery();
+            catch(System.Data.OleDb.OleDbException e)
+            {
+                effectuer = false;
+            }
+            return effectuer;
         }
 
         private void TousLesAlbums_SelectedIndexChanged(object sender, EventArgs e)

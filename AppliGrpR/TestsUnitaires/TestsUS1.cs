@@ -32,7 +32,7 @@ namespace TestsUnitaires
         {
             InitConnexion();
             
-            string login = "testUS1";
+            string login = "testUS1Inscription";
             string mdp = "testmdp";
             string prenom = "prenomTest";
             string nom = "testNom";
@@ -54,7 +54,7 @@ namespace TestsUnitaires
         {
             InitConnexion();
 
-            string login = "testUS1";
+            string login = "testUS1.1";
             string mdp = "testmdp";
             string prenom = "prenomTest";
             string nom = "testNom";
@@ -82,7 +82,7 @@ namespace TestsUnitaires
         {
             InitConnexion();
             bool testVerif;
-            string login = "testUS1";
+            string login = "testUS1.1.1";
             string mdp = "testmdp";
             string prenom = "prenomTest";
             string nom = "testNom";
@@ -117,13 +117,20 @@ namespace TestsUnitaires
         public void testDeuxFoisMemeEmprunt()
         {
             InitConnexion();
-            string login = "testUS1";
+            string login = "testUS1.1.1.1";
             string mdp = "testmdp";
             string prenom = "prenomTest";
             string nom = "testNom";
             string nationalite = "France";
             int codeAbo = 0;
+            string login2 = "testUS1.2";
+            string mdp2 = "testmdp";
+            string prenom2 = "prenomTest";
+            string nom2 = "testNom";
+            string nationalite2 = "France";
+            int codeAbo2 = 0;
             client.AddAbonnes(login, nationalite, nom, mdp, prenom);
+            client.AddAbonnes(login2, nationalite2, nom2, mdp2, prenom2);
             string consult = "Select CODE_ABONNÉ from ABONNÉS WHERE LOGIN_ABONNÉ = '" + login + "'";
             OleDbCommand cmdConsult = new OleDbCommand(consult, dbCon);
             OleDbDataReader reader = cmdConsult.ExecuteReader();
@@ -132,20 +139,21 @@ namespace TestsUnitaires
                 codeAbo = reader.GetInt32(0);
             }
             reader.Close();
+            string consult2 = "Select CODE_ABONNÉ from ABONNÉS WHERE LOGIN_ABONNÉ = '" + login2 + "'";
+            OleDbCommand cmdConsult2 = new OleDbCommand(consult2, dbCon);
+            OleDbDataReader reader2 = cmdConsult.ExecuteReader();
+            while (reader2.Read())
+            {
+                codeAbo2 = reader2.GetInt32(0);
+            }
+            reader2.Close();
             int codeAlb = 624;
             abo.EmprunterFonction(codeAlb, codeAbo);
-            abo.EmprunterFonction(codeAlb, codeAbo);
-            string check = "SELECT * FROM EMPRUNTER INNER JOIN ABONNÉS ON EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ WHERE CODE_ALBUM = " + codeAlb + " AND ABONNÉS.CODE_ABONNÉ=" + codeAbo;
+            Assert.IsFalse(abo.EmprunterFonction(codeAlb, codeAbo2));
+            string check = "SELECT * FROM EMPRUNTER INNER JOIN ABONNÉS ON EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ WHERE CODE_ALBUM = " + codeAlb + 
+                " AND ABONNÉS.CODE_ABONNÉ=" + codeAbo + "OR ABONNÉS.CODE_ABONNÉ=" + codeAbo2;
             OleDbCommand cmdCheck = new OleDbCommand(check, dbCon);
             cmdCheck.ExecuteNonQuery();
-            OleDbDataReader readerCheck = cmdCheck.ExecuteReader();
-            int i = 0;
-            while (readerCheck.Read())
-            {
-                i++;
-            }
-            Assert.AreEqual(i, 1, "emprunté deux fois");
-            readerCheck.Close();
             string delete = " DELETE FROM EMPRUNTER WHERE CODE_ALBUM = " + codeAlb;
             OleDbCommand cmdDelete = new OleDbCommand(delete, dbCon);
             cmdDelete.ExecuteNonQuery();

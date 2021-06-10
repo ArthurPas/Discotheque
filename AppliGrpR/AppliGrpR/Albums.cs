@@ -15,6 +15,7 @@ namespace AppliGrpR
         public Albums(int c, string n, DateTime d)
         {
             id = c;
+
             titre = n;
             dateRetour = d;
         }

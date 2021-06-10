@@ -14,10 +14,11 @@ namespace AppliGrpR
     public partial class Abonne_Prolonger : Form
     {
         OleDbConnection dbCon = Accueil.dbCon;
-        public static Abonne_Accueil accueil;
+        public Abonne_Accueil accueil;
         int CodeAlbumProlonger=0;
-        public Abonne_Prolonger()
+        public Abonne_Prolonger(Abonne_Accueil accueil)
         {
+            this.accueil = accueil;
             InitializeComponent();
             ListeDesProlongeable();
         }
@@ -32,7 +33,7 @@ namespace AppliGrpR
             string list = "Select ALBUMS.TITRE_ALBUM, ALBUMS.CODE_ALBUM, EMPRUNTER.DATE_RETOUR_ATTENDUE FROM ABONNÉS INNER JOIN EMPRUNTER on ABONNÉS.CODE_ABONNÉ = " +
                 "EMPRUNTER.CODE_ABONNÉ INNER JOIN ALBUMS on EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
                 "INNER JOIN GENRES on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE " +
-                "WHERE DATE_RETOUR_ATTENDUE - DATE_EMPRUNT <= DÉLAI AND ABONNÉS.CODE_ABONNÉ =" +Abonne_Accueil.numeroAbonne;
+                "WHERE DATE_RETOUR_ATTENDUE - DATE_EMPRUNT <= DÉLAI AND ABONNÉS.CODE_ABONNÉ =" +accueil.numeroAbonne;
             OleDbCommand cmd = new OleDbCommand(list, dbCon);
             OleDbDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
@@ -94,7 +95,7 @@ namespace AppliGrpR
 
         private void ProlongerButton_MouseDown(object sender, MouseEventArgs e)
         {
-            ExtendBorrowing(Abonne_Accueil.numeroAbonne, CodeAlbumProlonger);
+            ExtendBorrowing(accueil.numeroAbonne, CodeAlbumProlonger);
             AlbumsProlongeables.Items.Clear();
             ListeDesProlongeable();
             accueil.refreshList();
@@ -104,7 +105,7 @@ namespace AppliGrpR
         {
             if (ConfirmDialog())
             {
-                ExtendAllBorrowing(Abonne_Accueil.numeroAbonne);
+                ExtendAllBorrowing(accueil.numeroAbonne);
                 AlbumsProlongeables.Items.Clear();
                 ListeDesProlongeable();
                 accueil.refreshList();

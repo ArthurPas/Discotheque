@@ -23,26 +23,31 @@ namespace AppliGrpR
         public static List<Albums> suggestionsAlbumsChoisit = new List<Albums>();
         int CodeAlbumEmprunter= 0;
         int CodeAlbumRendre = 0;
-        public static string Nom;
-        public static string Prenom;
-        public static string Id;
-        public static string MotDePasse;
-        public static int numeroAbonne;
+        
+        public string Nom;
+        public string Prenom;
+        public string Id;
+        public string MotDePasse;
+        public int numeroAbonne;
+        
         public int indexEmprunt = 1;
         public int indexTout = 1;
-        public Abonne_Accueil()
+        public Abonne_Accueil(string nom, string prenom, string login)
         {
+            this.Nom = nom;
+            this.Prenom = prenom;
+            this.Id = login;
+            this.numeroAbonne = SetNumAbonne();
             this.StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
             refreshList();
         }
 
-        public void refreshList ()
+        public void refreshList()
         {
             ConsultAlbum(SetNumAbonne());
             Suggestions(numeroAbonne);
             Album();
-            Abonne_Prolonger.accueil = this;
         }
 
         private int SetNumAbonne()
@@ -203,7 +208,7 @@ namespace AppliGrpR
 
         private void Prolonger_un_emprunt_MouseDown(object sender, MouseEventArgs e)
         {
-            Abonne_Prolonger Abonneprolonger = new Abonne_Prolonger();
+            Abonne_Prolonger Abonneprolonger = new Abonne_Prolonger(this);
             Abonneprolonger.StartPosition = FormStartPosition.CenterScreen;
             Abonneprolonger.ShowDialog();
         }
@@ -370,6 +375,11 @@ namespace AppliGrpR
         private void Retour_MouseDown(object sender, MouseEventArgs e)
         {
             Accueil a = new Accueil();
+            Nom="";
+            Prenom = "";
+            Id = "";
+            MotDePasse = "";
+            numeroAbonne = 0;
             a.Show();
             this.Close();
         }
@@ -448,7 +458,7 @@ namespace AppliGrpR
 
         private void modifierMdp_Click(object sender, EventArgs e)
         {
-            Abonne_ModifierMdp a = new Abonne_ModifierMdp();
+            Abonne_ModifierMdp a = new Abonne_ModifierMdp(this);
             a.Show();
             this.Close();
         }

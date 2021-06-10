@@ -42,25 +42,23 @@ namespace AppliGrpR
             string a = DecryptageDeMotDePasse(motDePasseBDD);
             if (motDePasse.Equals(DecryptageDeMotDePasse(motDePasseBDD)))
             {
+                string nom = "";
+                string prenom = "";
+                string id="";
                 string sqlSet = "Select NOM_ABONNÉ, PRÉNOM_ABONNÉ, LOGIN_ABONNÉ, PASSWORD_ABONNÉ from ABONNÉS where LOGIN_ABONNÉ = '" + pseudoTextBox.Text + "'";
                 OleDbCommand cmdSet = new OleDbCommand(sqlSet, dbCon);
                 OleDbDataReader readerSet = cmdSet.ExecuteReader();
                 while (readerSet.Read())
                 {
-                    string nom = readerSet.GetString(0);
-                    Abonne_Accueil.Nom = nom;
+                    nom = readerSet.GetString(0);
 
-                    string prenom = readerSet.GetString(1);
-                    Abonne_Accueil.Prenom = prenom;
+                    prenom = readerSet.GetString(1);
 
-                    string login = readerSet.GetString(2);
-                    Abonne_Accueil.Id = login;
-
-                    Abonne_Accueil.MotDePasse = motDePasse;
+                    id = readerSet.GetString(2);
                 }
 
                 this.Close();
-                Abonne_Accueil AbonneAccueil = new Abonne_Accueil();
+                Abonne_Accueil AbonneAccueil = new Abonne_Accueil(nom,prenom,id);
                 AbonneAccueil.StartPosition = FormStartPosition.CenterScreen;
                 AbonneAccueil.ShowDialog();
                 

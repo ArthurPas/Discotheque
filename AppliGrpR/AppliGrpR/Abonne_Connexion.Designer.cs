@@ -36,6 +36,7 @@ namespace AppliGrpR
             this.motdepassetextbox = new System.Windows.Forms.TextBox();
             this.SeConnecter = new System.Windows.Forms.Button();
             this.Retour = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Connexion
@@ -78,6 +79,7 @@ namespace AppliGrpR
             this.motdepassetextbox.Name = "motdepassetextbox";
             this.motdepassetextbox.Size = new System.Drawing.Size(133, 20);
             this.motdepassetextbox.TabIndex = 7;
+            this.motdepassetextbox.UseSystemPasswordChar = true;
             // 
             // SeConnecter
             // 
@@ -99,11 +101,22 @@ namespace AppliGrpR
             this.Retour.UseVisualStyleBackColor = true;
             this.Retour.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Retour_MouseDown);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(603, 297);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(23, 22);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "o";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.viewMdp_Click);
+            // 
             // Abonne_Connexion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 661);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.Retour);
             this.Controls.Add(this.SeConnecter);
             this.Controls.Add(this.motdepassetextbox);
@@ -127,5 +140,6 @@ namespace AppliGrpR
         private System.Windows.Forms.TextBox motdepassetextbox;
         private System.Windows.Forms.Button SeConnecter;
         private System.Windows.Forms.Button Retour;
+        private System.Windows.Forms.Button button1;
     }
 }

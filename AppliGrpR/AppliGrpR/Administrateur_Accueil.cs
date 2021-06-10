@@ -15,9 +15,14 @@ namespace AppliGrpR
     {
         OleDbConnection dbCon = Accueil.dbCon;
         public static List<Albums> top10 = new List<Albums>();
+        public List<string> ListeAbo = new List<string>();
         public List<string> listeRetard = new List<string>();
-        public List<int> listeAlbNonEmprUnAn = new List<int>();
+        public List<string> listeAlbNonEmprUnAn = new List<string>();
         public static List<Albums> listeProlongement = new List<Albums>();
+        public int indexAbo = 1;
+        public int indexNonEmprunteUnAn = 1;
+        public int indexProlo = 1;
+        public int indexRetard = 1;
         public AdministrateurAccueil()
         {
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -49,11 +54,11 @@ namespace AppliGrpR
                 string titre = reader.GetString(2);
                 int codeAlbum = reader.GetInt32(3);
                 dateRetourAttendue = reader.GetDateTime(4);
-                ListeProlongementBox.Items.Add(name + " a prolongé l'emprunt de " + titre);
+                
                 Albums a = new Albums(codeAlbum, titre, dateRetourAttendue);
                 listeProlongement.Add(a);
             }
-
+            AfficherProlongement();
         }
 
         /// <summary>
@@ -73,9 +78,9 @@ namespace AppliGrpR
             {
                 string nom = reader.GetString(0);
                 string titre = reader.GetString(2);
-                Retard10joursBox.Items.Add(nom + titre);
-                listeRetard.Add(nom);
+                listeRetard.Add(nom+titre);
             }
+            AfficherRetard();
         }
 
         public void Abonnes()
@@ -91,8 +96,10 @@ namespace AppliGrpR
             while (reader.Read())
             {
                 string titre = reader.GetString(2);
-                ListeAbonnebox.Items.Add(titre);
+                
+                ListeAbo.Add(titre);
             }
+            AfficherPageAbo();
             reader.Close();
         }
 
@@ -156,9 +163,10 @@ namespace AppliGrpR
             {
                 int codeAlb = reader.GetInt32(0);
                 string titreAlbum = reader.GetString(3);
-                nonEmprunté.Items.Add(titreAlbum);
-                listeAlbNonEmprUnAn.Add(codeAlb);
+                
+                listeAlbNonEmprUnAn.Add(titreAlbum);
             }
+            AfficherPageNonEmprunt();
         }
 
         private void PurgerAbonnes_MouseDown(object sender, MouseEventArgs e)
@@ -174,6 +182,158 @@ namespace AppliGrpR
             Accueil a = new Accueil();
             a.Show();
             this.Close();
+        }
+        public void AfficherPageAbo()
+        {
+
+            for (int i = 20 * indexAbo - 20; i < 20 * indexAbo; i++)
+            {
+                if (i < ListeAbo.Count)
+                {
+                    ListeAbonnebox.Items.Add(ListeAbo[i]);
+                }
+            }
+        }
+        public void AfficherProlongement()
+        {
+            for (int i = 10 * indexProlo - 10; i < 10 * indexProlo; i++)
+            {
+                if (i < listeProlongement.Count)
+                {
+                    ListeProlongementBox.Items.Add(listeProlongement[i]);
+                }
+            }
+        }
+        public void AfficherPageNonEmprunt()
+        {
+            for (int i = 20 * indexNonEmprunteUnAn - 20; i < 20 * indexNonEmprunteUnAn; i++)
+            {
+                if (i < listeAlbNonEmprUnAn.Count)
+                {
+                    nonEmprunté.Items.Add(listeAlbNonEmprUnAn[i]);
+                }
+            }
+        }
+        public void AfficherRetard()
+        {
+            for (int i = 10 * indexRetard - 10; i < 10 * indexRetard; i++)
+            {
+                if (i < listeRetard.Count)
+                {
+                    Retard10joursBox.Items.Add(listeRetard[i]);
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="listBox"></param>
+        /// <param name="list"></param>
+        /// <param name="taille"></param>
+        public  void Afficher(int index,ListBox listBox, List<string> list, int taille)
+        {
+            for (int i = taille * index - taille; i < taille * index; i++)
+            {
+                if (i < list.Count)
+                {
+                    listBox.Items.Add(list[i]);
+                }
+            }
+
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="listBox"></param>
+        /// <param name="list"></param>
+        /// <param name="taille"></param>
+        public void AfficherAlbum(int index, ListBox listBox, List<Albums> list, int taille)
+        {
+            for (int i = taille * index - taille; i < taille * index; i++)
+            {
+                if (i < list.Count)
+                {
+                    listBox.Items.Add(list[i]);
+                }
+            }
+        }
+
+
+
+
+        private void RightListButton_Click(object sender, EventArgs e)
+        {
+            ListeAbonnebox.Items.Clear();
+            indexAbo++;
+            AfficherPageAbo();
+            
+
+        }
+
+        private void LeftListButton_Click(object sender, EventArgs e)
+        {
+            ListeAbonnebox.Items.Clear();
+            AfficherPageAbo();
+            if (indexAbo > 1)
+            {
+                indexAbo--;
+            }
+        }
+
+        private void RightNonEmprButton_Click(object sender, EventArgs e)
+        {
+            nonEmprunté.Items.Clear();
+            AfficherPageNonEmprunt();
+            indexNonEmprunteUnAn++;
+        }
+
+        private void LeftNonEmprButton_Click(object sender, EventArgs e)
+        {
+            nonEmprunté.Items.Clear();
+            AfficherPageNonEmprunt();
+            if (indexNonEmprunteUnAn > 1)
+            {
+                indexNonEmprunteUnAn--;
+            }
+        }
+
+        private void ProloRightButton_Click(object sender, EventArgs e)
+        {
+
+            ListeProlongementBox.Items.Clear();
+            AfficherProlongement();
+            indexProlo++;
+        }
+
+        private void ProloLeftButton_Click(object sender, EventArgs e)
+        {
+            ListeProlongementBox.Items.Clear();
+            AfficherProlongement();
+            if(indexProlo > 1)
+            {
+                indexProlo--;
+            }
+        }
+
+        private void RetardRightButton_Click(object sender, EventArgs e)
+        {
+            Retard10joursBox.Items.Clear();
+            AfficherRetard();
+            indexRetard++;
+        }
+
+        private void RetardLeftButton_Click(object sender, EventArgs e)
+        {
+            Retard10joursBox.Items.Clear();
+            AfficherRetard();
+            if(indexRetard > 1)
+            {
+                indexProlo--;
+            }
         }
     }
 }

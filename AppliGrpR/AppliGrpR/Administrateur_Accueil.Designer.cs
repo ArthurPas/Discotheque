@@ -41,6 +41,14 @@ namespace AppliGrpR
             this.ListeAbonne = new System.Windows.Forms.Label();
             this.déconnexion = new System.Windows.Forms.Button();
             this.PurgerAbonnes = new System.Windows.Forms.Button();
+            this.LeftListButton = new System.Windows.Forms.Button();
+            this.RightListButton = new System.Windows.Forms.Button();
+            this.LeftNonEmprButton = new System.Windows.Forms.Button();
+            this.RightNonEmprButton = new System.Windows.Forms.Button();
+            this.ProloLeftButton = new System.Windows.Forms.Button();
+            this.ProloRightButton = new System.Windows.Forms.Button();
+            this.RetardLeftButton = new System.Windows.Forms.Button();
+            this.RetardRightButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ListeProlongementBox
@@ -148,11 +156,99 @@ namespace AppliGrpR
             this.PurgerAbonnes.UseVisualStyleBackColor = true;
             this.PurgerAbonnes.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PurgerAbonnes_MouseDown);
             // 
+            // LeftListButton
+            // 
+            this.LeftListButton.Location = new System.Drawing.Point(587, 526);
+            this.LeftListButton.Name = "LeftListButton";
+            this.LeftListButton.Size = new System.Drawing.Size(75, 23);
+            this.LeftListButton.TabIndex = 12;
+            this.LeftListButton.Text = "<-";
+            this.LeftListButton.UseVisualStyleBackColor = true;
+            this.LeftListButton.Click += new System.EventHandler(this.LeftListButton_Click);
+            // 
+            // RightListButton
+            // 
+            this.RightListButton.Location = new System.Drawing.Point(668, 526);
+            this.RightListButton.Name = "RightListButton";
+            this.RightListButton.Size = new System.Drawing.Size(75, 23);
+            this.RightListButton.TabIndex = 13;
+            this.RightListButton.Text = "->";
+            this.RightListButton.UseVisualStyleBackColor = true;
+            this.RightListButton.Click += new System.EventHandler(this.RightListButton_Click);
+            // 
+            // LeftNonEmprButton
+            // 
+            this.LeftNonEmprButton.Location = new System.Drawing.Point(899, 526);
+            this.LeftNonEmprButton.Name = "LeftNonEmprButton";
+            this.LeftNonEmprButton.Size = new System.Drawing.Size(75, 23);
+            this.LeftNonEmprButton.TabIndex = 14;
+            this.LeftNonEmprButton.Text = "<-";
+            this.LeftNonEmprButton.UseVisualStyleBackColor = true;
+            this.LeftNonEmprButton.Click += new System.EventHandler(this.LeftNonEmprButton_Click);
+            // 
+            // RightNonEmprButton
+            // 
+            this.RightNonEmprButton.Location = new System.Drawing.Point(980, 526);
+            this.RightNonEmprButton.Name = "RightNonEmprButton";
+            this.RightNonEmprButton.Size = new System.Drawing.Size(75, 23);
+            this.RightNonEmprButton.TabIndex = 15;
+            this.RightNonEmprButton.Text = "->";
+            this.RightNonEmprButton.UseVisualStyleBackColor = true;
+            this.RightNonEmprButton.Click += new System.EventHandler(this.RightNonEmprButton_Click);
+            // 
+            // ProloLeftButton
+            // 
+            this.ProloLeftButton.Location = new System.Drawing.Point(361, 190);
+            this.ProloLeftButton.Name = "ProloLeftButton";
+            this.ProloLeftButton.Size = new System.Drawing.Size(75, 23);
+            this.ProloLeftButton.TabIndex = 16;
+            this.ProloLeftButton.Text = "<-";
+            this.ProloLeftButton.UseVisualStyleBackColor = true;
+            this.ProloLeftButton.Click += new System.EventHandler(this.ProloLeftButton_Click);
+            // 
+            // ProloRightButton
+            // 
+            this.ProloRightButton.Location = new System.Drawing.Point(442, 190);
+            this.ProloRightButton.Name = "ProloRightButton";
+            this.ProloRightButton.Size = new System.Drawing.Size(75, 23);
+            this.ProloRightButton.TabIndex = 17;
+            this.ProloRightButton.Text = "->";
+            this.ProloRightButton.UseVisualStyleBackColor = true;
+            this.ProloRightButton.Click += new System.EventHandler(this.ProloRightButton_Click);
+            // 
+            // RetardLeftButton
+            // 
+            this.RetardLeftButton.Location = new System.Drawing.Point(361, 385);
+            this.RetardLeftButton.Name = "RetardLeftButton";
+            this.RetardLeftButton.Size = new System.Drawing.Size(75, 23);
+            this.RetardLeftButton.TabIndex = 18;
+            this.RetardLeftButton.Text = "<-";
+            this.RetardLeftButton.UseVisualStyleBackColor = true;
+            this.RetardLeftButton.Click += new System.EventHandler(this.RetardLeftButton_Click);
+            // 
+            // RetardRightButton
+            // 
+            this.RetardRightButton.Location = new System.Drawing.Point(442, 385);
+            this.RetardRightButton.Name = "RetardRightButton";
+            this.RetardRightButton.Size = new System.Drawing.Size(75, 23);
+            this.RetardRightButton.TabIndex = 19;
+            this.RetardRightButton.Text = "->";
+            this.RetardRightButton.UseVisualStyleBackColor = true;
+            this.RetardRightButton.Click += new System.EventHandler(this.RetardRightButton_Click);
+            // 
             // AdministrateurAccueil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 661);
+            this.Controls.Add(this.RetardRightButton);
+            this.Controls.Add(this.RetardLeftButton);
+            this.Controls.Add(this.ProloRightButton);
+            this.Controls.Add(this.ProloLeftButton);
+            this.Controls.Add(this.RightNonEmprButton);
+            this.Controls.Add(this.LeftNonEmprButton);
+            this.Controls.Add(this.RightListButton);
+            this.Controls.Add(this.LeftListButton);
             this.Controls.Add(this.PurgerAbonnes);
             this.Controls.Add(this.déconnexion);
             this.Controls.Add(this.ListeAbonne);
@@ -186,5 +282,13 @@ namespace AppliGrpR
         private System.Windows.Forms.Label ListeAbonne;
         private System.Windows.Forms.Button déconnexion;
         private System.Windows.Forms.Button PurgerAbonnes;
+        private System.Windows.Forms.Button LeftListButton;
+        private System.Windows.Forms.Button RightListButton;
+        private System.Windows.Forms.Button LeftNonEmprButton;
+        private System.Windows.Forms.Button RightNonEmprButton;
+        private System.Windows.Forms.Button ProloLeftButton;
+        private System.Windows.Forms.Button ProloRightButton;
+        private System.Windows.Forms.Button RetardLeftButton;
+        private System.Windows.Forms.Button RetardRightButton;
     }
 }

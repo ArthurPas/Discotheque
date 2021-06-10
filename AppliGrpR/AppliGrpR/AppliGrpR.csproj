@@ -86,6 +86,7 @@
     <Compile Include="Administrateur_Connexion.Designer.cs">
       <DependentUpon>Administrateur_Connexion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Affichage_Utils.cs" />
     <Compile Include="Albums.cs" />
     <Compile Include="Accueil.cs">
       <SubType>Form</SubType>

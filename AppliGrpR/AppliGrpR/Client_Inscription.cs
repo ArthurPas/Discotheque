@@ -41,11 +41,11 @@ namespace AppliGrpR
             OleDbCommand cmdConsult = new OleDbCommand(consult, dbCon);
             OleDbDataReader reader = cmdConsult.ExecuteReader();
 
-            /*disableAllErrorMessage();
+            disableAllErrorMessage();
             valide = manageErrorMessage();
 
             if (valide)
-            {*/
+            {
                 if (!reader.HasRows)
                 {
                     string insert = "insert into ABONNÉS(CODE_PAYS,NOM_ABONNÉ,PRÉNOM_ABONNÉ,LOGIN_ABONNÉ,PASSWORD_ABONNÉ) values(?,?,?,?,?)";
@@ -75,7 +75,7 @@ namespace AppliGrpR
                 {
                     MessageBox.Show("Erreur un compte existe déja avec le même identifiant");
                 }
-            //}
+            }
             
         }
 

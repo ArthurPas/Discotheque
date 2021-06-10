@@ -25,7 +25,8 @@ namespace AppliGrpR
         public static string Id;
         public static string MotDePasse;
         public static int numeroAbonne;
-        public int index = 1;
+        public int indexEmprunt = 1;
+        public int indexTout = 1;
         public Abonne_Accueil()
         {
             InitializeComponent();
@@ -156,7 +157,7 @@ namespace AppliGrpR
                 album.Add(titre);
                 
             }
-            AfficherPageConseil();
+            AfficherTout();
             reader.Close();
         }
 
@@ -261,7 +262,7 @@ namespace AppliGrpR
         public void AfficherPageEmprunt()
         {
             
-            for (int i = 10 * index - 10; i < 10 * index; i++)
+            for (int i = 10 * indexEmprunt - 10; i < 10 * indexEmprunt; i++)
             {
                 if (i <empruntés.Count)
                 {
@@ -269,9 +270,9 @@ namespace AppliGrpR
                 }
             }
         }
-        public void AfficherPageConseil()
+        public void AfficherTout()
         {
-            for (int i = 10 * index - 10; i < 10 * index; i++)
+            for (int i = 10 * indexTout - 10; i < 10 * indexTout; i++)
             {
                 if (i < album.Count)
                 {
@@ -279,41 +280,34 @@ namespace AppliGrpR
                 }
             }
         }
-        public void PlusUnePage()
-        {
-            index++;
-        }
-        public void MoinsUnePage()
-        {
-            if(index > 1) { 
-                index--;
-            }
-        }
         private void ButtonRightEmprunt_Click(object sender, EventArgs e)
         {
             AlbumsEmpruntes.Items.Clear();
-            PlusUnePage();
+            indexEmprunt++;
             AfficherPageEmprunt();
         }
 
         private void ButtonLeftEmprunt_Click(object sender, EventArgs e)
         {
             AlbumsEmpruntes.Items.Clear();
-            MoinsUnePage();
+            if (indexEmprunt > 1)
+            {
+                indexEmprunt--;
+            }
             AfficherPageEmprunt();
         }
         private void ToutRightButton_Click(object sender, EventArgs e)
         {
             TousLesAlbums.Items.Clear();
-            PlusUnePage();
-            AfficherPageConseil();
+            indexTout++;
+            AfficherTout();
         }
 
         private void ToutLeftButton_Click(object sender, EventArgs e)
         {
             TousLesAlbums.Items.Clear();
-            MoinsUnePage();
-            AfficherPageConseil();
+            indexTout--;
+            AfficherTout();
         }
     }
 }

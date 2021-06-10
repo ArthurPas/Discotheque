@@ -48,6 +48,9 @@ namespace AppliGrpR
             this.erreur_mdp = new System.Windows.Forms.Label();
             this.erreur_id = new System.Windows.Forms.Label();
             this.erreur_nom = new System.Windows.Forms.Label();
+            this.ConfirmationMdpTextBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.ConfirmationMdpLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ajouterAbonné
@@ -62,7 +65,7 @@ namespace AppliGrpR
             // Mot_de_passe
             // 
             this.Mot_de_passe.AutoSize = true;
-            this.Mot_de_passe.Location = new System.Drawing.Point(342, 441);
+            this.Mot_de_passe.Location = new System.Drawing.Point(324, 445);
             this.Mot_de_passe.Name = "Mot_de_passe";
             this.Mot_de_passe.Size = new System.Drawing.Size(71, 13);
             this.Mot_de_passe.TabIndex = 37;
@@ -71,7 +74,7 @@ namespace AppliGrpR
             // Identifiant
             // 
             this.Identifiant.AutoSize = true;
-            this.Identifiant.Location = new System.Drawing.Point(351, 381);
+            this.Identifiant.Location = new System.Drawing.Point(324, 381);
             this.Identifiant.Name = "Identifiant";
             this.Identifiant.Size = new System.Drawing.Size(53, 13);
             this.Identifiant.TabIndex = 36;
@@ -80,7 +83,7 @@ namespace AppliGrpR
             // Prénom
             // 
             this.Prénom.AutoSize = true;
-            this.Prénom.Location = new System.Drawing.Point(361, 268);
+            this.Prénom.Location = new System.Drawing.Point(324, 272);
             this.Prénom.Name = "Prénom";
             this.Prénom.Size = new System.Drawing.Size(43, 13);
             this.Prénom.TabIndex = 35;
@@ -89,7 +92,7 @@ namespace AppliGrpR
             // Nom
             // 
             this.Nom.AutoSize = true;
-            this.Nom.Location = new System.Drawing.Point(375, 208);
+            this.Nom.Location = new System.Drawing.Point(324, 208);
             this.Nom.Name = "Nom";
             this.Nom.Size = new System.Drawing.Size(29, 13);
             this.Nom.TabIndex = 34;
@@ -98,7 +101,7 @@ namespace AppliGrpR
             // Nationalité
             // 
             this.Nationalité.AutoSize = true;
-            this.Nationalité.Location = new System.Drawing.Point(361, 325);
+            this.Nationalité.Location = new System.Drawing.Point(324, 330);
             this.Nationalité.Name = "Nationalité";
             this.Nationalité.Size = new System.Drawing.Size(57, 13);
             this.Nationalité.TabIndex = 33;
@@ -106,7 +109,7 @@ namespace AppliGrpR
             // 
             // inscription
             // 
-            this.inscription.Location = new System.Drawing.Point(468, 508);
+            this.inscription.Location = new System.Drawing.Point(464, 531);
             this.inscription.Name = "inscription";
             this.inscription.Size = new System.Drawing.Size(168, 39);
             this.inscription.TabIndex = 32;
@@ -225,11 +228,42 @@ namespace AppliGrpR
             this.erreur_nom.Tag = "erreur";
             this.erreur_nom.Text = "! Saisissez votre  Nom";
             // 
+            // ConfirmationMdpTextBox
+            // 
+            this.ConfirmationMdpTextBox.Location = new System.Drawing.Point(441, 482);
+            this.ConfirmationMdpTextBox.Name = "ConfirmationMdpTextBox";
+            this.ConfirmationMdpTextBox.Size = new System.Drawing.Size(219, 20);
+            this.ConfirmationMdpTextBox.TabIndex = 49;
+            this.ConfirmationMdpTextBox.TextChanged += new System.EventHandler(this.ConfirmationMdpTextBox_TextChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(324, 489);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(117, 13);
+            this.label2.TabIndex = 50;
+            this.label2.Text = "Confirmer mot de passe";
+            // 
+            // ConfirmationMdpLabel
+            // 
+            this.ConfirmationMdpLabel.AutoSize = true;
+            this.ConfirmationMdpLabel.ForeColor = System.Drawing.Color.Red;
+            this.ConfirmationMdpLabel.Location = new System.Drawing.Point(444, 505);
+            this.ConfirmationMdpLabel.Name = "ConfirmationMdpLabel";
+            this.ConfirmationMdpLabel.Size = new System.Drawing.Size(175, 13);
+            this.ConfirmationMdpLabel.TabIndex = 51;
+            this.ConfirmationMdpLabel.Tag = "erreur";
+            this.ConfirmationMdpLabel.Text = "! Saisissez le même le mot de passe";
+            // 
             // Client_Inscription
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 661);
+            this.Controls.Add(this.ConfirmationMdpLabel);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.ConfirmationMdpTextBox);
             this.Controls.Add(this.erreur_nom);
             this.Controls.Add(this.erreur_id);
             this.Controls.Add(this.erreur_mdp);
@@ -276,5 +310,8 @@ namespace AppliGrpR
         private System.Windows.Forms.Label erreur_mdp;
         private System.Windows.Forms.Label erreur_id;
         private System.Windows.Forms.Label erreur_nom;
+        private System.Windows.Forms.TextBox ConfirmationMdpTextBox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label ConfirmationMdpLabel;
     }
 }

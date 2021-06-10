@@ -24,10 +24,14 @@ namespace AppliGrpR
                 if (index < getIindexedMax(index, list, taille))
                     index++;
             }
-            else
+            if(direction == -1)
             {
                 if (index > 1)
                     index--;
+            }
+            if(direction == 0)
+            {
+                index = 1;
             }
 
             AfficherPagination(index, listBox, list, label, taille);
@@ -48,9 +52,17 @@ namespace AppliGrpR
         }
         static public double getIindexedMax(int index, List<string> list, int taille)
         {
+
             float l = list.Count;
             float t = taille;
-            return Math.Ceiling(l / t);
+            if (l > 0)
+            {
+                return Math.Ceiling(l / t);
+            }
+            else
+            {
+                return 1;
+            }
         }
 
         /// <summary>
@@ -68,10 +80,14 @@ namespace AppliGrpR
                 if (index < getIindexedMaxAlbum(index, list, taille))
                     index++;
             }
-            else
+            if (direction == -1)
             {
                 if (index > 1)
                     index--;
+            }
+            if (direction == 0)
+            {
+                index = 1;
             }
             AfficherPaginationAvecAlbum(index, listBox, list, label, taille);
         }
@@ -95,7 +111,14 @@ namespace AppliGrpR
         {
             float l = list.Count;
             float t = taille;
-            return Math.Ceiling(l / t);
+            if (l > 0)
+            {
+                return Math.Ceiling(l / t);
+            }
+            else
+            {
+                return 1;
+            }
         }
     }
 }

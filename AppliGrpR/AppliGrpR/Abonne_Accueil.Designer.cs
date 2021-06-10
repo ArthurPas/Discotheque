@@ -56,7 +56,7 @@ namespace AppliGrpR
             this.AlbumsConseillés.FormattingEnabled = true;
             this.AlbumsConseillés.Location = new System.Drawing.Point(147, 245);
             this.AlbumsConseillés.Name = "AlbumsConseillés";
-            this.AlbumsConseillés.Size = new System.Drawing.Size(793, 160);
+            this.AlbumsConseillés.Size = new System.Drawing.Size(793, 147);
             this.AlbumsConseillés.TabIndex = 1;
             // 
             // AlbumsEmpruntes

@@ -18,6 +18,7 @@ namespace AppliGrpR
         public static List<Albums> empruntés = new List<Albums>();
         List<string> genres = new List<string>();
         List<string> album = new List<string>();
+        List<string> albumRecherche = new List<string>();
         public static List<Albums> suggestionsAlbums = new List<Albums>();
         public static List<Albums> suggestionsAlbumsChoisit = new List<Albums>();
         int CodeAlbumEmprunter= 0;
@@ -168,7 +169,7 @@ namespace AppliGrpR
         {
             if (RechercherTextBox.Text.Equals(""))
             {
-                Album();
+                Album();               
             }
             else
             {
@@ -184,14 +185,19 @@ namespace AppliGrpR
                     "WHERE TITRE_ALBUM LIKE '%" + titreRech + "%'";
                 OleDbCommand cmd = new OleDbCommand(sql, dbCon);
                 OleDbDataReader reader = cmd.ExecuteReader();
+
+                albumRecherche.Clear();
+
                 while (reader.Read())
                 {
                     string titre = reader.GetString(0);
                     int id = reader.GetInt32(1);
                     Albums a = new Albums(id, titre);
-                    TousLesAlbums.Items.Add(titre);
+                    albumRecherche.Add(titre);
 
-                }
+                } 
+                Affichage_Utils.Paginer(ref indexTout, TousLesAlbums, albumRecherche, pageAlbum, 10,0);
+
             }
         }
 
@@ -299,14 +305,29 @@ namespace AppliGrpR
         }
         private void ToutRightButton_Click(object sender, EventArgs e)
         {
+            if (RechercherTextBox.Text.Equals(""))
+            {
+                Affichage_Utils.Paginer(ref indexTout, TousLesAlbums, album, pageAlbum, 10, 1);
 
-            Affichage_Utils.Paginer(ref indexTout,TousLesAlbums ,album, pageAlbum, 10, 1);
+            }
+            else
+            {
+                Affichage_Utils.Paginer(ref indexTout, TousLesAlbums, albumRecherche, pageAlbum, 10, 1);
+            }
 
         }
 
         private void ToutLeftButton_Click(object sender, EventArgs e)
         {
-            Affichage_Utils.Paginer(ref indexTout, TousLesAlbums, album, pageAlbum, 10, -1);
+            if (RechercherTextBox.Text.Equals(""))
+            {
+                Affichage_Utils.Paginer(ref indexTout, TousLesAlbums, album, pageAlbum, 10, -1);
+
+            }
+            else
+            {
+                Affichage_Utils.Paginer(ref indexTout, TousLesAlbums, albumRecherche, pageAlbum, 10, -1);
+            }
 
         }
     }

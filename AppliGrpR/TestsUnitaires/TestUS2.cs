@@ -84,7 +84,7 @@ namespace TestsUnitaires
             }
             Assert.IsTrue(same);
             string deleteFromEmprunts = "DELETE FROM EMPRUNTER WHERE CODE_ABONNÉ = (SELECT CODE_ABONNÉ FROM ABONNÉS WHERE LOGIN_ABONNÉ ='" + login + "' AND PASSWORD_ABONNÉ = '" + mdp + "')";
-            string deleteFromAbonnés = "DELETE FROM ABONNÉS WHERE LOGIN_ABONNÉ ='testUS2' AND PASSWORD_ABONNÉ = 'US2TestMDP'";
+            string deleteFromAbonnés = "DELETE FROM ABONNÉS WHERE LOGIN_ABONNÉ ='" + login + "' AND PASSWORD_ABONNÉ = '" + mdp + "'";
             OleDbCommand cmdDeleteFromEmprunts = new OleDbCommand(deleteFromEmprunts, dbCon);
             cmdDeleteFromEmprunts.ExecuteNonQuery();
             OleDbCommand cmdDeleteFromAbonnés = new OleDbCommand(deleteFromAbonnés, dbCon);
@@ -156,7 +156,7 @@ namespace TestsUnitaires
             }
             Assert.IsTrue(same);
             string deleteFromEmprunts = "DELETE FROM EMPRUNTER WHERE CODE_ABONNÉ = (SELECT CODE_ABONNÉ FROM ABONNÉS WHERE LOGIN_ABONNÉ ='" + login + "' AND PASSWORD_ABONNÉ = '" + mdp + "')";
-            string deleteFromAbonnés = "DELETE FROM ABONNÉS WHERE LOGIN_ABONNÉ ='testUS2' AND PASSWORD_ABONNÉ = 'US2TestMDP'";
+            string deleteFromAbonnés = "DELETE FROM ABONNÉS WHERE LOGIN_ABONNÉ ='"+login+"' AND PASSWORD_ABONNÉ = '"+mdp+"'";
             OleDbCommand cmdDeleteFromEmprunts = new OleDbCommand(deleteFromEmprunts, dbCon);
             cmdDeleteFromEmprunts.ExecuteNonQuery();
             OleDbCommand cmdDeleteFromAbonnés = new OleDbCommand(deleteFromAbonnés, dbCon);
@@ -208,7 +208,7 @@ namespace TestsUnitaires
                 i++;
             }
             Assert.IsTrue(same);
-            string deleteFromAbonnés = "DELETE FROM ABONNÉS WHERE LOGIN_ABONNÉ ='testUS2' AND PASSWORD_ABONNÉ = 'US2TestMDP'";
+            string deleteFromAbonnés = "DELETE FROM ABONNÉS WHERE LOGIN_ABONNÉ ='" + login + "' AND PASSWORD_ABONNÉ = '" + mdp + "'";
             OleDbCommand cmdDeleteFromAbonnés = new OleDbCommand(deleteFromAbonnés, dbCon);
             cmdDeleteFromAbonnés.ExecuteNonQuery();
         }

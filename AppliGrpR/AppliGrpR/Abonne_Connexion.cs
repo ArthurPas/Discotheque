@@ -32,18 +32,12 @@ namespace AppliGrpR
             string sql = "Select PASSWORD_ABONNÉ from ABONNÉS where LOGIN_ABONNÉ = '"+ pseudoTextBox.Text + "'";
             OleDbCommand cmd = new OleDbCommand(sql, dbCon);
             string motDePasseBDD = "";
-            string motDePasse = motdepassetextbox.Text;
-            int taille = motDePasse.Length;
-            char c = ' ';
-            while(taille!=32)
-            {
-                motDePasse+=c;
-                taille = motDePasse.Length;
-            }
+            string motDePasse = motdepassetextbox.Text.Trim(' ');
+            
             OleDbDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                motDePasseBDD = reader.GetString(0);
+                motDePasseBDD = reader.GetString(0).Trim(' ');
             }
             string a = DecryptageDeMotDePasse(motDePasseBDD);
             if (motDePasse.Equals(DecryptageDeMotDePasse(motDePasseBDD)))

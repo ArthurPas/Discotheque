@@ -430,5 +430,12 @@ namespace AppliGrpR
                 }     
             }
         }
+
+        private void modifierMdp_Click(object sender, EventArgs e)
+        {
+            Abonne_ModifierMdp a = new Abonne_ModifierMdp();
+            a.Show();
+            this.Close();
+        }
     }
 }

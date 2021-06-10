@@ -77,6 +77,12 @@
     <Compile Include="Abonne_Connexion.Designer.cs">
       <DependentUpon>Abonne_Connexion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abonne_ModifierMdp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abonne_ModifierMdp.Designer.cs">
+      <DependentUpon>Abonne_ModifierMdp.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abonne_Prolonger.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,6 +135,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Abonne_ModifierMdp.resx">
+      <DependentUpon>Abonne_ModifierMdp.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Accueil.resx">
       <DependentUpon>Accueil.cs</DependentUpon>
     </EmbeddedResource>

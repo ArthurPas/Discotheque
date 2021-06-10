@@ -22,6 +22,7 @@ namespace AppliGrpR
         public static List<Albums> suggestionsAlbums = new List<Albums>();
         public static List<Albums> suggestionsAlbumsChoisit = new List<Albums>();
         int CodeAlbumEmprunter= 0;
+        int CodeAlbumRendre = 0;
         public static string Nom;
         public static string Prenom;
         public static string Id;
@@ -67,7 +68,7 @@ namespace AppliGrpR
             string sql = "select  EMPRUNTER.CODE_ALBUM, TITRE_ALBUM, DATE_RETOUR_ATTENDUE from EMPRUNTER " +
                 "Inner join ALBUMS on EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
                 "Inner join ABONNÉS on EMPRUNTER.CODE_ABONNÉ = ABONNÉS.CODE_ABONNÉ " +
-                "WHERE ABONNÉS.CODE_ABONNÉ = '" + numeroAbo + "'";
+                "WHERE ABONNÉS.CODE_ABONNÉ = '" + numeroAbo + "' AND DATE_RETOUR IS NULL";
 
 
             OleDbCommand cmdRead = new OleDbCommand(sql, dbCon);
@@ -225,31 +226,53 @@ namespace AppliGrpR
         public bool EmprunterFonction(int codeAlbum, int numAbo)
         {
             bool effectuer = true;
-            try
+            string sqlEmpruntExistant = "SELECT DATE_RETOUR FROM EMPRUNTER WHERE CODE_ALBUM = " + codeAlbum + " and CODE_ABONNÉ = " + numAbo+"AND DATE_RETOUR IS NOT NULL";
+            OleDbCommand cmdEmpruntExistant = new OleDbCommand(sqlEmpruntExistant, dbCon);
+            cmdEmpruntExistant.ExecuteNonQuery();
+            OleDbDataReader rdTestEmprunt = cmdEmpruntExistant.ExecuteReader();
+            if (rdTestEmprunt.Read())
             {
-                int codeAbo = numAbo;
-                int delayNumber = 0;
-                string delay = "SELECT DÉLAI FROM GENRES INNER JOIN ALBUMS on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE " +
-                    "WHERE ALBUMS.CODE_ALBUM = " + codeAlbum;
-                OleDbCommand cmdDelay = new OleDbCommand(delay, dbCon);
-                cmdDelay.ExecuteNonQuery();
-                OleDbDataReader readerDelay = cmdDelay.ExecuteReader();
-                while (readerDelay.Read())
+                try
                 {
-                    delayNumber = readerDelay.GetInt32(0);
+                    string delete = "DELETE FROM EMPRUNTER WHERE CODE_ALBUM = " + codeAlbum + " and CODE_ABONNÉ = " + numAbo;
+                    OleDbCommand deleteFromEmprunt = new OleDbCommand(delete, dbCon);
+                    deleteFromEmprunt.ExecuteNonQuery();
+                    int codeAbo = numAbo;
+                    int delayNumber = 0;
+                    string delay = "SELECT DÉLAI FROM GENRES INNER JOIN ALBUMS on ALBUMS.CODE_GENRE = GENRES.CODE_GENRE " +
+                        "WHERE ALBUMS.CODE_ALBUM = " + codeAlbum;
+                    OleDbCommand cmdDelay = new OleDbCommand(delay, dbCon);
+                    cmdDelay.ExecuteNonQuery();
+                    OleDbDataReader readerDelay = cmdDelay.ExecuteReader();
+                    while (readerDelay.Read())
+                    {
+                        delayNumber = readerDelay.GetInt32(0);
+                    }
+                    string request = "insert into EMPRUNTER(CODE_ABONNÉ,CODE_ALBUM,DATE_EMPRUNT,DATE_RETOUR_ATTENDUE) " +
+                        "values(" + codeAbo + ", ?, GETDATE(),DATEADD(Day,?,GETDATE()))";
+                    OleDbCommand cmdTwo = new OleDbCommand(request, dbCon);
+                    cmdTwo.Parameters.Add("CODE_ALBUM", OleDbType.Integer).Value = codeAlbum;
+                    cmdTwo.Parameters.Add("CODE_ALBUM", OleDbType.Integer).Value = delayNumber;
+                    cmdTwo.ExecuteNonQuery();
                 }
-                string request = "insert into EMPRUNTER(CODE_ABONNÉ,CODE_ALBUM,DATE_EMPRUNT,DATE_RETOUR_ATTENDUE) " +
-                    "values(" + codeAbo + ", ?, GETDATE(),DATEADD(Day,?,GETDATE()))";
-                OleDbCommand cmdTwo = new OleDbCommand(request, dbCon);
-                cmdTwo.Parameters.Add("CODE_ALBUM", OleDbType.Integer).Value = codeAlbum;
-                cmdTwo.Parameters.Add("CODE_ALBUM", OleDbType.Integer).Value = delayNumber;
-                cmdTwo.ExecuteNonQuery();
-            }
-            catch(System.Data.OleDb.OleDbException e)
+                catch (System.Data.OleDb.OleDbException e)
+                {
+                    effectuer = false;
+                }
+            } else
             {
-                effectuer = false;
+                MessageBox.Show("Il faut rendre le CD pour le ré-emprunter.");
             }
             return effectuer;
+        }
+
+        public void RendreFonction(int codeAbo)
+        {
+            int numAbo = codeAbo;
+            string sqlRendreCD = "UPDATE EMPRUNTER SET DATE_RETOUR = GETDATE() " +
+                "WHERE CODE_ABONNÉ = " + numAbo + " AND CODE_ALBUM = " + CodeAlbumRendre;
+            OleDbCommand cmdRendreCD = new OleDbCommand(sqlRendreCD,dbCon);
+            cmdRendreCD.ExecuteNonQuery();
         }
 
         private void TousLesAlbums_SelectedIndexChanged(object sender, EventArgs e)
@@ -343,6 +366,37 @@ namespace AppliGrpR
                 Affichage_Utils.Paginer(ref indexTout, TousLesAlbums, albumRecherche, pageAlbum, 10, -1);
             }
 
+        }
+
+        private void buttonRendre_MouseDown(object sender, MouseEventArgs e)
+        {
+            RendreFonction(SetNumAbonne());
+            empruntés.Clear();
+            ConsultAlbum(SetNumAbonne());
+
+        }
+
+        private void AlbumsEmpruntes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (AlbumsEmpruntes.SelectedItem != null)
+            {
+                string apostrophe = "'";
+                Albums a = (Albums)AlbumsEmpruntes.SelectedItem;
+                string titre = a.getTitre();
+                if (titre.Contains("'"))
+                {
+                    titre = titre.Insert(titre.IndexOf("'"), apostrophe);
+                }
+
+                string sql = "SELECT CODE_ALBUM FROM ALBUMS WHERE TITRE_ALBUM ='" + titre + "'";
+                OleDbCommand cmd = new OleDbCommand(sql, dbCon);
+                cmd.ExecuteNonQuery();
+                OleDbDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    CodeAlbumRendre = reader.GetInt32(0);
+                }     
+            }
         }
     }
 }

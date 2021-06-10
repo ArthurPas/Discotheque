@@ -48,6 +48,7 @@ namespace AppliGrpR
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pageEmprunté = new System.Windows.Forms.Label();
             this.pageAlbum = new System.Windows.Forms.Label();
+            this.buttonRendre = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -66,6 +67,7 @@ namespace AppliGrpR
             this.AlbumsEmpruntes.Name = "AlbumsEmpruntes";
             this.AlbumsEmpruntes.Size = new System.Drawing.Size(793, 134);
             this.AlbumsEmpruntes.TabIndex = 2;
+            this.AlbumsEmpruntes.SelectedIndexChanged += new System.EventHandler(this.AlbumsEmpruntes_SelectedIndexChanged);
             // 
             // TousLesAlbums
             // 
@@ -141,7 +143,7 @@ namespace AppliGrpR
             // 
             // Prolonger_un_emprunt
             // 
-            this.Prolonger_un_emprunt.Location = new System.Drawing.Point(974, 120);
+            this.Prolonger_un_emprunt.Location = new System.Drawing.Point(974, 74);
             this.Prolonger_un_emprunt.Name = "Prolonger_un_emprunt";
             this.Prolonger_un_emprunt.Size = new System.Drawing.Size(73, 38);
             this.Prolonger_un_emprunt.TabIndex = 48;
@@ -225,11 +227,22 @@ namespace AppliGrpR
             this.pageAlbum.TabIndex = 58;
             this.pageAlbum.Text = "label2";
             // 
+            // buttonRendre
+            // 
+            this.buttonRendre.Location = new System.Drawing.Point(972, 165);
+            this.buttonRendre.Name = "buttonRendre";
+            this.buttonRendre.Size = new System.Drawing.Size(75, 34);
+            this.buttonRendre.TabIndex = 59;
+            this.buttonRendre.Text = "Rendre";
+            this.buttonRendre.UseVisualStyleBackColor = true;
+            this.buttonRendre.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonRendre_MouseDown);
+            // 
             // Abonne_Accueil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 661);
+            this.Controls.Add(this.buttonRendre);
             this.Controls.Add(this.pageAlbum);
             this.Controls.Add(this.pageEmprunté);
             this.Controls.Add(this.pictureBox1);
@@ -278,5 +291,6 @@ namespace AppliGrpR
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label pageEmprunté;
         private System.Windows.Forms.Label pageAlbum;
+        private System.Windows.Forms.Button buttonRendre;
     }
 }

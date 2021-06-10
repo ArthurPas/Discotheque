@@ -168,6 +168,11 @@ namespace AppliGrpR
                 valide = false;
                 erreur_nationalité.Visible = true;
             }
+            if (mdp_box.Text != ConfirmationMdpTextBox.Text || ConfirmationMdpTextBox.Text == "")
+            {
+                valide = false;
+                ConfirmationMdpLabel.Visible = true;
+            }
             return valide;
         }
 
@@ -186,5 +191,9 @@ namespace AppliGrpR
             this.Close();
         }
 
+        private void ConfirmationMdpTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

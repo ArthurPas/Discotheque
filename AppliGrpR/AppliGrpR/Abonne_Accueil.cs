@@ -276,12 +276,17 @@ namespace AppliGrpR
                 OleDbCommand cmdimage = new OleDbCommand(sqlimage, dbCon);
                 cmdimage.ExecuteNonQuery();
                 OleDbDataReader readerimage = cmdimage.ExecuteReader();
-                if (readerimage.Read()) // rd est ma datareader
+                if (readerimage.Read())
                 {
+                    pictureBox1.Visible = true;
                     byte[] image = (byte[])readerimage[0];
                     MemoryStream ms = new MemoryStream(image);
-                    pictureBox1.Image = new Bitmap(ms); // pboPhoto est ma picture box
+                    pictureBox1.Image = new Bitmap(ms);
                     pictureBox1.Image = resizeImage(pictureBox1.Image, new Size(200, 200));
+                }
+                else
+                {
+                    pictureBox1.Visible = false;
                 }
                 readerimage.Close();
             }

@@ -25,15 +25,15 @@ namespace AppliGrpR
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             listCasierEmprunts.Items.Clear();
-            EmpruntsCasier();           
+            EmpruntsCasier();
         }
 
         public void EmpruntsCasier()
         {
-            int codeCasier = (int)numCasier.SelectedIndex+1;
+            int codeCasier = (int)numCasier.SelectedIndex + 1;
             string sqlEmpruntsCasier = "SELECT TITRE_ALBUM FROM ALBUMS INNER JOIN EMPRUNTER " +
                 "ON EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
-                "WHERE CASIER_ALBUM = "+codeCasier+"  AND DATE_RETOUR IS NULL";
+                "WHERE CASIER_ALBUM = " + codeCasier + "  AND DATE_RETOUR IS NULL";
             OleDbCommand cmdEmpruntsCasier = new OleDbCommand(sqlEmpruntsCasier, dbCon);
             cmdEmpruntsCasier.ExecuteNonQuery();
             OleDbDataReader rdEmpruntsCasier = cmdEmpruntsCasier.ExecuteReader();
@@ -63,23 +63,27 @@ namespace AppliGrpR
 
         private void listCasierEmprunts_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string titre = listCasierEmprunts.SelectedItem.ToString();
-            string sqlimage = "SELECT POCHETTE FROM ALBUMS WHERE TITRE_ALBUM ='" + titre + "' and POCHETTE is not null";
-            OleDbCommand cmdimage = new OleDbCommand(sqlimage, dbCon);
-            cmdimage.ExecuteNonQuery();
-            OleDbDataReader readerimage = cmdimage.ExecuteReader();
-            if (readerimage.Read())
+            if (listCasierEmprunts.SelectedItem != null)
             {
-                byte[] image = (byte[])readerimage[0];
-                MemoryStream ms = new MemoryStream(image);
-                imageAlbum.Image = new Bitmap(ms);
-                imageAlbum.Image = Abonne_Accueil.resizeImage(imageAlbum.Image, new Size(200, 200));
-            }
-            else
-            {
+                string titre = listCasierEmprunts.SelectedItem.ToString();
+                string sqlimage = "SELECT POCHETTE FROM ALBUMS WHERE TITRE_ALBUM ='" + titre + "' and POCHETTE is not null";
+                OleDbCommand cmdimage = new OleDbCommand(sqlimage, dbCon);
+                cmdimage.ExecuteNonQuery();
+                OleDbDataReader readerimage = cmdimage.ExecuteReader();
+                if (readerimage.Read())
+                {
+                    byte[] image = (byte[])readerimage[0];
+                    MemoryStream ms = new MemoryStream(image);
+                    imageAlbum.Image = new Bitmap(ms);
+                    imageAlbum.Image = Abonne_Accueil.resizeImage(imageAlbum.Image, new Size(200, 200));
+                }
+                else
+                {
 
+                }
+                readerimage.Close();
             }
-            readerimage.Close();
         }
     }
 }
+

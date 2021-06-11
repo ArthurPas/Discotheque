@@ -33,7 +33,6 @@ namespace AppliGrpR
         /// Permet de vérifier si les paramètres pour l'inscription sont valides
         /// </summary>
         /// <returns>TRUE si valide, FALSE sinon</returns>
-        /// 
         public bool InscriptionValide()
         {
             bool valide = true;

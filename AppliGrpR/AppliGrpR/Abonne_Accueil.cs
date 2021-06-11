@@ -182,24 +182,17 @@ namespace AppliGrpR
                 {
                     TousLesAlbums.Items.Clear();
                     string apostrophe = "'";
-                    int positionApostrophe = -1;
                     string titreRech = RechercherTextBox.Text;
-                    for (int i = titreRech.Length - 1; i < titreRech.Length; i++)
+                    int i = 0;
+                    while (i < titreRech.Length)
                     {
-                        positionApostrophe = titreRech.IndexOf(apostrophe, positionApostrophe + 2);
-                        if (i == 0)
+                        if (titreRech[i] == apostrophe[0])
                         {
-                            positionApostrophe = titreRech.IndexOf(apostrophe, positionApostrophe + 1);
-                        }
-                        if (positionApostrophe != -1 && titreRech.Substring(positionApostrophe).Contains("'"))
-                        {
-                            titreRech = titreRech.Insert(positionApostrophe + 1, apostrophe);
-                        }
-                        else
-                        {
-                            i = titreRech.Length;
-                        }
+                            titreRech = titreRech.Insert(i, apostrophe);
+                            i++;
 
+                        }
+                        i++;
                     }
 
                     string sql = "SELECT TITRE_ALBUM, ALBUMS.CODE_ALBUM " +
@@ -355,20 +348,15 @@ namespace AppliGrpR
             {
                 string titre = TousLesAlbums.SelectedItem.ToString();
                 string apostrophe = "'";
-                int positionApostrophe = -1;
-                for (int i = 0; i < titre.Length; i++)
+                int i = 0;
+                while (i < titre.Length)
                 {
-
-                    positionApostrophe = titre.IndexOf(apostrophe,positionApostrophe+2);
-                    if (positionApostrophe != -1 && titre.Substring(positionApostrophe).Contains("'"))
+                    if (titre[i] == apostrophe[0])
                     {
-                        titre = titre.Insert(positionApostrophe + 1, apostrophe);
+                        titre = titre.Insert(i, apostrophe);
+                        i++;
                     }
-                    else
-                    {
-                        i = titre.Length;
-                    }
-                    
+                    i++;
                 }
                 string sql = "SELECT CODE_ALBUM FROM ALBUMS WHERE TITRE_ALBUM ='" + titre + "'";
                 OleDbCommand cmd = new OleDbCommand(sql, dbCon);

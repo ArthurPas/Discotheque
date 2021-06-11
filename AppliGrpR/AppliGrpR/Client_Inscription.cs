@@ -29,6 +29,11 @@ namespace AppliGrpR
             disableAllErrorMessage();
         }
 
+        /// <summary>
+        /// Permet de vérifier si les paramètres pour l'inscription sont valides
+        /// </summary>
+        /// <returns>TRUE si valide, FALSE sinon</returns>
+        /// 
         public bool InscriptionValide()
         {
             bool valide = true;
@@ -37,7 +42,7 @@ namespace AppliGrpR
             return valide;
         }
         /// <summary>
-        /// Ajoute un Abonné à la Base depuis les valeurs récupéré dans les textBox
+        /// Ajoute un Abonné à la Base depuis les valeurs récupérées dans les textBox
         /// </summary>
 
         public void AddAbonnes(string idbox, string nationalitebox, string nombox, string mdpbox, string prenombox)
@@ -79,6 +84,11 @@ namespace AppliGrpR
 
         }
 
+        /// <summary>
+        /// Permet de crypter un mot de passe
+        /// </summary>
+        /// <param name="mdp">le mot de passe à crypter</param>
+        /// <returns>le mot de passe crypté</returns>
         public string EncryptageDeMotDePasse(string mdp)
         {
             string encrypt = "";
@@ -95,6 +105,9 @@ namespace AppliGrpR
             return encrypt;
         }
 
+        /// <summary>
+        /// Permet à l'utilisateur de choisir sa nationnalité
+        /// </summary>
         public void Nationalite()
         {
             string sql = "select * from PAYS";
@@ -116,10 +129,10 @@ namespace AppliGrpR
         }
 
         /// <summary>
-        /// Renvoie le code Pays a partir du nom d'un pays
+        /// Renvoie le code Pays à partir du nom d'un pays
         /// </summary>
-        /// <param name="pays"></param>
-        /// <returns></returns>
+        /// <param name="pays">le pays choisi</param>
+        /// <returns>le code d'un pays</returns>
         private string getCodePaysFromNationalite(string pays)
         {
             string sql = "select CODE_PAYS from PAYS WHERE NOM_PAYS ='" + pays + "'";
@@ -136,7 +149,7 @@ namespace AppliGrpR
         }
 
         /// <summary>
-        ///  Désactive to les messages d'erreurs que l'on affichera indépendament si nécessaire
+        /// Désactive tous les messages d'erreurs que l'on affichera indépendamment si nécessaire
         /// </summary>
         void disableAllErrorMessage()
         {
@@ -208,10 +221,12 @@ namespace AppliGrpR
             this.Close();
         }
 
+
         private void ConfirmationMdpTextBox_TextChanged(object sender, EventArgs e)
         {
 
         }
+
 
         private void viewConfirmMdp_Click(object sender, EventArgs e)
         {

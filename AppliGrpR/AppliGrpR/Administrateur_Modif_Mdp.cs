@@ -73,7 +73,7 @@ namespace AppliGrpR
                     {
                         MessageBox.Show("Le mot de passe est le même que l'ancien");
                     }
-                    string sql = "update ABONNÉS set PASSWORD_ABONNÉ = '" + EncryptageDeMotDePasse(newMdp_box.Text) + "' where LOGIN_ABONNÉ = '" + logAbonneSelectionne + "'";
+                    string sql = "update ABONNÉS set PASSWORD_ABONNÉ = '" + Utils.manageSingleQuote(EncryptageDeMotDePasse(newMdp_box.Text)) + "' where LOGIN_ABONNÉ = '" + logAbonneSelectionne + "'";
                     OleDbCommand cmdUpdate = new OleDbCommand(sql, dbCon);
                     cmdUpdate.ExecuteNonQuery();
                     MessageBox.Show("Le mot de passe a bien été mis à jour");

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AppliGrpR
 {
-    static class Utils
+    public static class Utils
     {
         /// <summary>
         /// permet de doubler tout les apostrophes

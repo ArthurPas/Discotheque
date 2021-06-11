@@ -32,6 +32,7 @@ namespace AppliGrpR
         
         public int indexEmprunt = 1;
         public int indexTout = 1;
+
         public Abonne_Accueil(string nom, string prenom, string login)
         {
             this.Nom = nom;
@@ -43,6 +44,9 @@ namespace AppliGrpR
             refreshList();
         }
 
+        /// <summary>
+        /// Permet d'actualiser les différentes Listes
+        /// </summary>
         public void refreshList()
         {
             ConsultAlbum(SetNumAbonne());
@@ -50,6 +54,10 @@ namespace AppliGrpR
             Album();
         }
 
+        /// <summary>
+        /// Permet d'obtenir le numéro de l'abonné qui est connecté
+        /// </summary>
+        /// <returns>la variable int code (le code de l'abonné)</returns>
         private int SetNumAbonne()
         {
             Accueil accueil = new Accueil();
@@ -67,6 +75,10 @@ namespace AppliGrpR
             return code;
         }
 
+        /// <summary>
+        /// Permet d'afficher la liste des albums que l'abonné a emprunté.
+        /// </summary>
+        /// <param name="numeroAbo">numéro de l'abonné</param>
         public void ConsultAlbum(int numeroAbo)
         {
             empruntés.Clear();
@@ -97,6 +109,10 @@ namespace AppliGrpR
             numeroAbonne = numeroAbo;
         }
 
+        /// <summary>
+        /// Suggère 10 albums a l'abonné connecté selon le genre le plus emprunté de l'abonné
+        /// </summary>
+        /// <param name="numeroAbo">numéro de l'abonné</param>
         public void Suggestions(int numeroAbo)
         {
             //test si l'abonné a déjà emprunté
@@ -150,6 +166,9 @@ namespace AppliGrpR
             }
         }
 
+        /// <summary>
+        /// Permet d'ajouter la liste de tous les albums.
+        /// </summary>
         public void Album()
         {
             album.Clear();
@@ -170,6 +189,11 @@ namespace AppliGrpR
             reader.Close();
         }
 
+        /// <summary>
+        /// Permet de rechercher un album selon son titre/auteur
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RechercherTextBox_TextChanged(object sender, EventArgs e)
         {
             if (RechercherTextBox.Text.Equals(""))
@@ -208,6 +232,11 @@ namespace AppliGrpR
             }
         }
 
+        /// <summary>
+        /// Gestion du clic sur le bouton Prolonger un emprunt
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Prolonger_un_emprunt_MouseDown(object sender, MouseEventArgs e)
         {
             Abonne_Prolonger Abonneprolonger = new Abonne_Prolonger(this);
@@ -215,6 +244,11 @@ namespace AppliGrpR
             Abonneprolonger.ShowDialog();
         }
 
+        /// <summary>
+        /// Permet à l'abonné d'emprunter un album 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Emprunter_MouseDown(object sender, MouseEventArgs e)
         {
             try
@@ -229,6 +263,13 @@ namespace AppliGrpR
             Suggestions(numeroAbonne);
         }
 
+        /// <summary>
+        /// Permet de valider l'emprunt et d'ajouter dans la liste des albums emprunté par 
+        /// l'abonné
+        /// </summary>
+        /// <param name="codeAlbum">code de l'album qui est emprunté</param>
+        /// <param name="numAbo">numéro de l'abonné qui emprunte l'album</param>
+        /// <returns></returns>
         public bool EmprunterFonction(int codeAlbum, int numAbo)
         {
             bool effectuer = true;
@@ -320,6 +361,12 @@ namespace AppliGrpR
             return effectuer;
         }
 
+        /// <summary>
+        /// Permet à l'utilisateur de rendre un album qu'il 
+        /// emprunte
+        /// </summary>
+        /// <param name="CodeAlbumRendre">le code de l'album qui va être rendu</param>
+        /// <param name="codeAbo">le code l'abonné qui rend un album</param>
         public void RendreFonction(int CodeAlbumRendre, int codeAbo)
         {
             int numAbo = codeAbo;
@@ -329,6 +376,12 @@ namespace AppliGrpR
             cmdRendreCD.ExecuteNonQuery();
         }
 
+        /// <summary>
+        /// Permet de sélectionner l'album sur lequel on a cliqué dans la liste
+        /// de tous les albums
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TousLesAlbums_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (TousLesAlbums.SelectedItem != null)
@@ -364,11 +417,22 @@ namespace AppliGrpR
             }
         }
 
+        /// <summary>
+        /// Permet de changer la taille d'une image
+        /// </summary>
+        /// <param name="imgToResize">l'image dont la taille va être changé</param>
+        /// <param name="size">nouvelle taille de l'image</param>
+        /// <returns></returns>
         public static Image resizeImage(Image imgToResize, Size size)
         {
             return (Image)(new Bitmap(imgToResize, size));
         }
 
+        /// <summary>
+        /// Permet de retourner à la page "Acceuil" si on appuie sur le bouton "retour"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Retour_MouseDown(object sender, MouseEventArgs e)
         {
             Accueil a = new Accueil();
@@ -382,6 +446,9 @@ namespace AppliGrpR
         }
 
 
+        //
+        //Gestion de la pagination
+        //
         private void ButtonRightEmprunt_Click(object sender, EventArgs e)
         {
 
@@ -430,6 +497,11 @@ namespace AppliGrpR
 
         }
 
+        /// <summary>
+        /// Sélectionne un album qui a été emprunté
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AlbumsEmpruntes_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (AlbumsEmpruntes.SelectedItem != null)

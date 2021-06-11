@@ -36,6 +36,7 @@ namespace AppliGrpR
             this.MotDePasse = new System.Windows.Forms.Label();
             this.Retour = new System.Windows.Forms.Button();
             this.SeConnecter = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Connexion
@@ -60,6 +61,7 @@ namespace AppliGrpR
             this.motdepassetextbox.Name = "motdepassetextbox";
             this.motdepassetextbox.Size = new System.Drawing.Size(133, 20);
             this.motdepassetextbox.TabIndex = 2;
+            this.motdepassetextbox.UseSystemPasswordChar = true;
             // 
             // Utilisateur
             // 
@@ -102,12 +104,23 @@ namespace AppliGrpR
             this.SeConnecter.UseVisualStyleBackColor = false;
             this.SeConnecter.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SeConnecter_MouseDown);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(603, 297);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(23, 23);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "o";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Administrateur_Connexion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.CadetBlue;
             this.ClientSize = new System.Drawing.Size(1084, 661);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.SeConnecter);
             this.Controls.Add(this.Retour);
             this.Controls.Add(this.MotDePasse);
@@ -131,5 +144,6 @@ namespace AppliGrpR
         private System.Windows.Forms.Label MotDePasse;
         private System.Windows.Forms.Button Retour;
         private System.Windows.Forms.Button SeConnecter;
+        private System.Windows.Forms.Button button1;
     }
 }

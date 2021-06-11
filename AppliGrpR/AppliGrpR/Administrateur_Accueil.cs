@@ -208,7 +208,6 @@ namespace AppliGrpR
 
         private void ProloRightButton_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(indexProlo);
             Affichage_Utils.PaginerAvecAlbum(ref indexProlo, listeProlongementBox, listeProlongement,pageProlongement,10, 1);
         }
 
@@ -227,5 +226,14 @@ namespace AppliGrpR
         {
             Affichage_Utils.Paginer(ref indexRetard, Retard10joursBox, listeRetard, pageRetard,10, -1);
         }
+
+        private void modifMdpAbo_MouseDown(object sender, MouseEventArgs e)
+        {
+            Administrateur_Modif_Mdp adminModifMdp = new Administrateur_Modif_Mdp();
+            adminModifMdp.ShowDialog();
+            this.Hide();
+            this.Close();
+        }
+
     }
 }

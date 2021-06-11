@@ -53,6 +53,7 @@ namespace AppliGrpR
             this.pageRetard = new System.Windows.Forms.Label();
             this.pageListAbo = new System.Windows.Forms.Label();
             this.pageNonEmprunté = new System.Windows.Forms.Label();
+            this.modifMdpAbo = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listeProlongementBox
@@ -152,7 +153,7 @@ namespace AppliGrpR
             // 
             // PurgerAbonnes
             // 
-            this.PurgerAbonnes.Location = new System.Drawing.Point(763, 501);
+            this.PurgerAbonnes.Location = new System.Drawing.Point(646, 496);
             this.PurgerAbonnes.Name = "PurgerAbonnes";
             this.PurgerAbonnes.Size = new System.Drawing.Size(88, 23);
             this.PurgerAbonnes.TabIndex = 11;
@@ -276,11 +277,22 @@ namespace AppliGrpR
             this.pageNonEmprunté.TabIndex = 24;
             this.pageNonEmprunté.Text = "label5";
             // 
+            // modifMdpAbo
+            // 
+            this.modifMdpAbo.Location = new System.Drawing.Point(646, 566);
+            this.modifMdpAbo.Name = "modifMdpAbo";
+            this.modifMdpAbo.Size = new System.Drawing.Size(88, 42);
+            this.modifMdpAbo.TabIndex = 25;
+            this.modifMdpAbo.Text = "Modifier mot de passe abonné";
+            this.modifMdpAbo.UseVisualStyleBackColor = true;
+            this.modifMdpAbo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.modifMdpAbo_MouseDown);
+            // 
             // AdministrateurAccueil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 661);
+            this.Controls.Add(this.modifMdpAbo);
             this.Controls.Add(this.pageNonEmprunté);
             this.Controls.Add(this.pageListAbo);
             this.Controls.Add(this.pageRetard);
@@ -338,5 +350,6 @@ namespace AppliGrpR
         private System.Windows.Forms.Label pageRetard;
         private System.Windows.Forms.Label pageListAbo;
         private System.Windows.Forms.Label pageNonEmprunté;
+        private System.Windows.Forms.Button modifMdpAbo;
     }
 }

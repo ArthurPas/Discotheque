@@ -12,10 +12,12 @@ namespace AppliGrpR
         /// <summary>
         /// Affiche les élements de liste par page
         /// </summary>
-        /// <param name="index"></param>
-        /// <param name="listBox"></param>
-        /// <param name="list"></param>
-        /// <param name="taille"></param>
+        /// <param name="index">index de la page</param>
+        /// <param name="listBox">nom de la ListBox</param>
+        /// <param name="list">la list</param>
+        /// <param name="taille">taille de la list</param>
+        /// <param name="direction">attribut qui permet de changer de page</param>
+        /// <param name="label">affiche le numéro de la page actuelle</param>
         static public void Paginer(ref int index, ListBox listBox, List<string> list, Label label, int taille, int direction)
         {
 
@@ -37,6 +39,14 @@ namespace AppliGrpR
             AfficherPagination(index, listBox, list, label, taille);
         }
 
+        /// <summary>
+        /// Permet d'afficher page par page
+        /// </summary>
+        /// <param name="index">index de la page</param>
+        /// <param name="listBox">nom de la ListBox</param>
+        /// <param name="list">la list</param>
+        /// <param name="label">affiche le numéro de la page actuelle</param>
+        /// <param name="taille">taille de la list</param>
         static public void AfficherPagination(int index, ListBox listBox, List<string> list, Label label, int taille)
         {
             listBox.Items.Clear();
@@ -50,6 +60,14 @@ namespace AppliGrpR
             label.Text = index.ToString() + "/" + getIindexedMax(index, list, taille);
 
         }
+
+        /// <summary>
+        /// Nombres de pages max
+        /// </summary>
+        /// <param name="index">index que l'on cherche</param>
+        /// <param name="list">la List</param>
+        /// <param name="taille">taille de la List</param>
+        /// <returns></returns>
         static public double getIindexedMax(int index, List<string> list, int taille)
         {
 
@@ -66,12 +84,14 @@ namespace AppliGrpR
         }
 
         /// <summary>
-        /// 
+        /// Permet de changer de page
         /// </summary>
-        /// <param name="index"></param>
-        /// <param name="listBox"></param>
-        /// <param name="list"></param>
-        /// <param name="taille"></param>
+        /// <param name="index">index que l'on cherche</param>
+        /// <param name="listBox">nom de la ListBox</param>
+        /// <param name="list">la List</param>
+        /// <param name="taille">taille de la List</param>
+        /// <param name="direction">attribut qui permet de changer de page</param>
+        /// <param name="label">affiche le numéro de la page actuelle</param>
         static public void PaginerAvecAlbum(ref int index, ListBox listBox, List<Albums> list, Label label, int taille, int direction)
         {
 
@@ -92,6 +112,14 @@ namespace AppliGrpR
             AfficherPaginationAvecAlbum(index, listBox, list, label, taille);
         }
 
+        /// <summary>
+        /// Permet d'afficher page par page
+        /// </summary>
+        /// <param name="index">index que l'on cherche</param>
+        /// <param name="listBox">nom de la ListBox</param>
+        /// <param name="list">la List</param>
+        /// <param name="taille">taille de la List</param>
+        /// <param name="label">affiche le numéro de la page actuelle</param>
         static public void AfficherPaginationAvecAlbum(int index, ListBox listBox, List<Albums> list, Label label, int taille)
         {
             listBox.Items.Clear();
@@ -107,6 +135,13 @@ namespace AppliGrpR
 
         }
 
+        /// <summary>
+        /// Nombres de pages max
+        /// </summary>
+        /// <param name="index">index que l'on cherche</param>
+        /// <param name="list">la List</param>
+        /// <param name="taille">taille de la List</param>
+        /// <returns></returns>
         static public double getIindexedMaxAlbum(int index, List<Albums> list, int taille)
         {
             float l = list.Count;

@@ -14,6 +14,7 @@ namespace AppliGrpR
     public partial class Abonne_Connexion : Form
     {
         OleDbConnection dbCon = Accueil.dbCon;
+
         public Abonne_Connexion()
         {
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -69,6 +70,12 @@ namespace AppliGrpR
                 MessageBox.Show("Le mot de passe ou l'utilisateur est incorrect");
             }
         }
+
+        /// <summary>
+        /// Permet de décrypter un mot de passe de la base de donnée
+        /// </summary>
+        /// <param name="mdp">le mot de passe a décrypté</param>
+        /// <returns>le mot de passe décrypté</returns>
         public string DecryptageDeMotDePasse(string mdp)
         {
             string decrypt = "";

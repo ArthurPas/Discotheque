@@ -48,7 +48,7 @@ namespace AppliGrpR
         public void AddAbonnes(string idbox, string nationalitebox, string nombox, string mdpbox, string prenombox)
         {
 
-            string consult = "Select * from ABONNÉS WHERE LOGIN_ABONNÉ = '" + idbox + "'";
+            string consult = "Select * from ABONNÉS WHERE LOGIN_ABONNÉ = '" + Utils.manageSingleQuote(idbox) + "'";
             OleDbCommand cmdConsult = new OleDbCommand(consult, dbCon);
             OleDbDataReader reader = cmdConsult.ExecuteReader();
 

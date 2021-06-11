@@ -77,6 +77,11 @@ namespace AppliGrpR
         /// <param name="e"></param>
         private void AlbumsProlongeables_SelectedIndexChanged(object sender, EventArgs e)
         {
+            AlbumsProlongeable();
+        }
+
+        public void AlbumsProlongeable ()
+        {
             if (AlbumsProlongeables.SelectedItem != null)
             {
                 try
@@ -98,7 +103,6 @@ namespace AppliGrpR
 
                 }
             }
-
         }
 
         private void ProlongerButton_MouseDown(object sender, MouseEventArgs e)

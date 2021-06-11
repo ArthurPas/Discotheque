@@ -196,9 +196,14 @@ namespace AppliGrpR
         /// <param name="e"></param>
         private void RechercherTextBox_TextChanged(object sender, EventArgs e)
         {
+            RechercherTextBoxFonction();
+        }
+
+        public void RechercherTextBoxFonction()
+        {
             if (RechercherTextBox.Text.Equals(""))
             {
-                Album();               
+                Album();
             }
             else
             {
@@ -223,11 +228,12 @@ namespace AppliGrpR
                         albumRecherche.Add(titre);
 
                     }
-                } catch(System.Data.OleDb.OleDbException)
-                {
-                
                 }
-                Affichage_Utils.Paginer(ref indexTout, TousLesAlbums, albumRecherche, pageAlbum, 10,0);
+                catch (System.Data.OleDb.OleDbException)
+                {
+
+                }
+                Affichage_Utils.Paginer(ref indexTout, TousLesAlbums, albumRecherche, pageAlbum, 10, 0);
 
             }
         }
@@ -386,10 +392,15 @@ namespace AppliGrpR
         /// <param name="e"></param>
         private void TousLesAlbums_SelectedIndexChanged(object sender, EventArgs e)
         {
+            TousLesAlbumsFonction();
+        }
+
+        public void TousLesAlbumsFonction()
+        {
             if (TousLesAlbums.SelectedItem != null)
             {
                 string titre = TousLesAlbums.SelectedItem.ToString();
-  
+
                 string sql = "SELECT CODE_ALBUM FROM ALBUMS WHERE TITRE_ALBUM ='" + Utils.manageSingleQuote(titre) + "'";
                 OleDbCommand cmd = new OleDbCommand(sql, dbCon);
                 cmd.ExecuteNonQuery();
@@ -506,6 +517,11 @@ namespace AppliGrpR
         /// <param name="e"></param>
         private void AlbumsEmpruntes_SelectedIndexChanged(object sender, EventArgs e)
         {
+            AlbumsEmpruntesFonction();
+        }
+
+        public void AlbumsEmpruntesFonction()
+        {
             if (AlbumsEmpruntes.SelectedItem != null)
             {
                 Albums a = (Albums)AlbumsEmpruntes.SelectedItem;
@@ -518,7 +534,7 @@ namespace AppliGrpR
                 while (reader.Read())
                 {
                     CodeAlbumRendre = reader.GetInt32(0);
-                }     
+                }
             }
         }
 

@@ -14,8 +14,6 @@ namespace TestsUnitaires
     {
         OleDbConnection dbCon;
         string ChaineBd = "Provider=SQLOLEDB;Data Source=INFO-DORMEUR;Initial Catalog=MusiquePT2_R;Integrated Security=SSPI;";
-        Accueil accueil = new Accueil();
-        Abonne_Accueil aboAccu = new Abonne_Accueil();
         Client_Inscription client = new Client_Inscription();
         List<string> genres = new List<string>();
         public static List<Albums> suggestionsAlbums = new List<Albums>();
@@ -36,6 +34,7 @@ namespace TestsUnitaires
             string nom = "testNom";
             string nationalite = "France";
             int numeroAbo = 0;
+            Abonne_Accueil aboAccu = new Abonne_Accueil(nom,prenom,login);
             client.AddAbonnes(login, nationalite, nom, mdp, prenom);
 
             string getCode = "SELECT CODE_ABONNÉ FROM ABONNÉS WHERE LOGIN_ABONNÉ ='" + login + "' AND PASSWORD_ABONNÉ = '" + mdp + "'";

@@ -46,7 +46,6 @@ namespace TestsUnitaires
             if (adminAcc.listeAlbNonEmprUnAn.Count>0)
             {
                 test.Count();
-                adminAcc.listeAlbNonEmprUnAn.Count();
                 for (int i = 0; i < adminAcc.listeAlbNonEmprUnAn.Count; i++)
                 {
                     if (!test[i].Equals(adminAcc.listeAlbNonEmprUnAn[i]))

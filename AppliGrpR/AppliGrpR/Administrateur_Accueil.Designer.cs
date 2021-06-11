@@ -54,6 +54,8 @@ namespace AppliGrpR
             this.pageListAbo = new System.Windows.Forms.Label();
             this.pageNonEmprunté = new System.Windows.Forms.Label();
             this.modifMdpAbo = new System.Windows.Forms.Button();
+            this.EmpruntsCasier = new System.Windows.Forms.Button();
+            this.EmpruntsCasier = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listeProlongementBox
@@ -287,12 +289,34 @@ namespace AppliGrpR
             this.modifMdpAbo.UseVisualStyleBackColor = true;
             this.modifMdpAbo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.modifMdpAbo_MouseDown);
             // 
+            // EmpruntsCasier
+            // 
+            this.EmpruntsCasier.Location = new System.Drawing.Point(589, 626);
+            this.EmpruntsCasier.Name = "EmpruntsCasier";
+            this.EmpruntsCasier.Size = new System.Drawing.Size(75, 23);
+            this.EmpruntsCasier.TabIndex = 25;
+            this.EmpruntsCasier.Text = "Emprunts Casiers";
+            this.EmpruntsCasier.UseVisualStyleBackColor = true;
+            this.EmpruntsCasier.Click += new System.EventHandler(this.EmpruntsCasier_Click);
+            // 
+            // EmpruntsCasier
+            // 
+            this.EmpruntsCasier.Location = new System.Drawing.Point(589, 626);
+            this.EmpruntsCasier.Name = "EmpruntsCasier";
+            this.EmpruntsCasier.Size = new System.Drawing.Size(75, 23);
+            this.EmpruntsCasier.TabIndex = 25;
+            this.EmpruntsCasier.Text = "Emprunts Casiers";
+            this.EmpruntsCasier.UseVisualStyleBackColor = true;
+            this.EmpruntsCasier.Click += new System.EventHandler(this.EmpruntsCasier_Click);
+            // 
             // AdministrateurAccueil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 661);
             this.Controls.Add(this.modifMdpAbo);
+            this.Controls.Add(this.EmpruntsCasier);
+            this.Controls.Add(this.EmpruntsCasier);
             this.Controls.Add(this.pageNonEmprunté);
             this.Controls.Add(this.pageListAbo);
             this.Controls.Add(this.pageRetard);
@@ -351,5 +375,7 @@ namespace AppliGrpR
         private System.Windows.Forms.Label pageListAbo;
         private System.Windows.Forms.Label pageNonEmprunté;
         private System.Windows.Forms.Button modifMdpAbo;
+        private System.Windows.Forms.Button EmpruntsCasier;
+        private System.Windows.Forms.Button EmpruntsCasier;
     }
 }

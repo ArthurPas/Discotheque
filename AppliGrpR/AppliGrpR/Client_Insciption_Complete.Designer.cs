@@ -35,28 +35,31 @@ namespace AppliGrpR
             // 
             // continuer
             // 
+            this.continuer.BackColor = System.Drawing.Color.LightSkyBlue;
             this.continuer.Location = new System.Drawing.Point(619, 394);
             this.continuer.Name = "continuer";
             this.continuer.Size = new System.Drawing.Size(116, 37);
             this.continuer.TabIndex = 0;
             this.continuer.Text = "Continuer";
-            this.continuer.UseVisualStyleBackColor = true;
+            this.continuer.UseVisualStyleBackColor = false;
             this.continuer.Click += new System.EventHandler(this.continuer_Click);
             // 
             // quitter
             // 
+            this.quitter.BackColor = System.Drawing.Color.LightSkyBlue;
             this.quitter.Location = new System.Drawing.Point(401, 396);
             this.quitter.Name = "quitter";
             this.quitter.Size = new System.Drawing.Size(116, 35);
             this.quitter.TabIndex = 1;
             this.quitter.Text = "Quitter";
-            this.quitter.UseVisualStyleBackColor = true;
+            this.quitter.UseVisualStyleBackColor = false;
             this.quitter.Click += new System.EventHandler(this.quitter_Click);
             // 
             // Client_Insciption_Complete
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.CadetBlue;
             this.ClientSize = new System.Drawing.Size(1084, 661);
             this.Controls.Add(this.quitter);
             this.Controls.Add(this.continuer);

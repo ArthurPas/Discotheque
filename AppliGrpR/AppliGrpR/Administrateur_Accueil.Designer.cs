@@ -144,22 +144,26 @@ namespace AppliGrpR
             // 
             // déconnexion
             // 
+            this.déconnexion.BackColor = System.Drawing.Color.DarkRed;
+            this.déconnexion.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.déconnexion.Location = new System.Drawing.Point(990, 12);
             this.déconnexion.Name = "déconnexion";
             this.déconnexion.Size = new System.Drawing.Size(82, 26);
             this.déconnexion.TabIndex = 10;
             this.déconnexion.Text = "Déconnexion";
-            this.déconnexion.UseVisualStyleBackColor = true;
+            this.déconnexion.UseVisualStyleBackColor = false;
             this.déconnexion.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Retour_MouseDown);
             // 
             // PurgerAbonnes
             // 
+            this.PurgerAbonnes.BackColor = System.Drawing.Color.DarkRed;
+            this.PurgerAbonnes.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.PurgerAbonnes.Location = new System.Drawing.Point(646, 496);
             this.PurgerAbonnes.Name = "PurgerAbonnes";
-            this.PurgerAbonnes.Size = new System.Drawing.Size(88, 23);
+            this.PurgerAbonnes.Size = new System.Drawing.Size(110, 23);
             this.PurgerAbonnes.TabIndex = 11;
             this.PurgerAbonnes.Text = "PurgerAbonnes";
-            this.PurgerAbonnes.UseVisualStyleBackColor = true;
+            this.PurgerAbonnes.UseVisualStyleBackColor = false;
             this.PurgerAbonnes.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PurgerAbonnes_MouseDown);
             // 
             // LeftListButton
@@ -245,7 +249,8 @@ namespace AppliGrpR
             // pageProlongement
             // 
             this.pageProlongement.AutoSize = true;
-            this.pageProlongement.Location = new System.Drawing.Point(477, 227);
+            this.pageProlongement.BackColor = System.Drawing.Color.White;
+            this.pageProlongement.Location = new System.Drawing.Point(467, 226);
             this.pageProlongement.Name = "pageProlongement";
             this.pageProlongement.Size = new System.Drawing.Size(35, 13);
             this.pageProlongement.TabIndex = 20;
@@ -254,7 +259,8 @@ namespace AppliGrpR
             // pageRetard
             // 
             this.pageRetard.AutoSize = true;
-            this.pageRetard.Location = new System.Drawing.Point(477, 407);
+            this.pageRetard.BackColor = System.Drawing.Color.White;
+            this.pageRetard.Location = new System.Drawing.Point(467, 407);
             this.pageRetard.Name = "pageRetard";
             this.pageRetard.Size = new System.Drawing.Size(35, 13);
             this.pageRetard.TabIndex = 21;
@@ -263,7 +269,8 @@ namespace AppliGrpR
             // pageListAbo
             // 
             this.pageListAbo.AutoSize = true;
-            this.pageListAbo.Location = new System.Drawing.Point(730, 407);
+            this.pageListAbo.BackColor = System.Drawing.Color.White;
+            this.pageListAbo.Location = new System.Drawing.Point(721, 407);
             this.pageListAbo.Name = "pageListAbo";
             this.pageListAbo.Size = new System.Drawing.Size(35, 13);
             this.pageListAbo.TabIndex = 23;
@@ -272,6 +279,7 @@ namespace AppliGrpR
             // pageNonEmprunté
             // 
             this.pageNonEmprunté.AutoSize = true;
+            this.pageNonEmprunté.BackColor = System.Drawing.Color.White;
             this.pageNonEmprunté.Location = new System.Drawing.Point(1006, 407);
             this.pageNonEmprunté.Name = "pageNonEmprunté";
             this.pageNonEmprunté.Size = new System.Drawing.Size(35, 13);
@@ -280,32 +288,34 @@ namespace AppliGrpR
             // 
             // modifMdpAbo
             // 
+            this.modifMdpAbo.BackColor = System.Drawing.Color.DodgerBlue;
             this.modifMdpAbo.Location = new System.Drawing.Point(646, 566);
             this.modifMdpAbo.Name = "modifMdpAbo";
-            this.modifMdpAbo.Size = new System.Drawing.Size(88, 42);
+            this.modifMdpAbo.Size = new System.Drawing.Size(110, 42);
             this.modifMdpAbo.TabIndex = 25;
             this.modifMdpAbo.Text = "Modifier mot de passe abonné";
-            this.modifMdpAbo.UseVisualStyleBackColor = true;
-            this.modifMdpAbo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.modifMdpAbo_MouseDown);   
+            this.modifMdpAbo.UseVisualStyleBackColor = false;
+            this.modifMdpAbo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.modifMdpAbo_MouseDown);
             // 
             // EmpruntsCasier
             // 
-            this.EmpruntsCasier.Location = new System.Drawing.Point(589, 626);
+            this.EmpruntsCasier.BackColor = System.Drawing.Color.DodgerBlue;
+            this.EmpruntsCasier.Location = new System.Drawing.Point(646, 626);
             this.EmpruntsCasier.Name = "EmpruntsCasier";
-            this.EmpruntsCasier.Size = new System.Drawing.Size(75, 23);
+            this.EmpruntsCasier.Size = new System.Drawing.Size(110, 23);
             this.EmpruntsCasier.TabIndex = 25;
             this.EmpruntsCasier.Text = "Emprunts Casiers";
-            this.EmpruntsCasier.UseVisualStyleBackColor = true;
+            this.EmpruntsCasier.UseVisualStyleBackColor = false;
             this.EmpruntsCasier.Click += new System.EventHandler(this.EmpruntsCasier_Click);
             // 
             // AdministrateurAccueil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.CadetBlue;
             this.ClientSize = new System.Drawing.Size(1084, 661);
             this.Controls.Add(this.modifMdpAbo);
             this.Controls.Add(this.EmpruntsCasier);
-            //this.Controls.Add(this.EmpruntsCasier);
             this.Controls.Add(this.pageNonEmprunté);
             this.Controls.Add(this.pageListAbo);
             this.Controls.Add(this.pageRetard);

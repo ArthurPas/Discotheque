@@ -111,12 +111,14 @@ namespace AppliGrpR
             // 
             // inscription
             // 
+            this.inscription.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.inscription.ForeColor = System.Drawing.Color.Black;
             this.inscription.Location = new System.Drawing.Point(470, 516);
             this.inscription.Name = "inscription";
             this.inscription.Size = new System.Drawing.Size(168, 39);
             this.inscription.TabIndex = 32;
             this.inscription.Text = "Inscription";
-            this.inscription.UseVisualStyleBackColor = true;
+            this.inscription.UseVisualStyleBackColor = false;
             this.inscription.Click += new System.EventHandler(this.inscription_Click);
             // 
             // mdp_box
@@ -151,13 +153,15 @@ namespace AppliGrpR
             // 
             // retour_button
             // 
+            this.retour_button.BackColor = System.Drawing.Color.DarkRed;
             this.retour_button.Cursor = System.Windows.Forms.Cursors.Default;
-            this.retour_button.Location = new System.Drawing.Point(962, 38);
+            this.retour_button.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.retour_button.Location = new System.Drawing.Point(997, 12);
             this.retour_button.Name = "retour_button";
             this.retour_button.Size = new System.Drawing.Size(75, 29);
             this.retour_button.TabIndex = 41;
             this.retour_button.Text = "Retour";
-            this.retour_button.UseVisualStyleBackColor = true;
+            this.retour_button.UseVisualStyleBackColor = false;
             this.retour_button.Click += new System.EventHandler(this.retour_button_Click);
             // 
             // nationalité_comboBox
@@ -284,6 +288,7 @@ namespace AppliGrpR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.CadetBlue;
             this.ClientSize = new System.Drawing.Size(1084, 661);
             this.Controls.Add(this.viewConfirmMdp);
             this.Controls.Add(this.viewMdp);

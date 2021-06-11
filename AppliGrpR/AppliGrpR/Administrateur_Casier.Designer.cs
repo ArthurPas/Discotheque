@@ -66,12 +66,14 @@ namespace AppliGrpR
             // 
             // RetourButton
             // 
+            this.RetourButton.BackColor = System.Drawing.Color.Navy;
+            this.RetourButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.RetourButton.Location = new System.Drawing.Point(697, 12);
             this.RetourButton.Name = "RetourButton";
             this.RetourButton.Size = new System.Drawing.Size(75, 23);
             this.RetourButton.TabIndex = 3;
             this.RetourButton.Text = "Retour";
-            this.RetourButton.UseVisualStyleBackColor = true;
+            this.RetourButton.UseVisualStyleBackColor = false;
             this.RetourButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.RetourButton_MouseDown);
             // 
             // imageAlbum
@@ -86,6 +88,7 @@ namespace AppliGrpR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.CadetBlue;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.imageAlbum);
             this.Controls.Add(this.RetourButton);

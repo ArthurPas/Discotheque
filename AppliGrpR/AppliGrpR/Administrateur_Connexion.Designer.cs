@@ -81,28 +81,32 @@ namespace AppliGrpR
             // 
             // Retour
             // 
+            this.Retour.BackColor = System.Drawing.Color.Navy;
+            this.Retour.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.Retour.Location = new System.Drawing.Point(997, 12);
             this.Retour.Name = "Retour";
             this.Retour.Size = new System.Drawing.Size(75, 23);
             this.Retour.TabIndex = 5;
             this.Retour.Text = "Retour";
-            this.Retour.UseVisualStyleBackColor = true;
+            this.Retour.UseVisualStyleBackColor = false;
             this.Retour.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Retour_MouseDown);
             // 
             // SeConnecter
             // 
-            this.SeConnecter.Location = new System.Drawing.Point(484, 402);
+            this.SeConnecter.BackColor = System.Drawing.Color.DarkOrange;
+            this.SeConnecter.Location = new System.Drawing.Point(484, 405);
             this.SeConnecter.Name = "SeConnecter";
             this.SeConnecter.Size = new System.Drawing.Size(100, 23);
             this.SeConnecter.TabIndex = 6;
             this.SeConnecter.Text = "Se connecter";
-            this.SeConnecter.UseVisualStyleBackColor = true;
+            this.SeConnecter.UseVisualStyleBackColor = false;
             this.SeConnecter.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SeConnecter_MouseDown);
             // 
             // Administrateur_Connexion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.CadetBlue;
             this.ClientSize = new System.Drawing.Size(1084, 661);
             this.Controls.Add(this.SeConnecter);
             this.Controls.Add(this.Retour);

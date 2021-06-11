@@ -78,9 +78,9 @@ namespace AppliGrpR
             this.titre.AutoSize = true;
             this.titre.Location = new System.Drawing.Point(476, 179);
             this.titre.Name = "titre";
-            this.titre.Size = new System.Drawing.Size(152, 13);
+            this.titre.Size = new System.Drawing.Size(147, 13);
             this.titre.TabIndex = 3;
-            this.titre.Text = "Modifification de Mot de Passe";
+            this.titre.Text = "Modification de Mot de Passe";
             // 
             // mdp
             // 

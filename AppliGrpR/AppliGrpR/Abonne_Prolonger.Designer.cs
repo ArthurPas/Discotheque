@@ -39,12 +39,14 @@ namespace AppliGrpR
             // 
             // Retour
             // 
+            this.Retour.BackColor = System.Drawing.Color.DarkRed;
+            this.Retour.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.Retour.Location = new System.Drawing.Point(713, 12);
             this.Retour.Name = "Retour";
             this.Retour.Size = new System.Drawing.Size(75, 23);
             this.Retour.TabIndex = 6;
             this.Retour.Text = "Retour";
-            this.Retour.UseVisualStyleBackColor = true;
+            this.Retour.UseVisualStyleBackColor = false;
             this.Retour.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Retour_MouseDown);
             // 
             // AlbumsProlongeables
@@ -75,28 +77,31 @@ namespace AppliGrpR
             // 
             // ProlongerButton
             // 
+            this.ProlongerButton.BackColor = System.Drawing.Color.LightSkyBlue;
             this.ProlongerButton.Location = new System.Drawing.Point(235, 328);
             this.ProlongerButton.Name = "ProlongerButton";
             this.ProlongerButton.Size = new System.Drawing.Size(75, 23);
             this.ProlongerButton.TabIndex = 34;
             this.ProlongerButton.Text = "Prolonger";
-            this.ProlongerButton.UseVisualStyleBackColor = true;
+            this.ProlongerButton.UseVisualStyleBackColor = false;
             this.ProlongerButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ProlongerButton_MouseDown);
             // 
             // Pronlonger_tout_bouton
             // 
+            this.Pronlonger_tout_bouton.BackColor = System.Drawing.Color.LightSkyBlue;
             this.Pronlonger_tout_bouton.Location = new System.Drawing.Point(463, 328);
             this.Pronlonger_tout_bouton.Name = "Pronlonger_tout_bouton";
             this.Pronlonger_tout_bouton.Size = new System.Drawing.Size(88, 23);
             this.Pronlonger_tout_bouton.TabIndex = 35;
             this.Pronlonger_tout_bouton.Text = "Prolonger tout";
-            this.Pronlonger_tout_bouton.UseVisualStyleBackColor = true;
+            this.Pronlonger_tout_bouton.UseVisualStyleBackColor = false;
             this.Pronlonger_tout_bouton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pronlonger_tout_bouton_MouseDown);
             // 
             // Abonne_Prolonger
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.CadetBlue;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.Pronlonger_tout_bouton);
             this.Controls.Add(this.ProlongerButton);

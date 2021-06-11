@@ -134,32 +134,36 @@ namespace AppliGrpR
             // 
             // déconnexion
             // 
+            this.déconnexion.BackColor = System.Drawing.Color.DarkRed;
+            this.déconnexion.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.déconnexion.Location = new System.Drawing.Point(985, 12);
             this.déconnexion.Name = "déconnexion";
             this.déconnexion.Size = new System.Drawing.Size(87, 23);
             this.déconnexion.TabIndex = 47;
             this.déconnexion.Text = "Déconnexion";
-            this.déconnexion.UseVisualStyleBackColor = true;
+            this.déconnexion.UseVisualStyleBackColor = false;
             this.déconnexion.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Retour_MouseDown);
             // 
             // Prolonger_un_emprunt
             // 
+            this.Prolonger_un_emprunt.BackColor = System.Drawing.Color.LightSkyBlue;
             this.Prolonger_un_emprunt.Location = new System.Drawing.Point(944, 113);
             this.Prolonger_un_emprunt.Name = "Prolonger_un_emprunt";
             this.Prolonger_un_emprunt.Size = new System.Drawing.Size(73, 38);
             this.Prolonger_un_emprunt.TabIndex = 48;
             this.Prolonger_un_emprunt.Text = "Prolonger un emprunt";
-            this.Prolonger_un_emprunt.UseVisualStyleBackColor = true;
+            this.Prolonger_un_emprunt.UseVisualStyleBackColor = false;
             this.Prolonger_un_emprunt.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Prolonger_un_emprunt_MouseDown);
             // 
             // Emprunter
             // 
+            this.Emprunter.BackColor = System.Drawing.Color.LightSkyBlue;
             this.Emprunter.Location = new System.Drawing.Point(961, 547);
             this.Emprunter.Name = "Emprunter";
             this.Emprunter.Size = new System.Drawing.Size(73, 38);
             this.Emprunter.TabIndex = 49;
             this.Emprunter.Text = "Emprunter";
-            this.Emprunter.UseVisualStyleBackColor = true;
+            this.Emprunter.UseVisualStyleBackColor = false;
             this.Emprunter.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Emprunter_MouseDown);
             // 
             // ButtonRightEmprunt
@@ -213,7 +217,8 @@ namespace AppliGrpR
             // pageEmprunté
             // 
             this.pageEmprunté.AutoSize = true;
-            this.pageEmprunté.Location = new System.Drawing.Point(892, 202);
+            this.pageEmprunté.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.pageEmprunté.Location = new System.Drawing.Point(880, 192);
             this.pageEmprunté.Name = "pageEmprunté";
             this.pageEmprunté.Size = new System.Drawing.Size(35, 13);
             this.pageEmprunté.TabIndex = 57;
@@ -222,6 +227,7 @@ namespace AppliGrpR
             // pageAlbum
             // 
             this.pageAlbum.AutoSize = true;
+            this.pageAlbum.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.pageAlbum.Location = new System.Drawing.Point(482, 582);
             this.pageAlbum.Name = "pageAlbum";
             this.pageAlbum.Size = new System.Drawing.Size(35, 13);
@@ -230,28 +236,32 @@ namespace AppliGrpR
             // 
             // buttonRendre
             // 
+            this.buttonRendre.BackColor = System.Drawing.Color.LightSkyBlue;
             this.buttonRendre.Location = new System.Drawing.Point(944, 171);
             this.buttonRendre.Name = "buttonRendre";
             this.buttonRendre.Size = new System.Drawing.Size(75, 34);
             this.buttonRendre.TabIndex = 59;
             this.buttonRendre.Text = "Rendre";
-            this.buttonRendre.UseVisualStyleBackColor = true;
+            this.buttonRendre.UseVisualStyleBackColor = false;
             this.buttonRendre.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonRendre_MouseDown);
             // 
             // modifierMdp
             // 
+            this.modifierMdp.BackColor = System.Drawing.Color.Navy;
+            this.modifierMdp.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.modifierMdp.Location = new System.Drawing.Point(908, 39);
             this.modifierMdp.Name = "modifierMdp";
             this.modifierMdp.Size = new System.Drawing.Size(169, 22);
             this.modifierMdp.TabIndex = 60;
             this.modifierMdp.Text = "Modifier Mot de Passe";
-            this.modifierMdp.UseVisualStyleBackColor = true;
+            this.modifierMdp.UseVisualStyleBackColor = false;
             this.modifierMdp.Click += new System.EventHandler(this.modifierMdp_Click);
             // 
             // Abonne_Accueil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.CadetBlue;
             this.ClientSize = new System.Drawing.Size(1084, 661);
             this.Controls.Add(this.modifierMdp);
             this.Controls.Add(this.buttonRendre);

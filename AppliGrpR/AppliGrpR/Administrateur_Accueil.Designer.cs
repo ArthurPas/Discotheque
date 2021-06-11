@@ -53,6 +53,8 @@ namespace AppliGrpR
             this.pageRetard = new System.Windows.Forms.Label();
             this.pageListAbo = new System.Windows.Forms.Label();
             this.pageNonEmprunté = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // listeProlongementBox
@@ -62,6 +64,7 @@ namespace AppliGrpR
             this.listeProlongementBox.Name = "listeProlongementBox";
             this.listeProlongementBox.Size = new System.Drawing.Size(485, 173);
             this.listeProlongementBox.TabIndex = 0;
+            this.listeProlongementBox.SelectedIndexChanged += new System.EventHandler(this.listeProlongementBox_SelectedIndexChanged);
             // 
             // top10liste
             // 
@@ -70,6 +73,7 @@ namespace AppliGrpR
             this.top10liste.Name = "top10liste";
             this.top10liste.Size = new System.Drawing.Size(485, 147);
             this.top10liste.TabIndex = 1;
+            this.top10liste.SelectedIndexChanged += new System.EventHandler(this.top10liste_SelectedIndexChanged);
             // 
             // Retard10joursBox
             // 
@@ -78,6 +82,7 @@ namespace AppliGrpR
             this.Retard10joursBox.Name = "Retard10joursBox";
             this.Retard10joursBox.Size = new System.Drawing.Size(485, 134);
             this.Retard10joursBox.TabIndex = 2;
+            this.Retard10joursBox.SelectedIndexChanged += new System.EventHandler(this.Retard10joursBox_SelectedIndexChanged);
             // 
             // nonEmprunté
             // 
@@ -86,6 +91,7 @@ namespace AppliGrpR
             this.nonEmprunté.Name = "nonEmprunté";
             this.nonEmprunté.Size = new System.Drawing.Size(238, 355);
             this.nonEmprunté.TabIndex = 3;
+            this.nonEmprunté.SelectedIndexChanged += new System.EventHandler(this.nonEmprunté_SelectedIndexChanged);
             // 
             // nonEmpruntesLabel
             // 
@@ -276,11 +282,20 @@ namespace AppliGrpR
             this.pageNonEmprunté.TabIndex = 24;
             this.pageNonEmprunté.Text = "label5";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(892, 479);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(180, 180);
+            this.pictureBox1.TabIndex = 25;
+            this.pictureBox1.TabStop = false;
+            // 
             // AdministrateurAccueil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 661);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pageNonEmprunté);
             this.Controls.Add(this.pageListAbo);
             this.Controls.Add(this.pageRetard);
@@ -307,6 +322,7 @@ namespace AppliGrpR
             this.Controls.Add(this.listeProlongementBox);
             this.Name = "AdministrateurAccueil";
             this.Text = "Administrateur-Accueil";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -338,5 +354,6 @@ namespace AppliGrpR
         private System.Windows.Forms.Label pageRetard;
         private System.Windows.Forms.Label pageListAbo;
         private System.Windows.Forms.Label pageNonEmprunté;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

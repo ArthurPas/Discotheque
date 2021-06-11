@@ -330,11 +330,13 @@ namespace AppliGrpR
                 }
                 else
                 {
+                    effectuer = false;
                     MessageBox.Show("Impossible de l'emprunter.");
                 }
             }
             else
             {
+                effectuer = false;
                 MessageBox.Show("Album déjà emprunté par quelqu'un");
             }
             return effectuer;

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,10 +20,12 @@ namespace AppliGrpR
         public List<string> listeRetard = new List<string>();
         public List<string> listeAlbNonEmprUnAn = new List<string>();
         public static List<Albums> listeProlongement = new List<Albums>();
+        public string albSelectione;
         public int indexAbo = 1;
         public int indexNonEmprunteUnAn = 1;
         public int indexProlo = 1;
         public int indexRetard = 1;
+        public int CodeAlbumEmprunter;
         public AdministrateurAccueil()
         {
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -169,7 +172,10 @@ namespace AppliGrpR
             }
             Affichage_Utils.AfficherPagination(indexNonEmprunteUnAn, nonEmprunté, listeAlbNonEmprUnAn,pageNonEmprunté, 20);
         }
-
+        public static Image resizeImage(Image imgToResize, Size size)
+        {
+            return (Image)(new Bitmap(imgToResize, size));
+        }
         private void PurgerAbonnes_MouseDown(object sender, MouseEventArgs e)
         {
             listeProlongementBox.Items.Clear();
@@ -231,6 +237,26 @@ namespace AppliGrpR
         private void RetardLeftButton_Click(object sender, EventArgs e)
         {
             Affichage_Utils.Paginer(ref indexRetard, Retard10joursBox, listeRetard, pageRetard,10, -1);
+        }
+
+        private void listeProlongementBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            albSelectione = listeProlongementBox.SelectedItem.ToString();
+        }
+
+        private void Retard10joursBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            albSelectione = Retard10joursBox.SelectedItem.ToString();
+        }
+
+        private void top10liste_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            albSelectione = top10liste.SelectedItem.ToString();
+        }
+
+        private void nonEmprunté_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            albSelectione = nonEmprunté.SelectedItem.ToString();
         }
     }
 }

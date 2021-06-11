@@ -47,6 +47,11 @@ namespace AppliGrpR
             e.Graphics.DrawString(message, font, brush, x, y,format);
         }
 
+        /// <summary>
+        /// Gestion du clic du boutton "continuer"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void continuer_Click(object sender, EventArgs e)
         {
             Accueil a = new Accueil();
@@ -54,6 +59,11 @@ namespace AppliGrpR
             this.Close();
         }
 
+        /// <summary>
+        /// Gestion du clic du boutton "quitter" pour quitter l'application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void quitter_Click(object sender, EventArgs e)
         {
             Application.Exit();

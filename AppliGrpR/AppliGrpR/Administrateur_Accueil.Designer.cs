@@ -58,6 +58,8 @@ namespace AppliGrpR
             this.EmpruntsCasier = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // listeProlongementBox
@@ -323,11 +325,20 @@ namespace AppliGrpR
             this.pictureBox1.TabIndex = 25;
             this.pictureBox1.TabStop = false;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(892, 479);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(180, 180);
+            this.pictureBox1.TabIndex = 25;
+            this.pictureBox1.TabStop = false;
+            // 
             // AdministrateurAccueil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 661);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.modifMdpAbo);
             this.Controls.Add(this.EmpruntsCasier);
@@ -390,6 +401,7 @@ namespace AppliGrpR
         private System.Windows.Forms.Label pageRetard;
         private System.Windows.Forms.Label pageListAbo;
         private System.Windows.Forms.Label pageNonEmprunté;
+        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button modifMdpAbo;
         private System.Windows.Forms.Button EmpruntsCasier;
         private System.Windows.Forms.Button EmpruntsCasier;

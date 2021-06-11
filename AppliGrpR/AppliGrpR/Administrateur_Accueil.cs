@@ -273,5 +273,25 @@ namespace AppliGrpR
         {
             albSelectione = nonEmprunté.SelectedItem.ToString();
         }
+
+        private void listeProlongementBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            albSelectione = listeProlongementBox.SelectedItem.ToString();
+        }
+
+        private void Retard10joursBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            albSelectione = Retard10joursBox.SelectedItem.ToString();
+        }
+
+        private void top10liste_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            albSelectione = top10liste.SelectedItem.ToString();
+        }
+
+        private void nonEmprunté_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            albSelectione = nonEmprunté.SelectedItem.ToString();
+        }
     }
 }

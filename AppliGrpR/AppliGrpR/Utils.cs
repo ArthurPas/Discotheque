@@ -8,6 +8,11 @@ namespace AppliGrpR
 {
     static class Utils
     {
+        /// <summary>
+        /// permet de doubler tout les apostrophes
+        /// </summary>
+        /// <param name="titre">titre du string en paramètre</param>
+        /// <returns>le titre avec les apostrophes doublés</returns>
         public static string manageSingleQuote(string titre)
         {
             string apostrophe = "'";

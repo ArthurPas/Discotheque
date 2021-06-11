@@ -7,11 +7,11 @@
 - Numéro d'équipe : [4].[2]
 - Nom de la base de données : [R]_MusiquePT2
 - Composition de l'équipe :
-  - Arthur Pascal
-  - Gaetan Budet
--Loïc Blouin
--Aïssa Kahloul
--Pierre Laporte
+  - Arthur Pascal mainteneur/Développeur
+  - Gaetan Budet Développeur
+  - Loïc Blouin Développeur
+  - Aïssa Kahloul Développeur
+  - Pierre Laporte Scrum Master
 
 ## Projet
 

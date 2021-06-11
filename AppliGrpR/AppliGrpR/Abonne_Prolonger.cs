@@ -28,6 +28,9 @@ namespace AppliGrpR
             this.Close();
         }
 
+        /// <summary>
+        /// Ajoute a la liste des albums prolongeables les albums qui n'ont pas déjà été prolongés
+        /// </summary>
         public void ListeDesProlongeable()
         {
             string list = "Select ALBUMS.TITRE_ALBUM, ALBUMS.CODE_ALBUM, EMPRUNTER.DATE_RETOUR_ATTENDUE FROM ABONNÉS INNER JOIN EMPRUNTER on ABONNÉS.CODE_ABONNÉ = " +
@@ -49,6 +52,11 @@ namespace AppliGrpR
 
         }
 
+        /// <summary>
+        /// Permet d'allonger la date de retour attendue d'un album
+        /// </summary>
+        /// <param name="numeroABo">numéro de l'abonné qui prolonge l'album</param>
+        /// <param name="codeAlbumPro">code de l'album qui se fait prolongé</param>
         public void ExtendBorrowing(int numeroABo, int codeAlbumPro)
         {
 
@@ -62,6 +70,11 @@ namespace AppliGrpR
 
         }
 
+        /// <summary>
+        /// Permet de sélectionner un album prolongeable
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AlbumsProlongeables_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (AlbumsProlongeables.SelectedItem != null)
@@ -107,6 +120,10 @@ namespace AppliGrpR
             }
         }
 
+        /// <summary>
+        /// Permet d'afficher un écran de confirmation pour l'abonné
+        /// </summary>
+        /// <returns>TRUE si l'abonné appuie sur yes, FALSE si l'abonné appuie sur no</returns>
         public bool ConfirmDialog()
         {
             string message = "Confirmer ?";

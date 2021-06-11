@@ -36,7 +36,7 @@ namespace AppliGrpR
 
         /// <summary>
         /// US4
-        /// Affiche les emprunts qui on été prolongés
+        /// Ajoute a la liste les albums qui ont été prolongés et les affiches
         /// </summary>
         public void ListExtended()
         {
@@ -64,7 +64,7 @@ namespace AppliGrpR
 
         /// <summary>
         /// US5
-        /// Affiche les abonnés ayant des emprunts non rapportés en retard de 10 jours
+        /// Ajoute les abonnés ayant des emprunts non rapportés en retard de 10 jours dans la liste et les affiches
         /// </summary>
         public void ListRetard10J()
         {
@@ -84,6 +84,9 @@ namespace AppliGrpR
             Affichage_Utils.AfficherPagination(indexRetard, Retard10joursBox, listeRetard,pageRetard, 10);
         }
 
+        /// <summary>
+        /// Ajoute les abonnés dans la liste et les affiches
+        /// </summary>
         public void Abonnes()
         {
             listeAbonnebox.Items.Clear();
@@ -104,6 +107,9 @@ namespace AppliGrpR
             reader.Close();
         }
 
+        /// <summary>
+        /// Ajoute les albums du top 10 dans la liste et les affiches dans l'ordre
+        /// </summary>
         public void TOP10ALBUMS()
         {
             int classement = 1;
@@ -141,6 +147,9 @@ namespace AppliGrpR
             reader.Close();
         }
 
+        /// <summary>
+        /// Ajoute les albums non-empruntés depuis plus d'un an dans la liste et les affiches
+        /// </summary>
         public void GetAlbumNotBorrowedSinceOneYear()
         {
 
@@ -182,7 +191,9 @@ namespace AppliGrpR
             this.Close();
         }
 
-
+        //
+        //Gestion de la pagination
+        //
     private void RightListButton_Click(object sender, EventArgs e)
         {
             Affichage_Utils.Paginer(ref indexAbo, listeAbonnebox,listeAbo,pageListAbo, 20,1);    

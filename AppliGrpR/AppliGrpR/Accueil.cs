@@ -14,6 +14,9 @@ namespace AppliGrpR
             InitConnexion();
         }
         
+        /// <summary>
+        /// Connexion à la base de donnée 
+        /// </summary>
         public void InitConnexion()
         {
             string ChaineBd = "Provider=SQLOLEDB;Data Source=INFO-DORMEUR;Initial Catalog=MusiquePT2_R;Integrated Security=SSPI;";
@@ -21,7 +24,6 @@ namespace AppliGrpR
             dbCon = new OleDbConnection(ChaineBd);
             dbCon.Open();
         }
-
 
         private void inscription_Click(object sender, EventArgs e)
         {           

@@ -178,29 +178,51 @@ namespace AppliGrpR
             }
             else
             {
-                TousLesAlbums.Items.Clear();
-                string apostrophe = "'";
-                string titreRech = RechercherTextBox.Text;
-                if (titreRech.Contains("'"))
+                try
                 {
-                    titreRech = titreRech.Insert(titreRech.IndexOf("'"), apostrophe);
+                    TousLesAlbums.Items.Clear();
+                    string apostrophe = "'";
+                    int positionApostrophe = -1;
+                    string titreRech = RechercherTextBox.Text;
+                    for (int i = titreRech.Length - 1; i < titreRech.Length; i++)
+                    {
+                        positionApostrophe = titreRech.IndexOf(apostrophe, positionApostrophe + 2);
+                        if (i == 0)
+                        {
+                            positionApostrophe = titreRech.IndexOf(apostrophe, positionApostrophe + 1);
+                        }
+                        if (positionApostrophe != -1 && titreRech.Substring(positionApostrophe).Contains("'"))
+                        {
+                            titreRech = titreRech.Insert(positionApostrophe + 1, apostrophe);
+                        }
+                        else
+                        {
+                            i = titreRech.Length;
+                        }
+
+                    }
+
+                    string sql = "SELECT TITRE_ALBUM, ALBUMS.CODE_ALBUM " +
+                        "FROM ALBUMS " +
+                        "WHERE TITRE_ALBUM LIKE '%" + titreRech + "%'";
+                    OleDbCommand cmd = new OleDbCommand(sql, dbCon);
+                    OleDbDataReader reader = cmd.ExecuteReader();
+
+
+                    albumRecherche.Clear();
+
+                    while (reader.Read())
+                    {
+                        string titre = reader.GetString(0);
+                        int id = reader.GetInt32(1);
+                        Albums a = new Albums(id, titre);
+                        albumRecherche.Add(titre);
+
+                    }
+                } catch(System.Data.OleDb.OleDbException)
+                {
+                
                 }
-                string sql = "SELECT TITRE_ALBUM, ALBUMS.CODE_ALBUM " +
-                    "FROM ALBUMS " +
-                    "WHERE TITRE_ALBUM LIKE '%" + titreRech + "%'";
-                OleDbCommand cmd = new OleDbCommand(sql, dbCon);
-                OleDbDataReader reader = cmd.ExecuteReader();
-
-                albumRecherche.Clear();
-
-                while (reader.Read())
-                {
-                    string titre = reader.GetString(0);
-                    int id = reader.GetInt32(1);
-                    Albums a = new Albums(id, titre);
-                    albumRecherche.Add(titre);
-
-                } 
                 Affichage_Utils.Paginer(ref indexTout, TousLesAlbums, albumRecherche, pageAlbum, 10,0);
 
             }
@@ -333,11 +355,21 @@ namespace AppliGrpR
             {
                 string titre = TousLesAlbums.SelectedItem.ToString();
                 string apostrophe = "'";
-                if (titre.Contains("'"))
+                int positionApostrophe = -1;
+                for (int i = 0; i < titre.Length; i++)
                 {
-                    titre = titre.Insert(titre.IndexOf("'"), apostrophe);
-                }
 
+                    positionApostrophe = titre.IndexOf(apostrophe,positionApostrophe+2);
+                    if (positionApostrophe != -1 && titre.Substring(positionApostrophe).Contains("'"))
+                    {
+                        titre = titre.Insert(positionApostrophe + 1, apostrophe);
+                    }
+                    else
+                    {
+                        i = titre.Length;
+                    }
+                    
+                }
                 string sql = "SELECT CODE_ALBUM FROM ALBUMS WHERE TITRE_ALBUM ='" + titre + "'";
                 OleDbCommand cmd = new OleDbCommand(sql, dbCon);
                 cmd.ExecuteNonQuery();

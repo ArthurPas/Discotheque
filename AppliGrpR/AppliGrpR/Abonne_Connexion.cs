@@ -40,7 +40,7 @@ namespace AppliGrpR
                 motDePasseBDD = reader.GetString(0).Trim(' ');
             }
             string a = DecryptageDeMotDePasse(motDePasseBDD);
-            if (motDePasse.Equals(DecryptageDeMotDePasse(motDePasseBDD)))
+            if (motDePasse.Equals(DecryptageDeMotDePasse(motDePasseBDD)) && !motDePasse.Equals(""))
             {
                 string nom = "";
                 string prenom = "";
@@ -56,6 +56,7 @@ namespace AppliGrpR
 
                     id = readerSet.GetString(2);
                 }
+                readerSet.Close();
 
                 this.Close();
                 Abonne_Accueil AbonneAccueil = new Abonne_Accueil(nom,prenom,id);

@@ -141,22 +141,25 @@ namespace AppliGrpR
             // 
             // modifierMdp
             // 
+            this.modifierMdp.BackColor = System.Drawing.Color.LightSkyBlue;
             this.modifierMdp.Location = new System.Drawing.Point(479, 493);
             this.modifierMdp.Name = "modifierMdp";
             this.modifierMdp.Size = new System.Drawing.Size(149, 35);
             this.modifierMdp.TabIndex = 10;
             this.modifierMdp.Text = "Modifier Mot de Passe";
-            this.modifierMdp.UseVisualStyleBackColor = true;
+            this.modifierMdp.UseVisualStyleBackColor = false;
             this.modifierMdp.Click += new System.EventHandler(this.modifierMdp_Click);
             // 
             // retour
             // 
+            this.retour.BackColor = System.Drawing.Color.DarkRed;
+            this.retour.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.retour.Location = new System.Drawing.Point(997, 25);
             this.retour.Name = "retour";
             this.retour.Size = new System.Drawing.Size(75, 23);
             this.retour.TabIndex = 11;
             this.retour.Text = "Retour";
-            this.retour.UseVisualStyleBackColor = true;
+            this.retour.UseVisualStyleBackColor = false;
             this.retour.Click += new System.EventHandler(this.retour_Click);
             // 
             // errorConfirmNewMdp
@@ -223,6 +226,7 @@ namespace AppliGrpR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.CadetBlue;
             this.ClientSize = new System.Drawing.Size(1084, 661);
             this.Controls.Add(this.viewConfirmNewMdp);
             this.Controls.Add(this.viewNewMdp);

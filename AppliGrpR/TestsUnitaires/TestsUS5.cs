@@ -19,8 +19,6 @@ namespace TestsUnitaires
         string ChaineBd = "Provider=SQLOLEDB;Data Source=INFO-DORMEUR;Initial Catalog=MusiquePT2_R;Integrated Security=SSPI;";
         Dictionary<string, DateTime> emprunt = new Dictionary<string, DateTime>();
         Client_Inscription client = new Client_Inscription();
-        Abonne_Accueil abo = new Abonne_Accueil();
-        Abonne_Prolonger prolo = new Abonne_Prolonger();
         Accueil accueil = new Accueil();
         AdministrateurAccueil admin = new AdministrateurAccueil();
         public void InitConnexion()
@@ -37,12 +35,11 @@ namespace TestsUnitaires
             string prenom = "prenomTest";
             string nom = "testNom";
             string nationalite = "France";
-            string codePays = "1";
             int codeAbo = 0;
             int codeAlbumPro = 258;
             bool retardBool = true;
-            DateTime dateRetour = new DateTime();
-            DateTime dateRetourInit = new DateTime();
+            Abonne_Accueil abo= new Abonne_Accueil(nom, prenom, login);
+            Abonne_Prolonger prolo = new Abonne_Prolonger(abo);
             client.AddAbonnes(login, nationalite, nom, mdp, prenom);
             string consultCode = "Select CODE_ABONNÉ from ABONNÉS WHERE LOGIN_ABONNÉ = '" + login + "'";
             OleDbCommand cmdConsultCode = new OleDbCommand(consultCode, dbCon);

@@ -20,8 +20,6 @@ namespace TestsUnitaires
         string ChaineBd = "Provider=SQLOLEDB;Data Source=INFO-DORMEUR;Initial Catalog=MusiquePT2_R;Integrated Security=SSPI;";
         
         Client_Inscription client = new Client_Inscription();
-        Abonne_Accueil abo = new Abonne_Accueil();
-        Abonne_Prolonger prolo = new Abonne_Prolonger();
 
         public void InitConnexion()
         {
@@ -40,17 +38,13 @@ namespace TestsUnitaires
             string prenom = "prenomTest";
             string nom = "testNom";
             string nationalite = "France";
-            string codePays = "1";
             int codeAbo = 0;
-            
-
+            Abonne_Accueil abo = new Abonne_Accueil(nom,prenom,login);
+            Abonne_Prolonger prolo = new Abonne_Prolonger(abo);
             List<int> codeAlbum = new List<int>();
-
             List<DateTime> dateRetour = new List<DateTime>();
-            List<DateTime> dateRetourInit = new List <DateTime>();
-
+            List<DateTime> dateRetourInit = new List<DateTime>();
             client.AddAbonnes(login, nationalite, nom, mdp, prenom);
-
             //On get les codes pour emprunter
             string consultCode = "Select CODE_ABONNÉ from ABONNÉS WHERE LOGIN_ABONNÉ = '" + login + "'";
             OleDbCommand cmdConsultCode = new OleDbCommand(consultCode, dbCon);

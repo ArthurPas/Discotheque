@@ -19,7 +19,6 @@ namespace TestsUnitaires
         OleDbConnection dbCon;
         string ChaineBd = "Provider=SQLOLEDB;Data Source=INFO-DORMEUR;Initial Catalog=MusiquePT2_R;Integrated Security=SSPI;";
         Client_Inscription client = new Client_Inscription();
-        
         Accueil accueil = new Accueil();
         List<int> albumDispo = new List<int>();
         public void InitConnexion()
@@ -32,7 +31,7 @@ namespace TestsUnitaires
         {
             InitConnexion();
             
-            string login = "testUS1Inscription";
+            string login = "testUS1Inscription1";
             string mdp = "testmdp";
             string prenom = "prenomTest";
             string nom = "testNom";
@@ -40,8 +39,8 @@ namespace TestsUnitaires
             string codePays = "1";
             Abonne_Accueil abo = new Abonne_Accueil(nom, prenom, login);
             client.AddAbonnes(login, nationalite, nom, mdp, prenom);
-            string consult = "Select * from ABONNÉS WHERE LOGIN_ABONNÉ = '" + login + "' AND PASSWORD_ABONNÉ ='"+mdp+"' AND" +
-                " NOM_ABONNÉ ='"+nom+"' AND PRÉNOM_ABONNÉ ='"+prenom+"' AND CODE_PAYS = "+ codePays;
+            string consult = "Select * from ABONNÉS WHERE LOGIN_ABONNÉ = '" + login +
+                "' AND NOM_ABONNÉ ='"+nom+"' AND PRÉNOM_ABONNÉ ='"+prenom+"' AND CODE_PAYS = "+ codePays;
             OleDbCommand cmdConsult = new OleDbCommand(consult, dbCon);
             OleDbDataReader reader = cmdConsult.ExecuteReader();
             Assert.IsTrue(reader.HasRows, "pas inscrit");
@@ -63,8 +62,8 @@ namespace TestsUnitaires
             string codePays = "1";
             client.AddAbonnes(login, nationalite, nom, mdp, prenom);
             client.AddAbonnes(login, nationalite, nom, mdp, prenom);
-            string consult = "Select * from ABONNÉS WHERE LOGIN_ABONNÉ = '" + login + "' AND PASSWORD_ABONNÉ ='" + mdp + "' AND" +
-                " NOM_ABONNÉ ='" + nom + "' AND PRÉNOM_ABONNÉ ='" + prenom + "' AND CODE_PAYS = " + codePays;
+            string consult = "Select * from ABONNÉS WHERE LOGIN_ABONNÉ = '" + login +
+                "' AND NOM_ABONNÉ ='" + nom + "' AND PRÉNOM_ABONNÉ ='" + prenom + "' AND CODE_PAYS = " + codePays;
             OleDbCommand cmdConsult = new OleDbCommand(consult, dbCon);
             OleDbDataReader reader = cmdConsult.ExecuteReader();
             int i = 0;

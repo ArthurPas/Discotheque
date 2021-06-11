@@ -32,7 +32,6 @@ namespace TestsUnitaires
             InitConnexion();
 
             Client_Inscription client = new Client_Inscription();
-            Abonne_Accueil abonnée = new Abonne_Accueil();
             Administrateur_Purger admin = new Administrateur_Purger();
 
                       
@@ -43,6 +42,7 @@ namespace TestsUnitaires
             string nom = "Vieux";
             string nationalite = "France";
             int codeAbo = 0;
+            Abonne_Accueil abonnée = new Abonne_Accueil(nom,prenom,login);
             client.AddAbonnes(login, nationalite, nom, mdp, prenom);
 
             //On get les codes pour emprunter

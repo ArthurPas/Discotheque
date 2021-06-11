@@ -29,6 +29,9 @@ namespace AppliGrpR
             this.Close();
         }
 
+        /// <summary>
+        /// Ajoute les abonnés qui n'ont rien emprunté depuis plus d'un an et qui ont rendu leur disque dans la liste et les affiches
+        /// </summary>
         public void AfficherPurgeAbonne()
         {
             //regarde si l'abonné a un emprunt qui date de plus d'un an
@@ -63,6 +66,10 @@ namespace AppliGrpR
             reader.Close();
         }
 
+        /// <summary>
+        /// Affiche un message de confirmation
+        /// </summary>
+        /// <returns>TRUE si l'abonné appuie sur yes, FALSE si l'abonné appuie sur no</returns>
         public bool ConfirmDialog()
         {
             string message = "Confirmer ?";
@@ -80,6 +87,9 @@ namespace AppliGrpR
             }
         }
 
+        /// <summary>
+        /// Permet de purger tous les abonnés qui n'ont rien emprunté depuis plus d'un an
+        /// </summary>
         public void PurgeAbonne()
         {
             //regarde si l'abonné a un emprunt qui date de plus d'un an

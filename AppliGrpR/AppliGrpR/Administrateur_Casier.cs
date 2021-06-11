@@ -66,7 +66,7 @@ namespace AppliGrpR
             if (listCasierEmprunts.SelectedItem != null)
             {
                 string titre = listCasierEmprunts.SelectedItem.ToString();
-                string sqlimage = "SELECT POCHETTE FROM ALBUMS WHERE TITRE_ALBUM ='" + titre + "' and POCHETTE is not null";
+                string sqlimage = "SELECT POCHETTE FROM ALBUMS WHERE TITRE_ALBUM ='" + Utils.manageSingleQuote(titre) + "' and POCHETTE is not null";
                 OleDbCommand cmdimage = new OleDbCommand(sqlimage, dbCon);
                 cmdimage.ExecuteNonQuery();
                 OleDbDataReader readerimage = cmdimage.ExecuteReader();

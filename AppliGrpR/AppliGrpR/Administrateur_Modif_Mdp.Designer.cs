@@ -82,12 +82,14 @@ namespace AppliGrpR
             // 
             // modifierMdp
             // 
+            this.modifierMdp.BackColor = System.Drawing.Color.DarkOrange;
+            this.modifierMdp.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.modifierMdp.Location = new System.Drawing.Point(519, 555);
             this.modifierMdp.Name = "modifierMdp";
             this.modifierMdp.Size = new System.Drawing.Size(149, 35);
             this.modifierMdp.TabIndex = 24;
             this.modifierMdp.Text = "Modifier Mot de Passe";
-            this.modifierMdp.UseVisualStyleBackColor = true;
+            this.modifierMdp.UseVisualStyleBackColor = false;
             this.modifierMdp.MouseDown += new System.Windows.Forms.MouseEventHandler(this.modifierMdp_MouseDown);
             // 
             // errorNewMdp
@@ -146,7 +148,8 @@ namespace AppliGrpR
             // pageListAbo
             // 
             this.pageListAbo.AutoSize = true;
-            this.pageListAbo.Location = new System.Drawing.Point(714, 248);
+            this.pageListAbo.BackColor = System.Drawing.Color.White;
+            this.pageListAbo.Location = new System.Drawing.Point(705, 246);
             this.pageListAbo.Name = "pageListAbo";
             this.pageListAbo.Size = new System.Drawing.Size(35, 13);
             this.pageListAbo.TabIndex = 34;
@@ -208,12 +211,14 @@ namespace AppliGrpR
             // 
             // retour
             // 
+            this.retour.BackColor = System.Drawing.Color.Navy;
+            this.retour.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.retour.Location = new System.Drawing.Point(997, 12);
             this.retour.Name = "retour";
             this.retour.Size = new System.Drawing.Size(75, 23);
             this.retour.TabIndex = 37;
             this.retour.Text = "Retour";
-            this.retour.UseVisualStyleBackColor = true;
+            this.retour.UseVisualStyleBackColor = false;
             this.retour.MouseDown += new System.Windows.Forms.MouseEventHandler(this.retour_MouseDown);
             // 
             // errorMdpDifferrent
@@ -230,6 +235,7 @@ namespace AppliGrpR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.CadetBlue;
             this.ClientSize = new System.Drawing.Size(1084, 661);
             this.Controls.Add(this.errorMdpDifferrent);
             this.Controls.Add(this.retour);

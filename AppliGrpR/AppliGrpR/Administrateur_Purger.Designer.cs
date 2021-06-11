@@ -45,22 +45,26 @@ namespace AppliGrpR
             // 
             // Retour
             // 
+            this.Retour.BackColor = System.Drawing.Color.Navy;
+            this.Retour.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.Retour.Location = new System.Drawing.Point(713, 12);
             this.Retour.Name = "Retour";
             this.Retour.Size = new System.Drawing.Size(75, 23);
             this.Retour.TabIndex = 11;
             this.Retour.Text = "Retour";
-            this.Retour.UseVisualStyleBackColor = true;
+            this.Retour.UseVisualStyleBackColor = false;
             this.Retour.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Retour_MouseDown);
             // 
             // PurgeAll
             // 
-            this.PurgeAll.Location = new System.Drawing.Point(353, 363);
+            this.PurgeAll.BackColor = System.Drawing.Color.DarkRed;
+            this.PurgeAll.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.PurgeAll.Location = new System.Drawing.Point(360, 353);
             this.PurgeAll.Name = "PurgeAll";
             this.PurgeAll.Size = new System.Drawing.Size(75, 23);
             this.PurgeAll.TabIndex = 13;
             this.PurgeAll.Text = "Purger tous les abonnes";
-            this.PurgeAll.UseVisualStyleBackColor = true;
+            this.PurgeAll.UseVisualStyleBackColor = false;
             this.PurgeAll.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PurgeAll_MouseDown);
             // 
             // inactifPlusUnAn
@@ -76,6 +80,7 @@ namespace AppliGrpR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.CadetBlue;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.inactifPlusUnAn);
             this.Controls.Add(this.PurgeAll);

@@ -116,6 +116,7 @@ namespace AppliGrpR
         public void Suggestions(int numeroAbo)
         {
             //test si l'abonné a déjà emprunté
+            suggestionsAlbums.Clear();
             string sqlTest = "SELECT * From emprunter where CODE_ABONNÉ ="+ numeroAbo;
             OleDbCommand cmdTest = new OleDbCommand(sqlTest, dbCon);
             cmdTest.ExecuteNonQuery(); ;

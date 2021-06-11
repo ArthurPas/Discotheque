@@ -232,5 +232,11 @@ namespace AppliGrpR
         {
             Affichage_Utils.Paginer(ref indexRetard, Retard10joursBox, listeRetard, pageRetard,10, -1);
         }
+
+        private void EmpruntsCasier_Click(object sender, EventArgs e)
+        {
+            Administrateur_Casier adminCasier = new Administrateur_Casier();
+            adminCasier.Show();
+        }
     }
 }

@@ -95,6 +95,12 @@
     <Compile Include="Administrateur_Accueil.Designer.cs">
       <DependentUpon>Administrateur_Accueil.cs</DependentUpon>
     </Compile>
+    <Compile Include="Administrateur_Casier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Administrateur_Casier.Designer.cs">
+      <DependentUpon>Administrateur_Casier.cs</DependentUpon>
+    </Compile>
     <Compile Include="Administrateur_Purger.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,6 +146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Accueil.resx">
       <DependentUpon>Accueil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Administrateur_Casier.resx">
+      <DependentUpon>Administrateur_Casier.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Client_Insciption_Complete.resx">
       <DependentUpon>Client_Insciption_Complete.cs</DependentUpon>

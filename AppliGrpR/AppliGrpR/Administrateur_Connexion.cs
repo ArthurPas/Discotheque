@@ -12,6 +12,7 @@ namespace AppliGrpR
 {
     public partial class Administrateur_Connexion : Form
     {
+
         public Administrateur_Connexion()
         {
             this.StartPosition = FormStartPosition.CenterScreen;

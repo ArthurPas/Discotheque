@@ -39,7 +39,7 @@ namespace TestsUnitaires
             string nationalite = "France";
             client.AddAbonnes(login, nationalite, nom, mdp, prenom);
             Abonne_Accueil accueilAbo = new Abonne_Accueil(nom,prenom,login);
-            string getCode = "SELECT CODE_ABONNÉ FROM ABONNÉS WHERE LOGIN_ABONNÉ ='" + login + "' AND PASSWORD_ABONNÉ = '" + mdp + "'";
+            string getCode = "SELECT CODE_ABONNÉ FROM ABONNÉS WHERE LOGIN_ABONNÉ ='" + login+"'";
             OleDbCommand cmdCode = new OleDbCommand(getCode, dbCon);
             cmdCode.ExecuteNonQuery();
             OleDbDataReader readCode = cmdCode.ExecuteReader();
@@ -83,12 +83,11 @@ namespace TestsUnitaires
                 i++;
             }
             Assert.IsTrue(same);
-            string deleteFromEmprunts = "DELETE FROM EMPRUNTER WHERE CODE_ABONNÉ = (SELECT CODE_ABONNÉ FROM ABONNÉS WHERE LOGIN_ABONNÉ ='" + login + "' AND PASSWORD_ABONNÉ = '" + mdp + "')";
-            string deleteFromAbonnés = "DELETE FROM ABONNÉS WHERE LOGIN_ABONNÉ ='" + login + "' AND PASSWORD_ABONNÉ = '" + mdp + "'";
+            string deleteFromEmprunts = "DELETE FROM EMPRUNTER WHERE CODE_ABONNÉ = (SELECT CODE_ABONNÉ FROM ABONNÉS WHERE LOGIN_ABONNÉ ='" + login + "')";
+            string deleteFromAbonnés = "DELETE FROM ABONNÉS WHERE LOGIN_ABONNÉ ='" + login + "'";
             OleDbCommand cmdDeleteFromEmprunts = new OleDbCommand(deleteFromEmprunts, dbCon);
             cmdDeleteFromEmprunts.ExecuteNonQuery();
             OleDbCommand cmdDeleteFromAbonnés = new OleDbCommand(deleteFromAbonnés, dbCon);
-            cmdDeleteFromEmprunts.ExecuteNonQuery();
             cmdDeleteFromAbonnés.ExecuteNonQuery();
         }
 
@@ -111,7 +110,7 @@ namespace TestsUnitaires
             Abonne_Accueil accueilAbo = new Abonne_Accueil(nom, prenom, login);
             client.AddAbonnes(login, nationalite, nom, mdp, prenom);
 
-            string getCode = "SELECT CODE_ABONNÉ FROM ABONNÉS WHERE LOGIN_ABONNÉ ='" + login + "' AND PASSWORD_ABONNÉ = '" + mdp + "'";
+            string getCode = "SELECT CODE_ABONNÉ FROM ABONNÉS WHERE LOGIN_ABONNÉ ='" + login + "'";
             OleDbCommand cmdCode = new OleDbCommand(getCode, dbCon);
             cmdCode.ExecuteNonQuery();
             OleDbDataReader readCode = cmdCode.ExecuteReader();
@@ -156,12 +155,11 @@ namespace TestsUnitaires
                 i++;
             }
             Assert.IsTrue(same);
-            string deleteFromEmprunts = "DELETE FROM EMPRUNTER WHERE CODE_ABONNÉ = (SELECT CODE_ABONNÉ FROM ABONNÉS WHERE LOGIN_ABONNÉ ='" + login + "' AND PASSWORD_ABONNÉ = '" + mdp + "')";
-            string deleteFromAbonnés = "DELETE FROM ABONNÉS WHERE LOGIN_ABONNÉ ='"+login+"' AND PASSWORD_ABONNÉ = '"+mdp+"'";
+            string deleteFromEmprunts = "DELETE FROM EMPRUNTER WHERE CODE_ABONNÉ = (SELECT CODE_ABONNÉ FROM ABONNÉS WHERE LOGIN_ABONNÉ ='" + login + "')";
+            string deleteFromAbonnés = "DELETE FROM ABONNÉS WHERE LOGIN_ABONNÉ ='"+login+"'";
             OleDbCommand cmdDeleteFromEmprunts = new OleDbCommand(deleteFromEmprunts, dbCon);
             cmdDeleteFromEmprunts.ExecuteNonQuery();
             OleDbCommand cmdDeleteFromAbonnés = new OleDbCommand(deleteFromAbonnés, dbCon);
-            cmdDeleteFromEmprunts.ExecuteNonQuery();
             cmdDeleteFromAbonnés.ExecuteNonQuery();
         }
 
@@ -180,7 +178,7 @@ namespace TestsUnitaires
             Abonne_Accueil accueilAbo = new Abonne_Accueil(nom, prenom, login);
             client.AddAbonnes(login, nationalite, nom, mdp, prenom);
 
-            string getCode = "SELECT CODE_ABONNÉ FROM ABONNÉS WHERE LOGIN_ABONNÉ ='" + login + "' AND PASSWORD_ABONNÉ = '" + mdp + "'";
+            string getCode = "SELECT CODE_ABONNÉ FROM ABONNÉS WHERE LOGIN_ABONNÉ ='" + login + "'";
             OleDbCommand cmdCode = new OleDbCommand(getCode, dbCon);
             cmdCode.ExecuteNonQuery();
             OleDbDataReader readCode = cmdCode.ExecuteReader();
@@ -210,7 +208,7 @@ namespace TestsUnitaires
                 i++;
             }
             Assert.IsTrue(same);
-            string deleteFromAbonnés = "DELETE FROM ABONNÉS WHERE LOGIN_ABONNÉ ='" + login + "' AND PASSWORD_ABONNÉ = '" + mdp + "'";
+            string deleteFromAbonnés = "DELETE FROM ABONNÉS WHERE LOGIN_ABONNÉ ='" + login + "'";
             OleDbCommand cmdDeleteFromAbonnés = new OleDbCommand(deleteFromAbonnés, dbCon);
             cmdDeleteFromAbonnés.ExecuteNonQuery();
         }

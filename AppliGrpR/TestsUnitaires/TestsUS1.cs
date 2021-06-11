@@ -162,6 +162,9 @@ namespace TestsUnitaires
             string deleteAbo = "DELETE FROM ABONNÉS WHERE LOGIN_ABONNÉ ='" + login + "'";
             OleDbCommand cmdDel = new OleDbCommand(deleteAbo, dbCon);
             cmdDel.ExecuteNonQuery();
+            string deleteAbo2 = "DELETE FROM ABONNÉS WHERE LOGIN_ABONNÉ ='" + login2 + "'";
+            OleDbCommand cmdDel2 = new OleDbCommand(deleteAbo2, dbCon);
+            cmdDel2.ExecuteNonQuery();
         }
 
     }

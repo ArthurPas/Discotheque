@@ -120,16 +120,11 @@ namespace AppliGrpR
             {
                 int nbEmprunts = reader.GetInt32(0);
                 string titreAlbum = reader.GetString(1);
-                string apostrophe = "'";
-                if (titreAlbum.Contains("'"))
-                {
-                    titreAlbum = titreAlbum.Insert(titreAlbum.IndexOf("'"), apostrophe);
-                }
-                //
+
                 string sqlalbum = "SELECT TITRE_ALBUM, albums.CODE_ALBUM, DATE_RETOUR_ATTENDUE " +
                     "FROM EMPRUNTER INNER JOIN ALBUMS " +
                     "ON ALBUMS.CODE_ALBUM = EMPRUNTER.CODE_ALBUM " +
-                    "where TITRE_ALBUM ='"+titreAlbum+"'";
+                    "where TITRE_ALBUM ='"+Utils.manageSingleQuote(titreAlbum)+"'";
                 OleDbCommand cmdalbum = new OleDbCommand(sqlalbum, dbCon);
                 cmdalbum.ExecuteNonQuery();
                 OleDbDataReader readeralbum = cmdalbum.ExecuteReader();

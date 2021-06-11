@@ -29,7 +29,9 @@ namespace AppliGrpR
             hideError();
         }
 
-
+        /// <summary>
+        /// Permet à l'abonné de changer son mot de passe
+        /// </summary>
         public void modifierMotdePasse()
         {
             bool valide = true;
@@ -112,6 +114,12 @@ namespace AppliGrpR
             }
 
         }
+
+        /// <summary>
+        /// Permet de décrypter un mot de passe de la base de donnée
+        /// </summary>
+        /// <param name="mdp">mot de passe à décrypté</param>
+        /// <returns>mot de passe décrypté</returns>
         public string DecryptageDeMotDePasse(string mdp)
         {
             string decrypt = "";
@@ -136,7 +144,7 @@ namespace AppliGrpR
 
 
         /// <summary>
-        /// Met a jour le Mot de Passe d'un user a parti d'un nouveau mot de passe entré
+        /// Met a jour le Mot de Passe d'un abonné dans la base de donnée
         /// </summary>
         private void MettreAJourMotDePasse(string login,string nouveauMdp)
         {
@@ -147,6 +155,11 @@ namespace AppliGrpR
 
         }
 
+        /// <summary>
+        /// Permet de crypter un mot de passe
+        /// </summary>
+        /// <param name="mdp">mot de passe à crypter</param>
+        /// <returns>mot de passe crypé</returns>
         public string EncryptageDeMotDePasse(string mdp)
         {
             string encrypt = "";
@@ -164,6 +177,9 @@ namespace AppliGrpR
             return encrypt;
         }
 
+        /// <summary>
+        /// Permet de cacher les messages d'erreurs
+        /// </summary>
         private void hideError()
         {
             errorMdp.Visible = false;
@@ -185,7 +201,6 @@ namespace AppliGrpR
             abo.Show();
             this.Close();
         }
-
 
         private void viewMdp_Click(object sender, EventArgs e)
         {

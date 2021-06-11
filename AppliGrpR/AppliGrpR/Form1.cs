@@ -28,6 +28,7 @@ namespace AppliGrpR
             InitConnexion();
             
         }
+
         public void InitConnexion()
         {
 

@@ -406,7 +406,12 @@ namespace AppliGrpR
 
         private void nationalite_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string sql = "select * from PAYS WHERE NOM_PAYS ='"+ nationalite.SelectedItem.ToString()+"'";
+            nationaliteFonction();
+        }
+
+        public void nationaliteFonction()
+        {
+            string sql = "select * from PAYS WHERE NOM_PAYS ='" + nationalite.SelectedItem.ToString() + "'";
             OleDbCommand cmdRead = new OleDbCommand(sql, dbCon);
             OleDbDataReader reader = cmdRead.ExecuteReader();
 
@@ -416,7 +421,7 @@ namespace AppliGrpR
                 code = reader.GetInt32(0);
             }
             reader.Close();
-            textBox1.Text= code.ToString();
+            textBox1.Text = code.ToString();
         }
 
         private void Recomandation_MouseDown(object sender, MouseEventArgs e)
@@ -426,6 +431,11 @@ namespace AppliGrpR
         }
 
         private void ListeAbonne_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            listeAbonneFonction();
+        }
+
+        public void listeAbonneFonction()
         {
             string sql = "select * from ABONNÉS WHERE NOM_ABONNÉ ='" + ListeAbonne.SelectedItem.ToString() + "'";
             OleDbCommand cmdRead = new OleDbCommand(sql, dbCon);
@@ -439,6 +449,7 @@ namespace AppliGrpR
             reader.Close();
             numeroAbonne.Text = code.ToString();
         }
+
 
         public void Emprunter()
         {
@@ -495,7 +506,8 @@ namespace AppliGrpR
             {
                 CodeAlbumEmprunter = reader.GetInt32(0);
             }
-        }
+        } 
+
         private void ProlongerButton_MouseDown(object sender, MouseEventArgs e)
         {
             ExtendBorrowing();

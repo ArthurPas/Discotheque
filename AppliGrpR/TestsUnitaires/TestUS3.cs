@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace TestsUnitaires
 {
-    [TestClass]
+    
     public class TestUS3
     {
         OleDbConnection dbCon;

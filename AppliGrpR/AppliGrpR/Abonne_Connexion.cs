@@ -30,7 +30,7 @@ namespace AppliGrpR
 
         private void SeConnecter_MouseDown(object sender, MouseEventArgs e)
         {
-            string sql = "Select PASSWORD_ABONNÉ from ABONNÉS where LOGIN_ABONNÉ = '"+ pseudoTextBox.Text + "'";
+            string sql = "Select PASSWORD_ABONNÉ from ABONNÉS where LOGIN_ABONNÉ = '"+ Utils.manageSingleQuote(pseudoTextBox.Text) + "'";
             OleDbCommand cmd = new OleDbCommand(sql, dbCon);
             string motDePasseBDD = "";
             string motDePasse = motdepassetextbox.Text.Trim(' ');
@@ -46,16 +46,16 @@ namespace AppliGrpR
                 string nom = "";
                 string prenom = "";
                 string id="";
-                string sqlSet = "Select NOM_ABONNÉ, PRÉNOM_ABONNÉ, LOGIN_ABONNÉ, PASSWORD_ABONNÉ from ABONNÉS where LOGIN_ABONNÉ = '" + pseudoTextBox.Text + "'";
+                string sqlSet = "Select NOM_ABONNÉ, PRÉNOM_ABONNÉ, LOGIN_ABONNÉ, PASSWORD_ABONNÉ from ABONNÉS where LOGIN_ABONNÉ = '" + Utils.manageSingleQuote(pseudoTextBox.Text) + "'";
                 OleDbCommand cmdSet = new OleDbCommand(sqlSet, dbCon);
                 OleDbDataReader readerSet = cmdSet.ExecuteReader();
                 while (readerSet.Read())
                 {
-                    nom = readerSet.GetString(0);
+                    nom = Utils.manageSingleQuote(readerSet.GetString(0));
 
-                    prenom = readerSet.GetString(1);
+                    prenom = Utils.manageSingleQuote(readerSet.GetString(1));
 
-                    id = readerSet.GetString(2);
+                    id = Utils.manageSingleQuote(readerSet.GetString(2));
                 }
                 readerSet.Close();
 
@@ -68,6 +68,9 @@ namespace AppliGrpR
             else
             {
                 MessageBox.Show("Le mot de passe ou l'utilisateur est incorrect");
+
+                Console.WriteLine(motDePasse + "     " + DecryptageDeMotDePasse(motDePasseBDD));
+
             }
         }
 

@@ -116,7 +116,7 @@ namespace AppliGrpR
             this.inscription.Location = new System.Drawing.Point(470, 516);
             this.inscription.Name = "inscription";
             this.inscription.Size = new System.Drawing.Size(168, 39);
-            this.inscription.TabIndex = 32;
+            this.inscription.TabIndex = 34;
             this.inscription.Text = "Inscription";
             this.inscription.UseVisualStyleBackColor = false;
             this.inscription.Click += new System.EventHandler(this.inscription_Click);
@@ -124,22 +124,25 @@ namespace AppliGrpR
             // mdp_box
             // 
             this.mdp_box.Location = new System.Drawing.Point(442, 393);
+            this.mdp_box.MaxLength = 32;
             this.mdp_box.Name = "mdp_box";
             this.mdp_box.Size = new System.Drawing.Size(219, 20);
-            this.mdp_box.TabIndex = 31;
+            this.mdp_box.TabIndex = 32;
             this.mdp_box.UseSystemPasswordChar = true;
             // 
             // id_box
             // 
             this.id_box.ForeColor = System.Drawing.Color.Black;
             this.id_box.Location = new System.Drawing.Point(442, 333);
+            this.id_box.MaxLength = 32;
             this.id_box.Name = "id_box";
             this.id_box.Size = new System.Drawing.Size(219, 20);
-            this.id_box.TabIndex = 30;
+            this.id_box.TabIndex = 31;
             // 
             // prénom_box
             // 
             this.prénom_box.Location = new System.Drawing.Point(442, 220);
+            this.prénom_box.MaxLength = 32;
             this.prénom_box.Name = "prénom_box";
             this.prénom_box.Size = new System.Drawing.Size(219, 20);
             this.prénom_box.TabIndex = 29;
@@ -147,6 +150,7 @@ namespace AppliGrpR
             // nom_box
             // 
             this.nom_box.Location = new System.Drawing.Point(442, 160);
+            this.nom_box.MaxLength = 32;
             this.nom_box.Name = "nom_box";
             this.nom_box.Size = new System.Drawing.Size(219, 20);
             this.nom_box.TabIndex = 28;
@@ -159,7 +163,7 @@ namespace AppliGrpR
             this.retour_button.Location = new System.Drawing.Point(997, 12);
             this.retour_button.Name = "retour_button";
             this.retour_button.Size = new System.Drawing.Size(75, 29);
-            this.retour_button.TabIndex = 41;
+            this.retour_button.TabIndex = 35;
             this.retour_button.Text = "Retour";
             this.retour_button.UseVisualStyleBackColor = false;
             this.retour_button.Click += new System.EventHandler(this.retour_button_Click);
@@ -170,7 +174,7 @@ namespace AppliGrpR
             this.nationalité_comboBox.Location = new System.Drawing.Point(442, 277);
             this.nationalité_comboBox.Name = "nationalité_comboBox";
             this.nationalité_comboBox.Size = new System.Drawing.Size(219, 21);
-            this.nationalité_comboBox.TabIndex = 42;
+            this.nationalité_comboBox.TabIndex = 30;
             // 
             // label1
             // 
@@ -238,9 +242,10 @@ namespace AppliGrpR
             // ConfirmationMdpTextBox
             // 
             this.ConfirmationMdpTextBox.Location = new System.Drawing.Point(442, 449);
+            this.ConfirmationMdpTextBox.MaxLength = 32;
             this.ConfirmationMdpTextBox.Name = "ConfirmationMdpTextBox";
             this.ConfirmationMdpTextBox.Size = new System.Drawing.Size(219, 20);
-            this.ConfirmationMdpTextBox.TabIndex = 49;
+            this.ConfirmationMdpTextBox.TabIndex = 33;
             this.ConfirmationMdpTextBox.UseSystemPasswordChar = true;
             this.ConfirmationMdpTextBox.TextChanged += new System.EventHandler(this.ConfirmationMdpTextBox_TextChanged);
             // 
@@ -269,7 +274,7 @@ namespace AppliGrpR
             this.viewMdp.Location = new System.Drawing.Point(678, 393);
             this.viewMdp.Name = "viewMdp";
             this.viewMdp.Size = new System.Drawing.Size(27, 23);
-            this.viewMdp.TabIndex = 52;
+            this.viewMdp.TabIndex = 36;
             this.viewMdp.Text = "o";
             this.viewMdp.UseVisualStyleBackColor = true;
             this.viewMdp.Click += new System.EventHandler(this.viewMdp_Click);
@@ -279,7 +284,7 @@ namespace AppliGrpR
             this.viewConfirmMdp.Location = new System.Drawing.Point(678, 447);
             this.viewConfirmMdp.Name = "viewConfirmMdp";
             this.viewConfirmMdp.Size = new System.Drawing.Size(27, 23);
-            this.viewConfirmMdp.TabIndex = 53;
+            this.viewConfirmMdp.TabIndex = 37;
             this.viewConfirmMdp.Text = "o";
             this.viewConfirmMdp.UseVisualStyleBackColor = true;
             this.viewConfirmMdp.Click += new System.EventHandler(this.viewConfirmMdp_Click);

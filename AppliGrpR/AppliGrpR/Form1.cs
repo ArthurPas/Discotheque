@@ -485,13 +485,8 @@ namespace AppliGrpR
         private void ListAlbum_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             string titre = ListAlbum.SelectedItem.ToString();
-            string apostrophe = "'";
-            if (titre.Contains("'"))
-            {
-                titre = titre.Insert(titre.IndexOf("'"), apostrophe);
-            }
 
-            string sql = "SELECT CODE_ALBUM FROM ALBUMS WHERE TITRE_ALBUM ='" + titre + "'";
+            string sql = "SELECT CODE_ALBUM FROM ALBUMS WHERE TITRE_ALBUM ='" + Utils.manageSingleQuote(titre) + "'";
             OleDbCommand cmd = new OleDbCommand(sql, dbCon);
             cmd.ExecuteNonQuery();
             OleDbDataReader reader = cmd.ExecuteReader();
@@ -528,13 +523,8 @@ namespace AppliGrpR
             try { 
                 Albums album = (Albums)listBox1.SelectedItem;
                 string titre = album.titre.ToString();
-                string apostrophe = "'";
-                if (titre.Contains("'"))
-                {
-                    titre = titre.Insert(titre.IndexOf("'"), apostrophe);
-                }
 
-                string sql = "SELECT CODE_ALBUM FROM ALBUMS WHERE TITRE_ALBUM ='" + titre + "'";
+                string sql = "SELECT CODE_ALBUM FROM ALBUMS WHERE TITRE_ALBUM ='" + Utils.manageSingleQuote(titre) + "'";
                 OleDbCommand cmd = new OleDbCommand(sql, dbCon);
                 cmd.ExecuteNonQuery();
                 OleDbDataReader reader = cmd.ExecuteReader();
@@ -558,16 +548,12 @@ namespace AppliGrpR
             else
             {
                 ListAlbum.Items.Clear();
-                string apostrophe = "'";
                 string titreRech = RechercherTextBox.Text;
-                if (titreRech.Contains("'"))
-                {
-                     titreRech = titreRech.Insert(titreRech.IndexOf("'"), apostrophe);
-                }
+
                 string sql = "SELECT TITRE_ALBUM, ALBUMS.CODE_ALBUM, EMPRUNTER.DATE_RETOUR_ATTENDUE " +
                     "FROM ALBUMS " +
                     "FULL JOIN EMPRUNTER on EMPRUNTER.CODE_ALBUM = ALBUMS.CODE_ALBUM " +
-                    "WHERE TITRE_ALBUM LIKE '%"+ titreRech + "%'";
+                    "WHERE TITRE_ALBUM LIKE '%"+ Utils.manageSingleQuote(titreRech) + "%'";
                 OleDbCommand cmd = new OleDbCommand(sql, dbCon);
                 OleDbDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())

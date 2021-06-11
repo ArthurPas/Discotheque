@@ -181,33 +181,13 @@ namespace AppliGrpR
                 try
                 {
                     TousLesAlbums.Items.Clear();
-                    string apostrophe = "'";
-                    int positionApostrophe = -1;
+
                     string titreRech = RechercherTextBox.Text;
-                    for (int i = titreRech.Length - 1; i < titreRech.Length; i++)
-                    {
-                        positionApostrophe = titreRech.IndexOf(apostrophe, positionApostrophe + 2);
-                        if (i == 0)
-                        {
-                            positionApostrophe = titreRech.IndexOf(apostrophe, positionApostrophe + 1);
-                        }
-                        if (positionApostrophe != -1 && titreRech.Substring(positionApostrophe).Contains("'"))
-                        {
-                            titreRech = titreRech.Insert(positionApostrophe + 1, apostrophe);
-                        }
-                        else
-                        {
-                            i = titreRech.Length;
-                        }
-
-                    }
-
                     string sql = "SELECT TITRE_ALBUM, ALBUMS.CODE_ALBUM " +
                         "FROM ALBUMS " +
-                        "WHERE TITRE_ALBUM LIKE '%" + titreRech + "%'";
+                        "WHERE TITRE_ALBUM LIKE '%" + Utils.manageSingleQuote(titreRech) + "%'";
                     OleDbCommand cmd = new OleDbCommand(sql, dbCon);
                     OleDbDataReader reader = cmd.ExecuteReader();
-
 
                     albumRecherche.Clear();
 
@@ -354,23 +334,8 @@ namespace AppliGrpR
             if (TousLesAlbums.SelectedItem != null)
             {
                 string titre = TousLesAlbums.SelectedItem.ToString();
-                string apostrophe = "'";
-                int positionApostrophe = -1;
-                for (int i = 0; i < titre.Length; i++)
-                {
-
-                    positionApostrophe = titre.IndexOf(apostrophe,positionApostrophe+2);
-                    if (positionApostrophe != -1 && titre.Substring(positionApostrophe).Contains("'"))
-                    {
-                        titre = titre.Insert(positionApostrophe + 1, apostrophe);
-                    }
-                    else
-                    {
-                        i = titre.Length;
-                    }
-                    
-                }
-                string sql = "SELECT CODE_ALBUM FROM ALBUMS WHERE TITRE_ALBUM ='" + titre + "'";
+  
+                string sql = "SELECT CODE_ALBUM FROM ALBUMS WHERE TITRE_ALBUM ='" + Utils.manageSingleQuote(titre) + "'";
                 OleDbCommand cmd = new OleDbCommand(sql, dbCon);
                 cmd.ExecuteNonQuery();
                 OleDbDataReader reader = cmd.ExecuteReader();
@@ -469,15 +434,10 @@ namespace AppliGrpR
         {
             if (AlbumsEmpruntes.SelectedItem != null)
             {
-                string apostrophe = "'";
                 Albums a = (Albums)AlbumsEmpruntes.SelectedItem;
                 string titre = a.getTitre();
-                if (titre.Contains("'"))
-                {
-                    titre = titre.Insert(titre.IndexOf("'"), apostrophe);
-                }
 
-                string sql = "SELECT CODE_ALBUM FROM ALBUMS WHERE TITRE_ALBUM ='" + titre + "'";
+                string sql = "SELECT CODE_ALBUM FROM ALBUMS WHERE TITRE_ALBUM ='" + Utils.manageSingleQuote(titre) + "'";
                 OleDbCommand cmd = new OleDbCommand(sql, dbCon);
                 cmd.ExecuteNonQuery();
                 OleDbDataReader reader = cmd.ExecuteReader();

@@ -70,13 +70,8 @@ namespace AppliGrpR
                 {
                     Albums album = (Albums)AlbumsProlongeables.SelectedItem;
                     string titre = album.titre.ToString();
-                    string apostrophe = "'";
-                    if (titre.Contains("'"))
-                    {
-                        titre = titre.Insert(titre.IndexOf("'"), apostrophe);
-                    }
 
-                    string sql = "SELECT CODE_ALBUM FROM ALBUMS WHERE TITRE_ALBUM ='" + titre + "'";
+                    string sql = "SELECT CODE_ALBUM FROM ALBUMS WHERE TITRE_ALBUM ='" + Utils.manageSingleQuote(titre) + "'";
                     OleDbCommand cmd = new OleDbCommand(sql, dbCon);
                     cmd.ExecuteNonQuery();
                     OleDbDataReader reader = cmd.ExecuteReader();

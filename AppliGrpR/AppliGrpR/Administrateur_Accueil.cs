@@ -241,5 +241,11 @@ namespace AppliGrpR
             Administrateur_Casier adminCasier = new Administrateur_Casier();
             adminCasier.Show();
         }
+
+        private void EmpruntsCasier_Click(object sender, EventArgs e)
+        {
+            Administrateur_Casier adminCasier = new Administrateur_Casier();
+            adminCasier.Show();
+        }
     }
 }

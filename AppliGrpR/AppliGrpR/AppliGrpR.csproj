@@ -107,6 +107,12 @@
     <Compile Include="Administrateur_Casier.Designer.cs">
       <DependentUpon>Administrateur_Casier.cs</DependentUpon>
     </Compile>
+    <Compile Include="Administrateur_Casier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Administrateur_Casier.Designer.cs">
+      <DependentUpon>Administrateur_Casier.cs</DependentUpon>
+    </Compile>
     <Compile Include="Administrateur_Purger.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -156,6 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Administrateur_Modif_Mdp.resx">
       <DependentUpon>Administrateur_Modif_Mdp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Administrateur_Casier.resx">
+      <DependentUpon>Administrateur_Casier.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Administrateur_Casier.resx">
       <DependentUpon>Administrateur_Casier.cs</DependentUpon>

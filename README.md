@@ -30,7 +30,7 @@ Cas limite et détails:
 - [X] Est-ce que les champs sont bien limités à 32 caractères ?
 - [X] Peut-on s'inscrire avec un nom vide ?
 - [ ] Peut-on s'inscrire avec un nom qui ne contient qu'un espace ?
-- [X] Est-ce qu'il est bien possible de s'inscrire sans pays (car c'est facultatif) ?
+- [ ] Est-ce qu'il est bien possible de s'inscrire sans pays (car c'est facultatif) ?
 - [X] L'ordre des champs est correct lorsqu'on appuie sur "TAB"
 - [X] Est-ce que des messages d'erreur explicitent apparaissent en cas d'erreur ? ("Le champ prénom n'a pas été rempli", "Ce login est déjà utilisé" etc.)
 
